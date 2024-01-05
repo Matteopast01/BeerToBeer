@@ -3,13 +3,17 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {PrivateRoute} from "./components/PrivateRoute";
 import Homepage from "./pages/Homepage.js";
 import Search from "./pages/Search";
+import Login from "./pages/Login"
+
 
 function App() {
     return (
         <BrowserRouter>
             <Routes>
-
-                <Route path="/" element={< Homepage />}/>
+                <Route element={<PrivateRoute />}>
+                    <Route path="/" element={< Homepage />}/>
+                </Route>
+                <Route path="/login" element={<Login/>} />
                 <Route path="/search" element={<Search/>} />
             </Routes>
         </BrowserRouter>
@@ -17,6 +21,3 @@ function App() {
 }
 
 export default App;
-
-//<PrivateRoute path="/search" component={Search} />
-//<Route path="/search" element={<PrivateRoute component={<Search/>} />}/>
