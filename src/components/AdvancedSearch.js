@@ -1,0 +1,35 @@
+import * as React from 'react';
+import Slider from '@mui/material/Slider';
+import 'bulma/css/bulma.min.css'
+
+function valuetext(value) {
+    return `${value}`;
+}
+
+function AdvancedSearch({ data }) {
+    const [values, setValues] = React.useState(data.map(() => [20, 37]));
+
+    const handleChange = (index) => (event, newValue) => {
+        const newValues = [...values];
+        newValues[index] = newValue;
+        setValues(newValues);
+    };
+
+    const renderedData = data.map((filter, index) => (
+        <div key={index}>
+            <div className="has-text-centered mb-3 subtitle">{filter.name}</div>
+            <Slider
+                style={{ color: 'black', boxShadow: 'none'}}
+                getAriaLabel={() => 'range'}
+                value={values[index]}
+                onChange={handleChange(index)}
+                valueLabelDisplay="auto"
+                getAriaValueText={valuetext}
+            />
+        </div>
+    ));
+
+    return <div className="box column is-3 has-text-centered mb-3 title"
+                sx={{ width: 300 }}>Advanced Search {renderedData}</div>;
+}
+export default AdvancedSearch;
