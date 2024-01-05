@@ -8,6 +8,13 @@ export const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(null);
     const [pending, setPending] = useState(true);
 
+    const handleLogin = function (){
+
+    }
+     const handleLogout = function (){
+
+
+     }
     useEffect(() => {
         auth.onAuthStateChanged((user) => {
             setCurrentUser(user)
@@ -19,12 +26,14 @@ export const AuthProvider = ({ children }) => {
         return <>Loading...</>
     }
 
+    const valueToShare = {
+        currentUser,
+        handleLogin,
+        handleLogout
+    }
+
     return (
-        <AuthContext.Provider
-            value={{
-                currentUser
-            }}
-        >
+        <AuthContext.Provider value={valueToShare}>
             {children}
         </AuthContext.Provider>
     );
