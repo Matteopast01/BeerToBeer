@@ -1,6 +1,9 @@
 import * as React from 'react';
 import Slider from '@mui/material/Slider';
-import 'bulma/css/bulma.min.css'
+import IconButton from '@mui/material/IconButton';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import 'bulma/css/bulma.min.css';
+import {Tooltip} from "@mui/material";
 
 function valuetext(value) {
     return `${value}`;
@@ -12,14 +15,21 @@ function AdvancedSearch({ data }) {
     const handleChange = (index) => (event, newValue) => {
         const newValues = [...values];
         newValues[index] = newValue;
+        console.log(newValue)
         setValues(newValues);
     };
 
     const renderedData = data.map((filter, index) => (
         <div key={index}>
-            <div className="has-text-centered mb-3 subtitle">{filter.name}</div>
+            <div className="has-text-centered mb-3 subtitle">{filter.name}
+                <Tooltip title={filter.description} arrow>
+                <IconButton aria-label="delete" size="small">
+                    <InfoOutlinedIcon fontSize="medium" />
+                </IconButton>
+                </Tooltip>
+                </div>
             <Slider
-                style={{ color: 'black', boxShadow: 'none'}}
+                sx={{ color: 'black', '& .MuiSlider-thumb': { boxShadow: 'none' } }}
                 getAriaLabel={() => 'range'}
                 value={values[index]}
                 onChange={handleChange(index)}
