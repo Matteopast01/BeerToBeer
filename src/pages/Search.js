@@ -33,7 +33,7 @@ const Search = function (){
                 <AdvancedSearch data={filters} />
             </div>
             <div>
-                <CardList maxColumn={3} cardFeature={cardFeature} items={items}></CardList>
+                <CardList maxColumn={3} cardFeature={cardFeature} items={items}/>
             </div>
         </div>
     )
