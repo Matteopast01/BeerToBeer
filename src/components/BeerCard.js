@@ -4,8 +4,9 @@ import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import 'bulma/css/bulma.min.css';
+import {CardActionArea} from '@mui/material';
 
-function BeerCard({ vertical, horizontal, maxWidth, contentWidth, children, img  }) {
+function BeerCard({ horizontal, maxWidth, contentWidth, children, img , onClick }) {
     let style
     if(horizontal){
         style = {maxWidth: maxWidth, display: 'flex'}
@@ -16,18 +17,20 @@ function BeerCard({ vertical, horizontal, maxWidth, contentWidth, children, img 
 
 
     return (
-        <Card sx={style}>
-            <CardMedia
-                component="img"
-                height="194"
-                image={img}
-                alt="img"
-            />
-            <CardContent style={{ width: contentWidth }}>
-                <Typography variant="body2" color="text.secondary">
-                    {children}
-                </Typography>
-            </CardContent>
+        <Card sx={style} onClick={onClick}>
+            <CardActionArea>
+                <CardMedia
+                    component="img"
+                    height="194"
+                    image={img}
+                    alt="img"
+                />
+                <CardContent style={{ width: contentWidth }}>
+                    <Typography component={"span"} variant="body2" color="text.secondary">
+                        {children}
+                    </Typography>
+                </CardContent>
+            </CardActionArea>
         </Card>
         );
 }
