@@ -1,4 +1,5 @@
 import AdvancedSearch from "../components/AdvancedSearch";
+import {CardList} from "../components/CardList";
 
 const Search = function (){
     //SLIDER

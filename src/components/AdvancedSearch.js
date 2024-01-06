@@ -22,7 +22,7 @@ function AdvancedSearch({ data }) {
 
     const renderedData = data.map((filter, index) => (
         <div key={index}>
-            <div className="has-text-centered mb-3 subtitle">{filter.name}
+            <div className="has-text-centered mb-3">{filter.name}
                 <Tooltip title={filter.description} arrow>
                 <IconButton aria-label="delete" size="small">
                     <InfoOutlinedIcon fontSize="medium" />
@@ -47,14 +47,26 @@ function AdvancedSearch({ data }) {
         {label: "IBV", value: "ibv"},
         {label: "Number of like", value: "number of like"},
     ]);
+    const { selection: secondSelection, handleSelect: handleSecondSelect,
+            options: secondOptions } = useDropDown(null, [
+        { label: "Crescente", value: "crescente" },
+        { label: "Descrescente", value: "descrescente" },
+    ]);
 
     return (
         <div>
-            <div className="box column is-3 has-text-centered mb-3 title">
-                Advanced Search {renderedData}
+            <div className="box column is-3 has-text-centered mb-3">
+                <h3 className="title is-4">Advanced Search</h3>
+                {renderedData}
             </div>
             <div className="box column is-3 has-text-centered mb-3">
-                <DropDown options={options} value={selection} onChange={handleSelect} />
+                <div className="mb-3">
+                    <h5 className="title is-4">Sorting</h5>
+                    <DropDown options={options} value={selection} onChange={handleSelect} />
+                </div>
+                <div>
+                    <DropDown options={secondOptions} value={secondSelection} onChange={handleSecondSelect} />
+                </div>
             </div>
         </div>
     );
