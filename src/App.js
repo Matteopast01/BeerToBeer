@@ -4,14 +4,16 @@ import {PrivateRoute} from "./components/PrivateRoute";
 import Homepage from "./pages/Homepage.js";
 import Search from "./pages/Search";
 import Login from "./pages/Login"
+import Profilepage from "./pages/Profilepage";
 
 
 function App() {
     return (
         <BrowserRouter>
             <Routes>
+                <Route path="/" element={< Homepage />}/>
                 <Route element={<PrivateRoute />}>
-                    <Route path="/" element={< Homepage />}/>
+                    <Route path="/profile" element={< Profilepage />}/>
                 </Route>
                 <Route path="/login" element={<Login/>} />
                 <Route path="/search" element={<Search/>} />
