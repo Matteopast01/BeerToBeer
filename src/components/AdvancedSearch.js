@@ -4,6 +4,7 @@ import IconButton from '@mui/material/IconButton';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import 'bulma/css/bulma.min.css';
 import {Tooltip} from "@mui/material";
+import {useState} from "react";
 
 function valuetext(value) {
     return `${value}`;
@@ -15,7 +16,6 @@ function AdvancedSearch({ data }) {
     const handleChange = (index) => (event, newValue) => {
         const newValues = [...values];
         newValues[index] = newValue;
-        console.log(newValue)
         setValues(newValues);
     };
 
@@ -38,8 +38,7 @@ function AdvancedSearch({ data }) {
             />
         </div>
     ));
-
-    return <div className="box column is-3 has-text-centered mb-3 title"
-                sx={{ width: 300 }}>Advanced Search {renderedData}</div>;
+    return <div className="box column is-3 has-text-centered mb-3 title">
+        Advanced Search {renderedData}</div>;
 }
 export default AdvancedSearch;
