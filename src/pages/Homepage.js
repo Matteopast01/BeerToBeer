@@ -6,7 +6,13 @@ import SimpleSlider from "../components/Slider";
 const Homepage = function (){
     return (
         <div>
-            <SimpleSlider/>
+            <div>
+                <SimpleSlider/>
+            </div>
+            <br/>
+            <div>
+                <BeerContainer/>
+            </div>
         </div>
         )
 }

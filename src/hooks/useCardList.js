@@ -12,14 +12,14 @@ const useCardList = ( items, idFunc, imgFunc, descriptionFunc, styleName, onClic
             break
         default:
             cardFeature = {
-                maxWidth : 350,
-                contentWidth : 200,
+                maxWidth : 550,
+                contentWidth : 380,
                 horizontal: false,
                 onClick: (item)=>{onClick(item)}
             }
             break
     }
-    const itemsCard = items.map((item)=>{
+    const cardItems = items.map((item)=>{
         return {
             id: idFunc(item),
             img: imgFunc(item),
@@ -27,7 +27,7 @@ const useCardList = ( items, idFunc, imgFunc, descriptionFunc, styleName, onClic
         }
     })
 
-    return { itemsCard, cardFeature };
+    return { cardItems, cardFeature };
 };
 
 export default useCardList;

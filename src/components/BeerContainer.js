@@ -10,10 +10,9 @@ export function BeerContainer(){
             }});
 
     const navigate = useNavigate();
-    const {cardItems, cardFeature} =
-        useCardList(items,
-            (item)=>{item.id},
-            (item)=>{item.img},
+    const {cardItems, cardFeature} = useCardList(items,
+            (item)=>{return item.id},
+            (item)=>{return item.img},
             (item)=>{return <p>prova testo {item.id}</p>},
             "default",
             (item)=>{navigate("/login")}

@@ -2,7 +2,6 @@ import BeerCard from "./BeerCard";
 
 export function CardList({maxColumn, cardFeature, items}){
 
-
     const matrix = [];
     for (let i = 0; i < items.length; i += maxColumn) {
         matrix.push(items.slice(i, i + maxColumn));
@@ -19,7 +18,7 @@ export function CardList({maxColumn, cardFeature, items}){
                                   horizontal = {cardFeature.horizontal}
                                   img={card.img}
                                   onClick={()=>{cardFeature.onClick(card)}}>
-                            {card.description(card)}
+                            {card.description}
                         </BeerCard>
                     </td>
                 );

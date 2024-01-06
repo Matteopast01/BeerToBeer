@@ -17,7 +17,7 @@ function BeerCard({ horizontal, maxWidth, contentWidth, children, img , onClick 
 
 
     return (
-        <Card sx={style} onClick={onClick}>
+        <Card sx={style} onClick={onClick} style={{ width: contentWidth }}>
             <CardActionArea>
                 <CardMedia
                     component="img"
@@ -25,7 +25,7 @@ function BeerCard({ horizontal, maxWidth, contentWidth, children, img , onClick 
                     image={img}
                     alt="img"
                 />
-                <CardContent style={{ width: contentWidth }}>
+                <CardContent >
                     <Typography component={"span"} variant="body2" color="text.secondary">
                         {children}
                     </Typography>
