@@ -55,11 +55,11 @@ function AdvancedSearch({ data }) {
 
     return (
         <div>
-            <div className="box column is-3 has-text-centered mb-3">
+            <div className="box has-text-centered mb-3">
                 <h3 className="title is-4">Advanced Search</h3>
                 {renderedData}
             </div>
-            <div className="box column is-3 has-text-centered mb-3">
+            <div className="box has-text-centered mb-3">
                 <div className="mb-3">
                     <h5 className="title is-4">Sorting</h5>
                     <DropDown options={options} value={selection} onChange={handleSelect} />

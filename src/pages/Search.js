@@ -9,12 +9,34 @@ const Search = function (){
         {name: "SMR", min: "1", max:"10",description:"Standard Reference Method (SRM): Quantifies beer color by measuring light absorbance."}
     ];
 
+    //CARDLIST
+    const cardFeature = {
+        maxWidth : 350,
+        contentWidth : 200,
+        horizontal: false,
+        onClick: (item)=>{console.log(item.id)}
+    }
+
+    let items = Array.from({ length: 8 },
+        (_, i) => {
+            return {id: i,
+                img: "https://bulma.io/images/placeholders/96x96.png",
+                description: (item)=>{
+                    return <p>prova testo {item.id}</p>
+                }}
+        });
+
 
     return (
-        <div>
-            <AdvancedSearch data={filters}/>
+        <div style={{ display: 'flex', flexDirection: 'row' }}>
+            <div style={{ marginRight: '20px' }}>
+                <AdvancedSearch data={filters} />
+            </div>
+            <div>
+                <CardList maxColumn={3} cardFeature={cardFeature} items={items}></CardList>
+            </div>
         </div>
-
     )
 }
+
 export default Search;
