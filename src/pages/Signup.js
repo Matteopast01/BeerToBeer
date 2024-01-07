@@ -5,7 +5,7 @@ import {  createUserWithEmailAndPassword  } from 'firebase/auth';
 import {auth} from "../services/firebase/auth/manage_auth"
 
 
-export const Signup = (props) => {
+export const Signup = function () {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
