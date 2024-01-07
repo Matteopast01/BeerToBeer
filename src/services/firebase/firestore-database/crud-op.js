@@ -1,4 +1,4 @@
-import {getFirestore, collection, getDocs, addDoc, setDoc, deleteDoc, updateDoc, doc, getDoc, orderBy, limit, query, where, startAt, endAt, getCountFromServer} from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
+import {getFirestore, collection, getDocs, addDoc, setDoc, deleteDoc, updateDoc, doc, getDoc, orderBy, limit, query, where, startAt, endAt, getCountFromServer} from "firebase/firestore"
 import "../conf-firebase.js"
 const db = getFirestore()
 export const store_rew =  async function (obj, collection_name, error= ()=>{}, postprocessing = ()=>{}) {

@@ -4,27 +4,45 @@ import useCardList from "../hooks/useCardList";
 import DropDown from "./DropDown";
 import useDropDown from "../hooks/useDropDown";
 import * as React from "react";
+import {useEffect, useState} from "react";
+import {load_ordered, requestBeersById} from "../services/persistence_manager.js";
 
 export function BeerContainer(){
-    let items = Array.from({ length: 8 },
-        (_, i) => {
-            return {id: i,
-                img: "https://bulma.io/images/placeholders/96x96.png"
-            }});
+    const [selection, setSelection] = useState({label: "Più viste", value: "Più visti"});
+    const [items, setItems] = useState([])
+
+    useEffect(async () => {
+        setItems(await getBeers())
+    }, []);
+
+    const options = [
+        {label: "Più viste", value: "Più visti"},
+        {label: "Più apprezzate", value: "Più apprezzate"}
+    ]
+
+    const handleSelect = async (option) => {
+        setItems(await getBeers())
+        setSelection(option);
+    };
+
+    const getBeers = async function () {
+        let arrayOfId = await load_ordered("Beer_Id", "number_calls", "desc", 6)
+        let beers = []
+        for (let obj of arrayOfId) {
+            let beer = await requestBeersById(obj.id)
+            beers.push(beer[0])
+        }
+        return beers
+    }
 
     const navigate = useNavigate();
     const [cardItems, cardFeature] = useCardList(items,
             (item)=>{return item.id},
-            (item)=>{return item.img},
-            (item)=>{return <p> prova testo {item.id}</p>},
+            (item)=>{return item.image_url},
+            (item)=>{return <h2 style={{ textAlign: "center"}}> {item.name}</h2>},
             "default:350-500",
             (item)=>{navigate("/login")}
             )
-
-    const {selection, handleSelect,options} = useDropDown({label: "Più viste", value: "Più visti"}, [
-        {label: "Più viste", value: "Più visti"},
-        {label: "Più apprezzate", value: "Più apprezzate"},
-    ]);
 
     return (
         <div>

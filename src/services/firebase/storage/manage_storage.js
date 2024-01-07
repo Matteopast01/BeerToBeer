@@ -1,4 +1,5 @@
-import { getStorage, ref, uploadBytes, getDownloadURL }from "https://www.gstatic.com/firebasejs/10.5.2/firebase-storage.js";
+import "../conf-firebase.js"
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage"
 
 const storage = getStorage()
 

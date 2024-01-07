@@ -20,6 +20,7 @@ function BeerCard({ horizontal, maxWidth, contentWidth, children, img , onClick 
         <Card sx={style}>
             <CardActionArea onClick={onClick}>
                 <CardMedia
+                    style={{padding: "5px", position: "relative", margin: "auto", width: "auto", height: "350px"}}
                     component="img"
                     image={img}
                     alt="img"
