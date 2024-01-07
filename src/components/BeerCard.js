@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import 'bulma/css/bulma.min.css';
 import {CardActionArea} from '@mui/material';
 
-function BeerCard({ horizontal, maxWidth, contentWidth, children, img , onClick }) {
+function BeerCard({ horizontal, maxWidth, contentWidth, numberContentRow, children, img , onClick }) {
     let style
     if(horizontal){
         style = {width: maxWidth, display: 'flex'}
@@ -27,7 +27,7 @@ function BeerCard({ horizontal, maxWidth, contentWidth, children, img , onClick 
                 />
             </CardActionArea>
             <CardContent sx={{width: contentWidth}}>
-                <Typography component={"div"}>
+                <Typography sx={{display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: numberContentRow, overflow: 'hidden', textOverflow: 'ellipsis'}} component={"div"}>
                     {children}
                 </Typography>
             </CardContent>

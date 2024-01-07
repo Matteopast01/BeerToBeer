@@ -15,6 +15,7 @@ export function CardList({maxColumn, cardFeature, items}){
                     <td className="p-2" key={card.id}>
                         <BeerCard maxWidth={cardFeature.maxWidth}
                                   contentWidth={cardFeature.contentWidth}
+                                  numberContentRow = {cardFeature.numberContentRow}
                                   horizontal = {cardFeature.horizontal}
                                   img={card.img}
                                   onClick={()=>{cardFeature.onClick(card)}}>

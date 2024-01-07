@@ -10,8 +10,9 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarIcon from '@mui/icons-material/Star';
-import CustomButton from "./CustomButton";
+import Box from '@mui/material/Box';
 import CustomIconButton from "./CustomIconButton";
+import Typography from "@mui/material/Typography";
 
 export function BeerContainer(){
     const [selection, setSelection] = useState({label: "Più viste", value: "Più visti"});
@@ -57,11 +58,12 @@ export function BeerContainer(){
                     <CustomIconButton size={"small"} color={"error"} icon={<FavoriteBorderIcon/>} clickedIcon={<FavoriteIcon/>}/>
                     <CustomIconButton size={"small"} color={"warning"} icon={<StarBorderIcon sx={{fontSize : 27}}/>} clickedIcon={<StarIcon sx={{fontSize : 27}}/>}/>
                     <h1 className="has-text-centered"> {item.name}</h1>
-
+                    <Typography variant="body2" color="text.secondary">
+                        {item.description}
+                    </Typography>
                 </div>
-
             ) },
-            "default:350",
+            "default:350--8",
             (item)=>{navigate("/login")}
             )
 
