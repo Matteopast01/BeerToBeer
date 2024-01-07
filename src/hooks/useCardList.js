@@ -1,19 +1,31 @@
 
 const useCardList = ( items, idFunc, imgFunc, descriptionFunc, styleName, onClick = (item)=>{}) => {
+    let maxWidth = "auto"
+    let contentDimension = "auto"
+    if(styleName.includes(":")){
+        const splitted = styleName.split(":")
+        if(styleName.includes("-") ){
+            const widthSplitted = splitted[1].split("-")
+            maxWidth = parseInt(widthSplitted[0])
+            contentDimension = parseInt(widthSplitted[1])
+        }
+        maxWidth = parseInt(splitted[1])
+        styleName = splitted[0]
+    }
     let cardFeature
     switch (styleName){
         case "horizontal":
             cardFeature = {
-                maxWidth : 350,
-                contentWidth : 200,
+                maxWidth : maxWidth,
+                contentWidth : contentDimension,
                 horizontal: true,
                 onClick: (item)=>{onClick(item)}
             }
             break
         default:
             cardFeature = {
-                maxWidth : 550,
-                contentWidth : 380,
+                maxWidth : maxWidth,
+                contentWidth : contentDimension,
                 horizontal: false,
                 onClick: (item)=>{onClick(item)}
             }
@@ -27,7 +39,7 @@ const useCardList = ( items, idFunc, imgFunc, descriptionFunc, styleName, onClic
         }
     })
 
-    return { cardItems, cardFeature };
+    return [ cardItems, cardFeature ];
 };
 
 export default useCardList;

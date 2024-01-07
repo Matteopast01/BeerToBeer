@@ -9,28 +9,27 @@ import {CardActionArea} from '@mui/material';
 function BeerCard({ horizontal, maxWidth, contentWidth, children, img , onClick }) {
     let style
     if(horizontal){
-        style = {maxWidth: maxWidth, display: 'flex'}
+        style = {width: maxWidth, display: 'flex'}
     }
     else{
-        style = {maxWidth: maxWidth}
+        style = {width: maxWidth}
     }
 
 
     return (
-        <Card sx={style} onClick={onClick} style={{ width: contentWidth }}>
-            <CardActionArea>
+        <Card sx={style}>
+            <CardActionArea onClick={onClick}>
                 <CardMedia
                     component="img"
-                    height="194"
                     image={img}
                     alt="img"
                 />
-                <CardContent >
-                    <Typography component={"span"} variant="body2" color="text.secondary">
-                        {children}
-                    </Typography>
-                </CardContent>
             </CardActionArea>
+            <CardContent sx={{width: contentWidth}}>
+                <Typography component={"span"} variant="body2" color="text.secondary">
+                    {children}
+                </Typography>
+            </CardContent>
         </Card>
         );
 }

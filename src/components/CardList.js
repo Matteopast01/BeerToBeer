@@ -35,8 +35,8 @@ export function CardList({maxColumn, cardFeature, items}){
     }
 
     return (
-        <table>
-            <thead>
+        <table style={{width:"80%", margin:"auto"}}>
+            <thead style={{margin:"auto" }}>
                 {render()}
             </thead>
         </table>
