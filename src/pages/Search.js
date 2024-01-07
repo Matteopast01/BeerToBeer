@@ -6,9 +6,9 @@ import useDropDown from "../hooks/useDropDown";
 const Search = function (){
     //SLIDER
     const filters = [
-        {name: "ABV", min: "1", max:"50", description:"Alcohol by volume (ABV) is a metric used to determine the alcohol content in an alcoholic beverage."},
-        {name: "IBV", min: "1", max:"10",description:"International Bitterness Unit (IBU): Measures beer bitterness from hops."},
-        {name: "SMR", min: "1", max:"10",description:"Standard Reference Method (SRM): Quantifies beer color by measuring light absorbance."}
+        {name: "ABV", description:"Alcohol by volume (ABV) is a metric used to determine the alcohol content in an alcoholic beverage."},
+        {name: "IBV",description:"International Bitterness Unit (IBU): Measures beer bitterness from hops."},
+        {name: "SMR",description:"Standard Reference Method (SRM): Quantifies beer color by measuring light absorbance."}
     ];
     //DROPDOWN
     const {selection, handleSelect,options} = useDropDown(null, [
