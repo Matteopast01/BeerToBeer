@@ -1,4 +1,4 @@
-const Profilepage = function (){
+const Profile = function (){
     return ( <div>
         Welcome in the login page
     </div>)
@@ -9,4 +9,4 @@ const Profilepage = function (){
 
 }
 
-export default Profilepage;
+export default Profile;

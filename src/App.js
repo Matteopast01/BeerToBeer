@@ -3,9 +3,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {PrivateRoute} from "./components/PrivateRoute";
 import Homepage from "./pages/Homepage.js";
 import Search from "./pages/Search";
-import Login from "./pages/Login"
-import Profilepage from "./pages/Profilepage"
-import Signup from "./pages/Signup"
+import {Login} from "./pages/Login"
+
+import {Signup} from "./pages/Signup"
+import Profile from "./pages/Profile";
 
 import { Provider } from 'react-redux';
 import store from "./store/searchStore";
@@ -19,7 +20,7 @@ function App() {
             <Routes>
                 <Route path="/" element={< Homepage />}/>
                 <Route element={<PrivateRoute />}>
-                    <Route path="/profile" element={< Profilepage />}/>
+                    <Route path="/profile" element={< Profile />}/>
                 </Route>
                 <Route path="/login" element={<Login/>} />
                 <Route path="/signup" element={<Signup/>} />
