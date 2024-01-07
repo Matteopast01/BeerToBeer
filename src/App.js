@@ -10,7 +10,7 @@ import Profile from "./pages/Profile";
 
 import { Provider } from 'react-redux';
 import store from "./store/App";
-import TestPage from "./pages/TestPage";
+//import TestPage from "./pages/TestPage";
 
 
 
@@ -26,7 +26,7 @@ function App() {
                 <Route path="/login" element={<Login/>} />
                 <Route path="/signup" element={<Signup/>} />
                 <Route path="/search" element={<Search/>} />
-                <Route path="/TestPage" element={<TestPage/>} />
+
             </Routes>
         </BrowserRouter>
         </Provider>
