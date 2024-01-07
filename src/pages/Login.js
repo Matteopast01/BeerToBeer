@@ -1,27 +1,22 @@
-import React, { useState } from "react";
+import React, {useContext, useState} from "react";
 import "../App.css"
 import {useNavigate} from "react-router-dom";
-import {  signInWithEmailAndPassword  } from 'firebase/auth';
-import {auth} from "../services/firebase/auth/manage_auth"
+import {AuthContext} from "../contexts/Auth";
+import customButton from "../components/CustomButton";
+
+
+
+
 export const Login = function  () {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate()
-    const onLogin = (e) => {
-        e.preventDefault();
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed in
-                const user = userCredential.user;
-                navigate("/")
-                console.log(user);
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorCode, errorMessage)
-            });
+    const {handleLogin} = useContext(AuthContext);
 
+
+    const onLogin = async function  (e)  {
+        e.preventDefault();
+        await handleLogin(email, password, navigate)
     }
 
     return (

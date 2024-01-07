@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, {useContext, useState} from "react";
 import "../App.css"
 import { useNavigate} from "react-router-dom";
-import {  createUserWithEmailAndPassword  } from 'firebase/auth';
-import {auth} from "../services/firebase/auth/manage_auth"
+import {AuthContext} from "../contexts/Auth";
+
+
+
 
 
 export const Signup = function () {
@@ -11,25 +13,13 @@ export const Signup = function () {
     const [name, setName] = useState('');
 
     const navigate = useNavigate();
+    const {handleSignUp} = useContext(AuthContext);
+
+
 
     const onSubmit = async (e) => {
         e.preventDefault()
-
-        await createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed in
-                const user = userCredential.user;
-                console.log(user);
-                navigate("/login")
-                // ...
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorCode, errorMessage);
-                // ..
-            });
-
+        await handleSignUp(email, password, navigate)
 
     }
 
