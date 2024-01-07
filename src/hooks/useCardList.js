@@ -1,7 +1,7 @@
 
 const useCardList = ( items, idFunc, imgFunc, descriptionFunc, styleName, onClick = (item)=>{}) => {
-    let maxWidth = "auto"
-    let contentDimension = "auto"
+    let maxWidth = "100%"
+    let contentDimension = "100%"
     if(styleName.includes(":")){
         const splitted = styleName.split(":")
         if(styleName.includes("-") ){

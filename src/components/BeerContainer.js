@@ -6,14 +6,26 @@ import useDropDown from "../hooks/useDropDown";
 import * as React from "react";
 import {useEffect, useState} from "react";
 import {load_ordered, requestBeersById} from "../services/persistence_manager.js";
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
+import StarIcon from '@mui/icons-material/Star';
+import CustomButton from "./CustomButton";
 
 export function BeerContainer(){
     const [selection, setSelection] = useState({label: "Più viste", value: "Più visti"});
     const [items, setItems] = useState([])
 
-    useEffect(async () => {
-        setItems(await getBeers())
+    useEffect(() => {
+        (async  ()=> {
+            setItems(await getBeers())
+        })()
+        return ()=>{
+            setItems([])
+        }
     }, []);
+
+
 
     const options = [
         {label: "Più viste", value: "Più visti"},
@@ -39,8 +51,16 @@ export function BeerContainer(){
     const [cardItems, cardFeature] = useCardList(items,
             (item)=>{return item.id},
             (item)=>{return item.image_url},
-            (item)=>{return <h2 style={{ textAlign: "center"}}> {item.name}</h2>},
-            "default:350-500",
+            (item)=>{return(
+                <div>
+                    <h1 className="has-text-centered"> {item.name}
+                    <CustomButton size={"small"} color={"error"} startIcon={<FavoriteBorderIcon/>} startIconClicked={<FavoriteIcon/>}/>
+                    <CustomButton size={"small"} color={"warning"} startIcon={<StarBorderIcon/>} startIconClicked={<StarIcon/>}/>
+                    </h1>
+                </div>
+
+            ) },
+            "default:350",
             (item)=>{navigate("/login")}
             )
 

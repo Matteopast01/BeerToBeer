@@ -27,7 +27,7 @@ function BeerCard({ horizontal, maxWidth, contentWidth, children, img , onClick 
                 />
             </CardActionArea>
             <CardContent sx={{width: contentWidth}}>
-                <Typography component={"span"} variant="body2" color="text.secondary">
+                <Typography component={"div"}>
                     {children}
                 </Typography>
             </CardContent>
