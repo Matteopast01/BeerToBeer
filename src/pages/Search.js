@@ -1,6 +1,7 @@
 import AdvancedSearch from "../components/AdvancedSearch";
 import Sorting from "../components/Sorting";
 import {CardList} from "../components/CardList";
+import useDropDown from "../hooks/useDropDown";
 import * as React from "react";
 
 const Search = function (){
@@ -11,16 +12,17 @@ const Search = function (){
         {name: "SMR", description:"Standard Reference Method (SRM): Quantifies beer color by measuring light absorbance."}
     ];
     //DROPDOWN
-    const options1 =  [
+    const {selection, handleSelect,options} = useDropDown(null, [
         {label: "-", value: "-"},
         {label: "Alphabetical", value: "alphabetical"},
         {label: "IBV", value: "ibv"},
         {label: "Number of like", value: "number of like"},
-    ];
-    const  options2  =[
-        { label: "Crescent", value: "crescent" },
-        { label: "Decreasing", value: "decreasing" },
-    ];
+    ]);
+    const { selection: secondSelection, handleSelect: handleSecondSelect,
+        options: secondOptions } = useDropDown(null, [
+        { label: "Crescente", value: "crescente" },
+        { label: "Descrescente", value: "descrescente" },
+    ]);
 
     //CARDLIST
     const cardFeature = {
@@ -38,7 +40,7 @@ const Search = function (){
                     return <p>prova testo {item.id}</p>
                 }}
         });
-    
+
     return (
         <div style={{ display: 'flex', flexDirection: 'row' }}>
             <div style={{ marginRight: '20px' }}>
@@ -46,10 +48,14 @@ const Search = function (){
                 <div className="box has-text-centered mb-3">
                     <h5 className="title is-4">Sorting</h5>
                     <Sorting
-                        options={options1}
+                        options={options}
+                        selection={selection}
+                        handleSelect={handleSelect}
                     />
                     <Sorting
-                        options={options2}
+                        options={secondOptions}
+                        selection={secondSelection}
+                        handleSelect={handleSecondSelect}
                     />
                 </div>
             </div>
