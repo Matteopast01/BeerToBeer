@@ -20,21 +20,21 @@ export default class SimpleSlider extends Component {
                     <div>
                         <h3>
                             <a href="https://via.placeholder.com/600x400" target="_blank" rel="noopener noreferrer">
-                                <img src="https://via.placeholder.com/1200x400" alt="Image 1" />
+                                <img src="https://via.placeholder.com/1200x400" alt="Img1" />
                             </a>
                         </h3>
                     </div>
                     <div>
                         <h3>
                             <a href="https://via.placeholder.com/600x400" target="_blank" rel="noopener noreferrer">
-                                <img src="https://via.placeholder.com/1200x400" alt="Image 1" />
+                                <img src="https://via.placeholder.com/1200x400" alt="Img2" />
                             </a>
                         </h3>
                     </div>
                     <div>
                         <h3>
                             <a href="https://via.placeholder.com/600x400" target="_blank" rel="noopener noreferrer">
-                                <img src="https://via.placeholder.com/1200x400" alt="Image 1" />
+                                <img src="https://via.placeholder.com/1200x400" alt="Img3" />
                             </a>
                         </h3>
                     </div>

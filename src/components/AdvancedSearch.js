@@ -4,8 +4,6 @@ import IconButton from '@mui/material/IconButton';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import 'bulma/css/bulma.min.css';
 import {Tooltip} from "@mui/material";
-import DropDown from "../components/DropDown";
-import useDropDown from "../hooks/useDropDown";
 
 function valuetext(value) {
     return `${value}`;
@@ -40,33 +38,12 @@ function AdvancedSearch({ data }) {
         </div>
     ));
 
-    //DROPDOWN
-    const {selection, handleSelect,options} = useDropDown(null, [
-        {label: "-", value: "-"},
-        {label: "Alphabetical", value: "alphabetical"},
-        {label: "IBV", value: "ibv"},
-        {label: "Number of like", value: "number of like"},
-    ]);
-    const { selection: secondSelection, handleSelect: handleSecondSelect,
-            options: secondOptions } = useDropDown(null, [
-        { label: "Crescente", value: "crescente" },
-        { label: "Descrescente", value: "descrescente" },
-    ]);
 
     return (
         <div>
             <div className="box has-text-centered mb-3">
                 <h3 className="title is-4">Advanced Search</h3>
                 {renderedData}
-            </div>
-            <div className="box has-text-centered mb-3">
-                <div className="mb-3">
-                    <h5 className="title is-4">Sorting</h5>
-                    <DropDown options={options} value={selection} onChange={handleSelect} />
-                </div>
-                <div>
-                    <DropDown options={secondOptions} value={secondSelection} onChange={handleSecondSelect} />
-                </div>
             </div>
         </div>
     );
