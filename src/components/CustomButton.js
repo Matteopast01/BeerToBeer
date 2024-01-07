@@ -10,7 +10,7 @@ import {useState} from "react";
 // text = the button text
 
 function CustomButton({justClicked, startIcon, startIconClicked, disabledBoolean, variant, color, size, endIcon, endIconClicked, text, textClicked, handleClick}) {
-    const [clicked, setClicked] = useState(justClicked)
+    const [clicked, setClicked] = useState(!!justClicked)
     if(clicked){
         startIcon = !!startIconClicked ? startIconClicked : startIcon
         endIcon = !!endIconClicked ? endIconClicked : endIcon

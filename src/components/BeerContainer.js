@@ -11,6 +11,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarIcon from '@mui/icons-material/Star';
 import CustomButton from "./CustomButton";
+import CustomIconButton from "./CustomIconButton";
 
 export function BeerContainer(){
     const [selection, setSelection] = useState({label: "Più viste", value: "Più visti"});
@@ -53,10 +54,10 @@ export function BeerContainer(){
             (item)=>{return item.image_url},
             (item)=>{return(
                 <div>
-                    <h1 className="has-text-centered"> {item.name}
-                    <CustomButton size={"small"} color={"error"} startIcon={<FavoriteBorderIcon/>} startIconClicked={<FavoriteIcon/>}/>
-                    <CustomButton size={"small"} color={"warning"} startIcon={<StarBorderIcon/>} startIconClicked={<StarIcon/>}/>
-                    </h1>
+                    <CustomIconButton size={"small"} color={"error"} icon={<FavoriteBorderIcon/>} clickedIcon={<FavoriteIcon/>}/>
+                    <CustomIconButton size={"small"} color={"warning"} icon={<StarBorderIcon sx={{fontSize : 27}}/>} clickedIcon={<StarIcon sx={{fontSize : 27}}/>}/>
+                    <h1 className="has-text-centered"> {item.name}</h1>
+
                 </div>
 
             ) },
