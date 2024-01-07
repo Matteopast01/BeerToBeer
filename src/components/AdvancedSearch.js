@@ -5,7 +5,7 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import 'bulma/css/bulma.min.css';
 import {Tooltip} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
-import store, {updateFilter} from "../store/searchStore";
+import store, {updateFilter} from "../store/App";
 
 function valuetext(value) {
     return `${value}`;
@@ -30,7 +30,8 @@ function AdvancedSearch({ data }) {
 
     const renderedData = data.map((filter, index) => (
         <div key={index}>
-            <div className="has-text-centered mb-3">{filter.name}
+            <div className="has-text-centered mb-3">
+                {filter.name}
                 <Tooltip title={filter.description} arrow>
                 <IconButton aria-label="delete" size="small">
                     <InfoOutlinedIcon fontSize="medium" />

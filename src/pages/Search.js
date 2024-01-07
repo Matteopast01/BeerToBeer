@@ -2,13 +2,14 @@ import AdvancedSearch from "../components/AdvancedSearch";
 import Sorting from "../components/Sorting";
 import {CardList} from "../components/CardList";
 import useDropDown from "../hooks/useDropDown";
+import * as React from "react";
 
 const Search = function (){
     //SLIDER
     const filters = [
         {name: "ABV", description:"Alcohol by volume (ABV) is a metric used to determine the alcohol content in an alcoholic beverage."},
-        {name: "IBV",description:"International Bitterness Unit (IBU): Measures beer bitterness from hops."},
-        {name: "SMR",description:"Standard Reference Method (SRM): Quantifies beer color by measuring light absorbance."}
+        {name: "IBV", description:"International Bitterness Unit (IBU): Measures beer bitterness from hops."},
+        {name: "SMR", description:"Standard Reference Method (SRM): Quantifies beer color by measuring light absorbance."}
     ];
     //DROPDOWN
     const {selection, handleSelect,options} = useDropDown(null, [
@@ -44,14 +45,19 @@ const Search = function (){
         <div style={{ display: 'flex', flexDirection: 'row' }}>
             <div style={{ marginRight: '20px' }}>
                 <AdvancedSearch data={filters} />
-                <Sorting
-                    options={options}
-                    selection={selection}
-                    handleSelect={handleSelect}
-                    secondOptions={secondOptions}
-                    secondSelection={secondSelection}
-                    handleSecondSelect={handleSecondSelect}
-                />
+                <div className="box has-text-centered mb-3">
+                    <h5 className="title is-4">Sorting</h5>
+                    <Sorting
+                        options={options}
+                        selection={selection}
+                        handleSelect={handleSelect}
+                    />
+                    <Sorting
+                        options={secondOptions}
+                        selection={secondSelection}
+                        handleSelect={handleSecondSelect}
+                    />
+                </div>
             </div>
             <div>
                 <CardList maxColumn={3} cardFeature={cardFeature} items={items}/>
