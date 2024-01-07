@@ -49,6 +49,7 @@
   },
   "devDependencies": {
     "@mui/material": "^5.15.3",
+    "react-redux": "^9.0.4",
     "react-router-dom": "^6.21.1"
   }
 }

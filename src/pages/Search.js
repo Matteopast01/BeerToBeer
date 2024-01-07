@@ -1,7 +1,6 @@
 import AdvancedSearch from "../components/AdvancedSearch";
 import Sorting from "../components/Sorting";
 import {CardList} from "../components/CardList";
-import useDropDown from "../hooks/useDropDown";
 import * as React from "react";
 
 const Search = function (){
@@ -12,17 +11,16 @@ const Search = function (){
         {name: "SMR", description:"Standard Reference Method (SRM): Quantifies beer color by measuring light absorbance."}
     ];
     //DROPDOWN
-    const {selection, handleSelect,options} = useDropDown(null, [
+    const options1 =  [
         {label: "-", value: "-"},
         {label: "Alphabetical", value: "alphabetical"},
         {label: "IBV", value: "ibv"},
         {label: "Number of like", value: "number of like"},
-    ]);
-    const { selection: secondSelection, handleSelect: handleSecondSelect,
-        options: secondOptions } = useDropDown(null, [
-        { label: "Crescente", value: "crescente" },
-        { label: "Descrescente", value: "descrescente" },
-    ]);
+    ];
+    const  options2  =[
+        { label: "Crescent", value: "crescent" },
+        { label: "Decreasing", value: "decreasing" },
+    ];
 
     //CARDLIST
     const cardFeature = {
@@ -48,14 +46,10 @@ const Search = function (){
                 <div className="box has-text-centered mb-3">
                     <h5 className="title is-4">Sorting</h5>
                     <Sorting
-                        options={options}
-                        selection={selection}
-                        handleSelect={handleSelect}
+                        options={options1}
                     />
                     <Sorting
-                        options={secondOptions}
-                        selection={secondSelection}
-                        handleSelect={handleSecondSelect}
+                        options={options2}
                     />
                 </div>
             </div>

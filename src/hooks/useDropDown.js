@@ -7,7 +7,7 @@ const useDropDown = (initialValue, options) => {
         setSelection(option);
     };
 
-    return { selection, handleSelect, options };
+    return { options };
 };
 
 export default useDropDown;

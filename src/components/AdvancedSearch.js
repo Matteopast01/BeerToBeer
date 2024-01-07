@@ -5,7 +5,7 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import 'bulma/css/bulma.min.css';
 import {Tooltip} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
-import store, {updateFilter} from "../store/App";
+import {updateFilter} from "../store/App";
 
 function valuetext(value) {
     return `${value}`;

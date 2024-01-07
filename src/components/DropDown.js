@@ -1,9 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { GoChevronDown } from "react-icons/go";
+import { useSelector, useDispatch } from "react-redux";
+import { setSelectedValue } from "../store/App";
 
-function DropDown({ options, value, onChange }) {
+function DropDown({ options}) {
     const [isOpen, setIsOpen] = useState(false);
     const divEl = useRef();
+    const selectedValue = useSelector((state) => state.dropdown.selectedValue);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const handler = (event) => {
@@ -23,7 +27,8 @@ function DropDown({ options, value, onChange }) {
 
     const handleOptionClick = (option) => {
         setIsOpen(false);
-        onChange(option);
+        //onChange(option);
+        dispatch(setSelectedValue(option));
     };
 
     const renderedOptions = options.map((option) => {
@@ -46,7 +51,7 @@ function DropDown({ options, value, onChange }) {
                 style={{ cursor: "pointer" }}
             >
                 <div className="box border rounded p-3 shadow bg-white" style={{ width: '194px' }}>
-                    <span>{value?.label || "Select..."}</span>
+                    <span>{selectedValue?.label || "Select..."}</span>
                     <GoChevronDown className="text-lg ml-2" />
                 </div>
             </div>
