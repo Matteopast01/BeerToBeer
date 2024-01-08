@@ -7,25 +7,6 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 const Search = function (){
-    //SLIDER
-    const filters = [
-        {name: "ABV", description:"Alcohol by volume (ABV) is a metric used to determine the alcohol content in an alcoholic beverage."},
-        {name: "IBV", description:"International Bitterness Unit (IBU): Measures beer bitterness from hops."},
-        {name: "SMR", description:"Standard Reference Method (SRM): Quantifies beer color by measuring light absorbance."}
-    ];
-    //DROPDOWN
-    const {selection, handleSelect,options} = useDropDown(null, [
-        {label: "-", value: "-"},
-        {label: "Alphabetical", value: "alphabetical"},
-        {label: "IBV", value: "ibv"},
-        {label: "Number of like", value: "number of like"},
-    ]);
-    const { selection: secondSelection, handleSelect: handleSecondSelect,
-        options: secondOptions } = useDropDown(null, [
-        { label: "Crescente", value: "crescente" },
-        { label: "Descrescente", value: "descrescente" },
-    ]);
-
     //CARDLIST
     const cardFeature = {
         maxWidth : 350,
@@ -50,19 +31,10 @@ const Search = function (){
             </div>
             <div style={{ display: 'flex', flexDirection: 'row' }}>
                 <div style={{ marginRight: '20px' }}>
-                    <AdvancedSearch data={filters} />
+                    <AdvancedSearch/>
                     <div className="box has-text-centered mb-3">
                         <h5 className="title is-4">Sorting</h5>
-                        <Sorting
-                            options={options}
-                            selection={selection}
-                            handleSelect={handleSelect}
-                        />
-                        <Sorting
-                            options={secondOptions}
-                            selection={secondSelection}
-                            handleSelect={handleSecondSelect}
-                        />
+                        <Sorting/>
                     </div>
                 </div>
                 <div>

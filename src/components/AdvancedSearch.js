@@ -11,12 +11,17 @@ function valuetext(value) {
     return `${value}`;
 }
 
-function AdvancedSearch({ data }) {
+function AdvancedSearch( ) {
+    const filters = [
+        {name: "ABV", description:"Alcohol by volume (ABV) is a metric used to determine the alcohol content in an alcoholic beverage."},
+        {name: "IBV", description:"International Bitterness Unit (IBU): Measures beer bitterness from hops."},
+        {name: "SMR", description:"Standard Reference Method (SRM): Quantifies beer color by measuring light absorbance."}
+    ];
+
    // console.log(data);
    // const [values, setValues] = React.useState(data.map(() => [20, 37]));
     const dispatch = useDispatch();
     const values = useSelector(state => state.filters.values);
-
     //console.log(store.getState());
 
 
@@ -28,7 +33,7 @@ function AdvancedSearch({ data }) {
         setValues(newValues);*/
     };
 
-    const renderedData = data.map((filter, index) => (
+    const renderedData = filters.map((filter, index) => (
         <div key={index}>
             <div className="has-text-centered mb-3">
                 {filter.name}
