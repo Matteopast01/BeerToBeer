@@ -3,6 +3,8 @@ import Sorting from "../components/Sorting";
 import {CardList} from "../components/CardList";
 import useDropDown from "../hooks/useDropDown";
 import * as React from "react";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 const Search = function (){
     //SLIDER
@@ -42,25 +44,33 @@ const Search = function (){
         });
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'row' }}>
-            <div style={{ marginRight: '20px' }}>
-                <AdvancedSearch data={filters} />
-                <div className="box has-text-centered mb-3">
-                    <h5 className="title is-4">Sorting</h5>
-                    <Sorting
-                        options={options}
-                        selection={selection}
-                        handleSelect={handleSelect}
-                    />
-                    <Sorting
-                        options={secondOptions}
-                        selection={secondSelection}
-                        handleSelect={handleSecondSelect}
-                    />
+        <div>
+            <div>
+                <Header/>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
+                <div style={{ marginRight: '20px' }}>
+                    <AdvancedSearch data={filters} />
+                    <div className="box has-text-centered mb-3">
+                        <h5 className="title is-4">Sorting</h5>
+                        <Sorting
+                            options={options}
+                            selection={selection}
+                            handleSelect={handleSelect}
+                        />
+                        <Sorting
+                            options={secondOptions}
+                            selection={secondSelection}
+                            handleSelect={handleSecondSelect}
+                        />
+                    </div>
+                </div>
+                <div>
+                    <CardList maxColumn={3} cardFeature={cardFeature} items={items}/>
                 </div>
             </div>
             <div>
-                <CardList maxColumn={3} cardFeature={cardFeature} items={items}/>
+                <Footer/>
             </div>
         </div>
     )
