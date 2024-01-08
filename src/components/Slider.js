@@ -15,29 +15,11 @@ export default class SimpleSlider extends Component {
             autoplaySpeed: 3000 // Imposta la velocità di autoplay in millisecondi (ad esempio, 2000 ms = 2 secondi)
         };
         return (
-            <div>
-                <Slider {...settings}>
-                    <div>
-                        <h3>
-                            <a href="https://via.placeholder.com/600x400" target="_blank" rel="noopener noreferrer">
-                                <img src="https://via.placeholder.com/1200x400" alt="Img1" />
-                            </a>
-                        </h3>
-                    </div>
-                    <div>
-                        <h3>
-                            <a href="https://via.placeholder.com/600x400" target="_blank" rel="noopener noreferrer">
-                                <img src="https://via.placeholder.com/1200x400" alt="Img2" />
-                            </a>
-                        </h3>
-                    </div>
-                    <div>
-                        <h3>
-                            <a href="https://via.placeholder.com/600x400" target="_blank" rel="noopener noreferrer">
-                                <img src="https://via.placeholder.com/1200x400" alt="Img3" />
-                            </a>
-                        </h3>
-                    </div>
+            <div style={{margin: "auto", width:"100%"}}>
+                <Slider style={{margin: "auto", width:"95%"}} {...settings}>
+                    <img src="https://via.placeholder.com/1200x400" alt="Img1" />
+                    <img src="https://via.placeholder.com/1200x400" alt="Img2" />
+                    <img src="https://via.placeholder.com/1200x400" alt="Img3" />
                 </Slider>
             </div>
         );

@@ -11,6 +11,7 @@ const Homepage = function (){
             <div>
                 <Header/>
             </div>
+            <br/>
             <div>
                 <SimpleSlider/>
             </div>
