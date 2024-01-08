@@ -44,7 +44,8 @@ function AdvancedSearch( ) {
                 </Tooltip>
                 </div>
             <Slider
-                sx={{ color: 'black', '& .MuiSlider-thumb': {
+                sx={{ color: '#333333',
+                    '& .MuiSlider-thumb': {
                         boxShadow: 'none',
                         '&:hover, &:focus, &.Mui-focusVisible': {
                             boxShadow: '0 0 0 8px rgba(240, 240, 240, 0.5)',

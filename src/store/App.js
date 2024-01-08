@@ -20,9 +20,27 @@ const filterSlice = createSlice({
     },
 });
 
+//Slice per l'ordinamento
+const sortingSlice = createSlice({
+    name: 'sorting',
+    initialState: {
+        selection1: { label: 'Seleziona...', value: null },
+        selection2: { label: 'Seleziona...', value: null },
+    },
+    reducers: {
+        setSelection1: (state, action) => {
+            state.selection1 = action.payload;
+        },
+        setSelection2: (state, action) => {
+            state.selection2 = action.payload;
+        },
+    },
+});
+
 // Combinazione degli slice
 const rootReducer = {
     filters: filterSlice.reducer,
+    sorting: sortingSlice.reducer,
 };
 // Configurazione dello store
 const store = configureStore({
@@ -30,7 +48,9 @@ const store = configureStore({
 });
 
 export const { updateFilter } = filterSlice.actions;
+export const { setSelection1, setSelection2 } = sortingSlice.actions;
 
 export const selectFilters = (state) => state.filters;
+export const selectSorting = (state) => state.sorting;
 
 export default store;

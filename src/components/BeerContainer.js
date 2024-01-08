@@ -2,7 +2,6 @@ import {useNavigate} from "react-router-dom";
 import {CardList} from "./CardList";
 import useCardList from "../hooks/useCardList";
 import DropDown from "./DropDown";
-import useDropDown from "../hooks/useDropDown";
 import * as React from "react";
 import {useEffect, useState} from "react";
 import {load_ordered, requestBeersById} from "../services/persistence_manager.js";

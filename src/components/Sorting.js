@@ -1,28 +1,40 @@
 import * as React from "react";
 import DropDown from "../components/DropDown";
-import useDropDown from "../hooks/useDropDown";
+import {useDispatch, useSelector} from "react-redux";
+import {setSelection1, setSelection2} from "../store/App";
+
 
 function Sorting() {
+    const dispatch = useDispatch();
+    const selection1 = useSelector((state) => state.sorting.selection1);
+    const selection2 = useSelector((state) => state.sorting.selection2);
 
-    const {selection, handleSelect,options} = useDropDown(null, [
+    const  options1 =  [
         {label: "-", value: "-"},
         {label: "Alphabetical", value: "alphabetical"},
         {label: "IBV", value: "ibv"},
         {label: "Number of like", value: "number of like"},
-    ]);
-    const { selection: secondSelection, handleSelect: handleSecondSelect,
-        options: secondOptions } = useDropDown(null, [
+    ];
+    const options2 = [
         { label: "Increasing", value: "increasing" },
         { label: "Decreasing", value: "decreasing" },
-    ]);
+    ];
+
+    const handleSelect1 = (option) => {
+        dispatch(setSelection1(option));
+    };
+
+    const handleSelect2 = (option) => {
+        dispatch(setSelection2(option));
+    };
 
     return (
         <div className="has-text-centered mb-3">
             <div className="mb-3">
-                <DropDown options={options} value={selection} onChange={handleSelect} />
+                <DropDown options={options1} value={selection1} onChange={handleSelect1} />
             </div>
             <div className="mb-3">
-                <DropDown options={secondOptions} value={secondSelection} onChange={handleSecondSelect} />
+                <DropDown options={options2} value={selection2} onChange={handleSelect2} />
             </div>
         </div>
     );

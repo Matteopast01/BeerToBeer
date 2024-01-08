@@ -1,7 +1,6 @@
 import AdvancedSearch from "../components/AdvancedSearch";
 import Sorting from "../components/Sorting";
 import {CardList} from "../components/CardList";
-import useDropDown from "../hooks/useDropDown";
 import * as React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
