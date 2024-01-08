@@ -17,6 +17,13 @@ function Header(){
         size: "large"
     }
 
+    const propsAccount2 = {
+        icon: <AccountCircleIcon />,
+        sx: { color: '#333333'},
+        size: "large",
+        visibility: 'hidden'
+    }
+
     const propsHome = {
         text: "Home",
         sx: { color: '#333333'},
@@ -37,19 +44,23 @@ function Header(){
 
     return (
         <div>
-            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                <SearchBar {...propsSearch}/>
-                <CustomIconButton {...propsAccount}/>
+            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                <div style={{width: '50px'}}/>
+                <div style={{flex: '1', textAlign: 'center', fontSize: '32px', fontFamily: 'Arial, sans-serif'}}>
+                    <b>BeerToBeer</b>
+                </div>
+                <div style={{width: '50px'}}>
+                    <CustomIconButton {...propsAccount} />
+                </div>
             </div>
 
-            <div style={{textAlign: 'center', fontSize: '30px'}}>
-                <b>BeerToBeer</b>
-            </div>
-
-            <div style={{textAlign: 'center'}}>
-                <CustomButton {...propsHome}/>
-                <CustomButton {...propsPubs}/>
-                <CustomButton {...propsAdvancedSearch}/>
+            <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center'}}>
+                <div>
+                    <CustomButton {...propsHome} />
+                    <CustomButton {...propsPubs} />
+                    <CustomButton {...propsAdvancedSearch} />
+                </div>
+                <SearchBar {...propsSearch} />
             </div>
         </div>
     );

@@ -22,19 +22,23 @@ const SearchBar = ({ onSearch }) => {
               onChange={handleInputChange}
               className="search-input"
               style={{
-                  width: '200px',
+                  width: '250px',
                   height: '30px',
-                  backgroundColor: 'lightgray',
+                  backgroundColor: isHovered ? '#eaeffa' :'#fafafc',
                   border: '1px solid',
-                  borderColor: isHovered ? '#007bff' : 'lightgray', // Cambio del colore del bordo al passaggio del mouse
+                  borderColor: 'lightgray',
                   borderRadius: '5px',
                   padding: '5px',
                   outline: 'none',
                   transition: 'border-color 0.3s ease-in-out',
+                  fontSize: '14px',
+                  color: '#858484',
+                  fontStyle: 'italic',
+                  fontFamily: 'Arial, sans-serif',
               }}
-              // Gestione evento mouseover
+              // mouseover event
               onMouseOver={() => setIsHovered(true)}
-              // Gestione evento mouseout
+              // mouseout event
               onMouseOut={() => setIsHovered(false)}
           />
       </form>
