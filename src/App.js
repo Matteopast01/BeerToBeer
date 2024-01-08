@@ -10,9 +10,6 @@ import Profile from "./pages/Profile";
 
 import { Provider } from 'react-redux';
 import store from "./store/App";
-//import TestPage from "./pages/TestPage";
-
-
 
 function App() {
     return (
@@ -26,7 +23,6 @@ function App() {
                 <Route path="/login" element={<Login/>} />
                 <Route path="/signup" element={<Signup/>} />
                 <Route path="/search" element={<Search/>} />
-
             </Routes>
         </BrowserRouter>
         </Provider>
