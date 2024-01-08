@@ -45,7 +45,7 @@ function DropDown({ options, value, onChange }) {
                 onClick={handleClick}
                 style={{ cursor: "pointer" }}
             >
-                <div className="box border rounded p-3 shadow bg-white" style={{ width: '194px' }}>
+                <div className="box border rounded p-3 shadow bg-white" style={{ width: '194px', textAlign: "center" }}>
                     <span>{value?.label || "Select..."}</span>
                     <GoChevronDown className="text-lg ml-2" />
                 </div>

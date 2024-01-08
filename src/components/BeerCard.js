@@ -12,7 +12,7 @@ function BeerCard({ horizontal, maxWidth, contentWidth, numberContentRow, childr
         style = {width: maxWidth, display: 'flex'}
     }
     else{
-        style = {width: maxWidth}
+        style = {width: maxWidth, display: 'flex', flexDirection: 'column'}
     }
 
 
