@@ -13,7 +13,7 @@ import {useState} from "react";
 // size = "small", "medium" or "large"
 // children = <DeleteIcon />, <AlarmIcon /> ecc
 
-function CustomIconButton({label, variant, color, sx, size, justClicked, icon, clickedIcon, handleClick}) {
+function CustomIconButton({label, variant, color, sx, size, justClicked, icon, clickedIcon, handleClick, href}) {
     const [clicked, setClicked] = useState(!!justClicked)
     if(clicked){
         icon = !!clickedIcon ? clickedIcon : icon
@@ -36,6 +36,7 @@ function CustomIconButton({label, variant, color, sx, size, justClicked, icon, c
               sx={sx}
               size={size}
               onClick={realHandleClick}
+              href={href}
       >
           {icon}
       </IconButton>

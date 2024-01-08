@@ -2,6 +2,8 @@ import CustomButton from "./CustomButton";
 import CustomIconButton from "./CustomIconButton";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SearchBar from "./SearchBar";
+import Search from "../pages/Search";
+import {Route} from "react-router-dom";
 
 function Header(){
 
@@ -14,32 +16,29 @@ function Header(){
     const propsAccount = {
         icon: <AccountCircleIcon />,
         sx: { color: '#333333'},
-        size: "large"
-    }
-
-    const propsAccount2 = {
-        icon: <AccountCircleIcon />,
-        sx: { color: '#333333'},
         size: "large",
-        visibility: 'hidden'
+        href: "/profile"
     }
 
     const propsHome = {
         text: "Home",
         sx: { color: '#333333'},
-        size: "small"
+        size: "small",
+        href: "/"
     }
 
     const propsPubs = {
         text: "Our Pubs",
         sx: { color: '#333333'},
-        size: "small"
+        size: "small",
+        href: "/ourpubs"
     }
 
     const propsAdvancedSearch = {
         text:"Advanced Search",
         sx: { color: '#333333'},
-        size: "small"
+        size: "small",
+        href: "/search"
     }
 
     return (

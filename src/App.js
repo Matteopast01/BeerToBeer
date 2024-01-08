@@ -3,8 +3,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {PrivateRoute} from "./components/PrivateRoute";
 import Homepage from "./pages/Homepage.js";
 import Search from "./pages/Search";
+import OurPubs from "./pages/OurPubs";
 import {Login} from "./pages/Login"
-
 import {Signup} from "./pages/Signup"
 import Profile from "./pages/Profile";
 
@@ -23,6 +23,7 @@ function App() {
                 <Route path="/login" element={<Login/>} />
                 <Route path="/signup" element={<Signup/>} />
                 <Route path="/search" element={<Search/>} />
+                <Route path="/ourpubs" element={<OurPubs/>} />
             </Routes>
         </BrowserRouter>
         </Provider>
