@@ -1,36 +1,44 @@
 import CustomButton from "./CustomButton";
 import CustomIconButton from "./CustomIconButton";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import SearchBar from "./SearchBar";
 
 function Header(){
 
+    const propsSearch = {
+        onSearch: function () {
+            // TODO
+        }
+    }
+
     const propsAccount = {
         icon: <AccountCircleIcon />,
-        color: "primary",
+        sx: { color: '#333333'},
         size: "large"
     }
 
     const propsHome = {
         text: "Home",
-        color: "primary",
+        sx: { color: '#333333'},
         size: "small"
     }
 
     const propsPubs = {
         text: "Our Pubs",
-        color: "primary",
+        sx: { color: '#333333'},
         size: "small"
     }
 
     const propsAdvancedSearch = {
         text:"Advanced Search",
-        color: "primary",
+        sx: { color: '#333333'},
         size: "small"
     }
 
     return (
         <div>
-            <div style={{textAlign: 'right'}}>
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <SearchBar {...propsSearch}/>
                 <CustomIconButton {...propsAccount}/>
             </div>
 

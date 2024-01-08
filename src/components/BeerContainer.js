@@ -54,8 +54,8 @@ export function BeerContainer(){
             (item)=>{return item.image_url},
             (item)=>{return(
                 <div>
-                    <CustomIconButton size={"small"} color={"error"} icon={<FavoriteBorderIcon/>} clickedIcon={<FavoriteIcon/>}/>
-                    <CustomIconButton size={"small"} color={"warning"} icon={<StarBorderIcon sx={{fontSize : 27}}/>} clickedIcon={<StarIcon sx={{fontSize : 27}}/>}/>
+                    <CustomIconButton size={"small"} sx={{ color: '#f30303'}} icon={<FavoriteBorderIcon/>} clickedIcon={<FavoriteIcon/>}/>
+                    <CustomIconButton size={"small"} sx={{ color: '#fcf12b'}} icon={<StarBorderIcon sx={{fontSize : 27}}/>} clickedIcon={<StarIcon sx={{fontSize : 27}}/>}/>
                     <h1 className="has-text-centered"> {item.name}</h1>
                     <Typography variant="body2" color="text.secondary">
                         {item.description}
