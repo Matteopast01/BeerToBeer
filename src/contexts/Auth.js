@@ -11,16 +11,19 @@ export const AuthProvider = ({ children }) => {
     const auth = getAuth();
 
     const handleSignUp = async function (email, password, navigate) {
+
         await createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
                 console.log(user);
-                navigate("/login");
+                navigate("/");
+
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 console.log(errorCode, errorMessage);
+
             });
     }
 
@@ -30,11 +33,13 @@ export const AuthProvider = ({ children }) => {
                 const user = userCredential.user;
                 navigate("/");
                 console.log(user);
+                return true
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 console.log(errorCode, errorMessage);
+                return false
             });
     }
 

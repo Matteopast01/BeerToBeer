@@ -7,7 +7,6 @@ import OurPubs from "./pages/OurPubs";
 import {Login} from "./pages/Login"
 import {Signup} from "./pages/Signup"
 import Profile from "./pages/Profile";
-
 import { Provider } from 'react-redux';
 import store from "./store/App";
 
