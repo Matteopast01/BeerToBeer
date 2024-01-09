@@ -3,7 +3,7 @@ import CustomIconButton from "./CustomIconButton";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SearchBar from "./SearchBar";
 import Search from "../pages/Search";
-import {Route} from "react-router-dom";
+import {Route, useNavigate} from "react-router-dom";
 
 function Header(){
 
@@ -13,32 +13,34 @@ function Header(){
         }
     }
 
+    const navigate = useNavigate();
+
     const propsAccount = {
         icon: <AccountCircleIcon />,
         sx: { color: '#333333'},
         size: "large",
-        href: "/profile"
+        handleClick: ()=>{navigate("/login")}
     }
 
     const propsHome = {
         text: "Home",
         sx: { color: '#333333'},
         size: "small",
-        href: "/"
+        handleClick: ()=>{navigate("/")}
     }
 
     const propsPubs = {
         text: "Our Pubs",
         sx: { color: '#333333'},
         size: "small",
-        href: "/ourpubs"
+        handleClick: ()=>{navigate("/ourpubs")}
     }
 
     const propsAdvancedSearch = {
         text:"Advanced Search",
         sx: { color: '#333333'},
         size: "small",
-        href: "/search"
+        handleClick: ()=>{navigate("/search")}
     }
 
     return (
