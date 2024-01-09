@@ -28,7 +28,7 @@ export const Login = function  () {
                 <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="youremail@gmail.com" id="email" name="email" />
                 <label htmlFor="password">password:</label>
                 <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="********" id="password" name="password" />
-                <button type="submit" onSubmit={onLogin}>Log In </button>
+                <button type="submit" onClick={onLogin}>Log In </button>
             </form>
             <button className="link-btn" onClick={() => {navigate("/signup")}}>Don't have an account? Register here.</button>
         </div>

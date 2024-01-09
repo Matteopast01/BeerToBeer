@@ -1,6 +1,7 @@
 import Header from "../components/Header";
 import * as React from "react";
 import Footer from "../components/Footer";
+import FavoritesContainer from "../components/FavoritesContainer"
 
 const Profile = function (){
     return (
@@ -8,7 +9,8 @@ const Profile = function (){
             <div>
                 <Header/>
             </div>
-                Welcome in the login page
+            <FavoritesContainer/>
+
             <div>
                 <Footer/>
             </div>

@@ -34,7 +34,7 @@ export const Signup = function () {
                 <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="youremail@gmail.com" id="email" name="email" required />
                 <label htmlFor="password">password:</label>
                 <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="********" id="password" name="password"  required/>
-                <button type="submit" onSubmit={onSubmit}> Log In</button>
+                <button type="submit" onClick={onSubmit}> Log In</button>
             </form>
             <button className="link-btn" onClick={() => {navigate("/login")}}>Already have an account? Login here.</button>
         </div>
