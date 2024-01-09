@@ -69,7 +69,7 @@ export function BeerContainer(){
     return (
         <div>
             <br/>
-            <div style={{margin: "auto", width:"10%"}}>
+            <div style={{margin: "auto", width:"10%", display: "flex", justifyContent: "center" }}>
                 <DropDown options={options} value={selection} onChange={handleSelect} />
             </div>
             <CardList maxColumn={3} cardFeature={cardFeature} items={cardItems}></CardList>
