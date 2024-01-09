@@ -24,9 +24,7 @@ export function FavoritesContainer(){
         }
     }, []);
 
-    const handleSelect = async (option) => {
-        setItems(await getBeers())
-    };
+
 
     const getBeers = async function () {
         let arrayOfId = await load_ordered("Beer_Id", "number_calls", "desc", 6)
