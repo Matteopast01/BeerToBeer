@@ -9,7 +9,6 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarIcon from '@mui/icons-material/Star';
-import Box from '@mui/material/Box';
 import CustomIconButton from "./CustomIconButton";
 import Typography from "@mui/material/Typography";
 

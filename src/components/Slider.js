@@ -12,7 +12,7 @@ export default class SimpleSlider extends Component {
             speed: 500,
             slidesToShow: 1,
             slidesToScroll: 1,
-            autoplay: false,
+            autoplay: true,
             autoplaySpeed: 3000 // Imposta la velocità di autoplay in millisecondi (ad esempio, 2000 ms = 2 secondi)
         };
         return (
@@ -24,7 +24,7 @@ export default class SimpleSlider extends Component {
                             marginRight: "auto",
                             width: "80%"}} src="https://glacier-design.com/wp-content/uploads/2022/10/Can-you-hydrate-yourself-with-beer-2048x1365.jpg" alt="Img1" />
                         <h1 style={{position: "sticky", bottom: "50%", textAlign: "center", fontSize: 30, color: "white"}}>
-                            Imagine 1
+                            Image 1
                         </h1>
                     </cd>
                     <cd>
@@ -33,7 +33,7 @@ export default class SimpleSlider extends Component {
                             marginRight: "auto",
                             width: "80%"}} src="https://glacier-design.com/wp-content/uploads/2022/10/Can-you-hydrate-yourself-with-beer-2048x1365.jpg" alt="Img2" />
                         <h1 style={{position: "sticky", bottom: "50%", textAlign: "center", fontSize: 30, color: "white"}}>
-                            Imagine 2
+                            Image 2
                         </h1>
                     </cd>
                     <cd>
@@ -42,7 +42,7 @@ export default class SimpleSlider extends Component {
                             marginRight: "auto",
                             width: "80%"}} src="https://glacier-design.com/wp-content/uploads/2022/10/Can-you-hydrate-yourself-with-beer-2048x1365.jpg" alt="Img3" />
                         <h1 style={{position: "sticky", bottom: "50%", textAlign: "center", fontSize: 30, color: "white"}}>
-                            Imagine 3
+                            Image 3
                         </h1>
                     </cd>
                 </Slider>
