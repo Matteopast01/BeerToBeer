@@ -74,6 +74,5 @@ export function BeerContainer(){
             </div>
             <CardList maxColumn={3} cardFeature={cardFeature} items={cardItems}></CardList>
         </div>
-
     )
 }
