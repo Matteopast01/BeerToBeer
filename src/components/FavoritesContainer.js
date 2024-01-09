@@ -14,10 +14,11 @@ import Typography from "@mui/material/Typography";
 
 export function FavoritesContainer(){
     const [items, setItems] = useState([])
+    const navigate = useNavigate();
 
     useEffect(() => {
         (async  ()=> {
-            setItems(await getBeers())
+            setItems(await getFavorites())
         })()
         return ()=>{
             setItems([])
@@ -26,7 +27,7 @@ export function FavoritesContainer(){
 
 
 
-    const getBeers = async function () {
+    const getFavorites = async function () {
         let arrayOfId = await load_ordered("Beer_Id", "number_calls", "desc", 6)
         let beers = []
         for (let obj of arrayOfId) {
@@ -36,7 +37,6 @@ export function FavoritesContainer(){
         return beers
     }
 
-    const navigate = useNavigate();
     const [cardItems, cardFeature] = useCardList(items,
         (item)=>{return item.id},
         (item)=>{return item.image_url},
@@ -60,7 +60,7 @@ export function FavoritesContainer(){
             <br/>
             <div style={{margin: "auto", width:"10%", display: "flex", justifyContent: "center" }}>
             </div>
-            <CardList maxColumn={3} cardFeature={cardFeature} items={cardItems}></CardList>
+            <CardList maxColumn={3} cardFeature={cardFeature} items={cardItems}/>
         </div>
     )
 }
