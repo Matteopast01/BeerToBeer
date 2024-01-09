@@ -9,7 +9,8 @@ import {useState} from "react";
 // size = "small", "medium" or "large"
 // text = the button text
 
-function CustomButton({justClicked, startIcon, startIconClicked, disabledBoolean, variant, color, sx, size, endIcon, endIconClicked, text, textClicked, handleClick}) {
+function CustomButton({justClicked, startIcon, startIconClicked, disabledBoolean, variant, color, sx,
+                          size, endIcon, endIconClicked, text, textClicked, handleClick}) {
     const [clicked, setClicked] = useState(!!justClicked)
     if(clicked){
         startIcon = !!startIconClicked ? startIconClicked : startIcon

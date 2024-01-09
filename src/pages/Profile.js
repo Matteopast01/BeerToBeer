@@ -1,12 +1,9 @@
 const Profile = function (){
-    return ( <div>
+    return (
+        <div>
         Welcome in the login page
-    </div>)
-
-
-
-
-
+    </div>
+    )
 }
 
 export default Profile;
