@@ -55,8 +55,7 @@ export default function Popup() {
                     <DialogContentText  sx={{ textAlign: 'left', width: '100%', marginBottom: '30px'}}>
                         Enter your new photo  here:
                     </DialogContentText>
-                    <InputFileUpload
-                    />
+                    <InputFileUpload/>
             </DialogContent>
             <DialogActions>
                 <CustomButton {...propsSave}/>
