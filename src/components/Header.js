@@ -6,6 +6,7 @@ import Search from "../pages/Search";
 import {Route, useNavigate} from "react-router-dom";
 import { AuthContext } from "../contexts/Auth";
 import {useContext} from "react";
+import * as React from "react";
 
 
 function Header(){
@@ -25,14 +26,12 @@ function Header(){
         sx: { color: '#333333'},
         size: "large",
         handleClick: ()=>{navigate("/login")},
-        children: <CustomButton text={"Login"} size={"small"} sx={{color: '#333333'}}/>,
     }
     const propsLogout = {
         icon: <AccountCircleIcon />,
         sx: { color: '#333333'},
         size: "large",
         handleClick: ()=>{handleLogout(navigate)},
-        children: <CustomButton text={"Logout"} size={"small"} sx={{color: '#333333'}}/>,
     }
 
     const propsHome = {
@@ -65,7 +64,13 @@ function Header(){
                     <b>BeerToBeer</b>
                 </div>
                 <div style={{width: '70px'}}>
-                    {currentUser ? <CustomIconButton {...propsLogout}/> : <CustomIconButton {...propsLogin}/>}
+                    <div style={{display: "flex", alignItems: "center", flexDirection: "column"}}>
+                        {currentUser ? <CustomIconButton {...propsLogout}/> : <CustomIconButton {...propsLogin}/>}
+                        <div>
+                            {currentUser ? <CustomButton text={"Logout"} size={"small"} sx={{color: '#333333'}}/>:
+                                <CustomButton text={"Login"} size={"small"} sx={{color: '#333333'}}/>}
+                        </div>
+                    </div>
                 </div>
             </div>
 

@@ -13,7 +13,7 @@ import {useState} from "react";
 // size = "small", "medium" or "large"
 // children = <DeleteIcon />, <AlarmIcon /> ecc
 
-function CustomIconButton({label, variant, color, sx, size, justClicked, icon, clickedIcon, handleClick, children}) {
+function CustomIconButton({label, variant, color, sx, size, justClicked, icon, clickedIcon, handleClick}) {
     const [clicked, setClicked] = useState(!!justClicked)
     if(clicked){
         icon = !!clickedIcon ? clickedIcon : icon
@@ -31,7 +31,6 @@ function CustomIconButton({label, variant, color, sx, size, justClicked, icon, c
     }
 
     return (
-        <div style={{display: "flex", alignItems: "center", flexDirection: "column"}}>
             <IconButton aria-label={label}
                         variant={variant}
                         color={color}
@@ -41,10 +40,6 @@ function CustomIconButton({label, variant, color, sx, size, justClicked, icon, c
             >
                 {icon}
             </IconButton>
-            <div>
-                {children}
-            </div>
-        </div>
     );
 }
 
