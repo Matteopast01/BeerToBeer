@@ -3,7 +3,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import SaveAsIcon from '@mui/icons-material/SaveAs';
 import CustomButton from "./CustomButton";
 import {Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField} from "@mui/material";
-import InputFileUpload from "./InputFileUpload";
+import FileUploadButton from "./FileUploadButton";
 
 export default function Popup() {
     const [open, setOpen] = React.useState(false);
@@ -55,7 +55,7 @@ export default function Popup() {
                     <DialogContentText  sx={{ textAlign: 'left', width: '100%', marginBottom: '30px'}}>
                         Enter your new photo  here:
                     </DialogContentText>
-                    <InputFileUpload/>
+                    <FileUploadButton/>
             </DialogContent>
             <DialogActions>
                 <CustomButton {...propsSave}/>
