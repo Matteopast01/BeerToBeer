@@ -16,11 +16,11 @@ function Header(){
     const navigate = useNavigate();
 
     const propsAccount = {
-        children: <CustomButton text={"Login"}/>,
         icon: <AccountCircleIcon />,
         sx: { color: '#333333'},
         size: "large",
-        handleClick: ()=>{navigate("/login")}
+        handleClick: ()=>{navigate("/login")},
+        children: <CustomButton text={"Login"} size={"small"} sx={{color: '#333333'}}/>,
     }
 
     const propsHome = {
