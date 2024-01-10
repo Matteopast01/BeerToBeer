@@ -41,7 +41,8 @@ function Header(){
         text:"Advanced Search",
         sx: { color: '#333333'},
         size: "small",
-        handleClick: ()=>{navigate("/search")}
+        handleClick: ()=>{navigate("/search")},
+        uploadButtonBoolean: true
     }
 
     return (
