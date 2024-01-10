@@ -19,6 +19,7 @@ export let pull_img_url = async function (path_img, postprocessing= ()=>{}, erro
     try{
        let url =  await getDownloadURL(ref(storage, path_img))
         postprocessing(url)
+        return url
     }
     catch (e){
         error()

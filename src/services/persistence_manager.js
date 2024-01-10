@@ -158,7 +158,7 @@ export let push_img = async function (path_img, file,  postprocessing= ()=>{}, e
  * @param path_img path of the img
  * @param postprocessing postprocessing function
  * @param error error function
- * @returns {Promise<void>}
+ * @returns {Promise<string|undefined>}
  */
 export let pull_img_url = async function (path_img, postprocessing= ()=>{}, error = ()=>{}){
     return storage.pull_img_url(path_img, postprocessing, error)

@@ -1,11 +1,10 @@
-import React, {Component} from "react";
+import React, {Component, useEffect, useState} from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Typography from "@mui/material/Typography";
+import {pull_img_url} from "../services/persistence_manager";
 
-export default class SimpleSlider extends Component {
-    render() {
+export default function SimpleSlider({imags}) {
         const settings = {
             dots: true,
             infinite: true,
@@ -15,38 +14,24 @@ export default class SimpleSlider extends Component {
             autoplay: true,
             autoplaySpeed: 3000 // Imposta la velocità di autoplay in millisecondi (ad esempio, 2000 ms = 2 secondi)
         };
+
         return (
             <div style={{margin: "auto", width:"100%"}}>
                 <Slider style={{margin: "auto", width:"95%"}} {...settings}>
-                    <cd>
-                        <img style={{display: "block",
-                            marginLeft: "auto",
-                            marginRight: "auto",
-                            width: "80%"}} src="https://glacier-design.com/wp-content/uploads/2022/10/Can-you-hydrate-yourself-with-beer-2048x1365.jpg" alt="Img1" />
-                        <h1 style={{position: "sticky", bottom: "50%", textAlign: "center", fontSize: 30, color: "white"}}>
-                            Image 1
-                        </h1>
-                    </cd>
-                    <cd>
-                        <img style={{display: "block",
-                            marginLeft: "auto",
-                            marginRight: "auto",
-                            width: "80%"}} src="https://glacier-design.com/wp-content/uploads/2022/10/Can-you-hydrate-yourself-with-beer-2048x1365.jpg" alt="Img2" />
-                        <h1 style={{position: "sticky", bottom: "50%", textAlign: "center", fontSize: 30, color: "white"}}>
-                            Image 2
-                        </h1>
-                    </cd>
-                    <cd>
-                        <img style={{display: "block",
-                            marginLeft: "auto",
-                            marginRight: "auto",
-                            width: "80%"}} src="https://glacier-design.com/wp-content/uploads/2022/10/Can-you-hydrate-yourself-with-beer-2048x1365.jpg" alt="Img3" />
-                        <h1 style={{position: "sticky", bottom: "50%", textAlign: "center", fontSize: 30, color: "white"}}>
-                            Image 3
-                        </h1>
-                    </cd>
+                    {imags.map((img)=>{
+                        return (
+                            <cd>
+                                <img style={{display: "block",
+                                    marginLeft: "auto",
+                                    marginRight: "auto",
+                                    width: "80%"}} src={img.img} alt="Img1" />
+                                <h1 style={{position: "sticky", bottom: "50%", textAlign: "center", fontSize: 30, color: "white"}}>
+                                    {img.text}
+                                </h1>
+                            </cd>
+                        )
+                    })}
                 </Slider>
             </div>
         );
-    }
 }
