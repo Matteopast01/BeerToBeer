@@ -3,7 +3,6 @@ import DropDown from "../components/DropDown";
 import {useDispatch, useSelector} from "react-redux";
 import {setSelection1, setSelection2} from "../store/App";
 
-
 function Sorting() {
     const dispatch = useDispatch();
     const selection1 = useSelector((state) => state.sorting.selection1);
