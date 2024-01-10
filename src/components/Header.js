@@ -16,6 +16,7 @@ function Header(){
     const navigate = useNavigate();
 
     const propsAccount = {
+        children: <CustomButton text={"Login"}/>,
         icon: <AccountCircleIcon />,
         sx: { color: '#333333'},
         size: "large",
@@ -46,11 +47,11 @@ function Header(){
     return (
         <div>
             <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-                <div style={{width: '50px'}}/>
+                <div style={{width: '70px'}}/>
                 <div style={{flex: '1', textAlign: 'center', fontSize: '32px', fontFamily: 'Arial, sans-serif'}}>
                     <b>BeerToBeer</b>
                 </div>
-                <div style={{width: '50px'}}>
+                <div style={{width: '70px'}}>
                     <CustomIconButton {...propsAccount} />
                 </div>
             </div>
