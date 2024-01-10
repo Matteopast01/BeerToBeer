@@ -13,7 +13,7 @@ import * as beer_database from "./BeerApi/BeerApiHandler.js"
  * @returns {Promise<void>}
  */
 export const store_rew =  async function (obj, collection_name, error= ()=>{}, postprocessing = ()=>{}) {
-   return database.store_rew(obj, collection_name, error, postprocessing)
+   return database.store_doc(obj, collection_name, error, postprocessing)
 }
 
 /**
@@ -25,8 +25,8 @@ export const store_rew =  async function (obj, collection_name, error= ()=>{}, p
  * @param postprocessing postprocessing function
  * @returns {Promise<void>}
  */
-export const store_rew_byid = async function (obj, collection_name, id, error= ()=>{}, postprocessing = ()=>{}) {
-   return database.store_rew_byid(obj, collection_name, id, error, postprocessing)
+export const store_doc_by_id = async function (obj, collection_name, id, error= ()=>{}, postprocessing = ()=>{}) {
+   return database.store_doc_by_id(obj, collection_name, id, error, postprocessing)
 }
 
 /**
@@ -38,8 +38,8 @@ export const store_rew_byid = async function (obj, collection_name, id, error= (
  * @param do_not_exist do_not_exist function
  * @returns {Promise<*|undefined>}
  */
-export const load_rew = async function (collection_name, id, postprocessing, error = ()=>{}, do_not_exist = ()=>{}){
-    return database.load_rew(collection_name, id, postprocessing, error, do_not_exist)
+export const load_docs = async function (collection_name, id, postprocessing, error = ()=>{}, do_not_exist = ()=>{}){
+    return database.load_docs(collection_name, id, postprocessing, error, do_not_exist)
 }
 
 /**
@@ -52,8 +52,8 @@ export const load_rew = async function (collection_name, id, postprocessing, err
  * @param do_not_exist do_not_exist function
  * @returns {Promise<void>}
  */
-export const update_rew = async function (obj, collection_name, id, error = ()=>{}, postprocessing = ()=>{}, do_not_exist = ()=>{}){
-    return database.update_rew(obj, collection_name, id, error, postprocessing, do_not_exist)
+export const update_doc = async function (obj, collection_name, id, error = ()=>{}, postprocessing = ()=>{}, do_not_exist = ()=>{}){
+    return database.update_doc(obj, collection_name, id, error, postprocessing, do_not_exist)
 }
 
 /**
@@ -76,8 +76,8 @@ export const update_by_function =  async function (collection_name,attribute_nam
  * @param postprocessing postprocessing function
  * @returns {Promise<void>}
  */
-export const delete_rew = async function(collection_name, id, error = ()=>{}, postprocessing = ()=>{}){
-    return database.delete_rew(collection_name, id, error, postprocessing)
+export const delete_doc = async function(collection_name, id, error = ()=>{}, postprocessing = ()=>{}){
+    return database.delete_doc(collection_name, id, error, postprocessing)
 }
 
 /**
@@ -87,8 +87,8 @@ export const delete_rew = async function(collection_name, id, error = ()=>{}, po
  * @param attribute_name atribute for the where clouse
  * @returns {Promise<*|undefined>}
  */
-export const count_objs = async function(attribute_val, collection_name, attribute_name){
-    return database.count_objs(attribute_val, collection_name, attribute_name)
+export const count_docs = async function(attribute_val, collection_name, attribute_name){
+    return database.count_docs(attribute_val, collection_name, attribute_name)
 }
 
 /**
@@ -104,8 +104,8 @@ export const count_objs = async function(attribute_val, collection_name, attribu
  * @param do_not_exist do_not_exist function
  * @returns {Promise<*|undefined>}
  */
-export const get_by_attribute = async function(attribute, collection_name, attribute_name, limit_number=null, order_by =null, order_direction = "asc", error = ()=>{}, postprocessing = ()=>{}, do_not_exist = ()=>{}){
-    return database.get_by_attribute(attribute, collection_name, attribute_name, limit_number, order_by, order_direction , error , postprocessing , do_not_exist )
+export const get_docs_by_attribute = async function(attribute, collection_name, attribute_name, limit_number=null, order_by =null, order_direction = "asc", error = ()=>{}, postprocessing = ()=>{}, do_not_exist = ()=>{}){
+    return database.get_docs_by_attribute(attribute, collection_name, attribute_name, limit_number, order_by, order_direction , error , postprocessing , do_not_exist )
 }
 
 /**
@@ -133,8 +133,8 @@ export const query_by_preamble = async function (collection_name, attribute, sea
  * @param postprocessing postprocessing function
  * @returns {Promise<*[]|undefined>}
  */
-export const load_ordered = async function (collection_name, order_by_field, order_direction="asc", max_item_number = null, error = ()=>{}, postprocessing = ()=>{}) {
-    return database.load_ordered(collection_name,order_by_field,order_direction,max_item_number,error,postprocessing)
+export const load_ordered_docs = async function (collection_name, order_by_field, order_direction="asc", max_item_number = null, error = ()=>{}, postprocessing = ()=>{}) {
+    return database.load_ordered_docs(collection_name,order_by_field,order_direction,max_item_number,error,postprocessing)
 }
 
 

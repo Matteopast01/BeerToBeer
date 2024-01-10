@@ -4,7 +4,7 @@ import useCardList from "../hooks/useCardList";
 import DropDown from "./DropDown";
 import * as React from "react";
 import {useEffect, useState} from "react";
-import {load_ordered, requestBeersById} from "../services/persistence_manager.js";
+import {load_ordered_docs, requestBeersById} from "../services/persistence_manager.js";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
@@ -38,7 +38,7 @@ export function BeerContainer(){
     };
 
     const getBeers = async function () {
-        let arrayOfId = await load_ordered("Beer_Id", "number_calls", "desc", 6)
+        let arrayOfId = await load_ordered_docs("Beer_Id", "number_calls", "desc", 6)
         let beers = []
         for (let obj of arrayOfId) {
             let beer = await requestBeersById(obj.id)

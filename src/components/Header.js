@@ -4,8 +4,13 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SearchBar from "./SearchBar";
 import Search from "../pages/Search";
 import {Route, useNavigate} from "react-router-dom";
+import { AuthContext } from "../contexts/Auth";
+import {useContext} from "react";
+
 
 function Header(){
+    const {currentUser} = useContext(AuthContext);
+    const {handleLogout} = useContext(AuthContext);
 
     const propsSearch = {
         onSearch: function () {
@@ -15,12 +20,19 @@ function Header(){
 
     const navigate = useNavigate();
 
-    const propsAccount = {
+    const propsLogin = {
         icon: <AccountCircleIcon />,
         sx: { color: '#333333'},
         size: "large",
         handleClick: ()=>{navigate("/login")},
         children: <CustomButton text={"Login"} size={"small"} sx={{color: '#333333'}}/>,
+    }
+    const propsLogout = {
+        icon: <AccountCircleIcon />,
+        sx: { color: '#333333'},
+        size: "large",
+        handleClick: ()=>{handleLogout(navigate)},
+        children: <CustomButton text={"Logout"} size={"small"} sx={{color: '#333333'}}/>,
     }
 
     const propsHome = {
@@ -53,7 +65,7 @@ function Header(){
                     <b>BeerToBeer</b>
                 </div>
                 <div style={{width: '70px'}}>
-                    <CustomIconButton {...propsAccount} />
+                    {currentUser ? <CustomIconButton {...propsLogout}/> : <CustomIconButton {...propsLogin}/>}
                 </div>
             </div>
 

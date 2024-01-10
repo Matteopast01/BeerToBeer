@@ -1,7 +1,8 @@
-import {getFirestore, collection, getDocs, addDoc, setDoc, deleteDoc, updateDoc, doc, getDoc, orderBy, limit, query, where, startAt, endAt, getCountFromServer} from "firebase/firestore"
-import "../conf-firebase.js"
+import {getFirestore, collection, getDocs, addDoc, setDoc, deleteDoc, updateDoc, doc, getDoc, orderBy, limit, query, where,  getCountFromServer} from "firebase/firestore"
+import "../conf-firebase"
+
 const db = getFirestore()
-export const store_rew =  async function (obj, collection_name, error= ()=>{}, postprocessing = ()=>{}) {
+export const store_doc =  async function (obj, collection_name, error= ()=>{}, postprocessing = ()=>{}) {
     try {
         // preprocessing
         if( typeof(obj) == "function"){
@@ -9,7 +10,7 @@ export const store_rew =  async function (obj, collection_name, error= ()=>{}, p
         }
 
         // execute operation
-        let col = collection(db, collection_name)
+        let col= collection(db, collection_name)
         let result = await addDoc(col, obj)
 
         // postprocessing
@@ -23,7 +24,7 @@ export const store_rew =  async function (obj, collection_name, error= ()=>{}, p
     }
 }
 
-export const store_rew_byid = async function (obj, collection_name, id, error= ()=>{}, postprocessing = ()=>{}) {
+export const store_doc_by_id = async function (obj, collection_name, id, error= ()=>{}, postprocessing = ()=>{}) {
     try{
         // preprocessing
         if( typeof(obj) == "function"){
@@ -47,7 +48,7 @@ export const store_rew_byid = async function (obj, collection_name, id, error= (
     }
 }
 
-export const load_rew = async function (collection_name, id, postprocessing, error = ()=>{}, do_not_exist = ()=>{}){
+export const load_docs = async function (collection_name, id, postprocessing, error = ()=>{}, do_not_exist = ()=>{}){
     try{
         // preprocessing
         if( typeof(id)){
@@ -76,7 +77,7 @@ export const load_rew = async function (collection_name, id, postprocessing, err
     }
 }
 
-export const update_rew = async function (obj, collection_name, id, error = ()=>{}, postprocessing = ()=>{}, do_not_exist = ()=>{}){
+export const update_doc = async function (obj, collection_name, id, error = ()=>{}, postprocessing = ()=>{}, do_not_exist = ()=>{}){
     try{
         if (typeof(obj) == "function"){
             obj = obj()
@@ -118,7 +119,7 @@ export const update_by_function =  async function (collection_name,attribute_nam
         let snapshot = await getDocs(q)
 
         snapshot.forEach((snap_item) => {
-            update_rew( update_function(snap_item.data()), collection_name, snap_item.id)
+            update_doc( update_function(snap_item.data()), collection_name, snap_item.id)
         })
         console.log("ok")
     }
@@ -128,7 +129,7 @@ export const update_by_function =  async function (collection_name,attribute_nam
 
 }
 
-export const delete_rew = async function(collection_name, id, error = ()=>{}, postprocessing = ()=>{}){
+export const delete_doc = async function(collection_name, id, error = ()=>{}, postprocessing = ()=>{}){
     try{
         // preprocessing
         if( typeof(id) == "function"){
@@ -149,7 +150,7 @@ export const delete_rew = async function(collection_name, id, error = ()=>{}, po
 }
 
 
-export const count_objs = async function(attribute_val, collection_name, attribute_name){
+export const count_docs = async function(attribute_val, collection_name, attribute_name){
     try{
         if (typeof (attribute_val) == "function") {
             attribute_val = attribute_val()
@@ -165,7 +166,7 @@ export const count_objs = async function(attribute_val, collection_name, attribu
 }
 
 // da testare
-export const get_by_attribute = async function(attribute, collection_name, attribute_name, limit_number=null, order_by =null, order_direction = "asc", error = ()=>{}, postprocessing = ()=>{}, do_not_exist = ()=>{}){
+export const get_docs_by_attribute = async function(attribute, collection_name, attribute_name, limit_number=null, order_by =null, order_direction = "asc", error = ()=>{}, postprocessing = ()=>{}, do_not_exist = ()=>{}){
     try{
         // preprocessing
         if( typeof(attribute) == "function"){
@@ -203,37 +204,9 @@ export const get_by_attribute = async function(attribute, collection_name, attri
 
 }
 
-/*
-export const query_by_preamble = async function (collection_name, attribute, search_word, order_by_field, max_item_number = null, error = ()=>{}, postprocessing = ()=>{}) {
-    try {
-        // preprocessing
-        if (typeof (attribute) == "function") {
-            attribute = attribute()
-        }
 
-        let q
-        // execute operation
-        if (max_item_number == null) {
-            q = query(collection(db, collection_name), orderBy(attribute), orderBy(order_by_field, "desc"), startAt(search_word), endAt(search_word+"\uf8ff"));
-        } else {
-            q = query(collection(db, collection_name),orderBy(attribute) , startAt(search_word), endAt(search_word+"\uf8ff"), limit(max_item_number));
-        }
 
-        let snapshot = await getDocs(q)
-        // postprocessing
-        let result = []
-        snapshot.forEach((snap_item) => {
-            result.push(snap_item.data())
-        })
-        postprocessing(result)
-        return result
-    } catch (e) {
-        console.log(e)
-        error()
-    }
-}
- */
-export const load_ordered = async function (collection_name, order_by_field, order_direction="asc", max_item_number = null, error = ()=>{}, postprocessing = ()=>{}) {
+export const load_ordered_docs = async function (collection_name, order_by_field, order_direction="asc", max_item_number = null, error = ()=>{}, postprocessing = ()=>{}) {
     try {
 
         let q
