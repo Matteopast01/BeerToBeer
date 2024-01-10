@@ -50,8 +50,9 @@ export default function Popup() {
                     label="Username"
                     type="username"
                     fullWidth
-                    variant="standard"/>
-                    <DialogContentText  sx={{ textAlign: 'left', width: '100%' }}>
+                    variant="standard"
+                    sx={{marginBottom: '30px' }}/>
+                    <DialogContentText  sx={{ textAlign: 'left', width: '100%', marginBottom: '30px'}}>
                         Enter your new photo  here:
                     </DialogContentText>
                     <InputFileUpload
