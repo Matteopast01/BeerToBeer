@@ -3,19 +3,9 @@ import * as React from "react";
 import Footer from "../components/Footer";
 import FavoritesContainer from "../components/FavoritesContainer"
 import BeerCard from "../components/BeerCard";
-import CustomButton from "../components/CustomButton";
-import EditIcon from '@mui/icons-material/Edit';
-import CustomIconButton from "../components/CustomIconButton";
+import Popup from "../components/Popup";
 
 const Profile = function (){
-    const propsAccount = {
-        variant: "contained",
-        sx: { color: '#333333'},
-        size: "large",
-        handleClick: ()=>{},
-        endIcon: <EditIcon />,
-        text: "Edit"
-    }
 
     return (
         <div>
@@ -36,13 +26,16 @@ const Profile = function (){
                                     <br />
                                     Number of reviews
                                 </div>
-                                <CustomButton {...propsAccount} />
+                                <div style={{ textAlign: 'center' }}>
+                                <Popup/>
+                                </div>
                             </>
-                        }
-                    />
+                        }/>
                 </div>
-                <div style={{ flex: 1 }}>
-                    Fravorites
+                <div>
+                    <div style={{flex: '1', textAlign: 'center', fontSize: '28px', fontFamily: 'Arial, sans-serif'}}>
+                        <b>Favorites </b>
+                    </div>
                     <FavoritesContainer />
                 </div>
             </div>
