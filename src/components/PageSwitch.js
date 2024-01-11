@@ -4,10 +4,19 @@ import PubContainer from "./PubContainer";
 
 
 // page switch passa handleClick a pubContainer che lo passa alle carda dei pub...Redux o no?
-function PageSwitch ({SwitchComponent}, handleClick) {
+function PageSwitch(){
+
+    function handleClick() {
+        setSwitchFragment(<SinglePub />)
+        // setPubSelected()
+    }
+
+    const [switchFragment, setSwitchFragment] = useState(<PubContainer {...handleClick}/>) // TODO Matteo: onclick sulla card del pub
+    const [pubSelected, setPubSelected] = useState("")
+
     return (
       <div>
-          {SwitchComponent} switch Component
+          {switchFragment} switch Fragment
       </div>
     );
 }

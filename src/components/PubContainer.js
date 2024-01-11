@@ -1,4 +1,4 @@
-function PubContainer(){
+function PubContainer({handleClick}){
 
     return (
         <div>
