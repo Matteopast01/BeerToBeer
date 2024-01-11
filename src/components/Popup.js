@@ -1,9 +1,11 @@
 import * as React from 'react';
 import EditIcon from "@mui/icons-material/Edit";
 import SaveAsIcon from '@mui/icons-material/SaveAs';
+import CloseIcon from '@mui/icons-material/Close';
 import CustomButton from "./CustomButton";
 import {Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField} from "@mui/material";
 import FileUploadButton from "./FileUploadButton";
+import CustomIconButton from "./CustomIconButton";
 
 export default function Popup() {
     const [open, setOpen] = React.useState(false);
@@ -28,6 +30,14 @@ export default function Popup() {
         handleClick: handleClose
     }
 
+    const propsClose = {
+        variant: "text",
+        color: "error",
+        size: "medium",
+        icon: <CloseIcon />,
+        handleClick: handleClose
+    }
+
     return (
         <div>
             <CustomButton {...propsEdit}/>
@@ -39,6 +49,9 @@ export default function Popup() {
                 <DialogTitle sx={{ color: 'black' }}>
                     Edit <EditIcon/>
                 </DialogTitle>
+                <div style={{ position: 'absolute', top: 0, right: 0, padding: '8px' }}>
+                    <CustomIconButton {...propsClose} />
+                </div>
                 <DialogContent>
                     <DialogContentText  sx={{ textAlign: 'left', width: '100%' }}>
                         Enter your new username here:

@@ -17,7 +17,10 @@ const VisuallyHiddenInput = styled('input')({
 
 function FileUploadButton(){
     return (
-        <Button component="label" variant="contained" startIcon={<CloudUploadIcon />}>
+        <Button component="label"
+                variant="outlined"
+                style={{ border: '1px solid primary', color: 'black' }}
+                startIcon={<CloudUploadIcon />}>
             Upload file
             <VisuallyHiddenInput type="file" />
         </Button>
