@@ -9,6 +9,7 @@ import {Signup} from "./pages/Signup"
 import Profile from "./pages/Profile";
 import { Provider } from 'react-redux';
 import store from "./store/App";
+import AdminPage from "./pages/AdminPage";
 
 function App() {
     return (
@@ -23,6 +24,9 @@ function App() {
                 <Route path="/signup" element={<Signup/>} />
                 <Route path="/search" element={<Search/>} />
                 <Route path="/ourpubs" element={<OurPubs/>} />
+                <Route element={<PrivateRoute />}>
+                    <Route path="/adminPage" element={< AdminPage />}/>
+                </Route>
             </Routes>
         </BrowserRouter>
         </Provider>
