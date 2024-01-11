@@ -1,7 +1,7 @@
 import * as React from 'react';
 import IconButton from '@mui/material/IconButton';
 
-// children examples:
+// icon examples:
 import DeleteIcon from '@mui/icons-material/Delete';
 import AlarmIcon from '@mui/icons-material/Alarm';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
@@ -36,8 +36,7 @@ function CustomIconButton({label, variant, color, sx, size, justClicked, icon, c
                         color={color}
                         sx={sx}
                         size={size}
-                        onClick={realHandleClick}
-            >
+                        onClick={realHandleClick}>
                 {icon}
             </IconButton>
     );
