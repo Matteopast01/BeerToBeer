@@ -42,10 +42,10 @@ export default function BeerCardDescription({beer}){
 
     const {currentUser} = useContext(AuthContext);
     const justLiked = useAsync(async () => {
-        return await isIconClicked(beer.id, currentUser.uid, "Like")
+        return !!currentUser ? await isIconClicked(beer.id, currentUser.uid, "Like") : false
     })
     const justFavorited = useAsync(async () => {
-        return await isIconClicked(beer.id, currentUser.uid, "Favorites")
+        return !!currentUser ? await isIconClicked(beer.id, currentUser.uid, "Favorites") : false
     })
 
     return(
