@@ -6,11 +6,16 @@ import CustomButton from "./CustomButton";
 import {Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField} from "@mui/material";
 import FileUploadButton from "./FileUploadButton";
 import CustomIconButton from "./CustomIconButton";
+import ImagesUploader from "./ImagesUploader";
 
 export default function Popup() {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+    const handleImageUpload = (imageList) => {
+        console.log("Nuova lista di immagini:", imageList);
+    };
 
     const propsEdit = {
         variant: "outlined",
@@ -68,7 +73,7 @@ export default function Popup() {
                     <DialogContentText  sx={{ textAlign: 'left', width: '100%', marginBottom: '30px'}}>
                         Enter your new photo  here:
                     </DialogContentText>
-                    <FileUploadButton/>
+                    <ImagesUploader onImageUpload={handleImageUpload} maxImages={1}/>
             </DialogContent>
             <DialogActions>
                 <CustomButton {...propsSave}/>
