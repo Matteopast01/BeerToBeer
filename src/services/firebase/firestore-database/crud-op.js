@@ -209,23 +209,26 @@ export const get_docs_by_attribute = async function(attribute, collection_name, 
 export const load_by_attributes = async function (collection_name, attributes_name_value, order_by = null, order_direction = "asc", limit_number = null, error = () => {
 }, postprocessing = () => {
 }) {
-    console.log(attributes_name_value)
     let query = firebase.firestore().collection(collection_name)
     for (let attribute_name in attributes_name_value) {
-        query.where(attribute_name, "==", attributes_name_value[attribute_name])
+        query = query.where(attribute_name, "==", attributes_name_value[attribute_name])
     }
     if (order_by != null) {
-        query.orderBy(order_by, order_direction)
+        query = query.orderBy(order_by, order_direction)
     }
     if (limit_number != null) {
-        query.limit(limit_number)
+        query = query.limit(limit_number)
     }
     let snapshot = await getDocs(query)
 
     // postprocessing
     let result = []
     snapshot.forEach((snap_item) => {
-        result.push(snap_item.data())
+        console.log(snap_item.id)
+        result.push({
+            ...snap_item.data(),
+            doc_id: snap_item.id
+        })
     })
     postprocessing(result)
     return result
@@ -248,7 +251,10 @@ export const load_ordered_docs = async function (collection_name, order_by_field
         // postprocessing
         let result = []
         snapshot.forEach((snap_item) => {
-            result.push(snap_item.data())
+            result.push({
+                ...snap_item.data(),
+                doc_id: snap_item.id
+            })
         })
         postprocessing(result)
         console.log("ok")

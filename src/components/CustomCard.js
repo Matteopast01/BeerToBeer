@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import 'bulma/css/bulma.min.css';
 import {CardActionArea} from '@mui/material';
 
-function BeerCard({ horizontal, maxWidth, contentWidth, numberContentRow, children, img , onClick }) {
+function CustomCard({ horizontal, maxWidth, contentWidth, numberContentRow, children, img , onClick }) {
     let style
     if(horizontal){
         style = {width: maxWidth, display: 'flex'}
@@ -32,9 +32,9 @@ function BeerCard({ horizontal, maxWidth, contentWidth, numberContentRow, childr
                 </Typography>
             </CardContent>
         </Card>
-        );
+    );
 }
 
 
 
-export default BeerCard;
+export default CustomCard;

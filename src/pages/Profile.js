@@ -2,7 +2,7 @@ import Header from "../components/Header";
 import * as React from "react";
 import Footer from "../components/Footer";
 import FavoritesContainer from "../components/FavoritesContainer"
-import BeerCard from "../components/BeerCard";
+import CustomCard from "../components/CustomCard";
 import Popup from "../components/Popup";
 
 const Profile = function (){
@@ -12,7 +12,7 @@ const Profile = function (){
             <Header />
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <div style={{ flex: 1, marginRight: '10px' }}>
-                    <BeerCard
+                    <CustomCard
                         horizontal={false}
                         maxWidth="300px"
                         contentWidth="100%"
