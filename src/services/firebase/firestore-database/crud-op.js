@@ -1,5 +1,7 @@
 import {getFirestore, collection, getDocs, addDoc, setDoc, deleteDoc, updateDoc, doc, getDoc, orderBy, limit, query, where,  getCountFromServer} from "firebase/firestore"
 import "../conf-firebase"
+import firebase from "firebase/compat/app";
+import 'firebase/compat/firestore';
 
 const db = getFirestore()
 export const store_doc =  async function (obj, collection_name, error= ()=>{}, postprocessing = ()=>{}) {
@@ -202,6 +204,31 @@ export const get_docs_by_attribute = async function(attribute, collection_name, 
         error()
     }
 
+}
+
+export const load_by_attributes = async function (collection_name, attributes_name_value, order_by = null, order_direction = "asc", limit_number = null, error = () => {
+}, postprocessing = () => {
+}) {
+    console.log(attributes_name_value)
+    let query = firebase.firestore().collection(collection_name)
+    for (let attribute_name in attributes_name_value) {
+        query.where(attribute_name, "==", attributes_name_value[attribute_name])
+    }
+    if (order_by != null) {
+        query.orderBy(order_by, order_direction)
+    }
+    if (limit_number != null) {
+        query.limit(limit_number)
+    }
+    let snapshot = await getDocs(query)
+
+    // postprocessing
+    let result = []
+    snapshot.forEach((snap_item) => {
+        result.push(snap_item.data())
+    })
+    postprocessing(result)
+    return result
 }
 
 

@@ -108,6 +108,12 @@ export const get_docs_by_attribute = async function(attribute, collection_name, 
     return database.get_docs_by_attribute(attribute, collection_name, attribute_name, limit_number, order_by, order_direction , error , postprocessing , do_not_exist )
 }
 
+export const load_by_attributes = async function(collection_name, attributes_name_value, order_by = null, order_direction = "asc", limit_number = null, error = () => {
+}, postprocessing = () => {
+}){
+    return database.load_by_attributes(collection_name, attributes_name_value, order_by, order_direction, limit_number, error, postprocessing)
+}
+
 /**
  * query a document by an attribute start string
  * @param collection_name name of the object collection (table)
