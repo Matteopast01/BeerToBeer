@@ -11,6 +11,7 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarIcon from '@mui/icons-material/Star';
 import CustomIconButton from "./CustomIconButton";
 import Typography from "@mui/material/Typography";
+import BeerCardDescription from "./BeerCardDescription";
 
 export function FavoritesContainer(){
     const [items, setItems] = useState([])
@@ -41,15 +42,7 @@ export function FavoritesContainer(){
         (item)=>{return item.id},
         (item)=>{return item.image_url},
         (item)=>{return(
-            <div>
-                <CustomIconButton size={"small"} sx={{ color: '#f30303'}} icon={<FavoriteBorderIcon/>} clickedIcon={<FavoriteIcon/>}/>
-                <CustomIconButton size={"small"} sx={{ color: '#ffd700'}} icon={<StarBorderIcon sx={{fontSize : 27}}/>}
-                                  clickedIcon={<StarIcon sx={{fontSize : 27}}/>}/>
-                <h1 className="has-text-centered"> {item.name}</h1>
-                <Typography variant="body2" color="text.secondary">
-                    {item.description}
-                </Typography>
-            </div>
+            <BeerCardDescription beer={item}/>
         ) },
         "default:350--8",
         (item)=>{navigate("/login")}
