@@ -1,11 +1,11 @@
-// ImageListUploader.js
 import React, { useState } from "react";
 import FileUploadButton from "../components/FileUploadButton";
 import CustomIconButton from "../components/CustomIconButton";
-import CancelIcon from '@mui/icons-material/Cancel'; // Assuming CancelIcon is available in your MUI icons
+import CancelIcon from '@mui/icons-material/Cancel';
 
 const ImagesUploader = ({ onImageUpload, maxImages }) => {
     const [imageList, setImageList] = useState([]);
+    const [errorMessage, setErrorMessage] = useState("");
 
     const handleImageUpload = (files) => {
         const totalImages = imageList.length + files.length;
@@ -15,8 +15,10 @@ const ImagesUploader = ({ onImageUpload, maxImages }) => {
             setImageList(newImageList);
             onImageUpload(newImageList);
         } else {
-            // Puoi gestire l'errore o avvisare l'utente che ha raggiunto il limite di immagini
-            console.error("Hai raggiunto il limite massimo di immagini.");
+            setErrorMessage("You have reached the limit number of images, delete one to upload again.");
+            setTimeout(() => {
+                setErrorMessage("");
+            }, 5000);
         }
     };
 
@@ -29,11 +31,18 @@ const ImagesUploader = ({ onImageUpload, maxImages }) => {
 
     return (
         <div className="container">
+            {errorMessage && (
+                <div className="notification is-danger">
+                    <p>{errorMessage}</p>
+                </div>
+            )}
+
             <div className="box">
                 <div className="columns is-multiline is-flex is-centered">
                     {imageList.map((image, index) => (
                         <div key={index} className="column is-one-third" style={{ position: 'relative' }}>
-                            <img src={URL.createObjectURL(image)} alt={`Image ${index}`} style={{ maxWidth: "100%" }} />
+                            <img src={URL.createObjectURL(image)} alt={`Image ${index}`}
+                                 style={{ maxWidth: "100%", height: "auto", width: "100%" }} />
                             <div style={{ position: 'absolute', top: 0, right: 0 }}>
                                 <CustomIconButton
                                     label="Remove"
