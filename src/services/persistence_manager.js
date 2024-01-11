@@ -164,6 +164,17 @@ export let pull_img_url = async function (path_img, postprocessing= ()=>{}, erro
     return storage.pull_img_url(path_img, postprocessing, error)
 }
 
+/**
+ * delete img
+ * @param path_img name img to delete
+ * @param postprocessing postprocessing function
+ * @param error error function
+ * @returns {Promise<void>}
+ */
+export let delete_img = async function (path_img, postprocessing= ()=>{}, error = ()=>{}){
+    return storage.delete_img(path_img, postprocessing, error)
+}
+
 
 // api_beer
 

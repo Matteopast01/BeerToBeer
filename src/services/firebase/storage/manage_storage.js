@@ -1,5 +1,5 @@
 import "../conf-firebase.js"
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage"
+import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage"
 
 const storage = getStorage()
 
@@ -22,6 +22,17 @@ export let pull_img_url = async function (path_img, postprocessing= ()=>{}, erro
         return url
     }
     catch (e){
+        error()
+    }
+}
+
+export let delete_img = async function(path_img, postprocessing= ()=>{}, error = ()=>{}){
+    try{
+        const reference = ref(storage, path_img)
+        await deleteObject(reference)
+        postprocessing()
+    }
+    catch(e){
         error()
     }
 }
