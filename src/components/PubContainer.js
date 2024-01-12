@@ -1,5 +1,6 @@
-function PubContainer({handleClick}){
+function PubContainer(){
 
+        // TODO: ogni card deve avere un onClick = dispatch(pubSelected(pub))
     return (
         <div>
 

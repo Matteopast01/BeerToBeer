@@ -3,6 +3,7 @@ import GoogleMapReact from 'google-map-react';
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
+    // TODO: legge pubSelected: se selezionato centro il marker nel pub, altrimenti nessun marker o marker di "default"
 function Maps(){
 const defaultProps = {
     center: {
