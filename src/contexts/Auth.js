@@ -2,7 +2,7 @@ import { useEffect, useState, createContext } from "react";
 import { getAuth } from "firebase/auth";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { useNavigate, Routes } from "react-router-dom";
-
+import {store_doc} from "../services/persistence_manager"
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -10,11 +10,18 @@ export const AuthProvider = ({ children }) => {
     const [pending, setPending] = useState(true);
     const auth = getAuth();
 
-    const handleSignUp = async function (email, password, navigate) {
+    const handleSignUp = async function (email, password,name, navigate) {
+        const registeredUser = {}
+        registeredUser["username"] = name
+        registeredUser["role"] = false
+        registeredUser["link-img"] = ""
+
 
         await createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
+                registeredUser["uid"] = user.uid
+                store_doc(registeredUser,"User")
                 console.log(user);
                 navigate("/");
 
@@ -32,7 +39,12 @@ export const AuthProvider = ({ children }) => {
             .then((userCredential) => {
                 const user = userCredential.user;
                 navigate("/");
-                console.log(user);
+                for (let property in user) {
+                    if (user.hasOwnProperty(property)) {
+                        console.log(property + ": " + user[property]);
+                    }
+                }
+
                 return true
             })
             .catch((error) => {

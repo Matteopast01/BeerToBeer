@@ -14,6 +14,7 @@ export const store_doc =  async function (obj, collection_name, error= ()=>{}, p
         // execute operation
         let col= collection(db, collection_name)
         let result = await addDoc(col, obj)
+        console.log(result)
 
         // postprocessing
         console.log("ok")
@@ -22,6 +23,7 @@ export const store_doc =  async function (obj, collection_name, error= ()=>{}, p
     }
     catch (e) {
         console.log(e)
+        console.log("erroreeee")
         error()
     }
 }
@@ -206,7 +208,7 @@ export const get_docs_by_attribute = async function(attribute, collection_name, 
 
 }
 
-export const load_by_attributes = async function (collection_name, attributes_name_value, order_by = null, order_direction = "asc", limit_number = null, error = () => {
+export const load_docs_by_attributes = async function (collection_name, attributes_name_value, order_by = null, order_direction = "asc", limit_number = null, error = () => {
 }, postprocessing = () => {
 }) {
     let query = firebase.firestore().collection(collection_name)

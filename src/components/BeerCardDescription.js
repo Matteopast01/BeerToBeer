@@ -1,4 +1,4 @@
-import {delete_doc, load_by_attributes, store_rew} from "../services/persistence_manager";
+import {delete_doc, load_docs_by_attributes, store_doc} from "../services/persistence_manager";
 import CustomIconButton from "./CustomIconButton";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -15,7 +15,7 @@ import useAsync from "../hooks/useAsync";
 
 export default function BeerCardDescription({beer}){
     const isIconClicked = async (beer_id, user_id, icon) => {
-        let results = await load_by_attributes(icon, {
+        let results = await load_docs_by_attributes(icon, {
             beer_id: beer_id,
             uid: user_id
         })
@@ -26,12 +26,12 @@ export default function BeerCardDescription({beer}){
     }
     const iconClickHandler = async (beer_id, user_id, icon) => {
         if (await isIconClicked(beer_id, user_id, icon) === false) {
-            store_rew({
+            store_doc({
                 beer_id: beer_id,
                 uid: user_id
             },icon)
         } else {
-            let results = await load_by_attributes(icon, {
+            let results = await load_docs_by_attributes(icon, {
                 beer_id: beer_id,
                 uid: user_id
             })
