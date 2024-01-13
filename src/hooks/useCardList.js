@@ -19,7 +19,7 @@ const useCardList = ( items, idFunc, imgFunc, descriptionFunc, styleName, onClic
         case "horizontal":
             cardFeature = {
                 maxWidth : maxWidth,
-                contentWidth : contentDimension,
+                contentStyle : !!contentDimension ? {width: contentDimension}: contentDimension,
                 numberContentRow: numberContentRow,
                 horizontal: true,
                 onClick: (item)=>{onClick(item)}
@@ -28,7 +28,7 @@ const useCardList = ( items, idFunc, imgFunc, descriptionFunc, styleName, onClic
         default:
             cardFeature = {
                 maxWidth : maxWidth,
-                contentWidth : contentDimension,
+                contentWidth : !!contentDimension ? {width: contentDimension}: contentDimension,
                 numberContentRow : numberContentRow,
                 horizontal: false,
                 onClick: (item)=>{onClick(item)}
