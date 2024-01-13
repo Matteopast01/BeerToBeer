@@ -1,7 +1,6 @@
 import SinglePub from "./SinglePub";
 import PubContainer from "./PubContainer";
 import {useSelector} from "react-redux";
-import store from "../store/App";
 
 function PageSwitch(){
 
