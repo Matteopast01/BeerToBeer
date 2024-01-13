@@ -15,11 +15,11 @@ import {useState} from "react";
 
 function CustomIconButton({label, variant, color, sx, size, justClicked, icon, clickedIcon, handleClick}) {
     const [clicked, setClicked] = useState(!!justClicked)
-    if(clicked){
+    if(!!justClicked ? justClicked : clicked){
         icon = !!clickedIcon ? clickedIcon : icon
     }
     const realHandleClick = function (){
-        if(clicked){
+        if(!!justClicked ? justClicked : clicked){
             setClicked(false)
         }
         else {
