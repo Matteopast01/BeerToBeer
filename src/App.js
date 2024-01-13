@@ -11,6 +11,7 @@ import { Provider } from 'react-redux';
 import store from "./store/App";
 import AdminPage from "./pages/AdminPage";
 import {AdminPrivateRoute} from "./components/AdminPrivateRoute";
+import SingleProductPage from "./pages/SingleProductPage";
 
 function App() {
     return (
@@ -25,6 +26,7 @@ function App() {
                 <Route path="/signup" element={<Signup/>} />
                 <Route path="/search" element={<Search/>} />
                 <Route path="/ourpubs" element={<OurPubs/>} />
+                <Route path="/product/:beerId" element={<SingleProductPage/>} />
                 <Route element={<AdminPrivateRoute />}>
                     <Route path="/adminPage" element={< AdminPage />}/>
                 </Route>

@@ -22,8 +22,8 @@ export function BeerContainer(){
 
 
     const options = [
-        {label: "Più viste", value: "Più visti"},
-        {label: "Più apprezzate", value: "Più apprezzate"}
+        {label: "Most Popular", value: "More Popular"},
+        {label: "Most Liked", value: "Most Liked"}
     ]
 
     const handleSelect = async (option) => {
@@ -49,7 +49,7 @@ export function BeerContainer(){
                 return <BeerCardDescription beer={item}/>
                  },
             "default:350--8",
-            (item)=>{navigate("/login")}
+            (item)=>{navigate(`/product/${item.id}`)}
             )
 
     return (
