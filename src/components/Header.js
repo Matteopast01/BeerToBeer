@@ -2,9 +2,8 @@ import CustomButton from "./CustomButton";
 import CustomIconButton from "./CustomIconButton";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SearchBar from "./SearchBar";
-import Search from "../pages/Search";
 import {Route, useNavigate} from "react-router-dom";
-import { AuthContext } from "../contexts/Auth";
+import {AuthContext} from "../contexts/Auth";
 import {useContext} from "react";
 import * as React from "react";
 
@@ -59,10 +58,13 @@ function Header(){
     return (
         <div>
             <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+
                 <div style={{width: '70px'}}/>
+
                 <div style={{flex: '1', textAlign: 'center', fontSize: '32px', fontFamily: 'Arial, sans-serif'}}>
                     <b>BeerToBeer</b>
                 </div>
+
                 <div style={{width: '70px'}}>
                     <div style={{display: "flex", alignItems: "center", flexDirection: "column"}}>
                         {currentUser ? <CustomIconButton {...propsLogout}/> : <CustomIconButton {...propsLogin}/>}

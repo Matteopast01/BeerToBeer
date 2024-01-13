@@ -45,7 +45,7 @@ const pubSlice = createSlice({
             state = action.payload;
         },
         resetPubSelected: (state, action) => {
-            state = {};
+            state = action.payload;
         }
     }
 });
