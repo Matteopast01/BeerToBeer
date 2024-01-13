@@ -9,14 +9,18 @@ function OurPubs (){
         <div>
             <div>
                 <Header/>
-                <div style={{display: "flex"}}>
-                    <div style={{flex: "50%"}}>
-                        <PageSwitch/>
-                    </div>
-                    <div style={{flex: "50%"}}>
-                        <Maps/>
-                    </div>
+            </div>
+
+            <div style={{display: "flex", minHeight: "73vh"}}>
+                <div style={{flex: "50%"}}>
+                    <PageSwitch/>
                 </div>
+                <div style={{flex: "50%"}}>
+                    <Maps/>
+                </div>
+            </div>
+
+            <div>
                 <Footer/>
             </div>
         </div>

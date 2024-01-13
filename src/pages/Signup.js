@@ -26,7 +26,7 @@ export const Signup = function () {
         setFormSubmitted(true);
 
         if (isEmailValid() && isPasswordValid()) {
-            await handleSignUp(email, password, navigate);
+            await handleSignUp(email, password,name, navigate);
         }
     };
 
@@ -35,7 +35,7 @@ export const Signup = function () {
             <div className="auth-form-container">
                 <h2>Register:</h2>
                 <form className="register-form">
-                    <label htmlFor="name">Full name:</label>
+                    <label htmlFor="name">Username:</label>
                     <input
                         value={name}
                         name="name"

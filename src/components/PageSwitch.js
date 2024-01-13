@@ -1,13 +1,14 @@
-import {useState} from "react";
 import SinglePub from "./SinglePub";
 import PubContainer from "./PubContainer";
 
+function PageSwitch(){
 
-// page switch passa handleClick a pubContainer che lo passa alle carda dei pub...Redux o no?
-function PageSwitch ({SwitchComponent}, handleClick) {
+// TODO: legge lo stato di redux pubSelected: se vuoto display di pubContainer, altrimenti di single pub
+    const pubSelected = ""; // TODO: questo è il pub selezionato da prendere dallo store
+
     return (
       <div>
-          {SwitchComponent} switch Component
+          {!!pubSelected ? <SinglePub pub={pubSelected}/> : <PubContainer/>}
       </div>
     );
 }

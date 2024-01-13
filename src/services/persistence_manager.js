@@ -12,7 +12,7 @@ import * as beer_database from "./BeerApi/BeerApiHandler.js"
  * @param postprocessing postprocessing function
  * @returns {Promise<void>}
  */
-export const store_rew =  async function (obj, collection_name, error= ()=>{}, postprocessing = ()=>{}) {
+export const store_doc =  async function (obj, collection_name, error= ()=>{}, postprocessing = ()=>{}) {
    return database.store_doc(obj, collection_name, error, postprocessing)
 }
 
@@ -108,10 +108,10 @@ export const get_docs_by_attribute = async function(attribute, collection_name, 
     return database.get_docs_by_attribute(attribute, collection_name, attribute_name, limit_number, order_by, order_direction , error , postprocessing , do_not_exist )
 }
 
-export const load_by_attributes = async function(collection_name, attributes_name_value, order_by = null, order_direction = "asc", limit_number = null, error = () => {
+export const load_docs_by_attributes = async function(collection_name, attributes_name_value, order_by = null, order_direction = "asc", limit_number = null, error = () => {
 }, postprocessing = () => {
 }){
-    return database.load_by_attributes(collection_name, attributes_name_value, order_by, order_direction, limit_number, error, postprocessing)
+    return database.load_docs_by_attributes(collection_name, attributes_name_value, order_by, order_direction, limit_number, error, postprocessing)
 }
 
 /**

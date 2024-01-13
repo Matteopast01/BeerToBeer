@@ -1,6 +1,6 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 
-//Slice per i filtri
+// Slice for filters
 const filterSlice = createSlice({
     name: 'filters',
     initialState: {
@@ -10,7 +10,6 @@ const filterSlice = createSlice({
             { min: 1, max: 10 },
         ],
     },
-
     reducers: {
         updateFilter: (state, action) => {
             const { index, newValue } = action.payload;
@@ -20,7 +19,7 @@ const filterSlice = createSlice({
     },
 });
 
-//Slice per l'ordinamento
+// Slice for sorting
 const sortingSlice = createSlice({
     name: 'sorting',
     initialState: {
@@ -37,18 +36,34 @@ const sortingSlice = createSlice({
     },
 });
 
-// Combinazione degli slice
+// Slice for pub selected in ourPub page
+const pubSlice = createSlice({
+    name: "pub",
+    initialState: {},
+    reducers: {
+        pubSelected: (state, action) => {
+            state = action.payload;
+        },
+        resetPubSelected: (state, action) => {
+            state = {};
+        }
+    }
+});
+
+// combination of all slices
 const rootReducer = {
     filters: filterSlice.reducer,
     sorting: sortingSlice.reducer,
+    pubs: pubSlice.reducer,
 };
-// Configurazione dello store
+// Store configuration
 const store = configureStore({
     reducer: rootReducer,
 });
 
 export const { updateFilter } = filterSlice.actions;
 export const { setSelection1, setSelection2 } = sortingSlice.actions;
+export const {pubSelected, resetPubSelected} = pubSlice.actions;
 
 export const selectFilters = (state) => state.filters;
 export const selectSorting = (state) => state.sorting;
