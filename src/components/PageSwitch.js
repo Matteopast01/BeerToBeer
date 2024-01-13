@@ -1,10 +1,11 @@
 import SinglePub from "./SinglePub";
 import PubContainer from "./PubContainer";
+import {useSelector} from "react-redux";
+import store from "../store/App";
 
 function PageSwitch(){
 
-// TODO: legge lo stato di redux pubSelected: se vuoto display di pubContainer, altrimenti di single pub
-    const pubSelected = ""; // TODO: questo è il pub selezionato da prendere dallo store
+    const pubSelected = useSelector(state => state.pub);
 
     return (
       <div>

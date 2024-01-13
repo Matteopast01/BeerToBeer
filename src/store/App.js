@@ -38,8 +38,8 @@ const sortingSlice = createSlice({
 
 // Slice for pub selected in ourPub page
 const pubSlice = createSlice({
-    name: "pub",
-    initialState: {},
+    name: 'pub',
+    initialState: null,
     reducers: {
         pubSelected: (state, action) => {
             state = action.payload;
@@ -54,8 +54,9 @@ const pubSlice = createSlice({
 const rootReducer = {
     filters: filterSlice.reducer,
     sorting: sortingSlice.reducer,
-    pubs: pubSlice.reducer,
+    pub: pubSlice.reducer
 };
+
 // Store configuration
 const store = configureStore({
     reducer: rootReducer,

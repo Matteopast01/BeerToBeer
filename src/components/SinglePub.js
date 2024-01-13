@@ -11,7 +11,7 @@ function SinglePub({pub}){
     // TODO: onClick sul "Chiudi" azzera lo stato pubSelected
     return (
         <div>
-            "Chiudi"
+            "rendering SinglePub"
             <div>
                 <SimpleSlider imags={images}/>
                 <div>
