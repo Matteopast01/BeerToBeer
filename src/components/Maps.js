@@ -1,44 +1,49 @@
 import React from "react";
-import GoogleMapReact from 'google-map-react';
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
 import {useSelector} from "react-redux";
 
-const MapsComponent = ({text}) => <div>{text}</div>;
+function Maps() {
 
-    // TODO MATTEO: query che recupera un pub fornendo l'id
-
-function Maps(){
-
-    const defaultProps = {
-        center: {
-          lat: 10.99835602,
-          lng: 77.01502627
-        },
-        zoom: 11
-      };
+    // TODO MATTEO: query che recupera un pub dato  un id
+    const centerPosition = [51.507351, -0.127758]; // London; could be changed
 
     const pubSelected = useSelector(state => state.pub);
-    const pubSelectedProps = !!pubSelected ? {
-        center: {
-        lat: pubSelected.lat,
-        lng: pubSelected.lng
-        }
-    } : null
+    const markerPosition = [pubSelected?.lat || centerPosition[0], pubSelected?.lng || centerPosition[1]]
 
-    const pubProps = !!pubSelected ? pubSelectedProps : defaultProps
+    const customMarkerIcon = new L.Icon({
+        iconUrl: "https://upload.wikimedia.org/wikipedia/commons/8/88/Map_marker.svg",
+        iconSize: [32, 32],
+        iconAnchor: [16, 32], // sets the anchor point
+        popupAnchor: [0, -32], // sets the popup anchor point
+      });
 
       return (
-        <div style = {{ height: '73vh', width: '100%' }}>
-          <GoogleMapReact
-            bootstrapURLKeys = {{ key: "" }}
-            defaultCenter = {defaultProps.center}
-            defaultZoom = {defaultProps.zoom}
+        <div style={{ display: "flex" }}>
+          <MapContainer
+            style={{
+              height: "100vh",
+              width: "100%",
+            }}
+            center={centerPosition}
+            zoom={8}
           >
-            <MapsComponent
-              lat = {pubProps.center.lat}
-              lng = {pubProps.center.lng}
-              text = "My Marker"
+            {/* adds map layer */}
+            <TileLayer
+              attribution="Google Maps"
+              url="https://www.google.cn/maps/vt?lyrs=m@189&gl=cn&x={x}&y={y}&z={z}"
             />
-          </GoogleMapReact>
+
+            {/* if there is no pubSelected there is no marker*/}
+              {!!pubSelected ?
+                  <Marker position={!!markerPosition ? markerPosition : null} icon={customMarkerIcon}>
+                    <Popup>
+                        {pubSelected?.name || "Selected Pub"} <br /> Coordinate: {markerPosition[0]}, {markerPosition[1]}
+                    </Popup>
+                  </Marker>
+              : null}
+          </MapContainer>
         </div>
       );
 }

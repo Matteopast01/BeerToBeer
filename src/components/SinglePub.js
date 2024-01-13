@@ -14,10 +14,12 @@ function SinglePub(){
     const pubSelected = useSelector(state => state.pub);
 
     // if we are rendering singlePub it means that a pubSelected exists and so its properties images and description
-    let images = pubSelected.images;
-    let description = pubSelected.description;
+    // however js needs a fallback value in case of null state
+    let images = pubSelected?.images || [];
+    let description = pubSelected?.description || "";
 
      const dispatch = useDispatch();
+
      function handleClick(){
         dispatch(resetPubSelected(null))
     }
