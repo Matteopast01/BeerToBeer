@@ -3,7 +3,7 @@ import {CardList} from "./CardList";
 import useCardList from "../hooks/useCardList";
 import DropDown from "./DropDown";
 import * as React from "react";
-import {useContext, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {load_ordered_docs, requestBeersById, store_doc, load_docs_by_attributes, delete_doc} from "../services/persistence_manager.js";
 import BeerCardDescription from "./BeerCardDescription";
 

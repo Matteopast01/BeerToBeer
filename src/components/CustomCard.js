@@ -18,14 +18,20 @@ function CustomCard({ horizontal, maxWidth, contentWidth, numberContentRow, chil
 
     return (
         <Card sx={style}>
-            <CardActionArea onClick={onClick}>
+            {!!onClick ? (<CardActionArea onClick={onClick}>
                 <CardMedia
                     style={{padding: "5px", position: "relative", margin: "auto", width: "auto", height: "350px"}}
                     component="img"
                     image={img}
                     alt="img"
                 />
-            </CardActionArea>
+                </CardActionArea>) :
+                <CardMedia
+                    style={{padding: "5px", position: "relative", margin: "auto", width: "auto", height: "350px"}}
+                    component="img"
+                    image={img}
+                    alt="img"
+                />}
             <CardContent sx={{width: contentWidth}}>
                 <Typography sx={{display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: numberContentRow, overflow: 'hidden', textOverflow: 'ellipsis'}} component={"div"}>
                     {children}
