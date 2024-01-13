@@ -3,6 +3,7 @@ import ReviewContainer from "./ReviewContainer";
 
 function SinglePub({pub}){
 
+    // TODO MATTEO: recupera anche l'id del pub che mi servirà per fare una nuova query
     const images = []; // TODO MATTEO: query che recupera le immagini del pub passato come props
     const description = ""; // TODO MATTEO: query che recupera la descrizione del pub passato come props
 

@@ -24,7 +24,7 @@ function OurPubs (){
                 <Footer/>
             </div>
         </div>
-    )
+    );
 }
 
 export default OurPubs;
