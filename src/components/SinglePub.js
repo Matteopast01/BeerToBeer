@@ -1,18 +1,34 @@
 import SimpleSlider from "./Slider";
 import ReviewContainer from "./ReviewContainer";
+import {useDispatch, useSelector} from "react-redux";
+import CustomIconButton from "./CustomIconButton";
+import CloseIcon from '@mui/icons-material/Close';
+import {resetPubSelected} from "../store/App";
 
-function SinglePub({pub}){
+function SinglePub(){
 
-    // TODO MATTEO: recupera anche l'id del pub che mi servirà per fare una nuova query
-    const images = []; // TODO MATTEO: query che recupera le immagini del pub passato come props
-    const description = ""; // TODO MATTEO: query che recupera la descrizione del pub passato come props
+    const singlePub = {
+        // TODO MATTEO: recupera un pub da DB, mi potrebbe servire
+    }
 
-    // TODO: il componente legge lo stato di redux pubSelected per fare le query
-    // TODO: onClick sul "Chiudi" azzera lo stato pubSelected
+    const pubSelected = useSelector(state => state.pub);
+
+    // if we are rendering singlePub it means that a pubSelected exists and so its properties images and description
+    let images = pubSelected.images;
+    let description = pubSelected.description;
+
+     const dispatch = useDispatch();
+     function handleClick(){
+        dispatch(resetPubSelected(null))
+    }
+
     return (
-        <div>
-            "rendering SinglePub"
+        <div style={{textAlign: "center"}}>
+            "for debugging: rendering SinglePub"
             <div>
+                <div style={{textAlign: "right"}}>
+                    <CustomIconButton icon={<CloseIcon/>} onClick={handleClick}/>
+                </div>
                 <SimpleSlider imags={images}/>
                 <div>
                     {description}
@@ -20,7 +36,6 @@ function SinglePub({pub}){
                 <ReviewContainer/>
             </div>
         </div>
-
     );
 }
 
