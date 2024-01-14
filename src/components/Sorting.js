@@ -21,6 +21,7 @@ function Sorting() {
 
     const handleSelect1 = (option) => {
         dispatch(setSelection1(option));
+        dispatch(setSelection2(options2[0]))
     };
 
     const handleSelect2 = (option) => {
