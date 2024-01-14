@@ -23,7 +23,7 @@ const Search = function (){
                         <Sorting/>
                     </div>
                 </div>
-                <div>
+                <div style={{margin:'auto'}}>
                     <ResultContainer/>
                 </div>
             </div>
