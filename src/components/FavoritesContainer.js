@@ -1,16 +1,9 @@
 import {useNavigate} from "react-router-dom";
 import {CardList} from "./CardList";
 import useCardList from "../hooks/useCardList";
-import DropDown from "./DropDown";
 import * as React from "react";
 import {useEffect, useState} from "react";
 import {load_ordered_docs, requestBeersById} from "../services/persistence_manager.js";
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import StarBorderIcon from '@mui/icons-material/StarBorder';
-import StarIcon from '@mui/icons-material/Star';
-import CustomIconButton from "./CustomIconButton";
-import Typography from "@mui/material/Typography";
 import BeerCardDescription from "./BeerCardDescription";
 
 export function FavoritesContainer(){
@@ -27,7 +20,7 @@ export function FavoritesContainer(){
     }, []);
 
 
-
+//TO DO recuperare la lista di birre preferite dell'utente
     const getFavorites = async function () {
         let arrayOfId = await load_ordered_docs("Beer_Id", "number_calls", "desc", 6)
         let beers = []

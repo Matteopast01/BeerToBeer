@@ -27,8 +27,7 @@ const FileUploadButton = ({ onFileChange }) => {
             component="label"
             variant="outlined"
             style={{ border: '1px solid primary', color: 'black' }}
-            startIcon={<CloudUploadIcon />}
-        >
+            startIcon={<CloudUploadIcon />}>
             Upload file
             <VisuallyHiddenInput type="file" onChange={handleFileChange} />
         </Button>

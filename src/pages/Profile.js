@@ -17,6 +17,7 @@ const Profile = function (){
                         maxWidth="300px"
                         contentWidth="100%"
                         numberContentRow="12"
+                        //TO DO: recuperare la foto profilo username e n. recensioni
                         img="https://thumbs.dreamstime.com/z/birra-bevente-dell-uomo-avido-25256367.jpg?w=576"
                         onClick={null}
                         children={

@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import ImagesUploader from "../components/ImagesUploader";
 
 const AdminPage = () => {
+    //TO DO aggiornare le foto relative allo slider ed aggiornare la foto di default degli utenti
     const handleImageUpload = (imageList) => {
         console.log("Nuova lista di immagini:", imageList);
     };
