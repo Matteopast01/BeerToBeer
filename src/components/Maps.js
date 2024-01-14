@@ -13,6 +13,7 @@ function Maps() {
     const markerPosition = [pubSelected?.lat || centerPosition[0], pubSelected?.lng || centerPosition[1]]
 
     const customMarkerIcon = new L.Icon({
+        // TODO: could be store locally
         iconUrl: "https://upload.wikimedia.org/wikipedia/commons/8/88/Map_marker.svg",
         iconSize: [32, 32],
         iconAnchor: [16, 32], // sets the anchor point
