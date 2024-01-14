@@ -5,9 +5,9 @@ const filterSlice = createSlice({
     name: 'filters',
     initialState: {
         values: [
-            { min: 20, max: 37 },
-            { min: 1, max: 10 },
-            { min: 1, max: 10 },
+            { min: 0, max: 55 },
+            { min: 0, max: 1157 },
+            { min: 0, max: 600 },
         ],
     },
     reducers: {
