@@ -99,7 +99,7 @@ export const ResultContainer = function(){
 
 
 
-    let Beers = (sortingProperty === null) ? filteredBeers : sortingBeers(filteredBeers, sortingProperty, sortingWay);
+    let Beers = (sortingProperty === null || sortingProperty === "-") ? filteredBeers : sortingBeers(filteredBeers, sortingProperty, sortingWay);
 
     Beers.forEach((beer)=>{
         console.log( beer.id + " " + beer.ibu + " \n")
