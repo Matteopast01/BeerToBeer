@@ -8,8 +8,31 @@ import {load_ordered_docs, requestBeersById, store_doc, load_docs_by_attributes,
 import BeerCardDescription from "./BeerCardDescription";
 
 export function BeerContainer(){
+    //Hook State
+
     const [selection, setSelection] = useState({label: "Più viste", value: "Più visti"});
     const [items, setItems] = useState([])
+
+
+    // Hook Navigate
+
+    const navigate = useNavigate();
+
+
+    // Hook CardList
+
+    const [cardItems, cardFeature] = useCardList(items,
+        (item)=>{return item.id},
+        (item)=>{return item.image_url},
+        (item)=>{
+            return <BeerCardDescription beer={item}/>
+        },
+        "default:350--8",
+        (item)=>{navigate(`/product/${item.id}`)}
+    )
+
+
+    //Hook Effect
 
     useEffect(() => {
         (async  ()=> {
@@ -21,15 +44,16 @@ export function BeerContainer(){
     }, []);
 
 
+
+    // Props definition
+
     const options = [
         {label: "Most Popular", value: "More Popular"},
         {label: "Most Liked", value: "Most Liked"}
     ]
 
-    const handleSelect = async (option) => {
-        setItems(await getBeers())
-        setSelection(option);
-    };
+
+    // Handle Functions
 
     const getBeers = async function () {
         let arrayOfId = await load_ordered_docs("Beer_Id", "number_calls", "desc", 6)
@@ -41,16 +65,12 @@ export function BeerContainer(){
         return beers
     }
 
-    const navigate = useNavigate();
-    const [cardItems, cardFeature] = useCardList(items,
-            (item)=>{return item.id},
-            (item)=>{return item.image_url},
-            (item)=>{
-                return <BeerCardDescription beer={item}/>
-                 },
-            "default:350--8",
-            (item)=>{navigate(`/product/${item.id}`)}
-            )
+    const handleSelect = async (option) => {
+        setItems(await getBeers())
+        setSelection(option);
+    };
+
+    // Return JSX
 
     return (
         <div>
@@ -61,4 +81,7 @@ export function BeerContainer(){
             <CardList maxColumn={3} cardFeature={cardFeature} items={cardItems}></CardList>
         </div>
     )
+
+
+
 }
