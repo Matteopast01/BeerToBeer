@@ -8,18 +8,19 @@ import {load_ordered_docs, requestBeersById, store_doc, load_docs_by_attributes,
 import BeerCardDescription from "./BeerCardDescription";
 
 export function BeerContainer(){
-    //Hook State
+    //Hooks
+        //Hook State
 
     const [selection, setSelection] = useState({label: "Più viste", value: "Più visti"});
     const [items, setItems] = useState([])
 
 
-    // Hook Navigate
+        // Hook Navigate
 
     const navigate = useNavigate();
 
 
-    // Hook CardList
+        // Hook CardList
 
     const [cardItems, cardFeature] = useCardList(items,
         (item)=>{return item.id},
@@ -32,7 +33,7 @@ export function BeerContainer(){
     )
 
 
-    //Hook Effect
+        //Hook Effect
 
     useEffect(() => {
         (async  ()=> {
