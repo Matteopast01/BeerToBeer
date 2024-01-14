@@ -4,24 +4,11 @@ import {CardList} from "../components/CardList";
 import * as React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import {ResultContainer} from "../components/ResultContainer";
 
 const Search = function (){
-    //CARDLIST
-    const cardFeature = {
-        maxWidth : 350,
-        contentWidth : 200,
-        horizontal: false,
-        onClick: (item)=>{console.log(item.id)}
-    }
 
-    let items = Array.from({ length: 8 },
-        (_, i) => {
-            return {id: i,
-                img: "https://bulma.io/images/placeholders/96x96.png",
-                description: (item)=>{
-                    return <p>prova testo {item.id}</p>
-                }}
-        });
+
 
     return (
         <div>
@@ -37,7 +24,7 @@ const Search = function (){
                     </div>
                 </div>
                 <div>
-                    <CardList maxColumn={3} cardFeature={cardFeature} items={items}/>
+                    <ResultContainer/>
                 </div>
             </div>
             <div>
