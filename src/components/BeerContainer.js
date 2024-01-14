@@ -11,7 +11,7 @@ export function BeerContainer(){
     //Hooks
         //Hook State
 
-    const [selection, setSelection] = useState({label: "Più viste", value: "Più visti"});
+    const [selection, setSelection] = useState({label: "Most Popular", value: "Most Popular"});
     const [items, setItems] = useState([])
 
 
