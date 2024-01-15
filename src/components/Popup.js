@@ -24,7 +24,7 @@ export default function Popup() {
         text: "Edit",
         handleClick: handleOpen
     }
-//TO DO se premo salva aggiorno foto e/o username
+//TODO query che mi prende l'img attuale 
     const propsSave = {
         variant: "outlined",
         sx: { color: '#333333'},

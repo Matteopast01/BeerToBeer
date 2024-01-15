@@ -20,7 +20,7 @@ export function FavoritesContainer(){
     }, []);
 
 
-//TO DO recuperare la lista di birre preferite dell'utente
+//TODO recuperare la lista di birre preferite dell'utente
     const getFavorites = async function () {
         let arrayOfId = await load_ordered_docs("Beer_Id", "number_calls", "desc", 6)
         let beers = []
