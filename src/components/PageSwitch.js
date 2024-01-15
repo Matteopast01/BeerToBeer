@@ -8,7 +8,7 @@ function PageSwitch(){
 
     return (
       <div>
-          {!!pubSelected ? <SinglePub/> : <SinglePub/>}
+          {!!pubSelected ? <SinglePub/> : <PubContainer/>}
       </div>
     );
 }
