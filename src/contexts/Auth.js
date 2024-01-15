@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
         const registeredUser = {}
         registeredUser["username"] = name
         registeredUser["role"] = false
-        registeredUser["link-img"] = ""
+        registeredUser["link_img"] = ""
 
 
         await createUserWithEmailAndPassword(auth, email, password)
