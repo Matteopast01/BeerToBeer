@@ -6,6 +6,7 @@ import {useEffect, useState} from "react";
 import useCardList from "../hooks/useCardList";
 import BeerCardDescription from "./BeerCardDescription";
 import {CardList} from "./CardList";
+import * as React from "react";
 
 
 function PubContainer(){
@@ -15,7 +16,15 @@ function PubContainer(){
 
     useEffect(() => {
         (async  ()=> {
-            setPubs(await load_pubs())
+            const pubsObjects = await load_pubs()
+            const emptyArray = []
+             for (let pub of pubsObjects){
+                 emptyArray.push({...pub,
+                     img: await pull_img_url(pub.link_img)})
+
+          }
+             setPubs(emptyArray)
+
         })()
 
     }, []);
@@ -38,11 +47,13 @@ function PubContainer(){
 
     const [cardItems, cardFeature] = useCardList(pubs,
         (item)=>{return item.id},
-        async (item) => {
-            return await pull_img_url(item.link_img)
+         (item) => {
+            return item.img
         },
         (item)=>{
-            return item.description
+            return (<div><h1 style = {{fontWeight: "bold"}}className="has-text-centered"> {item.name}</h1> {item.description} </div>
+
+        )
         },
         "default:350--8",
         (item)=>{handleOnClick(item)}
@@ -51,7 +62,7 @@ function PubContainer(){
         // const dispatch = useDispatch()
         // TODO: ogni card deve avere un onClick = dispatch(pubSelected({pub}))
     return (
-        <div style={{textAlign: "center"}} >
+        <div style={{textAlign: "center", overflow: "auto", height:"100vh"}} >
             <CardList maxColumn={3} cardFeature={cardFeature} items={cardItems}/>
         </div>
     );
