@@ -1,7 +1,7 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 import {reviewSlices} from "../slices/ReviewSlices";
 import {filterSlice, sortingSlice} from "../slices/SearchSlices"
-import {pubSlice} from "../slices/PubSlices";
+import {loadedPubsSlice, pubSlice} from "../slices/PubSlices";
 
 
 // combination of all slices
@@ -9,7 +9,8 @@ const rootReducer = {
     filters: filterSlice.reducer,
     sorting: sortingSlice.reducer,
     pub: pubSlice.reducer,
-    review: reviewSlices.reducer
+    review: reviewSlices.reducer,
+    loadedPubs: loadedPubsSlice.reducer
 };
 
 // Store configuration
@@ -21,6 +22,7 @@ export const { updateFilter } = filterSlice.actions;
 export const { setSelection1, setSelection2 } = sortingSlice.actions;
 export const {pubSelected, resetPubSelected} = pubSlice.actions;
 
+export const {addPub, resetPubs} = loadedPubsSlice.actions
 export const {updateReviews} = reviewSlices.actions
 
 export const selectFilters = (state) => state.filters;

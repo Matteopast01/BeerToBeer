@@ -31,10 +31,6 @@ export const ResultContainer = function(){
     let sortingProperty = selection1.value
     let sortingWay = selection2.value
 
-    console.log(sortingProperty)
-    console.log(sortingWay)
-
-
 
     const loadBeers = async function () {
 

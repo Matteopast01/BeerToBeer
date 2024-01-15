@@ -13,3 +13,17 @@ export const pubSlice = createSlice({
         }
     }
 });
+
+
+export const loadedPubsSlice = createSlice({
+    name: 'loadedPubs',
+    initialState: [],
+    reducers: {
+        addPub: (state, action) => {
+            state.push(action.payload);
+        },
+        resetPubs: (state, action) => {
+            state = [];
+        }
+    }
+});
