@@ -12,13 +12,13 @@ function Header(){
     const {currentUser} = useContext(AuthContext);
     const {handleLogout} = useContext(AuthContext);
 
+    const navigate = useNavigate();
+
     const propsSearch = {
         onSearch: function () {
             // TODO
         }
     }
-
-    const navigate = useNavigate();
 
     const propsLogin = {
         icon: <AccountCircleIcon />,

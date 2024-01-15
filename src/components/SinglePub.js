@@ -29,11 +29,11 @@ function SinglePub(){
             "for debugging: rendering SinglePub"
             <div>
                 <div style={{textAlign: "right"}}>
-                    <CustomIconButton icon={<CloseIcon/>} onClick={handleClick}/>
+                    <CustomIconButton icon={<CloseIcon/>} onClick={handleClick} size={"medium"}/>
                 </div>
                 <SimpleSlider imags={images}/>
                 <div>
-                    {description}
+                    {description} {/* TODO quì ci va la descrizione con un qualche container? */}
                 </div>
                 <ReviewContainer/>
             </div>
