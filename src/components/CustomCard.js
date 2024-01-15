@@ -33,7 +33,8 @@ function CustomCard({ horizontal, maxWidth, contentStyle, numberContentRow, chil
                     alt="img"
                 />}
             <CardContent sx={contentStyle}>
-                <Typography sx={{display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: numberContentRow, overflow: 'hidden', textOverflow: 'ellipsis'}} component={"div"}>
+                <Typography sx={{display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: numberContentRow,
+                    overflow: 'hidden', textOverflow: 'ellipsis'}} component={"div"}>
                     {children}
                 </Typography>
             </CardContent>
