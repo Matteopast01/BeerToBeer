@@ -55,7 +55,7 @@ function PubContainer(){
 
         )
         },
-        "default:350--8",
+        "default:290--6",
         (item)=>{handleOnClick(item)}
     )
 
