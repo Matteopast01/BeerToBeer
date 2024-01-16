@@ -37,6 +37,7 @@ export default function Popup() {
     const propsClose = {
         variant: "text",
         color: "error",
+        sx: {color: '#f30303'},
         size: "medium",
         icon: <CloseIcon />,
         handleClick: handleClose
@@ -70,7 +71,7 @@ export default function Popup() {
                     variant="standard"
                     sx={{marginBottom: '30px' }}/>
                     <DialogContentText  sx={{ textAlign: 'left', width: '100%', marginBottom: '30px'}}>
-                        Enter your new photo  here:
+                        Enter your new photo here:
                     </DialogContentText>
                     <ImagesUploader onImageUpload={handleImageUpload} maxImages={1}/>
             </DialogContent>

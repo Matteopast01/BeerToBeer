@@ -1,5 +1,5 @@
 import {BeerContainer} from "../components/BeerContainer";
-import SimpleSlider from "../components/Slider";
+import SimpleSlider from "../components/SimpleSlider";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import {pull_img_url} from "../services/persistence_manager";

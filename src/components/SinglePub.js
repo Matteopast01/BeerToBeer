@@ -1,5 +1,5 @@
-import SimpleSlider from "./Slider";
-import ReviewContainer from "./ReviewContainer";
+import SimpleSlider from "./SimpleSlider";
+import PubReviewContainer from "./PubReviewContainer";
 import {useDispatch, useSelector} from "react-redux";
 import CustomIconButton from "./CustomIconButton";
 import CloseIcon from '@mui/icons-material/Close';
@@ -34,20 +34,24 @@ function SinglePub(){
 
     return (
 
-        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-            <div style={{width: '70px'}}/>
-            <div style={{flex: '1', textAlign: 'center', fontSize: '40px', fontFamily: 'Arial, sans-serif'}}>
-                <b>{name}</b>
-            </div>
-            <div style={{width: '70px'}}>
-                <div style={{display: "flex", alignItems: "center", flexDirection: "column"}}>
-                    <CustomIconButton icon={<CloseIcon/>} handleClick={handleClick} size={"medium"}/>
+        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%'}}>
+                <div style={{width: '70px'}}/>
+                <div style={{flex: '1', textAlign: 'center', fontSize: '40px', fontFamily: 'Arial, sans-serif'}}>
+                    <b>{name}</b>
+                </div>
+                <div style={{width: '70px'}}>
+                    <div style={{display: "flex", alignItems: "center", flexDirection: "column"}}>
+                        <CustomIconButton icon={<CloseIcon sx={{color: '#f30303'}}/>} handleClick={handleClick} size={"medium"}/>
+                    </div>
                 </div>
             </div>
-            <div>
+            <div style={{textAlign: 'center', fontSize: '16px', fontFamily: 'Arial, sans-serif'}}>
                 {description}
             </div>
         </div>
+
+
     );
 }
 
