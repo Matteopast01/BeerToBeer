@@ -36,21 +36,21 @@ function Header(){
     const propsHome = {
         text: "Home",
         sx: { color: '#333333'},
-        size: "small",
+        size: "large",
         handleClick: ()=>{navigate("/")}
     }
 
     const propsPubs = {
         text: "Our Pubs",
         sx: { color: '#333333'},
-        size: "small",
+        size: "large",
         handleClick: ()=>{navigate("/ourpubs")}
     }
 
     const propsAdvancedSearch = {
         text:"Advanced Search",
         sx: { color: '#333333'},
-        size: "small",
+        size: "large",
         handleClick: ()=>{navigate("/search")},
         uploadButtonBoolean: true
     }
@@ -61,7 +61,7 @@ function Header(){
 
                 <div style={{width: '70px'}}/>
 
-                <div style={{flex: '1', textAlign: 'center', fontSize: '32px', fontFamily: 'Arial, sans-serif'}}>
+                <div style={{flex: '1', textAlign: 'center', fontSize: '40px', fontFamily: 'Arial, sans-serif'}}>
                     <b>BeerToBeer</b>
                 </div>
 
