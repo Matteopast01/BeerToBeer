@@ -18,13 +18,6 @@ export const filterSlice = createSlice({
             );
             },
 
-        setValuesFilter: (state,action) => {
-            state.values = action.payload
-
-        }
-
-
-
 
     },
 
@@ -45,6 +38,20 @@ export const sortingSlice = createSlice({
         setSelection2: (state, action) => {
             state.selection2 = action.payload;
         },
+    },
+});
+
+
+export const searchedBeersSlice = createSlice({
+    name: 'searchedBeers',
+    initialState: {
+       searchedBeers: []
+    },
+    reducers: {
+        setSearchedBeers: (state, action) => {
+            state.searchedBeers = action.payload;
+        },
+
     },
 });
 

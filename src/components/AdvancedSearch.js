@@ -13,13 +13,40 @@ function valuetext(value) {
 
 function AdvancedSearch( ) {
 
-    const FilterValues = useSelector((state)=>state.filters.values)
+    const SearchedBeers = useSelector((state)=>state.searchedBeers.searchedBeers)
+
+    const computeFilterValues  = function(beers ){
+
+        let abv = []
+        let ibv = []
+        let srm = []
+
+        beers.forEach((beer)=>{
+            console.log(beer.abv)
+            console.log(beer.ibu)
+            console.log(beer.srm)
+
+            abv.push(beer.abv)
+            ibv.push(beer.ibu)
+            srm.push(beer.srm)
+        })
+
+        let minAbv = Math.min(...abv);
+        let maxAbv = Math.max(...abv);
+        let minIbv = Math.min(...ibv);
+        let maxIbv = Math.max(...ibv);
+        let minSrm = Math.min(...srm);
+        let maxSrm = Math.max(...srm);
+       return [{minAbv: minAbv, maxAbv: maxAbv }, {minIbv: minIbv, maxIbv: maxIbv }, {minSrm:minSrm, maxSrm: maxSrm}]
+
+    }
+    const filtersValues = computeFilterValues(SearchedBeers)
 
 
     const filters = [
-        {name: "ABV", description:"Alcohol by volume (ABV) is a metric used to determine the alcohol content in an alcoholic beverage.", min:FilterValues[0].min, max:FilterValues[0].max},
-        {name: "IBV", description:"International Bitterness Unit (IBU): Measures beer bitterness from hops.", min:FilterValues[1].min, max:FilterValues[1].min},
-        {name: "SMR", description:"Standard Reference Method (SRM): Quantifies beer color by measuring light absorbance.", min: FilterValues[2].min, max:FilterValues[2].max}
+        {name: "ABV", description:"Alcohol by volume (ABV) is a metric used to determine the alcohol content in an alcoholic beverage.", min:filtersValues[0].minAbv, max:filtersValues[0].maxAbv},
+        {name: "IBV", description:"International Bitterness Unit (IBU): Measures beer bitterness from hops.",  min:filtersValues[1].minIbv, max:filtersValues[1].maxIbv},
+        {name: "SMR", description:"Standard Reference Method (SRM): Quantifies beer color by measuring light absorbance.",  min:filtersValues[2].minSrm, max:filtersValues[2].maxSrm}
     ];
 
     const dispatch = useDispatch();
@@ -52,8 +79,8 @@ function AdvancedSearch( ) {
                 onChange={handleChange(index)}
                 valueLabelDisplay="auto"
                 getAriaValueText={valuetext}
-                min={10}
-                max={70}
+                min={filter.min}
+                max={filter.max}
             />
         </div>
     ));

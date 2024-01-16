@@ -5,7 +5,7 @@ import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {get_docs_by_attribute, requestBeersById} from "../services/persistence_manager";
-import {setValuesFilter} from "../store/App";
+import {setSearchedBeers, setValuesFilter} from "../store/App";
 
 
 export const ResultContainer = function(){
@@ -49,7 +49,7 @@ export const ResultContainer = function(){
         return beerList
     }
 
-
+/*
     const computeFilterValues  = function(beers ){
 
         let abv = []
@@ -77,12 +77,15 @@ export const ResultContainer = function(){
         dispatch((setValuesFilter(values)))
 
     }
+
+
+ */
     useEffect(() => {
         (async  ()=> {
 
             const beers = await loadBeers()
             setItems(beers)
-            computeFilterValues(beers)
+            dispatch(setSearchedBeers(beers))
         })()
 
     }, []);
