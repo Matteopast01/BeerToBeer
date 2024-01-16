@@ -9,8 +9,11 @@ function Homepage(){
 
     let images = useAsync(async  ()=> {
         const items = []
-        for(let img of ["slider-1.jpeg", "slider-2.jpeg", "slider-3.jpeg"]){
-            items.push({img: await pull_img_url(img), text: "image"})
+        const text =  ["Life's too short \n to drink bad beer.", "In a world of choices, choose beer.", "Save water,  drink beer."]
+        const images = ["slider-1.jpeg", "slider-2.jpeg", "slider-3.jpeg"]
+
+        for(let i = 0; i <text.length; i++ ){
+            items.push({img: await pull_img_url(images[i]), text: text[i]})
         }
         return items
     })

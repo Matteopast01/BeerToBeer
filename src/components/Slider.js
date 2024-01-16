@@ -1,8 +1,7 @@
-import React, {Component, useEffect, useState} from "react";
+import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import {pull_img_url} from "../services/persistence_manager";
 
 export default function SimpleSlider({imags}) {
         const settings = {
@@ -12,19 +11,21 @@ export default function SimpleSlider({imags}) {
             slidesToShow: 1,
             slidesToScroll: 1,
             autoplay: true,
-            autoplaySpeed: 3000 // Imposta la velocità di autoplay in millisecondi (ad esempio, 2000 ms = 2 secondi)
+            autoplaySpeed: 3000
         };
 
         return (
-            <div style={{margin: "auto", width:"100%"}}>
-                <Slider style={{margin: "auto", width:"95%"}} {...settings}>
+            <div style={{marginLeft: "0px", marginRight: "0px", width:"100%"}}>
+                <Slider style={{marginLeft: "0px", marginRight: "0px", width:"100%"}} {...settings}>
                     {imags.map((img)=>{
                         return (
                             <cd>
                                 <img style={{display: "block",
-                                    marginLeft: "auto",
-                                    marginRight: "auto",
-                                    width: "80%"}} src={img.img} alt="Img1" />
+                                    marginLeft: "0px",
+                                    marginRight: "0px",
+                                    width: "1920px",
+                                    height: "550px",
+                                    objectFit: "cover", }} src={img.img} alt="Img1" />
                                 <h1 style={{position: "sticky", bottom: "50%", textAlign: "center", fontSize: 30, color: "white"}}>
                                     {img.text}
                                 </h1>
