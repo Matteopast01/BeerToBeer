@@ -3,8 +3,9 @@ import useCardList from "../hooks/useCardList";
 import BeerCardDescription from "./BeerCardDescription";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {get_docs_by_attribute, requestBeersById} from "../services/persistence_manager";
+import {setValuesFilter} from "../store/App";
 
 
 export const ResultContainer = function(){
@@ -16,7 +17,7 @@ export const ResultContainer = function(){
 
 
 
-
+    const dispatch = useDispatch()
     const values = useSelector((state)=>state.filters.values)
     const selection1 = useSelector((state) => state.sorting.selection1)
     const selection2 = useSelector((state) => state.sorting.selection2)
@@ -43,12 +44,45 @@ export const ResultContainer = function(){
             beer["number_likes"] = queryResult[0].number_likes
             beerList.push(beer)
         }
+
+
         return beerList
     }
 
+
+    const computeFilterValues  = function(beers ){
+
+        let abv = []
+        let ibv = []
+        let srm = []
+
+        beers.forEach((beer)=>{
+            console.log(beer.abv)
+            console.log(beer.ibu)
+            console.log(beer.srm)
+
+            abv.push(beer.abv)
+            ibv.push(beer.ibu)
+            srm.push(beer.srm)
+        })
+        let minAbv = Math.min(...abv);
+        let maxAbv = Math.max(...abv);
+        let minIbv = Math.min(...ibv);
+        let maxIbv = Math.max(...ibv);
+        let minSrm = Math.min(...srm);
+        let maxSrm = Math.max(...srm);
+
+        const values =[ {min:minAbv, max:maxAbv}, {min:minIbv, max:maxIbv}, {min:minSrm, max: maxSrm}]
+
+        dispatch((setValuesFilter(values)))
+
+    }
     useEffect(() => {
         (async  ()=> {
-            setItems(await loadBeers())
+
+            const beers = await loadBeers()
+            setItems(beers)
+            computeFilterValues(beers)
         })()
 
     }, []);

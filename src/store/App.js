@@ -18,7 +18,7 @@ const store = configureStore({
     reducer: rootReducer,
 });
 
-export const { updateFilter } = filterSlice.actions;
+export const { updateFilter, setValuesFilter } = filterSlice.actions;
 export const { setSelection1, setSelection2 } = sortingSlice.actions;
 export const {pubSelected, resetPubSelected} = pubSlice.actions;
 

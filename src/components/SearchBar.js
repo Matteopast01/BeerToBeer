@@ -19,7 +19,7 @@ const SearchBar = ({ onSearch }) => {
         <form onSubmit={handleSubmit} className="search-container">
             <Autocomplete
                 freeSolo
-                options={[]}  // Add your autocomplete options here
+                options={["ciao", "Matteo è ritardato"]}  // Add your autocomplete options here
                 value={searchTerm}
                 onInputChange={handleInputChange}
                 renderInput={(params) => (

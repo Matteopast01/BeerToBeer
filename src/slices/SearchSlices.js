@@ -5,9 +5,9 @@ export const filterSlice = createSlice({
     name: 'filters',
     initialState: {
         values: [
-            { min: 0, max: 55 },
-            { min: 0, max: 1157 },
-            { min: 0, max: 600 },
+            { min: 0, max: 200 },
+            { min: 0, max: 200 },
+            { min: 0, max: 200 },
         ],
     },
     reducers: {
@@ -15,8 +15,20 @@ export const filterSlice = createSlice({
             const { index, newValue } = action.payload;
             state.values = state.values.map((filter, i) =>
                 i === index ? { ...filter, min: newValue[0], max: newValue[1] } : filter
-            ); },
+            );
+            },
+
+        setValuesFilter: (state,action) => {
+            state.values = action.payload
+
+        }
+
+
+
+
     },
+
+
 });
 
 // Slice for sorting
@@ -35,3 +47,4 @@ export const sortingSlice = createSlice({
         },
     },
 });
+

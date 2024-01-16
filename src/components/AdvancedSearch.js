@@ -12,10 +12,14 @@ function valuetext(value) {
 }
 
 function AdvancedSearch( ) {
+
+    const FilterValues = useSelector((state)=>state.filters.values)
+
+
     const filters = [
-        {name: "ABV", description:"Alcohol by volume (ABV) is a metric used to determine the alcohol content in an alcoholic beverage."},
-        {name: "IBV", description:"International Bitterness Unit (IBU): Measures beer bitterness from hops."},
-        {name: "SMR", description:"Standard Reference Method (SRM): Quantifies beer color by measuring light absorbance."}
+        {name: "ABV", description:"Alcohol by volume (ABV) is a metric used to determine the alcohol content in an alcoholic beverage.", min:FilterValues[0].min, max:FilterValues[0].max},
+        {name: "IBV", description:"International Bitterness Unit (IBU): Measures beer bitterness from hops.", min:FilterValues[1].min, max:FilterValues[1].min},
+        {name: "SMR", description:"Standard Reference Method (SRM): Quantifies beer color by measuring light absorbance.", min: FilterValues[2].min, max:FilterValues[2].max}
     ];
 
     const dispatch = useDispatch();
@@ -48,8 +52,8 @@ function AdvancedSearch( ) {
                 onChange={handleChange(index)}
                 valueLabelDisplay="auto"
                 getAriaValueText={valuetext}
-                min={0}
-                max={10}
+                min={10}
+                max={70}
             />
         </div>
     ));
