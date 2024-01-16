@@ -6,10 +6,18 @@ import {useSelector} from "react-redux";
 
 function Maps() {
 
-    // TODO MATTEO: query che recupera un pub dato  un id
+
     const centerPosition = [51.507351, -0.127758]; // London; could be changed
 
-    const pubSelected = useSelector(state => state.pub);
+    const pubSelected = useSelector(state => state.pub.value);
+
+
+    const pubsLoaded = useSelector(state => state.loadedPubs.pubs)
+
+    //ogni oggetto dell'array pubsLoaded è un pub, per prendere la posizione pub.lat, pub.lng
+
+
+
     const markerPosition = [pubSelected?.lat || centerPosition[0], pubSelected?.lng || centerPosition[1]]
 
     const customMarkerIcon = new L.Icon({

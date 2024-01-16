@@ -4,7 +4,7 @@ import {useSelector} from "react-redux";
 
 function PageSwitch(){
 
-    const pubSelected = useSelector(state => state.pub);
+    const pubSelected = useSelector(state => state.pub.value);
 
     return (
       <div>

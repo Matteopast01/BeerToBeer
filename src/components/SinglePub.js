@@ -7,20 +7,32 @@ import {resetPubSelected} from "../store/App";
 
 function SinglePub(){
 
-    const singlePub = {
-        // TODO MATTEO: recupera un pub da DB, mi potrebbe servire
-    }
 
-    const pubSelected = useSelector(state => state.pub);
+
+    const pubSelected = useSelector(state => state.pub.value);
 
     // if we are rendering singlePub it means that a pubSelected exists and so its properties images and description
     // however js needs a fallback value in case of null state
-    let images = pubSelected?.images || [];
+
+
+
+
+    //pubSelected.name  (nome)
+    //pubSelected.img (immagine)
+    //pubSelected.description (descrizione)
+    //pubSelected.lat
+    //pubSelected.lng
+
+
+    let images = pubSelected?.img || [];
     let description = pubSelected?.description || "";
+
+    let name = pubSelected?.name
 
      const dispatch = useDispatch();
 
      function handleClick(){
+         console.log("ciao")
         dispatch(resetPubSelected(null))
     }
 
@@ -29,9 +41,9 @@ function SinglePub(){
             "for debugging: rendering SinglePub"
             <div>
                 <div style={{textAlign: "right"}}>
-                    <CustomIconButton icon={<CloseIcon/>} onClick={handleClick} size={"medium"}/>
+                    <CustomIconButton icon={<CloseIcon/>} handleClick={handleClick} size={"medium"}/>
                 </div>
-                <SimpleSlider imags={images}/>
+                {/* <SimpleSlider imags={images}/> */}
                 <div>
                     {description} {/* TODO quì ci va la descrizione con un qualche container? */}
                 </div>

@@ -3,13 +3,13 @@ import { createSlice } from '@reduxjs/toolkit';
 // Slice for pub selected in ourPub page
 export const pubSlice = createSlice({
     name: 'pub',
-    initialState: null,
+    initialState: {value : null},
     reducers: {
         pubSelected: (state, action) => {
-            state = action.payload;
+            state.value = action.payload;
         },
         resetPubSelected: (state, action) => {
-            state = action.payload;
+            state.value = action.payload;
         }
     }
 });
@@ -17,10 +17,12 @@ export const pubSlice = createSlice({
 
 export const loadedPubsSlice = createSlice({
     name: 'loadedPubs',
-    initialState: [],
+    initialState: {
+        pubs : []
+    },
     reducers: {
         addPub: (state, action) => {
-            state.push(action.payload);
+            state.pubs.push(action.payload);
         },
         resetPubs: (state, action) => {
             state = [];

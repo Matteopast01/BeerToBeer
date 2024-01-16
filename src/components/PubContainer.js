@@ -1,7 +1,7 @@
 
 import {load_ordered_docs, pull_img_url} from "../services/persistence_manager";
 import {useDispatch} from "react-redux";
-import {addPub} from "../store/App";
+import {addPub, pubSelected} from "../store/App";
 import {useEffect, useState} from "react";
 import useCardList from "../hooks/useCardList";
 import BeerCardDescription from "./BeerCardDescription";
@@ -34,19 +34,40 @@ function PubContainer(){
 
     const load_pubs = async function (){
         const pubs =  await load_ordered_docs("Pub", "name")
-        pubs.forEach((beer)=>dispatch(addPub(beer)))
+        pubs.forEach((pub)=>{
+            const { position, ...newObj } = pub;
+            const serializablePub = {
+                ...newObj,
+                lat: pub.position._lat,
+                lng: pub.position._long
+            }
+            dispatch(addPub(serializablePub))}
+        )
         return pubs
     }
 
-    const handleOnClick = function (item){
+    const handleOnclick = function (item){
 
-        console.log("ciao")
+        const id = item.id
+        const pub =  pubs.find((pub) => pub.id === id);
+        const { position, ...newObj } = pub;
+        const serializablePub = {
+            ...newObj,
+            lat: pub.position._lat,
+            lng: pub.position._long
+        }
+
+        dispatch(pubSelected(serializablePub))
+
+
 
     }
 
 
+
     const [cardItems, cardFeature] = useCardList(pubs,
-        (item)=>{return item.id},
+        (item)=>{
+            return item.id},
          (item) => {
             return item.img
         },
@@ -56,10 +77,11 @@ function PubContainer(){
         )
         },
         "default:290--6",
-        (item)=>{handleOnClick(item)}
+        (item)=>{ handleOnclick(item)
+        }
     )
 
-        // const dispatch = useDispatch()
+
         // TODO: ogni card deve avere un onClick = dispatch(pubSelected({pub}))
     return (
         <div style={{textAlign: "center", overflow: "auto", height:"100vh"}} >
