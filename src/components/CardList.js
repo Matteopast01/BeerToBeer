@@ -7,13 +7,12 @@ export function CardList({maxColumn, cardFeature, items}){
         matrix.push(items.slice(i, i + maxColumn));
     }
 
-
     const render = function(){
         const renderCards = function(row) {
             return row.map((card) => {
                 return (
                     <td className="p-2" key={card.id}>
-                        <CustomCard maxWidth={cardFeature.maxWidth * 0.94}
+                        <CustomCard maxWidth={cardFeature.maxWidth}
                               contentWidth={cardFeature.contentWidth}
                               numberContentRow = {cardFeature.numberContentRow}
                               horizontal = {cardFeature.horizontal}
@@ -44,4 +43,3 @@ export function CardList({maxColumn, cardFeature, items}){
 
     );
 }
-

@@ -4,25 +4,21 @@ import {useDispatch, useSelector} from "react-redux";
 import CustomIconButton from "./CustomIconButton";
 import CloseIcon from '@mui/icons-material/Close';
 import {resetPubSelected} from "../store/App";
+import * as React from "react";
+import CustomButton from "./CustomButton";
 
 function SinglePub(){
-
-
 
     const pubSelected = useSelector(state => state.pub.value);
 
     // if we are rendering singlePub it means that a pubSelected exists and so its properties images and description
     // however js needs a fallback value in case of null state
 
-
-
-
     //pubSelected.name  (nome)
     //pubSelected.img (immagine)
     //pubSelected.description (descrizione)
     //pubSelected.lat
     //pubSelected.lng
-
 
     let images = pubSelected?.img || [];
     let description = pubSelected?.description || "";
@@ -37,17 +33,19 @@ function SinglePub(){
     }
 
     return (
-        <div style={{textAlign: "center"}}>
-            "for debugging: rendering SinglePub"
-            <div>
-                <div style={{textAlign: "right"}}>
+
+        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+            <div style={{width: '70px'}}/>
+            <div style={{flex: '1', textAlign: 'center', fontSize: '40px', fontFamily: 'Arial, sans-serif'}}>
+                <b>{name}</b>
+            </div>
+            <div style={{width: '70px'}}>
+                <div style={{display: "flex", alignItems: "center", flexDirection: "column"}}>
                     <CustomIconButton icon={<CloseIcon/>} handleClick={handleClick} size={"medium"}/>
                 </div>
-                {/* <SimpleSlider imags={images}/> */}
-                <div>
-                    {description} {/* TODO quì ci va la descrizione con un qualche container? */}
-                </div>
-                <ReviewContainer/>
+            </div>
+            <div>
+                {description}
             </div>
         </div>
     );
