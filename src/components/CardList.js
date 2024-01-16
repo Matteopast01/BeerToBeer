@@ -13,7 +13,7 @@ export function CardList({maxColumn, cardFeature, items}){
             return row.map((card) => {
                 return (
                     <td className="p-2" key={card.id}>
-                        <CustomCard maxWidth={cardFeature.maxWidth}
+                        <CustomCard maxWidth={cardFeature.maxWidth * 0.94}
                               contentWidth={cardFeature.contentWidth}
                               numberContentRow = {cardFeature.numberContentRow}
                               horizontal = {cardFeature.horizontal}
