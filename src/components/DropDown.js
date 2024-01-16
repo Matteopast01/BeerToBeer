@@ -32,6 +32,7 @@ function DropDown({ options, value, onChange }) {
                 className="hover:bg-link rounded cursor-pointer p-1"
                 onClick={() => handleOptionClick(option)}
                 key={option.value}
+                style={{ cursor: "pointer" }}
             >
                 {option.label}
             </div>

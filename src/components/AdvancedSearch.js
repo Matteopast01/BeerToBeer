@@ -18,19 +18,12 @@ function AdvancedSearch( ) {
         {name: "SMR", description:"Standard Reference Method (SRM): Quantifies beer color by measuring light absorbance."}
     ];
 
-   // console.log(data);
-   // const [values, setValues] = React.useState(data.map(() => [20, 37]));
     const dispatch = useDispatch();
     const values = useSelector(state => state.filters.values);
-    //console.log(store.getState());
 
 
     const handleChange = (index) => (event, newValue) => {
-       // console.log(index, newValue);
         dispatch(updateFilter({index, newValue}));
-        /*const newValues = [...values];
-        newValues[index] = newValue;
-        setValues(newValues);*/
     };
 
     const renderedData = filters.map((filter, index) => (
@@ -55,6 +48,8 @@ function AdvancedSearch( ) {
                 onChange={handleChange(index)}
                 valueLabelDisplay="auto"
                 getAriaValueText={valuetext}
+                min={0}
+                max={10}
             />
         </div>
     ));
