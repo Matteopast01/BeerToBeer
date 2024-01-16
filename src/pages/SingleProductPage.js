@@ -30,10 +30,13 @@ function SingleProductPage(){
     return (
         <div>
             <Header/>
+            <div/>
+            <div style={{marginTop: '20px'}}>
             {!!beer ?
             <CustomCard img={beer.image_url} horizontal contentStyle={{width:"75%", background: "#f5f5f5"}} maxWidth={"100%"}>
                 <ProductCardDescription beer={beer}/>
             </CustomCard> : beerId}
+            </div>
         </div>
     )
 
