@@ -67,7 +67,7 @@ function PubContainer(){
 
         // TODO: ogni card deve avere un onClick = dispatch(pubSelected({pub}))
     return (
-        <div style={{textAlign: "center", overflow: "auto", height:"100vh"}} >
+        <div style={{textAlign: "center", overflow: "auto", height:"90vh"}} >
             <CardList maxColumn={3} cardFeature={cardFeature} items={cardItems}/>
         </div>
     );
