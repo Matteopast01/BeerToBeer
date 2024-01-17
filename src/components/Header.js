@@ -2,11 +2,11 @@ import CustomButton from "./CustomButton";
 import CustomIconButton from "./CustomIconButton";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SearchBar from "./SearchBar";
-import {Route, useNavigate} from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import {AuthContext} from "../contexts/Auth";
 import {useContext} from "react";
-import * as React from "react";
 
+import {query_by_preamble} from "../services/persistence_manager";
 
 function Header(){
     const {currentUser} = useContext(AuthContext);
@@ -15,8 +15,22 @@ function Header(){
     const navigate = useNavigate();
 
     const propsSearch = {
-        onSearch: function () {
-            // TODO
+        onSearch: async function () {
+
+            const input = "p" //input da dare alla query
+
+
+            // queryResult, risultato della query
+            const queryResult = await query_by_preamble(
+                "Beer_Id",
+                "name",
+                input,
+                "number_calls",
+                5,
+            )
+
+
+
         }
     }
 
