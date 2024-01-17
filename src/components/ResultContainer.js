@@ -49,37 +49,7 @@ export const ResultContainer = function(){
         return beerList
     }
 
-/*
-    const computeFilterValues  = function(beers ){
 
-        let abv = []
-        let ibv = []
-        let srm = []
-
-        beers.forEach((beer)=>{
-            console.log(beer.abv)
-            console.log(beer.ibu)
-            console.log(beer.srm)
-
-            abv.push(beer.abv)
-            ibv.push(beer.ibu)
-            srm.push(beer.srm)
-        })
-        let minAbv = Math.min(...abv);
-        let maxAbv = Math.max(...abv);
-        let minIbv = Math.min(...ibv);
-        let maxIbv = Math.max(...ibv);
-        let minSrm = Math.min(...srm);
-        let maxSrm = Math.max(...srm);
-
-        const values =[ {min:minAbv, max:maxAbv}, {min:minIbv, max:maxIbv}, {min:minSrm, max: maxSrm}]
-
-        dispatch((setValuesFilter(values)))
-
-    }
-
-
- */
     useEffect(() => {
         (async  ()=> {
 

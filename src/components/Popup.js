@@ -1,4 +1,4 @@
-import * as React from 'react';
+
 import EditIcon from "@mui/icons-material/Edit";
 import SaveAsIcon from '@mui/icons-material/SaveAs';
 import CloseIcon from '@mui/icons-material/Close';
@@ -6,11 +6,20 @@ import CustomButton from "./CustomButton";
 import {Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField} from "@mui/material";
 import CustomIconButton from "./CustomIconButton";
 import ImagesUploader from "./ImagesUploader";
+import {useContext, useState} from "react";
+import {AuthContext} from "../contexts/Auth";
+import {count_docs, get_docs_by_attribute, pull_img_url} from "../services/persistence_manager";
 
-export default function Popup() {
-    const [open, setOpen] = React.useState(false);
+
+export default function Popup( {currentImage}) {
+    const [open, setOpen] = useState(false);
+
+    const {currentUser} = useContext(AuthContext);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    //TODO query che mi prende l'img attuale
+   //te l'ho messa come props visto che la recupero nella componente padre, non ha senso fare la query due volte
+
 
     const handleImageUpload = (imageList) => {
         console.log("Nuova lista di immagini:", imageList);
@@ -24,7 +33,7 @@ export default function Popup() {
         text: "Edit",
         handleClick: handleOpen
     }
-//TODO query che mi prende l'img attuale 
+
     const propsSave = {
         variant: "outlined",
         sx: { color: '#333333'},

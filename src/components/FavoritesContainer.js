@@ -1,18 +1,24 @@
 import {useNavigate} from "react-router-dom";
 import {CardList} from "./CardList";
 import useCardList from "../hooks/useCardList";
-import * as React from "react";
-import {useEffect, useState} from "react";
-import {load_ordered_docs, requestBeersById} from "../services/persistence_manager.js";
+import {useContext, useEffect, useState} from "react";
+import {
+    get_docs_by_attribute,
+    requestBeersById
+} from "../services/persistence_manager.js";
 import BeerCardDescription from "./BeerCardDescription";
+import {AuthContext} from "../contexts/Auth";
 
 export function FavoritesContainer(){
     const [items, setItems] = useState([])
     const navigate = useNavigate();
+    const {currentUser} = useContext(AuthContext);
 
     useEffect(() => {
         (async  ()=> {
-            setItems(await getFavorites())
+
+            await loadFavoritesBeers()
+
         })()
         return ()=>{
             setItems([])
@@ -21,7 +27,27 @@ export function FavoritesContainer(){
 
 
 //TODO recuperare la lista di birre preferite dell'utente
-    const getFavorites = async function () {
+
+    const loadFavoritesBeers = async function () {
+
+        const queryResult = await get_docs_by_attribute(currentUser.uid, "Favorites", "uid")
+        const FavoriteBeers= []
+        for (let doc of queryResult){
+
+            let beer = await requestBeersById(doc.beer_id)
+            console.log (beer)
+
+            FavoriteBeers.push(beer[0])
+            console.log (beer[0])
+
+
+        }
+
+        setItems(FavoriteBeers)
+    }
+
+
+  /*  const getFavorites = async function () {
         let arrayOfId = await load_ordered_docs("Beer_Id", "number_calls", "desc", 6)
         let beers = []
         for (let obj of arrayOfId) {
@@ -30,6 +56,8 @@ export function FavoritesContainer(){
         }
         return beers
     }
+    */
+
 
     const [cardItems, cardFeature] = useCardList(items,
         (item)=>{return item.id},

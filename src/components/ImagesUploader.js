@@ -29,6 +29,7 @@ const ImagesUploader = ({ onImageUpload, maxImages }) => {
         onImageUpload(updatedImageList);
     };
 
+
     //TODO query che si salva le foto che inserisco
     return (
         <div className="container">

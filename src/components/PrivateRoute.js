@@ -3,6 +3,7 @@ import { Navigate, Outlet } from "react-router-dom";
 import { AuthContext } from "../contexts/Auth";
 
 
+
 export const PrivateRoute = () => {
     const {currentUser} = useContext(AuthContext);
 
