@@ -11,7 +11,7 @@ function Sorting() {
     const  options1 =  [
         {label: "-", value: "-"},
         {label: "Alphabetical", value: "alphabetical"},
-        {label: "IBV", value: "ibv"},
+        {label: "IBU", value: "ibu"},
         {label: "Number of like", value: "number of like"},
     ];
     const options2 = [

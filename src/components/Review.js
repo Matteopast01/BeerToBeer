@@ -1,6 +1,7 @@
 import Homepage from "../pages/Homepage";
 import useAsync from "../hooks/useAsync";
 import {get_docs_by_attribute, pull_img_url} from "../services/persistence_manager"
+import {Avatar, ListItem, ListItemAvatar} from "@mui/material";
 
 
 function Review({rew, answers}){
@@ -23,22 +24,14 @@ function Review({rew, answers}){
 
 
     return (
-            <li className="media">
-                <a className="pull-left">
-                    <img className="media-object comment-avatar" src={!!user_obj ? user_obj.img: "" } alt="" width="50" height="50"/>
-                </a>
-                <div className="media-body">
-                    <div className="comment-info">
-                        <div className="comment-author">
-                            <a> {!!user_obj ? user_obj.username: null}</a>
-                        </div>
-                        <time>{new Date(rew.date).toGMTString()}</time>
-                    </div>
-                    <p>
-                        {rew.review}
-                    </p>
-                </div>
-            </li>)
+            <ListItem alignItems="flex-start">
+                <ListItemAvatar>
+                    <Avatar alt="Remy Sharp" src={!!user_obj ? user_obj.img: "" } />
+                </ListItemAvatar>
+                <h1 style={{fontWeight: "bold", display: "box"}}> {!!user_obj ? user_obj.username: null} </h1>
+                <time dateTime="2024-01-17">{new Date(rew.date).toTimeString()}</time>
+                <p> comment </p>
+            </ListItem>)
 }
 
 

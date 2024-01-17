@@ -4,14 +4,18 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SearchBar from "./SearchBar";
 import { useNavigate} from "react-router-dom";
 import {AuthContext} from "../contexts/Auth";
-import {useContext} from "react";
+import {useContext, useState} from "react";
 import {query_by_preamble} from "../services/persistence_manager";
+import {useSelector} from "react-redux";
 
 function Header(){
+
     const {currentUser} = useContext(AuthContext);
     const {handleLogout} = useContext(AuthContext);
 
     const navigate = useNavigate();
+    // TODO: una volta capito se funziona passarlo allo store
+    const [options, setOptions] = useState();
 
     const propsSearch = {
         onSearch: async function (searchTerm) {
@@ -23,8 +27,10 @@ function Header(){
                 searchTerm,
                 "number_calls",
                 5,
-            )
-        }
+            );
+            setOptions(queryResult);
+        },
+        options: useSelector(options)
     }
 
     const propsLogin = {

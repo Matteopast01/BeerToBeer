@@ -57,13 +57,13 @@ function ProductCardDescription({beer}){
         <div>
             <h1 style={{fontWeight: "bold", fontSize: "150%"}}>{beer.name}</h1>
             <div style={{display: "inline", margin: "auto"}}>
-                <Chip className="p-2" style={{background: "#75c270", marginRight: "2px"}}  label={`SRM ${beer.srm}`}/>
-            </div>
-            <div style={{display: "inline", margin: "auto"}}>
                 <Chip className="p-2" style={{background: "#e7c9b6", margin: "2px"}}  label={`ABV ${beer.abv} % vol`}/>
             </div>
-            <div style={{display: "inline", margin: "auto", width: "80%"}}>
+            <div style={{display: "inline", margin: "auto"}}>
                 <Chip className="p-2" style={{background: "#a0bbbb", margin: "2px"}}  label={`IBU ${beer.ibu}`}/>
+            </div>
+            <div style={{display: "inline", margin: "auto", width: "80%"}}>
+                <Chip className="p-2" style={{background: "#75c270", marginRight: "2px"}}  label={`SRM ${beer.srm}`}/>
             </div>
 
             <br/><br/>
