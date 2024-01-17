@@ -30,7 +30,7 @@ function Header(){
             );
             setOptions(queryResult);
         },
-        options: useSelector(options)
+        // TODO: verificare options: useSelector(options)
     }
 
     const propsLogin = {
