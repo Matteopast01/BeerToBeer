@@ -19,7 +19,6 @@ function Header(){
 
             const input = "p" //input da dare alla query
 
-
             // queryResult, risultato della query
             const queryResult = await query_by_preamble(
                 "Beer_Id",
@@ -28,9 +27,6 @@ function Header(){
                 "number_calls",
                 5,
             )
-
-
-
         }
     }
 
