@@ -40,7 +40,7 @@ function PubContainer(){
     const handleOnclick = function (item){
 
         const id = item.id
-        const pub =  pubs.find((pub) => pub.id === id);
+        const pub = pubs.find((pub) => pub.id === id);
         const { position, ...newObj } = pub;
         const serializablePub = {
             ...newObj,
@@ -61,13 +61,11 @@ function PubContainer(){
         )
         },
         "default:273--6",
-        (item)=>{ handleOnclick(item)
-        }
+        (item)=>{handleOnclick(item)}
     )
 
-        // TODO: ogni card deve avere un onClick = dispatch(pubSelected({pub}))
     return (
-        <div style={{textAlign: "center", overflow: "auto", height:"90vh"}} >
+        <div style={{textAlign: "center", overflow: "auto", height:"90vh"}}>
             <CardList maxColumn={3} cardFeature={cardFeature} items={cardItems}/>
         </div>
     );

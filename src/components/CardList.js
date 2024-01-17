@@ -40,6 +40,5 @@ export function CardList({maxColumn, cardFeature, items}){
                 {render()}
             </thead>
         </table>
-
     );
 }

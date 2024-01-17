@@ -2,14 +2,15 @@ import React from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {pubSelected} from "../store/App";
 
 function Maps() {
 
     const centerPosition = [54.251186, -4.463196]; // Man Island
 
-    const pubSelected = useSelector(state => state.pub.value);
-    const pubSelectedPosition = [pubSelected?.lat || null, pubSelected?.lng || null]
+    const currentPubSelected = useSelector(state => state.pub.value);
+    const pubSelectedPosition = [currentPubSelected?.lat || null, currentPubSelected?.lng || null]
 
     //ogni oggetto dell'array pubsLoaded è un pub, per prendere la posizione pub.lat, pub.lng
     const pubsLoaded = useSelector(state => state.loadedPubs.pubs)
@@ -29,6 +30,7 @@ function Maps() {
         popupAnchor: [0, -60], // sets the popup anchor point
       });
 
+
     const renderedPubsLoaded = pubsLoaded.map((pub, index) => {
         const markerPosition = [pub.lat, pub.lng];
 
@@ -39,13 +41,24 @@ function Maps() {
         }
 
         return (
-            <Marker key={index} position={markerPosition} icon={markerIcon}>
-                <Popup>
+            <Marker key={index} position={markerPosition} icon={markerIcon}
+            eventHandlers={{
+                click: () => {
+                handleMarkerClick(index);
+                },
+            }}
+            >
+                {/*<Popup>
                     {pub.name || "Selected Pub"} <br/>
-                </Popup>
+                </Popup>*/}
             </Marker>
         )
     })
+
+    const dispatch = useDispatch();
+    const handleMarkerClick = function (index){
+        dispatch(pubSelected(pubsLoaded[index]))
+    }
 
       return (
         <div style={{ display: "flex" }}>
@@ -54,7 +67,7 @@ function Maps() {
               height: "90vh",
               width: "100%",
             }}
-            center={pubSelected ? pubSelectedPosition : centerPosition}
+            center={currentPubSelected ? pubSelectedPosition : centerPosition}
             zoom={6}
           >
             {/* adds map layer */}
