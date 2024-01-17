@@ -5,7 +5,6 @@ import CustomIconButton from "./CustomIconButton";
 import CloseIcon from '@mui/icons-material/Close';
 import {resetPubSelected} from "../store/App";
 import * as React from "react";
-import CustomButton from "./CustomButton";
 
 function SinglePub(){
 
@@ -14,7 +13,7 @@ function SinglePub(){
     // if we are rendering singlePub it means that a pubSelected exists and so its properties images and description
     // however js needs a fallback value in case of null state
 
-    //pubSelected.name  (nome)
+    //pubSelected.name (nome)
     //pubSelected.img (immagine)
     //pubSelected.description (descrizione)
     //pubSelected.lat
@@ -23,12 +22,11 @@ function SinglePub(){
     let images = pubSelected?.img || [];
     let description = pubSelected?.description || "";
 
-    let name = pubSelected?.name
+    let name = pubSelected?.name;
 
      const dispatch = useDispatch();
 
      function handleClick(){
-         console.log("ciao")
         dispatch(resetPubSelected(null))
     }
 
@@ -50,8 +48,6 @@ function SinglePub(){
                 {description}
             </div>
         </div>
-
-
     );
 }
 
