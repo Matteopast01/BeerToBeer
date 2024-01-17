@@ -2,22 +2,25 @@ import React, { useState } from 'react';
 import {useNavigate} from "react-router-dom";
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
+import {useDispatch, useSelector} from "react-redux";
+import {setSearchTerm} from "../store/App";
 
 const SearchBar = ({onSearch, options}) => {
-    // TODO: da passare allo store
-    const [searchTerm, setSearchTerm] = useState('');
-    const [isHovered, setIsHovered] = useState(false);
-
-    const handleInputChange = (event, value) => {
-        setSearchTerm(value);
-        onSearch(searchTerm); // provare al limite con value al posto di searchterms
-    };
 
     const navigate = useNavigate();
+    const [isHovered, setIsHovered] = useState(false);
+
+    const dispatch = useDispatch()
+    const searchTerm = useSelector(state => state.searchTerm.value);
+
+    const handleInputChange = (event, value) => {
+        dispatch(setSearchTerm(value));
+        onSearch(value);
+    };
 
     const handleSubmit = (event, value) => {
         event.preventDefault();
-        setSearchTerm(value);
+        dispatch(setSearchTerm(value));
         navigate(`/search`)
     };
 
@@ -32,7 +35,7 @@ const SearchBar = ({onSearch, options}) => {
         <form onSubmit={handleSubmit} className="search-container">
             <Autocomplete
                 freeSolo
-                options={[]}  //TODO: controllo sul tipo, dovrebbe essere un array di oggetti
+                options={[]}  //TODO: metterci {renderedOptions}
                 value={searchTerm}
                 onInputChange={handleInputChange}
                 renderInput={(params) => (

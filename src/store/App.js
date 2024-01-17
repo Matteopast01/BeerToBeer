@@ -1,6 +1,6 @@
-import { configureStore, createSlice } from '@reduxjs/toolkit';
+import { configureStore} from '@reduxjs/toolkit';
 import {reviewSlices} from "../slices/ReviewSlices";
-import {filterSlice, searchedBeersSlice, sortingSlice} from "../slices/SearchSlices"
+import {filterSlice, searchedBeersSlice, searchTermSlice, sortingSlice} from "../slices/SearchSlices"
 import {loadedPubsSlice, pubSlice} from "../slices/PubSlices";
 
 
@@ -11,7 +11,8 @@ const rootReducer = {
     pub: pubSlice.reducer,
     review: reviewSlices.reducer,
     loadedPubs: loadedPubsSlice.reducer,
-    searchedBeers: searchedBeersSlice.reducer
+    searchedBeers: searchedBeersSlice.reducer,
+    searchTerm: searchTermSlice.reducer
 };
 
 // Store configuration
@@ -22,12 +23,13 @@ const store = configureStore({
 export const { updateFilter, setValuesFilter } = filterSlice.actions;
 export const { setSelection1, setSelection2 } = sortingSlice.actions;
 export const {pubSelected, resetPubSelected} = pubSlice.actions;
-
-export const {addPub, resetPubs} = loadedPubsSlice.actions
-export const {updateReviews} = reviewSlices.actions
-
-export const {setSearchedBeers} = searchedBeersSlice.actions
+export const {addPub, resetPubs} = loadedPubsSlice.actions;
+export const {updateReviews} = reviewSlices.actions;
+export const {setSearchedBeers} = searchedBeersSlice.actions;
+export const {setSearchTerm} = searchTermSlice.actions;
+// TODO da togliere?
 export const selectFilters = (state) => state.filters;
+// TODO da togliere?
 export const selectSorting = (state) => state.sorting;
 
 export default store;

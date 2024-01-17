@@ -3,7 +3,9 @@ import { createSlice } from '@reduxjs/toolkit';
 // Slice for pub selected in ourPub page
 export const pubSlice = createSlice({
     name: 'pub',
-    initialState: {value : null},
+    initialState: {
+        value: null
+    },
     reducers: {
         pubSelected: (state, action) => {
             state.value = action.payload;
@@ -14,11 +16,10 @@ export const pubSlice = createSlice({
     }
 });
 
-
 export const loadedPubsSlice = createSlice({
     name: 'loadedPubs',
     initialState: {
-        pubs : []
+        pubs: []
     },
     reducers: {
         addPub: (state, action) => {

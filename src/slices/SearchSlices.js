@@ -12,16 +12,12 @@ export const filterSlice = createSlice({
     },
     reducers: {
         updateFilter: (state, action) => {
-            const { index, newValue } = action.payload;
+            const {index, newValue} = action.payload;
             state.values = state.values.map((filter, i) =>
-                i === index ? { ...filter, min: newValue[0], max: newValue[1] } : filter
+                i === index ? {...filter, min: newValue[0], max: newValue[1]} : filter
             );
-            },
-
-
+        },
     },
-
-
 });
 
 // Slice for sorting
@@ -41,7 +37,6 @@ export const sortingSlice = createSlice({
     },
 });
 
-
 export const searchedBeersSlice = createSlice({
     name: 'searchedBeers',
     initialState: {
@@ -51,7 +46,17 @@ export const searchedBeersSlice = createSlice({
         setSearchedBeers: (state, action) => {
             state.searchedBeers = action.payload;
         },
-
     },
 });
 
+export const searchTermSlice = createSlice({
+    name: 'searchTerm',
+    initialState: {
+       value: []
+    },
+    reducers: {
+        setSearchTerm: (state, action) => {
+            state.value = action.payload;
+        },
+    },
+});
