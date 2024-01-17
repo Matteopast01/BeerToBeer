@@ -11,7 +11,7 @@ export function CardList({maxColumn, cardFeature, items}){
         const renderCards = function(row) {
             return row.map((card) => {
                 return (
-                    <td className="p-2" key={card.id}>
+                    <td className="p-2" key={card.id.toString()}>
                         <CustomCard maxWidth={cardFeature.maxWidth}
                               contentWidth={cardFeature.contentWidth}
                               numberContentRow = {cardFeature.numberContentRow}
