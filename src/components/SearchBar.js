@@ -3,7 +3,8 @@ import {useNavigate} from "react-router-dom";
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 
-const SearchBar = ({onSearch}) => {
+const SearchBar = ({onSearch, options}) => {
+    // TODO: da passare allo store
     const [searchTerm, setSearchTerm] = useState('');
     const [isHovered, setIsHovered] = useState(false);
 
@@ -20,11 +21,16 @@ const SearchBar = ({onSearch}) => {
         navigate(`/search`)
     };
 
+    // TODO: da verificare
+    const renderedOptions = options.map((option) => {
+        return option.name;
+    });
+
     return (
         <form onSubmit={handleSubmit} className="search-container">
             <Autocomplete
                 freeSolo
-                options={["ciao", "Matteo è ritardato"]}  // Add your autocomplete options here
+                options={[options]}  //TODO: controllo sul tipo, dovrebbe essere un array di oggetti
                 value={searchTerm}
                 onInputChange={handleInputChange}
                 renderInput={(params) => (
