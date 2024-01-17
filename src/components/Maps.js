@@ -8,9 +8,11 @@ import {pubSelected} from "../store/App";
 function Maps() {
 
     const centerPosition = [54.251186, -4.463196]; // Man Island
-
     const currentPubSelected = useSelector(state => state.pub.value);
     const pubSelectedPosition = [currentPubSelected?.lat || null, currentPubSelected?.lng || null]
+
+    console.log(centerPosition)
+    console.log(pubSelectedPosition)
 
     //ogni oggetto dell'array pubsLoaded è un pub, per prendere la posizione pub.lat, pub.lng
     const pubsLoaded = useSelector(state => state.loadedPubs.pubs)
@@ -30,12 +32,9 @@ function Maps() {
         popupAnchor: [0, -60], // sets the popup anchor point
       });
 
-
     const renderedPubsLoaded = pubsLoaded.map((pub, index) => {
         const markerPosition = [pub.lat, pub.lng];
-
         let markerIcon = customMarkerIcon;
-
         if (JSON.stringify(markerPosition) === JSON.stringify(pubSelectedPosition)) {
             markerIcon = customMarkerSelectedIcon
         }
@@ -56,6 +55,7 @@ function Maps() {
     })
 
     const dispatch = useDispatch();
+
     const handleMarkerClick = function (index){
         dispatch(pubSelected(pubsLoaded[index]))
     }
@@ -67,7 +67,7 @@ function Maps() {
               height: "90vh",
               width: "100%",
             }}
-            center={currentPubSelected ? pubSelectedPosition : centerPosition}
+            center={centerPosition}
             zoom={6}
           >
             {/* adds map layer */}

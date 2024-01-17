@@ -20,17 +20,16 @@ function Header(){
     const propsSearch = {
         onSearch: async function (searchTerm) {
 
-            // queryResult, risultato della query
             const queryResult = await query_by_preamble(
                 "Beer_Id",
                 "name",
-                searchTerm,
+                searchTerm.charAt(0).toUpperCase() + searchTerm.slice(1).toLowerCase(),
                 "number_calls",
                 5,
             );
             setOptions(queryResult);
         },
-        // TODO: verificare options: useSelector(options)
+        options: useSelector(state => options)
     }
 
     const propsLogin = {
@@ -39,6 +38,7 @@ function Header(){
         size: "large",
         handleClick: ()=>{navigate("/login")},
     }
+
     const propsLogout = {
         icon: <AccountCircleIcon />,
         sx: { color: '#333333'},
