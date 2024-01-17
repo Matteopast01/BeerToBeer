@@ -5,7 +5,6 @@ import SearchBar from "./SearchBar";
 import { useNavigate} from "react-router-dom";
 import {AuthContext} from "../contexts/Auth";
 import {useContext} from "react";
-
 import {query_by_preamble} from "../services/persistence_manager";
 
 function Header(){
@@ -15,15 +14,13 @@ function Header(){
     const navigate = useNavigate();
 
     const propsSearch = {
-        onSearch: async function () {
-
-            const input = "p" //input da dare alla query
+        onSearch: async function (searchTerm) {
 
             // queryResult, risultato della query
             const queryResult = await query_by_preamble(
                 "Beer_Id",
                 "name",
-                input,
+                searchTerm,
                 "number_calls",
                 5,
             )

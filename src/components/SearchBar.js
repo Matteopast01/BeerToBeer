@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
+import {useNavigate} from "react-router-dom";
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 
-const SearchBar = ({ onSearch }) => {
+const SearchBar = ({onSearch}) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [isHovered, setIsHovered] = useState(false);
 
     const handleInputChange = (event, value) => {
         setSearchTerm(value);
+        onSearch(searchTerm); // provare al limite con value al posto di searchterms
     };
 
-    const handleSubmit = (event) => {
+    const navigate = useNavigate();
+
+    const handleSubmit = (event, value) => {
         event.preventDefault();
-        onSearch(searchTerm);
+        setSearchTerm(value);
+        navigate(`/search`)
     };
 
     return (

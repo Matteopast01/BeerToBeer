@@ -1,14 +1,10 @@
 import AdvancedSearch from "../components/AdvancedSearch";
 import Sorting from "../components/Sorting";
-import {CardList} from "../components/CardList";
-import * as React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import {ResultContainer} from "../components/ResultContainer";
 
 const Search = function (){
-
-
 
     return (
         <div>
@@ -19,7 +15,7 @@ const Search = function (){
                 <div style={{ marginRight: '20px' }}>
                     <AdvancedSearch/>
                     <div className="box has-text-centered mb-3">
-                        <h5 className="title is-4">Sorting</h5>
+                        <h5 className="title is-4">Sorting by</h5>
                         <Sorting/>
                     </div>
                 </div>

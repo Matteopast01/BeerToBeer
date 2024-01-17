@@ -7,15 +7,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {get_docs_by_attribute, requestBeersById} from "../services/persistence_manager";
 import {setSearchedBeers, setValuesFilter} from "../store/App";
 
-
 export const ResultContainer = function(){
-
-
 
     const [items, setItems] = useState([])
     const navigate = useNavigate()
-
-
 
     const dispatch = useDispatch()
     const values = useSelector((state)=>state.filters.values)
@@ -32,7 +27,6 @@ export const ResultContainer = function(){
     let sortingProperty = selection1.value
     let sortingWay = selection2.value
 
-
     const loadBeers = async function () {
 
         const beerList = []
@@ -44,11 +38,8 @@ export const ResultContainer = function(){
             beer["number_likes"] = queryResult[0].number_likes
             beerList.push(beer)
         }
-
-
         return beerList
     }
-
 
     useEffect(() => {
         (async  ()=> {
@@ -57,9 +48,7 @@ export const ResultContainer = function(){
             setItems(beers)
             dispatch(setSearchedBeers(beers))
         })()
-
     }, []);
-
 
     const filterBeers = function (){
 
@@ -68,12 +57,9 @@ export const ResultContainer = function(){
                 beer.ibu >= minIbv && beer.ibu <= maxIbv &&
                 beer.srm >= minSrm && beer.srm <= maxSrm;
         })
-
     }
 
-
     let filteredBeers = filterBeers()
-
 
     const sortingBeers = function (filteredBeers, sortingProperty, sortingWay) {
         const sortOrder = sortingWay === 'decreasing' ? -1 : 1;
@@ -84,7 +70,7 @@ export const ResultContainer = function(){
                 : [...filteredBeers].sort((a, b) => b.name.localeCompare(a.name));
         }
 
-        if (sortingProperty === "ibv") {
+        if (sortingProperty === "ibu") {
             return sortOrder === 1
                 ? [...filteredBeers].sort((a, b) => a.ibu - b.ibu)
                 : [...filteredBeers].sort((a, b) => b.ibu - a.ibu);
@@ -95,22 +81,14 @@ export const ResultContainer = function(){
                 ? [...filteredBeers].sort((a, b) => a.number_likes - b.number_likes)
                 : [...filteredBeers].sort((a, b) => b.number_likes - a.number_likes);
         }
-
-
         return [...filteredBeers];
     };
-
-
 
     let Beers = (sortingProperty === null || sortingProperty === "-") ? filteredBeers : sortingBeers(filteredBeers, sortingProperty, sortingWay);
 
     Beers.forEach((beer)=>{
         console.log( beer.id + " " + beer.ibu + " \n")
-
-
     })
-
-
 
     const [cardItems, cardFeature] = useCardList(Beers,
         (item)=>{return item.id},
@@ -122,12 +100,9 @@ export const ResultContainer = function(){
         (item)=>{navigate(`/product/${item.id}`)}
     )
 
-
-
     return (<div style={{ margin:"auto"}}>
 
         <CardList maxColumn={3} cardFeature={cardFeature} items={cardItems}/>
         </div>
     )
-
 }
