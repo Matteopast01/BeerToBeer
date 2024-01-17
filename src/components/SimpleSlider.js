@@ -17,9 +17,9 @@ export default function SimpleSlider({imags}) {
         return (
             <div style={{marginLeft: "0px", marginRight: "0px", width:"100%"}}>
                 <Slider style={{marginLeft: "0px", marginRight: "0px", width:"100%"}} {...settings}>
-                    {imags.map((img)=>{
+                    {imags.map((img, index)=>{
                         return (
-                            <cd>
+                            <cd key={index}>
                                 <img style={{display: "block",
                                     marginLeft: "0px",
                                     marginRight: "0px",

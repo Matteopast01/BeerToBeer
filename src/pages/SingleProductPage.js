@@ -11,6 +11,7 @@ import * as React from "react";
 import CustomIconButton from "../components/CustomIconButton";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import ProductCardDescription from "../components/ProductCardDescription";
+import Review from "../components/Review";
 
 
 function SingleProductPage(){
@@ -30,13 +31,11 @@ function SingleProductPage(){
     return (
         <div>
             <Header/>
-            <div/>
-            <div style={{marginTop: '20px'}}>
             {!!beer ?
             <CustomCard img={beer.image_url} horizontal contentStyle={{width:"75%", background: "#f5f5f5"}} maxWidth={"100%"}>
                 <ProductCardDescription beer={beer}/>
             </CustomCard> : beerId}
-            </div>
+            <Review rew={{date: 100, review: "prova testo", uid_author: "loi4gpcxzxYwuD0u0H7ZvLV5aPb2"}}/>
         </div>
     )
 

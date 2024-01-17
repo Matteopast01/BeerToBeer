@@ -11,7 +11,7 @@ export function BeerContainer(){
     //Hooks
         //Hook State
 
-    const [selection, setSelection] = useState({label: "Most Popular", value: "Most Popular"});
+    const [selection, setSelection] = useState({label: "Most Popular", value: "number_calls"});
     const [items, setItems] = useState([])
 
 
@@ -37,7 +37,7 @@ export function BeerContainer(){
 
     useEffect(() => {
         (async  ()=> {
-            setItems(await getBeers())
+            setItems(await getBeers("number_calls"))
         })()
         return ()=>{
             setItems([])
@@ -49,15 +49,15 @@ export function BeerContainer(){
     // Props definition
 
     const options = [
-        {label: "Most Popular", value: "More Popular"},
-        {label: "Most Liked", value: "Most Liked"}
+        {label: "Most Popular", value: "number_calls"},
+        {label: "Most Liked", value: "number_likes"}
     ]
 
 
     // Handle Functions
 
-    const getBeers = async function () {
-        let arrayOfId = await load_ordered_docs("Beer_Id", "number_calls", "desc", 6)
+    const getBeers = async function (order_parameter) {
+        let arrayOfId = await load_ordered_docs("Beer_Id", order_parameter, "desc", 6)
         let beers = []
         for (let obj of arrayOfId) {
             let beer = await requestBeersById(obj.id)
@@ -67,7 +67,7 @@ export function BeerContainer(){
     }
 
     const handleSelect = async (option) => {
-        setItems(await getBeers())
+        setItems(await getBeers(option.value))
         setSelection(option);
     };
 

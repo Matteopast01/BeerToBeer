@@ -1,4 +1,4 @@
-import {delete_doc, load_docs_by_attributes, store_doc} from "../services/persistence_manager";
+import {delete_doc, load_docs_by_attributes, store_doc, update_by_function} from "../services/persistence_manager";
 import CustomIconButton from "./CustomIconButton";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -27,12 +27,25 @@ export default function BeerCardDescription({beer}){
         }
         return false
     }
+
+    const updateNumberLikes = async (number_likes_to_add, beer_id)=>{
+        await update_by_function("Beer_Id", "id", beer_id, (obj)=>{
+            const { _, ...newObj } = obj;
+            return {
+                ...newObj,
+                number_likes : obj.number_likes + number_likes_to_add
+            }
+        } )
+    }
     const iconClickHandler = async (beer_id, user_id, icon) => {
         if (await isIconClicked(beer_id, user_id, icon) === false) {
             await store_doc({
                 beer_id: beer_id,
                 uid: user_id
             },icon)
+            if (icon === "Like"){
+                updateNumberLikes(1, beer_id)
+            }
         } else {
             let results = await load_docs_by_attributes(icon, {
                 beer_id: beer_id,
@@ -40,6 +53,9 @@ export default function BeerCardDescription({beer}){
             })
             for( let result of results ){
                 await delete_doc(icon, result.doc_id)
+                if (icon === "Like"){
+                    updateNumberLikes(-1, beer_id)
+                }
             }
         }
     }
