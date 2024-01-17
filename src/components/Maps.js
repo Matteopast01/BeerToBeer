@@ -6,52 +6,63 @@ import {useSelector} from "react-redux";
 
 function Maps() {
 
-
-    const centerPosition = [51.507351, -0.127758]; // London; could be changed
+    const centerPosition = [54.251186, -4.463196]; // Man Island
 
     const pubSelected = useSelector(state => state.pub.value);
-
-
-    const pubsLoaded = useSelector(state => state.loadedPubs.pubs)
+    const pubSelectedPosition = [pubSelected?.lat || null, pubSelected?.lng || null]
 
     //ogni oggetto dell'array pubsLoaded è un pub, per prendere la posizione pub.lat, pub.lng
-
-
-
-    const markerPosition = [pubSelected?.lat || centerPosition[0], pubSelected?.lng || centerPosition[1]]
+    const pubsLoaded = useSelector(state => state.loadedPubs.pubs)
 
     const customMarkerIcon = new L.Icon({
-        // TODO: could be store locally
-        iconUrl: "https://upload.wikimedia.org/wikipedia/commons/8/88/Map_marker.svg",
-        iconSize: [32, 32],
-        iconAnchor: [16, 32], // sets the anchor point
-        popupAnchor: [0, -32], // sets the popup anchor point
+        iconUrl: "https://cdn2.iconfinder.com/data/icons/shipping-delivery-color/100/objects-52-1024.png",
+        iconSize: [40, 40],
+        iconAnchor: [20, 40], // sets the anchor point
+        popupAnchor: [0, -40], // sets the popup anchor point
       });
+
+    // for the selected pub
+    const customMarkerSelectedIcon = new L.Icon({
+        iconUrl: "https://cdn3.iconfinder.com/data/icons/e-commerce-pt-2/96/map_marker_mark_destination-1024.png",
+        iconSize: [60, 60],
+        iconAnchor: [30, 60], // sets the anchor point
+        popupAnchor: [0, -60], // sets the popup anchor point
+      });
+
+    const renderedPubsLoaded = pubsLoaded.map((pub, index) => {
+        const markerPosition = [pub.lat, pub.lng];
+
+        let markerIcon = customMarkerIcon;
+
+        if (JSON.stringify(markerPosition) === JSON.stringify(pubSelectedPosition)) {
+            markerIcon = customMarkerSelectedIcon
+        }
+
+        return (
+            <Marker key={index} position={markerPosition} icon={markerIcon}>
+                <Popup>
+                    {pub.name || "Selected Pub"} <br/>
+                </Popup>
+            </Marker>
+        )
+    })
 
       return (
         <div style={{ display: "flex" }}>
           <MapContainer
             style={{
-              height: "100vh",
+              height: "90vh",
               width: "100%",
             }}
-            center={centerPosition}
-            zoom={8}
+            center={pubSelected ? pubSelectedPosition : centerPosition}
+            zoom={6}
           >
             {/* adds map layer */}
             <TileLayer
               attribution="Google Maps"
               url="https://www.google.cn/maps/vt?lyrs=m@189&gl=cn&x={x}&y={y}&z={z}"
             />
-
-            {/* if there is no pubSelected there is no marker*/}
-              {!!pubSelected ?
-                  <Marker position={!!markerPosition ? markerPosition : null} icon={customMarkerIcon}>
-                    <Popup>
-                        {pubSelected?.name || "Selected Pub"} <br /> Coordinate: {markerPosition[0]}, {markerPosition[1]}
-                    </Popup>
-                  </Marker>
-              : null}
+              {renderedPubsLoaded}
           </MapContainer>
         </div>
       );
