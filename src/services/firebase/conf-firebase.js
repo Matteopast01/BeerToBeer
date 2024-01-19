@@ -7,27 +7,26 @@ import firebase from "firebase/compat/app";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
+
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-
-    apiKey: "AIzaSyB9yib2-L2SeVaQjQfTh5GBa_b4kTkz0Lc",
-
-    authDomain: "beertobeerproject.firebaseapp.com",
-
-    projectId: "beertobeerproject",
-
-    storageBucket: "beertobeerproject.appspot.com",
-
-    messagingSenderId: "159226030615",
-
-    appId: "1:159226030615:web:a2d67d197a7a58b51b8a52",
-
-    measurementId: "G-LBV813Q2TN"
-
+    apiKey: "AIzaSyCwlz5fnSVn1Nan3K-KclpOvPxzu2BTaEI",
+    authDomain: "front-end1-6c987.firebaseapp.com",
+    projectId: "front-end1-6c987",
+    storageBucket: "front-end1-6c987.appspot.com",
+    messagingSenderId: "173402594782",
+    appId: "1:173402594782:web:6939ce69197d93161ad14f",
+    measurementId: "G-0QPC73ZS0R"
 };
 
+// Initialize Firebase
 
-firebase.initializeApp(firebaseConfig)
+
+//firebase.initializeApp(firebaseConfig)
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
