@@ -25,7 +25,7 @@ function Homepage(){
             <div>
                 <SimpleSlider imags={!!images ? images: []}/>
                 <br/>
-                <BeerContainer/>
+                {/*<BeerContainer/>*/}
             </div>
             <Footer/>
         </div>
