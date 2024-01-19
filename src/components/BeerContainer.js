@@ -68,7 +68,6 @@ export function BeerContainer(){
 
     const handleSelect = async (option) => {
         setItems(await getBeers(option.value))
-        setSelection(option);
     };
 
     // Return JSX
