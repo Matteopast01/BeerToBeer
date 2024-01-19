@@ -19,7 +19,7 @@ const SearchBar = ({onSearch, options}) => {
     };
 
     const handleSubmit = (event, value) => {
-        //event.preventDefault();
+        event.preventDefault();
         dispatch(setSearchTerm(value));
         navigate(`/search`)
     };
