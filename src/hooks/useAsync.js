@@ -7,7 +7,7 @@ const useAsync = (promise) =>{
          const r = await promise()
          setResult(r)
      })()
-     return ()=>{setResult(null)}},[])
+     },[])
 
     return result
 }

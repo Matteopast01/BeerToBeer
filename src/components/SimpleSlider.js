@@ -19,7 +19,7 @@ export default function SimpleSlider({imags}) {
                 <Slider style={{marginLeft: "0px", marginRight: "0px", width:"100%"}} {...settings}>
                     {imags.map((img, index)=>{
                         return (
-                            <cd key={index}>
+                            <div key={index}>
                                 <img style={{display: "block",
                                     marginLeft: "0px",
                                     marginRight: "0px",
@@ -29,7 +29,7 @@ export default function SimpleSlider({imags}) {
                                 <h1 style={{position: "sticky", bottom: "50%", textAlign: "center", fontSize: 30, color: "white"}}>
                                     {img.text}
                                 </h1>
-                            </cd>
+                            </div>
                         )
                     })}
                 </Slider>

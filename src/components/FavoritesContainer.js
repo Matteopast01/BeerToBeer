@@ -20,9 +20,7 @@ export function FavoritesContainer(){
             await loadFavoritesBeers()
 
         })()
-        return ()=>{
-            setItems([])
-        }
+
     }, []);
 
 

@@ -66,10 +66,7 @@ export default function BeerCardDescription({beer}){
             setLiked(!!currentUser ? await isIconClicked(beer.id, currentUser.uid, "Like") : false)
             setFavorited(!!currentUser ? await isIconClicked(beer.id, currentUser.uid, "Favorites") : false)
         })()
-        return ()=>{
-            setLiked(false)
-            setFavorited(false)
-        }
+
     }, []);
 
     return(
