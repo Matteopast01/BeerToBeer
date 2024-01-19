@@ -17,20 +17,21 @@ export function BeerContainer(){
 
         // Hook Navigate
 
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
 
 
         // Hook CardList
-
+    /*
     const [cardItems, cardFeature] = useCardList(items,
         (item)=>{return item.id},
         (item)=>{return item.image_url},
         (item)=>{
-            return <BeerCardDescription beer={item}/>
+            return ""
         },
         "default:350--8",
         (item)=>{navigate(`/product/${item.id}`)}
     )
+     */
 
 
         //Hook Effect
@@ -77,9 +78,9 @@ export function BeerContainer(){
         <div>
             <br/>
             <div style={{margin: "auto", width:"10%", display: "flex", justifyContent: "center" }}>
-                <DropDown options={options} value={selection} onChange={handleSelect} />
+                {/*<DropDown options={options} value={selection} onChange={handleSelect} />*/}
             </div>
-            <CardList maxColumn={3} cardFeature={cardFeature} items={cardItems}></CardList>
+            {/*<CardList maxColumn={3} cardFeature={cardFeature} items={cardItems}></CardList>*/}
         </div>
     )
 

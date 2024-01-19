@@ -7,6 +7,7 @@ import useAsync from "../hooks/useAsync";
 
 function Homepage(){
 
+    /*
     let images = useAsync(async  ()=> {
         const items = []
         const text =  ["Life's too short \n to drink bad beer.", "In a world of choices, choose beer.", "Save water,  drink beer."]
@@ -17,17 +18,18 @@ function Homepage(){
         }
         return items
     })
+     */
 
     return (
-        <div >
-            <Header/>
+        <div>
+            {/*<Header/>*/}
             <br/>
             <div>
-                <SimpleSlider imags={!!images ? images: []}/>
+                {/*<SimpleSlider imags={!!images ? images: []}/>*/}
                 <br/>
                 <BeerContainer/>
             </div>
-            <Footer/>
+            {/*<Footer/>*/}
         </div>
     )
 }
