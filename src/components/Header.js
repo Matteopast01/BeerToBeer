@@ -7,7 +7,7 @@ import {AuthContext} from "../contexts/Auth";
 import {useContext, useState} from "react";
 import {get_docs_by_attribute, query_by_preamble, requestBeersByName} from "../services/persistence_manager";
 import {useDispatch} from "react-redux";
-import {pubSelected, setSearchTerm} from "../store/App";
+import {pubSelected, resetPubSelected, setSearchTerm} from "../store/App";
 
 function Header({pub}){
 
@@ -93,7 +93,10 @@ function Header({pub}){
         text: "Our Pubs",
         sx: { color: '#333333'},
         size: "large",
-        handleClick: ()=>{navigate("/ourpubs")}
+        handleClick: ()=>{
+            navigate("/ourpubs");
+            dispatch(resetPubSelected(null));
+        }
     };
 
     const propsAdvancedSearch = {
