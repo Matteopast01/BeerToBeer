@@ -7,12 +7,11 @@ import CustomButton from "../components/CustomButton";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ModeCommentOutlinedIcon from '@mui/icons-material/ModeCommentOutlined';
 import Chip from '@mui/material/Chip';
-import * as React from "react";
 import CustomIconButton from "../components/CustomIconButton";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import ProductCardDescription from "../components/ProductCardDescription";
 import Review from "../components/Review";
-
+import {sliderClasses} from "@mui/material";
 
 function SingleProductPage(){
     const {beerId} = useParams()

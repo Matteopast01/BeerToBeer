@@ -267,7 +267,46 @@ export const load_ordered_docs = async function (collection_name, order_by_field
     }
 }
 
-export const query_by_preamble = async function (collection_name, attribute, search_word, order_by_field, max_item_number = null, error = ()=>{}, postprocessing = ()=>{}) {
+export const query_by_preamble = async function (collection_name, attribute, search_word, efficient=true, max_item_number = null, order_by_field = null, error = ()=>{}, postprocessing = ()=>{}){
+    if(efficient){
+        return await query_by_preamble_efficient(collection_name, attribute, search_word, max_item_number, error, postprocessing)
+    }
+    else{
+        return await query_by_preamble_no_efficient(collection_name, attribute, search_word, order_by_field, max_item_number, error, postprocessing)
+    }
+}
+
+const query_by_preamble_efficient = async function (collection_name, attribute, search_word, max_item_number = null, error = ()=>{}, postprocessing = ()=>{}) {
+    try {
+        // preprocessing
+        if (typeof (attribute) == "function") {
+            attribute = attribute()
+        }
+        let q = query(collection(db, collection_name), where(attribute, ">=", search_word), limit(max_item_number));
+
+
+        let snapshot = await getDocs(q)
+        // postprocessing
+        let result = []
+        snapshot.forEach((snap_item) => {
+            result.push({
+                ...snap_item.data(),
+                doc_id: snap_item.id
+            })
+        })
+        postprocessing(result)
+        console.log("ok")
+        return result
+    }
+    catch (e) {
+        console.log(e)
+        error()
+    }
+}
+
+
+
+const query_by_preamble_no_efficient = async function (collection_name, attribute, search_word, order_by_field, max_item_number = null, error = ()=>{}, postprocessing = ()=>{}) {
     try {
         // preprocessing
         if (typeof (attribute) == "function") {

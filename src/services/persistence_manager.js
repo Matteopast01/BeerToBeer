@@ -119,14 +119,15 @@ export const load_docs_by_attributes = async function(collection_name, attribute
  * @param collection_name name of the object collection (table)
  * @param attribute attribute value
  * @param search_word start str
+ * @param efficient if efficient == false the query require all documents to firebase
  * @param order_by_field attribute to order
  * @param max_item_number max number of results
  * @param error error function
  * @param postprocessing postprocessing function
  * @returns {Promise<*|undefined>}
  */
-export const query_by_preamble = async function (collection_name, attribute, search_word, order_by_field, max_item_number = null, error = ()=>{}, postprocessing = ()=>{}) {
-    return database.query_by_preamble(collection_name, attribute, search_word, order_by_field, max_item_number , error , postprocessing )
+export const query_by_preamble = async function (collection_name, attribute, search_word, efficient=true, max_item_number = null, order_by_field = null, error = ()=>{}, postprocessing = ()=>{}) {
+    return database.query_by_preamble(collection_name, attribute, search_word, efficient, max_item_number, order_by_field , error , postprocessing )
 }
 
 /**
