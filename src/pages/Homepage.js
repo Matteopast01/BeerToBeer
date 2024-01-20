@@ -4,19 +4,17 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import {pull_img_url} from "../services/persistence_manager";
 import useAsync from "../hooks/useAsync";
+import {get_docs_by_attribute} from "../services/persistence_manager";
 
 function Homepage(){
 
     let images = useAsync(async  ()=> {
         const items = [];
-        const images = ["slider-1.jpeg", "slider-2.jpeg", "slider-3.jpeg"];
-        const text =  [
-            "Life's too short \n to drink bad beer.",
-            "In a world of choices, choose beer.",
-            "Save water,  drink beer."];
+         const queryResult = await get_docs_by_attribute("slider_img", "Default_Images", "type")
 
-        for (let i = 0; i <text.length; i++){
-            items.push({img: await pull_img_url(images[i]), text: text[i]})
+        for (let doc of queryResult){
+            items.push({img: await pull_img_url(doc.link_img), text: doc.text})
+
         }
         return items;
     })
