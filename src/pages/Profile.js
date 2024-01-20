@@ -10,30 +10,59 @@ import {useContext, useEffect, useState} from "react";
 
 import {count_docs, get_docs_by_attribute} from "../services/persistence_manager";
 import {pull_img_url} from "../services/persistence_manager";
+import {setSearchedBeers} from "../store/App";
 const Profile = function (){
 
     const {currentUser} = useContext(AuthContext);
 
     const [currentUserImage, setCurrentUserImage] = useState(null)
+    const [username, setUsername] = useState("")
+    const [numberRew, setNumberRew] = useState(0)
 
 
-    //TODO: recuperare la foto profilo username e n. recensioni
     const provideUserInformation = async function () {
+
+        const result = {}
 
         const id_user = currentUser.uid
         let number_reviews = await count_docs(id_user,"Review","uid_author")
+
+        result["number_rew"] = number_reviews
+
+
         console.log ("number_reviews: " + number_reviews)
         const user = await get_docs_by_attribute(id_user, "User", "uid")
         const username = user[0].username
+        result["username"] = username
+
         console.log ("username" + username)
         const link_img = user[0].link_img
         console.log (link_img)
 
        const img =  !!link_img ?  await pull_img_url("link_img") : await pull_img_url("user-img.webp")
         console.log ("img"+ img)
+        result["img"] = img
 
-        setCurrentUserImage(img)
+        return result
+
+
+
+
     }
+
+
+    useEffect(() => {
+        (async  ()=> {
+
+            const result =  await provideUserInformation()
+
+            setUsername(result.username)
+            setNumberRew(result.number_rew)
+            setCurrentUserImage(result.img)
+        })()
+    }, []);
+
+
 
 
 
@@ -47,14 +76,14 @@ const Profile = function (){
                         maxWidth="300px"
                         contentWidth="100%"
                         numberContentRow="12"
-                        img="https://thumbs.dreamstime.com/z/birra-bevente-dell-uomo-avido-25256367.jpg?w=576"
+                        img={currentUserImage}
                         onClick={null}
                         children={
                             <>
                                 <div style={{ textAlign: 'center' }}>
-                                    Username
+                                    {username}
                                     <br />
-                                    Number of reviews
+                                    {numberRew}
                                 </div>
                                 <div style={{ textAlign: 'center' }}>
                                 <Popup currentImage={currentUserImage}/>

@@ -24,8 +24,6 @@ export function FavoritesContainer(){
     }, []);
 
 
-//TODO recuperare la lista di birre preferite dell'utente
-
     const loadFavoritesBeers = async function () {
 
         const queryResult = await get_docs_by_attribute(currentUser.uid, "Favorites", "uid")
@@ -33,28 +31,11 @@ export function FavoritesContainer(){
         for (let doc of queryResult){
 
             let beer = await requestBeersById(doc.beer_id)
-            console.log (beer)
-
             FavoriteBeers.push(beer[0])
-            console.log (beer[0])
-
-
         }
-
         setItems(FavoriteBeers)
     }
 
-
-  /*  const getFavorites = async function () {
-        let arrayOfId = await load_ordered_docs("Beer_Id", "number_calls", "desc", 6)
-        let beers = []
-        for (let obj of arrayOfId) {
-            let beer = await requestBeersById(obj.id)
-            beers.push(beer[0])
-        }
-        return beers
-    }
-    */
 
 
     const [cardItems, cardFeature] = useCardList(items,
