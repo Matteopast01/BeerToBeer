@@ -2,12 +2,12 @@ import CustomButton from "./CustomButton";
 import CustomIconButton from "./CustomIconButton";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SearchBar from "./SearchBar";
-import { useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {AuthContext} from "../contexts/Auth";
 import {useContext, useState} from "react";
-import {query_by_preamble} from "../services/persistence_manager";
-import {useDispatch, useSelector} from "react-redux";
-import {setSearchTerm} from "../store/App";
+import {get_docs_by_attribute, query_by_preamble, requestBeersByName} from "../services/persistence_manager";
+import {useDispatch} from "react-redux";
+import {pubSelected, resetPubSelected, setSearchTerm} from "../store/App";
 
 function Header({pub}){
 
@@ -18,6 +18,34 @@ function Header({pub}){
     const dispatch = useDispatch();
     const [options, setOptions] = useState([]);
 
+    const handleClickPub = function(){}; // TODO: da rimuovere tolti il commento multi riga sotto
+
+    /*
+    const handleClickPub = async (value) => {
+
+        const pubFromDB = await get_docs_by_attribute(value, "Pub", "name");
+        console.log("This is the pub from DB:" + JSON.stringify(pubFromDB[0]))
+
+        const {position, ...newObj} = pubFromDB[0];
+        console.log("This is the position:" + JSON.stringify(position))
+        const pub = {
+            ...newObj,
+            lat: position.latitude,
+            lng: position.longitude
+        };
+
+        dispatch(pubSelected(pub));
+        dispatch(setSearchTerm(value));
+    }
+    */
+
+    const handleClickBeer = async (value) => {
+        const beer = await requestBeersByName(value);   // it returns an array of one element
+        const id = beer[0].id;
+        dispatch(setSearchTerm(value));
+        navigate(`/product/${id}`)
+    };
+
     const propsSearch = {
         onSearch: async function (searchTerm) {
 
@@ -26,7 +54,7 @@ function Header({pub}){
                 "name",
                 searchTerm.charAt(0).toUpperCase() + searchTerm.slice(1).toLowerCase(),
                 5,
-                true,       // attention!!! with false it orders by number_calls too (many requests!)
+                true,       // attention!!! with false it orders by number_calls too (so many requests!)
                 "number_calls"
             );
             setOptions(queryResult);
@@ -38,36 +66,40 @@ function Header({pub}){
                 navigate(`/search`)
             }
         },
-        label: !!pub ? "Search pub..." : "Search beer..."
+        label: !!pub ? "Search pub..." : "Search beer...",
+        handleClick: !!pub ? handleClickPub : handleClickBeer
     };
 
     const propsLogin = {
-        icon: <AccountCircleIcon />,
+        icon: <AccountCircleIcon/>,
         sx: { color: '#333333'},
         size: "large",
         handleClick: ()=>{navigate("/login")},
-    }
+    };
 
     const propsLogout = {
-        icon: <AccountCircleIcon />,
+        icon: <AccountCircleIcon/>,
         sx: { color: '#333333'},
         size: "large",
         handleClick: ()=>{handleLogout(navigate)},
-    }
+    };
 
     const propsHome = {
         text: "Home",
         sx: { color: '#333333'},
         size: "large",
         handleClick: ()=>{navigate("/")}
-    }
+    };
 
     const propsPubs = {
         text: "Our Pubs",
         sx: { color: '#333333'},
         size: "large",
-        handleClick: ()=>{navigate("/ourpubs")}
-    }
+        handleClick: ()=>{
+            navigate("/ourpubs");
+            dispatch(resetPubSelected(null));
+        }
+    };
 
     const propsAdvancedSearch = {
         text:"Advanced Search",
@@ -75,7 +107,7 @@ function Header({pub}){
         size: "large",
         handleClick: ()=>{navigate("/search")},
         uploadButtonBoolean: true
-    }
+    };
 
     return (
         <div>
@@ -100,11 +132,11 @@ function Header({pub}){
 
             <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center'}}>
                 <div>
-                    <CustomButton {...propsHome} />
-                    <CustomButton {...propsPubs} />
-                    <CustomButton {...propsAdvancedSearch} />
+                    <CustomButton {...propsHome}/>
+                    <CustomButton {...propsPubs}/>
+                    <CustomButton {...propsAdvancedSearch}/>
                 </div>
-                <SearchBar {...propsSearch} />
+                <SearchBar {...propsSearch}/>
             </div>
         </div>
     );
