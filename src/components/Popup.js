@@ -1,4 +1,3 @@
-
 import EditIcon from "@mui/icons-material/Edit";
 import SaveAsIcon from '@mui/icons-material/SaveAs';
 import CloseIcon from '@mui/icons-material/Close';
@@ -8,22 +7,86 @@ import CustomIconButton from "./CustomIconButton";
 import ImagesUploader from "./ImagesUploader";
 import {useContext, useState} from "react";
 import {AuthContext} from "../contexts/Auth";
-import {count_docs, get_docs_by_attribute, pull_img_url} from "../services/persistence_manager";
+import {delete_img, get_docs_by_attribute, push_img, update_by_function} from "../services/persistence_manager";
 
 
-export default function Popup( {currentImage}) {
+export default function Popup( {username,changeUpdatedUsername, changeUploadedImage }) {
     const [open, setOpen] = useState(false);
 
+    const [formText, setFormText] = useState()
+
+    const [img, setImg] = useState({})
+
     const {currentUser} = useContext(AuthContext);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
-    //TODO query che mi prende l'img attuale
-   //te l'ho messa come props visto che la recupero nella componente padre, non ha senso fare la query due volte
-
-
-    const handleImageUpload = (imageList) => {
-        console.log("Nuova lista di immagini:", imageList);
+    const handleFormOpen = () => {
+        setOpen(true)
+        setFormText(username)
     };
+    const handleFormClose = () => setOpen(false);
+
+
+    const handleUsernameChange = function (event){
+        setFormText(event.target.value);
+    }
+    const handleFormEdit = async function () {
+        await update_by_function("User", "uid", currentUser.uid, (user) => {
+            user.username = formText
+            return user
+        })
+        changeUpdatedUsername(formText)
+        const id_user = currentUser.uid
+        const user = await get_docs_by_attribute(id_user, "User", "uid")
+        if (user.link_img !== ""){
+            await delete_img(user.link_img)
+        }
+
+        const image_url = username + "_profile_img"
+        await update_by_function("User", "uid", currentUser.uid, (user) => {
+            user.link_img = image_url
+            return user
+        })
+        changeUploadedImage(img)
+
+        console.log(img)
+        await push_img(image_url, img)
+        handleFormClose()
+
+    }
+
+
+
+/*
+        const getFileBlob = async (file) => {
+            return new Promise((resolve) => {
+                const reader = new FileReader();
+
+                reader.onloadend = function () {
+                    if (reader.result instanceof ArrayBuffer) {
+                        const byteArray = new Uint8Array(reader.result);
+                        const blob = new Blob([byteArray], { type: file.type });
+                        resolve(blob);
+                    }
+                };
+
+                reader.readAsArrayBuffer(file);
+            });
+        };
+
+    function mimeToExtension(mimeType) {
+        const mimeParts = mimeType.split('/');
+        if (mimeParts.length === 2) {
+            return `.${mimeParts[1]}`;
+        } else {
+            console.error('Formato tipo MIME non valido');
+            return null;
+        }
+    }
+*/
+
+    const RetrieveImage = async function (img) {
+        setImg(img)
+
+    }
 
     const propsEdit = {
         variant: "outlined",
@@ -31,7 +94,7 @@ export default function Popup( {currentImage}) {
         size: "large",
         endIcon: <EditIcon />,
         text: "Edit",
-        handleClick: handleOpen
+        handleClick: handleFormOpen
     }
 
     const propsSave = {
@@ -40,7 +103,7 @@ export default function Popup( {currentImage}) {
         size: "large",
         endIcon: <SaveAsIcon />,
         text: "Save ",
-        handleClick: handleClose
+        handleClick: handleFormEdit
     }
 
     const propsClose = {
@@ -49,7 +112,7 @@ export default function Popup( {currentImage}) {
         sx: {color: '#f30303'},
         size: "medium",
         icon: <CloseIcon />,
-        handleClick: handleClose
+        handleClick: handleFormClose
     }
 
     return (
@@ -57,7 +120,7 @@ export default function Popup( {currentImage}) {
             <CustomButton {...propsEdit}/>
             <Dialog
                 open={open}
-                onClose={handleClose}
+                onClose={handleFormClose}
                 maxWidth="sm"
                 fullWidth>
                 <DialogTitle sx={{ color: 'black' }}>
@@ -67,22 +130,24 @@ export default function Popup( {currentImage}) {
                     <CustomIconButton {...propsClose} />
                 </div>
                 <DialogContent>
-                    <DialogContentText  sx={{ textAlign: 'left', width: '100%' }}>
+                    <DialogContentText sx={{textAlign: 'left', width: '100%'}}>
                         Enter your new username here:
                     </DialogContentText>
                     <TextField
-                    autoFocus
-                    margin="dense"
+                        autoFocus
+                        margin="dense"
                     id="name"
                     label="Username"
-                    type="username"
+                    value={formText}
+                    onChange={handleUsernameChange}
+                    type="text"
                     fullWidth
                     variant="standard"
                     sx={{marginBottom: '30px' }}/>
                     <DialogContentText  sx={{ textAlign: 'left', width: '100%', marginBottom: '30px'}}>
                         Enter your new photo here:
                     </DialogContentText>
-                    <ImagesUploader onImageUpload={handleImageUpload} maxImages={1}/>
+                    <ImagesUploader retrieveImage={RetrieveImage}  maxImages={1}/>
             </DialogContent>
             <DialogActions>
                 <CustomButton {...propsSave}/>

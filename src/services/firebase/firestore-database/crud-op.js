@@ -226,7 +226,6 @@ export const load_docs_by_attributes = async function (collection_name, attribut
     // postprocessing
     let result = []
     snapshot.forEach((snap_item) => {
-        console.log(snap_item.id)
         result.push({
             ...snap_item.data(),
             doc_id: snap_item.id

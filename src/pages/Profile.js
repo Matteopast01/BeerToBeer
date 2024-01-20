@@ -1,21 +1,20 @@
 import Header from "../components/Header";
 import * as React from "react";
+import {useContext, useEffect, useState} from "react";
 import Footer from "../components/Footer";
 import FavoritesContainer from "../components/FavoritesContainer"
 import CustomCard from "../components/CustomCard";
 import Popup from "../components/Popup";
 
-import { AuthContext } from "../contexts/Auth";
-import {useContext, useEffect, useState} from "react";
+import {AuthContext} from "../contexts/Auth";
 
-import {count_docs, get_docs_by_attribute} from "../services/persistence_manager";
-import {pull_img_url} from "../services/persistence_manager";
-import {setSearchedBeers} from "../store/App";
+import {count_docs, get_docs_by_attribute, pull_img_url} from "../services/persistence_manager";
+
 const Profile = function (){
 
     const {currentUser} = useContext(AuthContext);
 
-    const [currentUserImage, setCurrentUserImage] = useState(null)
+    const [currentUserImage, setCurrentUserImage] = useState("")
     const [username, setUsername] = useState("")
     const [numberRew, setNumberRew] = useState(0)
 
@@ -25,27 +24,21 @@ const Profile = function (){
         const result = {}
 
         const id_user = currentUser.uid
-        let number_reviews = await count_docs(id_user,"Review","uid_author")
+        result["number_rew"] = await count_docs(id_user, "Review", "uid_author")
 
-        result["number_rew"] = number_reviews
-
-
-        console.log ("number_reviews: " + number_reviews)
         const user = await get_docs_by_attribute(id_user, "User", "uid")
         const defaultImage = await get_docs_by_attribute("default_user_img", "Default_Images", "type")
-        console.log(defaultImage)
-        const username = user[0].username
-        result["username"] = username
-
-        console.log ("username" + username)
+        result["username"] = user[0].username
         const link_img = user[0].link_img
-        console.log (link_img)
 
-       const img =  !!link_img ?  await pull_img_url("link_img") : await pull_img_url(defaultImage[0].link_img)
-        console.log ("img"+ img)
-        result["img"] = img
 
+        result["img"] = !!link_img ? await pull_img_url(link_img) : await pull_img_url(defaultImage[0].link_img)
+        console.log(result["img"])
         return result
+    }
+
+    const changeUploadedImage = function (image){
+        setCurrentUserImage(image)
     }
 
 
@@ -60,9 +53,9 @@ const Profile = function (){
         })()
     }, []);
 
-
-
-
+    const changeUpdatedUsername = function ( updatedUsername){
+        setUsername(updatedUsername)
+    }
 
     return (
         <div>
@@ -74,17 +67,18 @@ const Profile = function (){
                         maxWidth="300px"
                         contentWidth="100%"
                         numberContentRow="12"
-                        img={currentUserImage}
+                        img={typeof currentUserImage === "string" ? currentUserImage : URL.createObjectURL(currentUserImage)}
                         onClick={null}
                         children={
                             <>
-                                <div style={{ textAlign: 'center' }}>
-                                    {username}
-                                    <br />
-                                    {numberRew}
+                                <div style={{textAlign: 'center'}}>
+                                    <b> Username: </b> {username}
+                                    <br/>
+                                    <b> Number Reviews: </b> {numberRew}
+                                    <br/>
                                 </div>
                                 <div style={{ textAlign: 'center' }}>
-                                <Popup currentImage={currentUserImage}/>
+                                <Popup  username={username} changeUploadedImage={ changeUploadedImage} changeUpdatedUsername = {changeUpdatedUsername}/>
                                 </div>
                             </>
                         }/>

@@ -24,16 +24,12 @@ const AdminPage = () => {
 
     }
 
-    const handleImageUpload = (imageList) => {
-        console.log("Nuova lista di immagini:", imageList);
-    };
-
     return (
         <div>
             <Header />
-            <ImagesUploader onImageUpload={handleImageUpload} maxImages={3} />
+            <ImagesUploader type = {"slider_img"} maxImages={3} />
             <br />
-            <ImagesUploader onImageUpload={handleImageUpload} maxImages={1} />
+            <ImagesUploader type = {"default_user_img"} maxImages={1} />
             <Footer />
         </div>
     );
