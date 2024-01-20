@@ -8,8 +8,8 @@ export const reviewSlices = createSlice(
             reviews : []
         },
         reducers: {
-            updateReviews: async (state, action) =>{
-                state.reviews = await get_docs_by_attribute( action.payload, "Review","beer_id",3, "date", "desc")
+            updateReviews: (state, action) =>{
+                state.reviews = action.payload
             }
         }
     }

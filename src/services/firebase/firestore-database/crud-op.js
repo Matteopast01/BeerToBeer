@@ -196,7 +196,10 @@ export const get_docs_by_attribute = async function(attribute, collection_name, 
         // postprocessing
         let result = []
         snapshot.forEach((snap_item) => {
-            result.push(snap_item.data())
+            result.push({
+                ...snap_item.data(),
+                doc_id: snap_item.id
+            })
         })
         postprocessing(result)
         return result
