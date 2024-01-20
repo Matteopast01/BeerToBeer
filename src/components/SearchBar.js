@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import {useNavigate} from "react-router-dom";
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 
-const SearchBar = ({onSearch, handleSubmit, options, label}) => {
+const SearchBar = ({onSearch, handleSubmit, handleClick, options, label}) => {
 
-    const navigate = useNavigate();
     const [isHovered, setIsHovered] = useState(false);
     const [searchTerm, setSearchTerm] = useState("")
 
@@ -25,6 +23,7 @@ const SearchBar = ({onSearch, handleSubmit, options, label}) => {
                 options={renderedOptions}
                 value={searchTerm}
                 onInputChange={handleInputChange}
+                onChange={(event, value)=> handleClick(value)}
                 renderInput={(params) => (
                     <TextField
                         {...params}
