@@ -8,7 +8,7 @@ function OurPubs (){
     return (
         <div>
             <div>
-                <Header/>
+                <Header pub/>
             </div>
 
             <div style={{display: "flex", minHeight: "73vh", marginTop: "5px"}}>

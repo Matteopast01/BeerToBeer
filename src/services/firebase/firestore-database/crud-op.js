@@ -267,7 +267,7 @@ export const load_ordered_docs = async function (collection_name, order_by_field
     }
 }
 
-export const query_by_preamble = async function (collection_name, attribute, search_word, efficient=true, max_item_number = null, order_by_field = null, error = ()=>{}, postprocessing = ()=>{}){
+export const query_by_preamble = async function (collection_name, attribute, search_word, max_item_number = null, efficient=true, order_by_field = null, error = ()=>{}, postprocessing = ()=>{}){
     if(efficient){
         return await query_by_preamble_efficient(collection_name, attribute, search_word, max_item_number, error, postprocessing)
     }

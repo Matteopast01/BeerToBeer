@@ -14,10 +14,9 @@ function Homepage(){
 
         for (let doc of queryResult){
             items.push({img: await pull_img_url(doc.link_img), text: doc.text})
-
         }
         return items;
-    })
+    });
 
     return (
         <div>

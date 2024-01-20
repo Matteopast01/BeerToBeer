@@ -126,8 +126,10 @@ export const load_docs_by_attributes = async function(collection_name, attribute
  * @param postprocessing postprocessing function
  * @returns {Promise<*|undefined>}
  */
-export const query_by_preamble = async function (collection_name, attribute, search_word, efficient=true, max_item_number = null, order_by_field = null, error = ()=>{}, postprocessing = ()=>{}) {
-    return database.query_by_preamble(collection_name, attribute, search_word, efficient, max_item_number, order_by_field , error , postprocessing )
+export const query_by_preamble = async function (collection_name, attribute, search_word, max_item_number = null,
+                                                 efficient=true, order_by_field = null, error = ()=>{},
+                                                 postprocessing = ()=>{}) {
+    return database.query_by_preamble(collection_name, attribute, search_word, max_item_number, efficient, order_by_field , error , postprocessing )
 }
 
 /**

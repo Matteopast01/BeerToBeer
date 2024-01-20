@@ -6,32 +6,41 @@ import { useNavigate} from "react-router-dom";
 import {AuthContext} from "../contexts/Auth";
 import {useContext, useState} from "react";
 import {query_by_preamble} from "../services/persistence_manager";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {setSearchTerm} from "../store/App";
 
-function Header(){
+function Header({pub}){
 
     const {currentUser} = useContext(AuthContext);
     const {handleLogout} = useContext(AuthContext);
 
     const navigate = useNavigate();
-    // TODO: una volta capito se funziona passarlo allo store
+    const dispatch = useDispatch();
     const [options, setOptions] = useState([]);
 
     const propsSearch = {
         onSearch: async function (searchTerm) {
 
             const queryResult = await query_by_preamble(
-                "Beer_Id",
+                !!pub ? "Pub" : "Beer_Id",
                 "name",
                 searchTerm.charAt(0).toUpperCase() + searchTerm.slice(1).toLowerCase(),
-                "number_calls",
                 5,
+                true,       // attention!!! with false it orders by number_calls too (many requests!)
+                "number_calls"
             );
             setOptions(queryResult);
             console.log(queryResult +" prova")
         },
-        options: useSelector(state => options)
-    }
+        options: useSelector(state => options),
+        handleSubmit: (event, value) => {
+            dispatch(setSearchTerm(value));
+            if (!pub) {
+                navigate(`/search`)
+            }
+        },
+        label: !!pub ? "Search pub..." : "Search beer..."
+    };
 
     const propsLogin = {
         icon: <AccountCircleIcon />,
