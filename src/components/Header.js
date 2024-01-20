@@ -30,9 +30,8 @@ function Header({pub}){
                 "number_calls"
             );
             setOptions(queryResult);
-            console.log(queryResult +" prova")
         },
-        options: useSelector(state => options),
+        options: options,
         handleSubmit: (event, value) => {
             dispatch(setSearchTerm(value));
             if (!pub) {
