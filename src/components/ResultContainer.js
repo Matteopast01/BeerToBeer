@@ -37,6 +37,7 @@ export const ResultContainer = function(){
             const queryResult = await get_docs_by_attribute(requestResult[0].id,"Beer_Id", "id")
             beer["number_likes"] = queryResult[0].number_likes
             beerList.push(beer)
+            console.log("ciao")
         }
         return beerList
     }

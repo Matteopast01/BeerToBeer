@@ -15,7 +15,7 @@ function Header(){
 
     const navigate = useNavigate();
     // TODO: una volta capito se funziona passarlo allo store
-    const [options, setOptions] = useState();
+    const [options, setOptions] = useState([]);
 
     const propsSearch = {
         onSearch: async function (searchTerm) {
@@ -28,6 +28,7 @@ function Header(){
                 5,
             );
             setOptions(queryResult);
+            console.log(queryResult +" prova")
         },
         options: useSelector(state => options)
     }

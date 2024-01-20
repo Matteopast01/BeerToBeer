@@ -25,17 +25,17 @@ const SearchBar = ({onSearch, options}) => {
     };
 
     // TODO: da verificare
-    /*
+
     const renderedOptions = options.map((option) => {
         return option.name;
     });
-    */
+
 
     return (
         <form onSubmit={handleSubmit} className="search-container">
             <Autocomplete
                 freeSolo
-                options={[]}  //TODO: metterci {renderedOptions}
+                options={renderedOptions}  //TODO: metterci {renderedOptions}
                 value={searchTerm}
                 onInputChange={handleInputChange}
                 renderInput={(params) => (
