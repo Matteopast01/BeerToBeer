@@ -7,18 +7,19 @@ import useAsync from "../hooks/useAsync";
 
 function Homepage(){
 
-
     let images = useAsync(async  ()=> {
-        const items = []
-        const text =  ["Life's too short \n to drink bad beer.", "In a world of choices, choose beer.", "Save water,  drink beer."]
-        const images = ["slider-1.jpeg", "slider-2.jpeg", "slider-3.jpeg"]
+        const items = [];
+        const images = ["slider-1.jpeg", "slider-2.jpeg", "slider-3.jpeg"];
+        const text =  [
+            "Life's too short \n to drink bad beer.",
+            "In a world of choices, choose beer.",
+            "Save water,  drink beer."];
 
-        for(let i = 0; i <text.length; i++ ){
+        for (let i = 0; i <text.length; i++){
             items.push({img: await pull_img_url(images[i]), text: text[i]})
         }
-        return items
+        return items;
     })
-
 
     return (
         <div>
