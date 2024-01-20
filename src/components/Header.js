@@ -18,8 +18,9 @@ function Header({pub}){
     const dispatch = useDispatch();
     const [options, setOptions] = useState([]);
 
-    // const handleClickPub = function(){}; // TODO: da rimuovere tolti il commento multi riga sotto
+    const handleClickPub = function(){}; // TODO: da rimuovere tolti il commento multi riga sotto
 
+    /*
     const handleClickPub = async (value) => {
 
         const pubFromDB = await get_docs_by_attribute(value, "Pub", "name");
@@ -36,6 +37,7 @@ function Header({pub}){
         dispatch(pubSelected(pub));
         dispatch(setSearchTerm(value));
     }
+    */
 
     const handleClickBeer = async (value) => {
         const beer = await requestBeersByName(value);   // it returns an array of one element
