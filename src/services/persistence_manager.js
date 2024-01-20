@@ -62,10 +62,11 @@ export const update_doc = async function (obj, collection_name, id, error = ()=>
  * @param attribute_name atribute for the where clouse
  * @param attribute attribute value
  * @param update_function function with witch update the object
+ * @param postprocessing
  * @returns {Promise<void>}
  */
-export const update_by_function =  async function (collection_name,attribute_name, attribute, update_function ){
-    return database.update_by_function(collection_name,attribute_name, attribute, update_function)
+export const update_by_function =  async function (collection_name,attribute_name, attribute, update_function, postprocessing= ()=>{} ){
+    return database.update_by_function(collection_name,attribute_name, attribute, update_function, postprocessing)
 }
 
 /**

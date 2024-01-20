@@ -113,7 +113,7 @@ export const update_doc = async function (obj, collection_name, id, error = ()=>
     }
 }
 
-export const update_by_function =  async function (collection_name,attribute_name, attribute, update_function ){
+export const update_by_function =  async function (collection_name,attribute_name, attribute, update_function, postprocessing= (item)=>{} ){
     try{
         if (typeof (attribute) == "function") {
             attribute = attribute()
@@ -125,6 +125,9 @@ export const update_by_function =  async function (collection_name,attribute_nam
         snapshot.forEach((snap_item) => {
             update_doc( update_function(snap_item.data()), collection_name, snap_item.id)
         })
+        postprocessing()
+
+
         console.log("ok")
     }
     catch(e){

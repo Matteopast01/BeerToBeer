@@ -4,6 +4,7 @@ import Review from "./Review";
 import {updateReviews} from "../store/App";
 import {get_docs_by_attribute} from "../services/persistence_manager";
 import Typography from "@mui/material/Typography";
+import {Divider} from "@mui/material";
 
 
 const ProductReviewContainer = function({beerId}){
@@ -20,7 +21,6 @@ const ProductReviewContainer = function({beerId}){
     // Utility
     const rews = []
     const rew_answers = {}
-    console.log(reviews)
     reviews.map((item)=>{
         if( item.id_replied_review === 0){
             rews.push(item)
@@ -34,18 +34,21 @@ const ProductReviewContainer = function({beerId}){
     })
 
     // Render
-    const rendered_rews = rews.map((rew, index)=>{
-        return (
-            <div key={index}>
-                <Review rew={rew} answers={rew_answers[rew.doc_id]}/>
-            </div>
-        )
-    })
-    console.log(reviews.length)
+    const render_rews = (rews)=>{
+        return rews.map((rew, index)=>{
+            return (
+                <div>
+                    <Review rew={rew} answers={rew_answers[rew.doc_id]}/>
+                    <Divider/>
+                </div>
+            )
+        })
+    }
+    console.log(reviews)
 
     return (
         <div style={{overflow: "auto", maxHeight: "25%"}}>
-            {!(rendered_rews.length === 0) ? rendered_rews:
+            {!(reviews.length === 0) ? render_rews(rews):
                 <div style={{marginTop: "50px", marginBottom: "50px"}}>
                     <Typography sx={{textAlign: "center"}} fontSize={25}> {"Non ci Sono Recensioni"} </Typography>
                 </div>}

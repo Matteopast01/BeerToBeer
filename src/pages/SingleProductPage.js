@@ -1,7 +1,12 @@
 import { useParams } from 'react-router-dom';
 import CustomCard from "../components/CustomCard";
 import useAsync from "../hooks/useAsync";
-import {get_docs_by_attribute, requestBeersById, store_doc} from "../services/persistence_manager";
+import {
+    get_docs_by_attribute,
+    load_docs_by_attributes,
+    requestBeersById,
+    store_doc
+} from "../services/persistence_manager";
 import Header from "../components/Header";
 import CustomButton from "../components/CustomButton";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -27,8 +32,20 @@ function SingleProductPage(){
     const {beerId} = useParams()
     const beer = useAsync(
         async ()=>{
-            const b = await requestBeersById(beerId)
-            return b[0]
+            const beer_api = await requestBeersById(beerId)
+            const beer_firebase = await get_docs_by_attribute(Number(beerId),"Beer_Id", "id")
+            console.log(beer_firebase)
+            console.log(
+                {
+                    number_likes : beer_firebase[0].number_likes,
+                    ...beer_api[0],
+
+                }
+            )
+            return {
+                ...beer_api[0],
+                ...beer_firebase[0]
+            }
         }
     )
     const {currentUser} = useContext(AuthContext);
@@ -67,7 +84,7 @@ function SingleProductPage(){
                 <ProductCardDescription beer={beer}/>
             </CustomCard> : ""}
             <ProductReviewContainer beerId={beerId}/>
-            <InputRew placeholder={"type your review..."} onSubmit={handleInputRewSubmit}></InputRew>
+            <InputRew style={{marginTop: "1%", marginLeft: "10%", marginRight:"10%"}} placeholder={"type your review..."} onSubmit={handleInputRewSubmit}></InputRew>
             <Footer/>
         </div>
     )

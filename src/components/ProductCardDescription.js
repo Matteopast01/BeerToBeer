@@ -4,7 +4,7 @@ import StarBorderIcon from "@mui/icons-material/StarBorder";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import * as React from "react";
 import {useContext, useEffect, useState} from "react";
-import {delete_doc, load_docs_by_attributes, store_doc} from "../services/persistence_manager";
+import {delete_doc, load_docs_by_attributes, store_doc, update_by_function} from "../services/persistence_manager";
 import {AuthContext} from "../contexts/Auth";
 import StarIcon from "@mui/icons-material/Star";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -14,6 +14,7 @@ function ProductCardDescription({beer}){
     const {currentUser} = useContext(AuthContext);
     const [liked, setLiked] = useState(false)
     const [favorited, setFavorited] = useState(false)
+    const [numberLikes, setNumberLikes] = useState(beer.number_likes)
     const isIconClicked = async (beer_id, user_id, icon) => {
         let results = await load_docs_by_attributes(icon, {
             beer_id: beer_id,
@@ -24,12 +25,26 @@ function ProductCardDescription({beer}){
         }
         return false
     }
+    const updateNumberLikes = async (number_likes_to_add, beer_id)=>{
+        await update_by_function("Beer_Id", "id", beer_id, (obj)=>{
+            const { _, ...newObj } = obj;
+            return {
+                ...newObj,
+                number_likes : obj.number_likes + number_likes_to_add
+            }
+        }, ()=> {
+            setNumberLikes(numberLikes + number_likes_to_add )
+        } )
+    }
     const iconClickHandler = async (beer_id, user_id, icon) => {
         if (await isIconClicked(beer_id, user_id, icon) === false) {
             await store_doc({
                 beer_id: beer_id,
                 uid: user_id
             },icon)
+            if (icon === "Like"){
+                updateNumberLikes(1, beer_id)
+            }
         } else {
             let results = await load_docs_by_attributes(icon, {
                 beer_id: beer_id,
@@ -37,6 +52,9 @@ function ProductCardDescription({beer}){
             })
             for( let result of results ){
                 await delete_doc(icon, result.doc_id)
+                if (icon === "Like"){
+                    updateNumberLikes(-1, beer_id)
+                }
             }
         }
     }
@@ -101,7 +119,7 @@ function ProductCardDescription({beer}){
                                   }}/>
                     <Divider orientation="vertical"  flexItem />
                     <CustomButton sx={{ color: "#f30303" }}
-                                  text={"15 like"}
+                                  text={numberLikes+" like"}
                                   startIcon={
                                       !liked ? <FavoriteBorderIcon/>: <FavoriteIcon/>
                                  }

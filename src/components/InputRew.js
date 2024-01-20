@@ -3,9 +3,10 @@ import CustomIconButton from "./CustomIconButton";
 import ArrowUpwardRoundedIcon from '@mui/icons-material/ArrowUpwardRounded';
 import CustomButton from "./CustomButton";
 import  {grey}  from '@mui/material/colors';
+import {TextareaAutosize} from "@mui/material";
 
 
-const InputRew = function({placeholder, onChange, onSubmit}){
+const InputRew = function({placeholder, onChange, onSubmit, style}){
 
     // Hook
     const [text, setText] = useState("")
@@ -41,7 +42,6 @@ const InputRew = function({placeholder, onChange, onSubmit}){
 
     const textAreaStyle = {
         width: "100%",
-        minHeight: "60px",
         padding: "10px",
         resize: "none"
     }
@@ -51,9 +51,9 @@ const InputRew = function({placeholder, onChange, onSubmit}){
 
 
     return (
-        <div style={{marginLeft: "10%", marginRight:"10%"}}>
+        <div style={style}>
             <div>
-                <textarea style={textAreaStyle} placeholder={placeholder} onChange={handleChange} value={text}></textarea>
+                <TextareaAutosize style={textAreaStyle} placeholder={placeholder} onChange={handleChange} value={text} minRows={2}></TextareaAutosize>
                 <CustomButton sx={submitButtonStyle} variant="contained" text={"Submit"} handleClick={handleSubmit}></CustomButton>
             </div>
         </div>
