@@ -35,7 +35,7 @@ function SingleProductPage(){
             <CustomCard img={beer.image_url} horizontal contentStyle={{width:"75%", background: "#f5f5f5"}} maxWidth={"100%"}>
                 <ProductCardDescription beer={beer}/>
             </CustomCard> : beerId}
-            <Review rew={{date: 100, review: "prova testo", uid_author: "Kj9O9UHugebKEEu6YqWw7O035Bq1"}}/>
+            <Review rew={{date: 100, review: "prova testo", uid_author: "loi4gpcxzxYwuD0u0H7ZvLV5aPb2"}}/>
         </div>
     )
 
