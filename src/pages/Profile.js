@@ -32,6 +32,8 @@ const Profile = function (){
 
         console.log ("number_reviews: " + number_reviews)
         const user = await get_docs_by_attribute(id_user, "User", "uid")
+        const defaultImage = await get_docs_by_attribute("default_user_img", "Default_Images", "type")
+        console.log(defaultImage)
         const username = user[0].username
         result["username"] = username
 
@@ -39,15 +41,11 @@ const Profile = function (){
         const link_img = user[0].link_img
         console.log (link_img)
 
-       const img =  !!link_img ?  await pull_img_url("link_img") : await pull_img_url("user-img.webp")
+       const img =  !!link_img ?  await pull_img_url("link_img") : await pull_img_url(defaultImage[0].link_img)
         console.log ("img"+ img)
         result["img"] = img
 
         return result
-
-
-
-
     }
 
 
