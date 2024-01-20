@@ -33,12 +33,23 @@ const Profile = function (){
 
 
         result["img"] = !!link_img ? await pull_img_url(link_img) : await pull_img_url(defaultImage[0].link_img)
-        console.log(result["img"])
         return result
     }
 
-    const changeUploadedImage = function (image){
-        setCurrentUserImage(image)
+    const changeUploadedImage = async function (image) {
+
+        if (image === null) {
+            const defaultImage = await get_docs_by_attribute("default_user_img", "Default_Images", "type")
+            const defaultImg =  await pull_img_url(defaultImage[0].link_img)
+            console.log (defaultImg)
+            setCurrentUserImage(defaultImg)
+
+        }
+        else {
+            setCurrentUserImage(image)
+            console.log (image)
+
+        }
     }
 
 

@@ -8,6 +8,7 @@ import ImagesUploader from "./ImagesUploader";
 import {useContext, useState} from "react";
 import {AuthContext} from "../contexts/Auth";
 import {delete_img, get_docs_by_attribute, push_img, update_by_function} from "../services/persistence_manager";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 
 export default function Popup( {username,changeUpdatedUsername, changeUploadedImage }) {
@@ -22,7 +23,8 @@ export default function Popup( {username,changeUpdatedUsername, changeUploadedIm
         setOpen(true)
         setFormText(username)
     };
-    const handleFormClose = () => setOpen(false);
+    const handleFormClose = () =>
+        setOpen(false);
 
 
     const handleUsernameChange = function (event){
@@ -36,7 +38,8 @@ export default function Popup( {username,changeUpdatedUsername, changeUploadedIm
         changeUpdatedUsername(formText)
         const id_user = currentUser.uid
         const user = await get_docs_by_attribute(id_user, "User", "uid")
-        if (user.link_img !== ""){
+        if (user.link_img != ""){
+            console.log("ti elimino")
             await delete_img(user.link_img)
         }
 
@@ -47,41 +50,28 @@ export default function Popup( {username,changeUpdatedUsername, changeUploadedIm
         })
         changeUploadedImage(img)
 
-        console.log(img)
         await push_img(image_url, img)
         handleFormClose()
 
     }
 
-
-
-/*
-        const getFileBlob = async (file) => {
-            return new Promise((resolve) => {
-                const reader = new FileReader();
-
-                reader.onloadend = function () {
-                    if (reader.result instanceof ArrayBuffer) {
-                        const byteArray = new Uint8Array(reader.result);
-                        const blob = new Blob([byteArray], { type: file.type });
-                        resolve(blob);
-                    }
-                };
-
-                reader.readAsArrayBuffer(file);
-            });
-        };
-
-    function mimeToExtension(mimeType) {
-        const mimeParts = mimeType.split('/');
-        if (mimeParts.length === 2) {
-            return `.${mimeParts[1]}`;
-        } else {
-            console.error('Formato tipo MIME non valido');
-            return null;
+    const removeCurrentImage = async function () {
+        const id_user = currentUser.uid
+        const user = await get_docs_by_attribute(id_user, "User", "uid")
+        if (user.link_img != "") {
+            console.log("ti elimino")
+            await delete_img(user.link_img)
         }
+        await update_by_function("User", "uid", currentUser.uid, (user) => {
+            user.link_img = ""
+            return user
+        })
+        changeUploadedImage(null)
+
+
+
     }
-*/
+
 
     const RetrieveImage = async function (img) {
         setImg(img)
@@ -95,6 +85,15 @@ export default function Popup( {username,changeUpdatedUsername, changeUploadedIm
         endIcon: <EditIcon />,
         text: "Edit",
         handleClick: handleFormOpen
+    }
+
+    const propsRemoveCurrentImage = {
+        variant: "outlined",
+        sx: { color: '#333333'},
+        size: "large",
+        endIcon: <DeleteIcon />,
+        text: "Delete Image",
+        handleClick: removeCurrentImage
     }
 
     const propsSave = {
@@ -117,7 +116,12 @@ export default function Popup( {username,changeUpdatedUsername, changeUploadedIm
 
     return (
         <div>
-            <CustomButton {...propsEdit}/>
+            <div>
+            <CustomButton {...propsRemoveCurrentImage} style={{ display: 'block', marginBottom: '10px' }}/>
+            </div>
+            <div>
+            <CustomButton {...propsEdit} style={{ display: 'block' }}/>
+            </div>
             <Dialog
                 open={open}
                 onClose={handleFormClose}
@@ -147,7 +151,7 @@ export default function Popup( {username,changeUpdatedUsername, changeUploadedIm
                     <DialogContentText  sx={{ textAlign: 'left', width: '100%', marginBottom: '30px'}}>
                         Enter your new photo here:
                     </DialogContentText>
-                    <ImagesUploader retrieveImage={RetrieveImage}  maxImages={1}/>
+                    <ImagesUploader props = {{type : "default", uploadFunction: RetrieveImage}} maxImages={1}/>
             </DialogContent>
             <DialogActions>
                 <CustomButton {...propsSave}/>
