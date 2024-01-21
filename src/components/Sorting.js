@@ -12,7 +12,6 @@ function Sorting() {
         {label: "-", value: "-"},
         {label: "Alphabetical", value: "alphabetical"},
         {label: "IBU", value: "ibu"},
-        {label: "Number of like", value: "number of like"},
     ];
     const options2 = [
         { label: "Increasing", value: "increasing" },

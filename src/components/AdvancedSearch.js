@@ -46,7 +46,7 @@ function AdvancedSearch( ) {
     const filters = [
         {name: "ABV", description:"Alcohol by volume (ABV) is a metric used to determine the alcohol content in an alcoholic beverage.", min:filtersValues[0].minAbv, max:filtersValues[0].maxAbv},
         {name: "IBU", description:"International Bitterness Unit (IBU): Measures beer bitterness from hops.",  min:filtersValues[1].minIbv, max:filtersValues[1].maxIbv},
-        {name: "SMR", description:"Standard Reference Method (SRM): Quantifies beer color by measuring light absorbance.",  min:filtersValues[2].minSrm, max:filtersValues[2].maxSrm}
+        {name: "SRM", description:"Standard Reference Method (SRM): Quantifies beer color by measuring light absorbance.",  min:filtersValues[2].minSrm, max:filtersValues[2].maxSrm}
     ];
 
     const dispatch = useDispatch();
