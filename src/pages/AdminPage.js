@@ -27,7 +27,7 @@ const AdminPage = () => {
 
     return (
         <div>
-            <Header />
+            <Header disableSearchBar/>
             <ImagesUploader props = {{type : "slider_img", uploadFunction: updateSliderImages}} maxImages={3} />
             <br />
             <ImagesUploader props = {{type :"default_user_img", uploadFunction : updateDefaultUserImage }} maxImages={1} />

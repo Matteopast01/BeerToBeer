@@ -9,7 +9,8 @@ import {get_docs_by_attribute, query_by_preamble, requestBeersByName} from "../s
 import {useDispatch} from "react-redux";
 import {pubSelected, resetPubSelected, setSearchTerm} from "../store/App";
 
-function Header({pub}){
+// disableSearchBar passed as prop disables the searchBar component
+function Header({pub, disableSearchBar}){
 
     const {currentUser} = useContext(AuthContext);
     const {handleLogout} = useContext(AuthContext);
@@ -121,11 +122,15 @@ function Header({pub}){
 
                 <div style={{width: '70px'}}>
                     <div style={{display: "flex", alignItems: "center", flexDirection: "column"}}>
-                        {currentUser ? <CustomIconButton {...propsLogout}/> : <CustomIconButton {...propsLogin}/>}
-                        <div>
+                        {currentUser ?
+                            <CustomIconButton {...propsLogout}/> :
+                            <CustomIconButton {...propsLogin}/>}
+
+
+                        {/*<div>
                             {currentUser ? <CustomButton text={"Logout"} size={"small"} sx={{color: '#333333'}}/>:
                                 <CustomButton text={"Login"} size={"small"} sx={{color: '#333333'}}/>}
-                        </div>
+                        </div>*/}
                     </div>
                 </div>
             </div>
@@ -136,7 +141,7 @@ function Header({pub}){
                     <CustomButton {...propsPubs}/>
                     <CustomButton {...propsAdvancedSearch}/>
                 </div>
-                <SearchBar {...propsSearch}/>
+                {!!disableSearchBar ? <div></div> : <SearchBar {...propsSearch}/>}
             </div>
         </div>
     );
