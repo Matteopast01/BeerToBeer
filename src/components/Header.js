@@ -45,6 +45,7 @@ function Header({pub, disableSearchBar}){
         const id = beer[0].id;
         dispatch(setSearchTerm(value));
         navigate(`/product/${id}`)
+        navigate(0)
     };
 
     const propsSearch = {
