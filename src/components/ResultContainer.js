@@ -12,7 +12,6 @@ export const ResultContainer = function(){
     const navigate = useNavigate()
     const {searchTerm} = useParams()
     const dispatch = useDispatch()
-    console.log(searchTerm)
 
     const values = useSelector((state)=>state.filters.values)
     const selection1 = useSelector((state) => state.sorting.selection1)

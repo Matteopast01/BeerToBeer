@@ -1,53 +1,66 @@
-import {load_ordered_docs, pull_img_url} from "../services/persistence_manager";
-import {useDispatch} from "react-redux";
+import {load_ordered_docs, pull_img_url, query_by_preamble} from "../services/persistence_manager";
+import {useDispatch, useSelector} from "react-redux";
 import {addPub, pubSelected} from "../store/App";
-import {useEffect, useState} from "react";
+import * as React from "react";
+import {useEffect} from "react";
 import useCardList from "../hooks/useCardList";
 import {CardList} from "./CardList";
-import * as React from "react";
 
 function PubContainer(){
-    const [pubs, setPubs] = useState([])
+
     const dispatch = useDispatch()
+
+    const searchedPub = useSelector((state)=> state.searchTerm.value)
 
     useEffect(() => {
         (async  ()=> {
             const pubsObjects = await load_pubs()
+
             const emptyArray = []
              for (let pub of pubsObjects){
                  emptyArray.push({...pub,
                      img: await pull_img_url(pub.link_img)})
           }
-             setPubs(emptyArray)
+             console.log(emptyArray)
+            dispatch(addPub(emptyArray))
         })()
 
-    }, []);
+    }, [searchedPub]);
 
     const load_pubs = async function (){
-        const pubs =  await load_ordered_docs("Pub", "name")
-        pubs.forEach((pub)=>{
-            const { position, ...newObj } = pub;
-            const serializablePub = {
+        const pubs = searchedPub === ""
+            ? await load_ordered_docs("Pub", "name","asc", 9)
+            : await query_by_preamble(
+                "Pub",
+                "name",
+                searchedPub.charAt(0).toUpperCase() + searchedPub.slice(1).toLowerCase(),
+                200,
+                true,
+                "number_calls"
+            );
+
+        pubs.forEach((pub,index) => {
+            const {position, ...newObj} = pub;
+            pubs[index] = {
                 ...newObj,
                 lat: pub.position._lat,
                 lng: pub.position._long
+            };
+
             }
-            dispatch(addPub(serializablePub))}
         )
         return pubs
     }
+
+
+    const pubs = useSelector(state => state.loadedPubs.pubs)
+
 
     const handleOnclick = function (item){
 
         const id = item.id
         const pub = pubs.find((pub) => pub.id === id);
-        const { position, ...newObj } = pub;
-        const serializablePub = {
-            ...newObj,
-            lat: pub.position._lat,
-            lng: pub.position._long
-        }
-        dispatch(pubSelected(serializablePub))
+        dispatch(pubSelected(pub))
     }
 
     const [cardItems, cardFeature] = useCardList(pubs,

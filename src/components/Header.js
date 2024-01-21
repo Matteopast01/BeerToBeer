@@ -19,26 +19,22 @@ function Header({pub, disableSearchBar}){
     const dispatch = useDispatch();
     const [options, setOptions] = useState([]);
 
-    const handleClickPub = function(){}; // TODO: da rimuovere tolti il commento multi riga sotto
-
-    /*
     const handleClickPub = async (value) => {
+        console.log(value)
+        if (value != null) {
+            const pubFromDB = await get_docs_by_attribute(value, "Pub", "name");
+            const {position, ...newObj} = pubFromDB[0];
 
-        const pubFromDB = await get_docs_by_attribute(value, "Pub", "name");
-        console.log("This is the pub from DB:" + JSON.stringify(pubFromDB[0]))
+            const pub = {
+                ...newObj,
+                lat: position.latitude,
+                lng: position.longitude
+            };
 
-        const {position, ...newObj} = pubFromDB[0];
-        console.log("This is the position:" + JSON.stringify(position))
-        const pub = {
-            ...newObj,
-            lat: position.latitude,
-            lng: position.longitude
-        };
+            dispatch(pubSelected(pub));
 
-        dispatch(pubSelected(pub));
-        dispatch(setSearchTerm(value));
+        }
     }
-    */
 
     const handleClickBeer = async (value) => {
         const beer = await requestBeersByName(value);   // it returns an array of one element
@@ -62,11 +58,14 @@ function Header({pub, disableSearchBar}){
             setOptions(queryResult);
         },
         options: options,
-        handleSubmit: (value) => {
+        handleSubmit: (value, event) => {
 
             dispatch(setSearchTerm(value));
             if (!pub) {
                 navigate(`/search/${value}`)
+            }
+            if (pub){
+                event.preventDefault()
             }
         },
         label: !!pub ? "Search pub..." : "Search beer...",

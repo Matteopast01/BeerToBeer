@@ -17,13 +17,17 @@ const SearchBar = ({onSearch, handleSubmit, handleClick, options, label}) => {
     });
 
     return (
-        <form onSubmit={() => handleSubmit(searchTerm)} className="search-container">
+        <form onSubmit={(event) => handleSubmit(searchTerm, event)} className="search-container">
             <Autocomplete
                 freeSolo
                 options={renderedOptions}
                 value={searchTerm}
                 onInputChange={handleInputChange}
-                onChange={(event, value)=> handleClick(value)}
+                onChange={(event, value)=> {
+                    setSearchTerm("")
+                    handleClick(value)
+
+                }}
                 renderInput={(params) => (
                     <TextField
                         {...params}

@@ -23,7 +23,7 @@ export const loadedPubsSlice = createSlice({
     },
     reducers: {
         addPub: (state, action) => {
-            state.pubs.push(action.payload);
+            state.pubs = action.payload;
         },
         resetPubs: (state, action) => {
             state = [];
