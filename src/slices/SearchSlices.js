@@ -52,7 +52,7 @@ export const searchedBeersSlice = createSlice({
 export const searchTermSlice = createSlice({
     name: 'searchTerm',
     initialState: {
-       value: []
+       value: ""
     },
     reducers: {
         setSearchTerm: (state, action) => {

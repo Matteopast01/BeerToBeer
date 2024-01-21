@@ -68,7 +68,6 @@ export const load_docs = async function (collection_name, id, postprocessing, er
             let result = snapshot.data()
             postprocessing(result)
             return result
-            console.log("ok")
         }
         else{
             console.log("do not exist")
@@ -127,8 +126,6 @@ export const update_by_function =  async function (collection_name,attribute_nam
         })
         postprocessing()
 
-
-        console.log("ok")
     }
     catch(e){
         console.log(e)
@@ -264,7 +261,6 @@ export const load_ordered_docs = async function (collection_name, order_by_field
             })
         })
         postprocessing(result)
-        console.log("ok")
         return result
     } catch (e) {
         console.log(e)
@@ -300,7 +296,6 @@ const query_by_preamble_efficient = async function (collection_name, attribute, 
             })
         })
         postprocessing(result)
-        console.log("ok")
         return result
     }
     catch (e) {
@@ -329,7 +324,6 @@ const query_by_preamble_no_efficient = async function (collection_name, attribut
                 result.push(snap_item.data())
             }
             if(result.length >= max_item_number){
-                console.log(result.length)
                 return result
             }
         })

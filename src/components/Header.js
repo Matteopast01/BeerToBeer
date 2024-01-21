@@ -61,7 +61,8 @@ function Header({pub, disableSearchBar}){
             setOptions(queryResult);
         },
         options: options,
-        handleSubmit: (event, value) => {
+        handleSubmit: (value) => {
+
             dispatch(setSearchTerm(value));
             if (!pub) {
                 navigate(`/search`)

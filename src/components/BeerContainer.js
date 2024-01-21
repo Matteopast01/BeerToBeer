@@ -56,10 +56,8 @@ export function BeerContainer(){
 
     const getBeers = async function (order_parameter) {
         let arrayOfId = await load_ordered_docs("Beer_Id", order_parameter, "desc", 6)
-        console.log(arrayOfId)
         let beers = []
         for (let obj of arrayOfId) {
-            console.log(i)
             i = i +1
             let beer = await requestBeersById(obj.id)
             beers.push(beer[0])

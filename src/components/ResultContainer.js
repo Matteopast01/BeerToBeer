@@ -1,21 +1,21 @@
 import {CardList} from "./CardList";
 import useCardList from "../hooks/useCardList";
 import BeerCardDescription from "./BeerCardDescription";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {get_docs_by_attribute, requestBeersById} from "../services/persistence_manager";
-import {setSearchedBeers, setValuesFilter} from "../store/App";
+import { requestBeersById} from "../services/persistence_manager";
+import {setSearchedBeers} from "../store/App";
 
 export const ResultContainer = function(){
 
-    const [items, setItems] = useState([])
     const navigate = useNavigate()
-
     const dispatch = useDispatch()
+
     const values = useSelector((state)=>state.filters.values)
     const selection1 = useSelector((state) => state.sorting.selection1)
     const selection2 = useSelector((state) => state.sorting.selection2)
+
 
     let minAbv = values[0].min
     let maxAbv = values[0].max
@@ -27,33 +27,35 @@ export const ResultContainer = function(){
     let sortingProperty = selection1.value
     let sortingWay = selection2.value
 
+
+
+    const searchTerm = useSelector((state)=> state.searchTerm.value)
+    console.log(searchTerm)
+
+
     const loadBeers = async function () {
 
         const beerList = []
-
         for (let i = 1; i < 10; i++) {
             const requestResult = await requestBeersById(i)
             const beer = requestResult[0]
-            const queryResult = await get_docs_by_attribute(requestResult[0].id,"Beer_Id", "id")
-            beer["number_likes"] = queryResult[0].number_likes
             beerList.push(beer)
-            console.log("ciao")
         }
         return beerList
     }
 
     useEffect(() => {
         (async  ()=> {
-
             const beers = await loadBeers()
-            setItems(beers)
             dispatch(setSearchedBeers(beers))
         })()
     }, []);
 
+
+    const beers = useSelector((state)=>state.searchedBeers.searchedBeers)
     const filterBeers = function (){
 
-      return items.filter((beer)=>{
+      return beers.filter((beer)=>{
             return beer.abv >= minAbv && beer.abv <= maxAbv &&
                 beer.ibu >= minIbv && beer.ibu <= maxIbv &&
                 beer.srm >= minSrm && beer.srm <= maxSrm;
@@ -77,19 +79,10 @@ export const ResultContainer = function(){
                 : [...filteredBeers].sort((a, b) => b.ibu - a.ibu);
         }
 
-        if (sortingProperty === "number of like") {
-            return sortOrder === 1
-                ? [...filteredBeers].sort((a, b) => a.number_likes - b.number_likes)
-                : [...filteredBeers].sort((a, b) => b.number_likes - a.number_likes);
-        }
         return [...filteredBeers];
     };
 
     let Beers = (sortingProperty === null || sortingProperty === "-") ? filteredBeers : sortingBeers(filteredBeers, sortingProperty, sortingWay);
-
-    Beers.forEach((beer)=>{
-        console.log( beer.id + " " + beer.ibu + " \n")
-    })
 
     const [cardItems, cardFeature] = useCardList(Beers,
         (item)=>{return item.id},

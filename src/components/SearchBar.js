@@ -17,7 +17,7 @@ const SearchBar = ({onSearch, handleSubmit, handleClick, options, label}) => {
     });
 
     return (
-        <form onSubmit={handleSubmit} className="search-container">
+        <form onSubmit={() => handleSubmit(searchTerm)} className="search-container">
             <Autocomplete
                 freeSolo
                 options={renderedOptions}

@@ -22,10 +22,6 @@ function AdvancedSearch( ) {
         let srm = []
 
         beers.forEach((beer)=>{
-            console.log(beer.abv)
-            console.log(beer.ibu)
-            console.log(beer.srm)
-
             abv.push(beer.abv)
             ibv.push(beer.ibu)
             srm.push(beer.srm)
