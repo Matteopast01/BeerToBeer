@@ -30,6 +30,7 @@ export default function Popup( {username,changeUpdatedUsername, changeUploadedIm
     const handleUsernameChange = function (event){
         setFormText(event.target.value);
     }
+
     const handleFormEdit = async function () {
         await update_by_function("User", "uid", currentUser.uid, (user) => {
             user.username = formText
@@ -52,7 +53,6 @@ export default function Popup( {username,changeUpdatedUsername, changeUploadedIm
 
         await push_img(image_url, img)
         handleFormClose()
-
     }
 
     const removeCurrentImage = async function () {
@@ -67,15 +67,10 @@ export default function Popup( {username,changeUpdatedUsername, changeUploadedIm
             return user
         })
         changeUploadedImage(null)
-
-
-
     }
-
 
     const RetrieveImage = async function (img) {
         setImg(img)
-
     }
 
     const propsEdit = {
