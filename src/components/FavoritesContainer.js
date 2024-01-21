@@ -49,12 +49,7 @@ export function FavoritesContainer(){
     )
 
     return (
-        <div>
-            <br/>
-            <div style={{margin: "auto", width:"10%", display: "flex", justifyContent: "center" }}>
-            </div>
             <CardList maxColumn={3} cardFeature={cardFeature} items={cardItems}/>
-        </div>
     )
 }
 

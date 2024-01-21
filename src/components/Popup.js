@@ -111,11 +111,11 @@ export default function Popup( {username,changeUpdatedUsername, changeUploadedIm
 
     return (
         <div>
-            <div>
-            <CustomButton {...propsRemoveCurrentImage} style={{ display: 'block', marginBottom: '10px' }}/>
+            <div style={{ display: 'block', marginBottom: '10px'}}>
+            <CustomButton {...propsEdit} style={{ display: 'block' }}/>
             </div>
             <div>
-            <CustomButton {...propsEdit} style={{ display: 'block' }}/>
+                <CustomButton {...propsRemoveCurrentImage} style={{ display: 'block', marginBottom: '10px' }}/>
             </div>
             <Dialog
                 open={open}

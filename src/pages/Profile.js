@@ -9,6 +9,8 @@ import Popup from "../components/Popup";
 import {AuthContext} from "../contexts/Auth";
 
 import {count_docs, get_docs_by_attribute, pull_img_url} from "../services/persistence_manager";
+import CustomButton from "../components/CustomButton";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const Profile = function (){
 
@@ -68,11 +70,19 @@ const Profile = function (){
         setUsername(updatedUsername)
     }
 
+
     return (
         <div>
-            <Header />
+            <div style={{ display: 'block', marginBottom: '10px'}}>
+                <Header />
+            </div>
+            <div style={{  textAlign: 'center' }}>
+                <div style={{ fontSize: '28px', fontFamily: 'Arial, sans-serif', marginBottom: '10px' }}>
+                    <b>Favorites</b>
+                </div>
+            </div>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <div style={{ flex: 1, marginRight: '10px' }}>
+                <div style={{ flex: 1, marginRight: '15px' }}>
                     <CustomCard
                         horizontal={false}
                         maxWidth="300px"
@@ -89,17 +99,13 @@ const Profile = function (){
                                     <br/>
                                 </div>
                                 <div style={{ textAlign: 'center' }}>
-                                <Popup  username={username} changeUploadedImage={ changeUploadedImage} changeUpdatedUsername = {changeUpdatedUsername}/>
+                                    <Popup  username={username} changeUploadedImage={ changeUploadedImage} changeUpdatedUsername = {changeUpdatedUsername}/>
                                 </div>
                             </>
                         }/>
                 </div>
-                <div>
-                    <div style={{flex: '1', textAlign: 'center', fontSize: '28px', fontFamily: 'Arial, sans-serif'}}>
-                        <b>Favorites </b>
-                    </div>
-                    <FavoritesContainer />
-                </div>
+                <div style={{ borderRight: '1px solid #ccc', height: '100%' }}/>
+                <FavoritesContainer />
             </div>
             <Footer />
         </div>
