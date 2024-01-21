@@ -29,7 +29,8 @@ const Profile = function (){
         result["number_rew"] = await count_docs(id_user, "Review", "uid_author")
 
         const user = await get_docs_by_attribute(id_user, "User", "uid")
-        const defaultImage = await get_docs_by_attribute("default_user_img", "Default_Images", "type")
+        const defaultImage = await get_docs_by_attribute("default_user_img",
+            "Default_Images", "type")
         result["username"] = user[0].username
         const link_img = user[0].link_img
 
@@ -41,7 +42,8 @@ const Profile = function (){
     const changeUploadedImage = async function (image) {
 
         if (image === null) {
-            const defaultImage = await get_docs_by_attribute("default_user_img", "Default_Images", "type")
+            const defaultImage = await get_docs_by_attribute("default_user_img",
+                "Default_Images", "type")
             const defaultImg =  await pull_img_url(defaultImage[0].link_img)
             console.log (defaultImg)
             setCurrentUserImage(defaultImg)
@@ -99,7 +101,9 @@ const Profile = function (){
                                     <br/>
                                 </div>
                                 <div style={{ textAlign: 'center' }}>
-                                    <Popup  username={username} changeUploadedImage={ changeUploadedImage} changeUpdatedUsername = {changeUpdatedUsername}/>
+                                    <Popup  username={username}
+                                            changeUploadedImage={ changeUploadedImage}
+                                            changeUpdatedUsername = {changeUpdatedUsername}/>
                                 </div>
                             </>
                         }/>

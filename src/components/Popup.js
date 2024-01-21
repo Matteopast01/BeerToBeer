@@ -32,7 +32,8 @@ export default function Popup( {username,changeUpdatedUsername, changeUploadedIm
     }
 
     const handleFormEdit = async function () {
-        await update_by_function("User", "uid", currentUser.uid, (user) => {
+        await update_by_function("User", "uid",
+            currentUser.uid, (user) => {
             user.username = formText
             return user
         })
@@ -45,7 +46,8 @@ export default function Popup( {username,changeUpdatedUsername, changeUploadedIm
         }
 
         const image_url = username + "_profile_img"
-        await update_by_function("User", "uid", currentUser.uid, (user) => {
+        await update_by_function("User", "uid",
+            currentUser.uid, (user) => {
             user.link_img = image_url
             return user
         })
@@ -62,7 +64,8 @@ export default function Popup( {username,changeUpdatedUsername, changeUploadedIm
             console.log("ti elimino")
             await delete_img(user.link_img)
         }
-        await update_by_function("User", "uid", currentUser.uid, (user) => {
+        await update_by_function("User", "uid",
+            currentUser.uid, (user) => {
             user.link_img = ""
             return user
         })
@@ -146,7 +149,8 @@ export default function Popup( {username,changeUpdatedUsername, changeUploadedIm
                     <DialogContentText  sx={{ textAlign: 'left', width: '100%', marginBottom: '30px'}}>
                         Enter your new photo here:
                     </DialogContentText>
-                    <ImagesUploader props = {{type : "default", uploadFunction: RetrieveImage}} maxImages={1} minImages={0}/>
+                    <ImagesUploader props = {{type : "default", uploadFunction: RetrieveImage}}
+                                    maxImages={1} minImages={0}/>
             </DialogContent>
             <DialogActions>
                 <CustomButton {...propsSave}/>
