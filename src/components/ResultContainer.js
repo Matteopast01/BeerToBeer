@@ -2,15 +2,17 @@ import {CardList} from "./CardList";
 import useCardList from "../hooks/useCardList";
 import BeerCardDescription from "./BeerCardDescription";
 import {useEffect} from "react";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import { requestBeersById} from "../services/persistence_manager";
+import {requestBeersById, requestBeersByName} from "../services/persistence_manager";
 import {setSearchedBeers} from "../store/App";
 
 export const ResultContainer = function(){
 
     const navigate = useNavigate()
+    const {searchTerm} = useParams()
     const dispatch = useDispatch()
+    console.log(searchTerm)
 
     const values = useSelector((state)=>state.filters.values)
     const selection1 = useSelector((state) => state.sorting.selection1)
@@ -27,22 +29,20 @@ export const ResultContainer = function(){
     let sortingProperty = selection1.value
     let sortingWay = selection2.value
 
-
-
-    const searchTerm = useSelector((state)=> state.searchTerm.value)
-    console.log(searchTerm)
-
-
     const loadBeers = async function () {
 
-        const beerList = []
-        for (let i = 1; i < 10; i++) {
-            const requestResult = await requestBeersById(i)
-            const beer = requestResult[0]
-            beerList.push(beer)
-        }
+        if (searchTerm === undefined){
+            let beerList = [];
+            for (let i = 1; i < 10; i++) {
+                const requestResult = await requestBeersById(i)
+                const beer = requestResult[0]
+                beerList.push(beer)
+            }
         return beerList
+
     }
+        return await requestBeersByName(searchTerm)
+}
 
     useEffect(() => {
         (async  ()=> {
@@ -94,7 +94,7 @@ export const ResultContainer = function(){
         (item)=>{navigate(`/product/${item.id}`)}
     )
 
-    return (<div style={{ margin:"auto"}}>
+    return (<div style={{textAlign: "center", overflow: "auto", height:"90vh"}}>
 
         <CardList maxColumn={3} cardFeature={cardFeature} items={cardItems}/>
         </div>

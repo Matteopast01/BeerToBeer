@@ -66,7 +66,7 @@ function Header({pub, disableSearchBar}){
 
             dispatch(setSearchTerm(value));
             if (!pub) {
-                navigate(`/search`)
+                navigate(`/search/${value}`)
             }
         },
         label: !!pub ? "Search pub..." : "Search beer...",

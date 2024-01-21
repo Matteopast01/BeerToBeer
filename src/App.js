@@ -24,7 +24,7 @@ function App() {
                 </Route>
                 <Route path="/login" element={<Login/>} />
                 <Route path="/signup" element={<Signup/>} />
-                <Route path="/search" element={<Search/>} />
+                <Route path="/search/:searchTerm?" element={<Search/>} />
                 <Route path="/ourpubs" element={<OurPubs/>} />
                 <Route path="/product/:beerId" element={<SingleProductPage/>} />
                 <Route element={<AdminPrivateRoute />}>
