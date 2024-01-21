@@ -5,7 +5,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import {get_docs_by_attribute, pull_img_url} from "../services/persistence_manager";
 import {AuthContext} from "../contexts/Auth";
 
-const ImagesUploader = ({props, maxImages}) => {
+const ImagesUploader = ({props, maxImages, minImages}) => {
     const [imageList, setImageList] = useState([]);
     const [errorMessage, setErrorMessage] = useState("");
 
@@ -36,23 +36,30 @@ const ImagesUploader = ({props, maxImages}) => {
 
 
     }
-    const handleImageUpload = (files) => {
-        const totalImages = imageList.length + files.length;
-        if (totalImages <= maxImages) {
+
+
+
+    const handleImageUpload = async (files) => {
+
+
+        const numberImages = imageList.length + files.length;
+
+        if (numberImages <= maxImages) {
             const newImageList = [...imageList];
-            for (let index = 0; index < files.length; index++){
+            for (let index = 0; index < files.length; index++) {
                 newImageList.push(files[index]);
                 if (props.type === "default")
                     props.uploadFunction(files[index])
-                else if (props.type === "slider_img"){
+                else if (props.type === "slider_img") {
                     props.uploadFunction(files[index])
-                }
-                else if (props.type === "default_user_img"){
+                } else if (props.type === "default_user_img") {
                     props.uploadFunction(files[index])
                 }
 
             }
             setImageList(newImageList);
+
+
 
         } else {
             setErrorMessage("You have reached the limit number of images, delete one to upload again.");
@@ -63,12 +70,24 @@ const ImagesUploader = ({props, maxImages}) => {
     };
 
 
-    const handleImageDelete = (index) => {
+    const handleImageDelete = async (index) => {
+        const totalImages = imageList.length-1
+        if (totalImages >= minImages) {
+            if (props.type === "slider_img") {
+                await props.removePopupImage(imageList[index])
+            }
+            const updatedImageList = [...imageList];
+            updatedImageList.splice(index, 1);
+            setImageList(updatedImageList);
+        }
+        else {
+            setErrorMessage("Upload an image before removing an another one");
+            setTimeout(() => {
+                setErrorMessage("");
+            }, 5000);
+        }
+        }
 
-        const updatedImageList = [...imageList];
-        updatedImageList.splice(index, 1);
-        setImageList(updatedImageList);
-    };
 
     return (
         <div className="container">
