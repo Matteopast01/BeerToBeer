@@ -74,7 +74,7 @@ function CustomAccountButton({img}) {
           transformOrigin: { horizontal: 'right', vertical: 'top' },
           anchorOrigin: { horizontal: 'right', vertical: 'bottom' }
       }
-      console.log(JSON.stringify(currentUser))
+
       return (
           <>
               <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>

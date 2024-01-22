@@ -45,17 +45,13 @@ const Profile = function (){
             const defaultImage = await get_docs_by_attribute("default_user_img",
                 "Default_Images", "type")
             const defaultImg =  await pull_img_url(defaultImage[0].link_img)
-            console.log (defaultImg)
             setCurrentUserImage(defaultImg)
 
         }
         else {
             setCurrentUserImage(image)
-            console.log (image)
-
         }
     }
-
 
     useEffect(() => {
         (async  ()=> {
@@ -71,7 +67,6 @@ const Profile = function (){
     const changeUpdatedUsername = function ( updatedUsername){
         setUsername(updatedUsername)
     }
-
 
     return (
         <div>

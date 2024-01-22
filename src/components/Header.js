@@ -10,14 +10,13 @@ import {useDispatch} from "react-redux";
 import {pubSelected, resetPubSelected, setSearchTerm} from "../store/App";
 
 // disableSearchBar passed as prop disables the searchBar component
-function Header({pub, disableSearchBar}) {
+function Header({pub, disableSearchBar, advancedSearch}) {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [options, setOptions] = useState([]);
 
     const handleClickPub = async (value) => {
-        console.log(value)
         if (value != null) {
             const pubFromDB = await get_docs_by_attribute(value, "Pub", "name");
             const {position, ...newObj} = pubFromDB[0];
@@ -32,11 +31,14 @@ function Header({pub, disableSearchBar}) {
     }
 
     const handleClickBeer = async (value) => {
-        const beer = await requestBeersByName(value);   // it returns an array of one element
-        const id = beer[0].id;
-        dispatch(setSearchTerm(value));
-        navigate(`/product/${id}`)
-        navigate(0)
+        console.log("value: " + value)
+        console.log(typeof (value))
+            const beer = await requestBeersByName(value);   // it returns an array of one element
+            const id = beer[0].id;
+            console.log("beer " + beer)
+            dispatch(setSearchTerm(value));
+            navigate(`/product/${id}`)
+            navigate(0)
     };
 
     const propsSearch = {
@@ -55,10 +57,10 @@ function Header({pub, disableSearchBar}) {
         options: options,
         handleSubmit: (value, event) => {
             dispatch(setSearchTerm(value));
-            if (!pub) {
+            if (!pub && !advancedSearch) {
                 navigate(`/search/${value}`)
             }
-            else {
+            else if (pub || advancedSearch) {
                 event.preventDefault()
             }
         },

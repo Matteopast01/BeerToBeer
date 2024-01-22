@@ -21,7 +21,6 @@ function PubContainer(){
                  emptyArray.push({...pub,
                      img: await pull_img_url(pub.link_img)})
           }
-             console.log(emptyArray)
             dispatch(addPub(emptyArray))
         })()
     }, [searchedPub]);
