@@ -24,7 +24,7 @@ export const { updateFilter, setValuesFilter } = filterSlice.actions;
 export const { setSelection1, setSelection2 } = sortingSlice.actions;
 export const {pubSelected, resetPubSelected} = pubSlice.actions;
 export const {addPub, resetPubs} = loadedPubsSlice.actions;
-export const {updateReviews} = reviewSlices.actions;
+export const {updateReviews, setRewToReply} = reviewSlices.actions;
 export const {setSearchedBeers} = searchedBeersSlice.actions;
 export const {setSearchTerm} = searchTermSlice.actions;
 // TODO da togliere?

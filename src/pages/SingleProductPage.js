@@ -2,29 +2,24 @@ import { useParams } from 'react-router-dom';
 import CustomCard from "../components/CustomCard";
 import useAsync from "../hooks/useAsync";
 import {
-    get_docs_by_attribute,
-    load_docs_by_attributes,
+    get_docs_by_attribute, pull_img_url,
     requestBeersById,
     store_doc
 } from "../services/persistence_manager";
 import Header from "../components/Header";
-import CustomButton from "../components/CustomButton";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import ModeCommentOutlinedIcon from '@mui/icons-material/ModeCommentOutlined';
 import Chip from '@mui/material/Chip';
-import CustomIconButton from "../components/CustomIconButton";
-import StarBorderIcon from "@mui/icons-material/StarBorder";
 import ProductCardDescription from "../components/ProductCardDescription";
-import Review from "../components/Review";
-import {sliderClasses} from "@mui/material";
 import Footer from "../components/Footer";
-import PageSwitch from "../components/PageSwitch";
 import ProductReviewContainer from "../components/ProductReviewContainer";
 import InputRew from "../components/InputRew";
 import {useContext} from "react";
 import {AuthContext} from "../contexts/Auth";
-import {useDispatch} from "react-redux";
-import {updateReviews} from "../store/App";
+import {useDispatch, useSelector} from "react-redux";
+import {updateReviews, setRewToReply} from "../store/App";
+import {loads_rews} from "../services/utility/review_utility";
+
+
+
 
 function SingleProductPage(){
 
@@ -51,6 +46,7 @@ function SingleProductPage(){
     const {currentUser} = useContext(AuthContext);
 
     const dispatch = useDispatch()
+    const rewToReply = useSelector((state) => state.review.rewToReply)
     /*
     <CustomButton text={
                     <Chip sx={ {background: "#ffd5d5"}}  icon={<FavoriteBorderIcon  sx={{color: "#f30303"}}/>} label={"15 Likes"}/>
@@ -65,14 +61,18 @@ function SingleProductPage(){
         await store_doc({
             beer_id: beerId,
             date: Date.now(),
-            id_replied_review: 0,
+            id_replied_review: !!rewToReply ? rewToReply.doc_id : 0 ,
             review: text,
             uid_author: currentUser.uid
         }, "Review")
-        const rews_redux = await get_docs_by_attribute(beerId, "Review", "beer_id", null, "date", "desc")
+        const rews_redux = await loads_rews( await get_docs_by_attribute(beerId, "Review", "beer_id", null, "date", "desc"))
         dispatch(updateReviews(rews_redux))
+        dispatch(setRewToReply(null))
     }
 
+    const handleInputRewUnreply = async () =>{
+        dispatch(setRewToReply(null))
+    }
     // Render
 
     return (
@@ -84,7 +84,13 @@ function SingleProductPage(){
                 <ProductCardDescription beer={beer}/>
             </CustomCard> : ""}
             <ProductReviewContainer beerId={beerId}/>
-            <InputRew style={{marginTop: "1%", marginLeft: "10%", marginRight:"10%"}} placeholder={"type your review..."} onSubmit={handleInputRewSubmit}></InputRew>
+            <InputRew
+                style={{marginTop: "1%", marginLeft: "10%", marginRight:"10%"}}
+                placeholder={"type your review..."}
+                onSubmit={handleInputRewSubmit}
+                rewToReply={rewToReply}
+                onUnreply={handleInputRewUnreply}
+            />
             <Footer/>
         </div>
     )

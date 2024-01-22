@@ -4,9 +4,10 @@ import ArrowUpwardRoundedIcon from '@mui/icons-material/ArrowUpwardRounded';
 import CustomButton from "./CustomButton";
 import  {grey}  from '@mui/material/colors';
 import {TextareaAutosize} from "@mui/material";
+import Chip from "@mui/material/Chip";
 
 
-const InputRew = function({placeholder, onChange, onSubmit, style}){
+const InputRew = function({placeholder, onChange, onSubmit, rewToReply, style, onUnreply}){
 
     // Hook
     const [text, setText] = useState("")
@@ -39,6 +40,19 @@ const InputRew = function({placeholder, onChange, onSubmit, style}){
         color: "#ffffff"
     }
 
+    const chipStyle = {
+        marginBottom: "2px",
+        backgroundColor: "#000000",
+        color: "#ffffff",
+        '& .MuiChip-deleteIcon': {
+            color: "#fcf3f3",
+            '&:hover': {
+                color: "#d2bcbc"
+            }
+        }
+    }
+
+
 
     const textAreaStyle = {
         width: "100%",
@@ -53,6 +67,11 @@ const InputRew = function({placeholder, onChange, onSubmit, style}){
     return (
         <div style={style}>
             <div>
+                {
+                    !! rewToReply ?
+                        <Chip sx={chipStyle}  variant="outlined" onDelete={onUnreply} label={"replay to "+rewToReply.user.username}/>:
+                        ""
+                }
                 <TextareaAutosize style={textAreaStyle} placeholder={placeholder} onChange={handleChange} value={text} minRows={2}></TextareaAutosize>
                 <CustomButton sx={submitButtonStyle} variant="contained" text={"Submit"} handleClick={handleSubmit}></CustomButton>
             </div>

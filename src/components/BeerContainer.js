@@ -6,7 +6,6 @@ import {useEffect, useState} from "react";
 import {load_ordered_docs, requestBeersById} from "../services/persistence_manager.js";
 import BeerCardDescription from "./BeerCardDescription";
 
-let i = 0
 export function BeerContainer(){
     //Hooks
         //Hook State
@@ -58,7 +57,6 @@ export function BeerContainer(){
         let arrayOfId = await load_ordered_docs("Beer_Id", order_parameter, "desc", 6)
         let beers = []
         for (let obj of arrayOfId) {
-            i = i +1
             let beer = await requestBeersById(obj.id)
             beers.push(beer[0])
         }
