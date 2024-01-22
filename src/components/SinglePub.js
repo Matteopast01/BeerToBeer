@@ -1,10 +1,8 @@
-import SimpleSlider from "./SimpleSlider";
-import PubReviewContainer from "./PubReviewContainer";
 import {useDispatch, useSelector} from "react-redux";
 import CustomIconButton from "./CustomIconButton";
 import CloseIcon from '@mui/icons-material/Close';
 import {resetPubSelected} from "../store/App";
-import * as React from "react";
+import CustomCard from "./CustomCard";
 
 function SinglePub(){
 
@@ -38,15 +36,16 @@ function SinglePub(){
                 <div style={{flex: '1', textAlign: 'center', fontSize: '40px', fontFamily: 'Arial, sans-serif'}}>
                     <b>{name}</b>
                 </div>
-                <div style={{width: '70px'}}>
-                    <div style={{display: "flex", alignItems: "center", flexDirection: "column"}}>
-                        <CustomIconButton icon={<CloseIcon sx={{color: '#f30303'}}/>} handleClick={handleClick} size={"medium"}/>
-                    </div>
+                <div style={{ width: '70px' }} />
+                <div style={{ width: '50px' }}>
+                    <CustomIconButton icon={<CloseIcon sx={{ color: '#f30303' }} />} handleClick={handleClick} size={"medium"} />
                 </div>
             </div>
-            <div style={{textAlign: 'center', fontSize: '16px', fontFamily: 'Arial, sans-serif'}}>
-                {description}
-            </div>
+            <CustomCard img={images}  contentStyle={{width:"100%", background: "#f5f5f5"}} maxWidth={"95%"}>
+                <div style={{textAlign: 'left', fontSize: '16px', fontFamily: 'Arial, sans-serif'}}>
+                    {description}
+                </div>
+            </CustomCard>
         </div>
     );
 }

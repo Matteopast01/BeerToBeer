@@ -24,7 +24,6 @@ function PubContainer(){
              console.log(emptyArray)
             dispatch(addPub(emptyArray))
         })()
-
     }, [searchedPub]);
 
     const load_pubs = async function (){
@@ -46,15 +45,12 @@ function PubContainer(){
                 lat: pub.position._lat,
                 lng: pub.position._long
             };
-
             }
         )
         return pubs
     }
 
-
     const pubs = useSelector(state => state.loadedPubs.pubs)
-
 
     const handleOnclick = function (item){
 
@@ -78,7 +74,7 @@ function PubContainer(){
     )
 
     return (
-        <div style={{textAlign: "center", overflow: "auto", height:"90vh"}}>
+        <div style={{textAlign: "left", overflow: "auto", height:"90vh"}}>
             <CardList maxColumn={3} cardFeature={cardFeature} items={cardItems}/>
         </div>
     );
