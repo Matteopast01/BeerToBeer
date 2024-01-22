@@ -1,5 +1,5 @@
 import CustomButton from "./CustomButton";
-import CustomIconButton from "./CustomIconButton";
+import CustomAccountButton from "./CustomAccountButton";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SearchBar from "./SearchBar";
 import {useNavigate} from "react-router-dom";
@@ -10,7 +10,7 @@ import {useDispatch} from "react-redux";
 import {pubSelected, resetPubSelected, setSearchTerm} from "../store/App";
 
 // disableSearchBar passed as prop disables the searchBar component
-function Header({pub, disableSearchBar}){
+function Header({pub, disableSearchBar}) {
 
     const {currentUser} = useContext(AuthContext);
     const {handleLogout} = useContext(AuthContext);
@@ -30,9 +30,7 @@ function Header({pub, disableSearchBar}){
                 lat: position.latitude,
                 lng: position.longitude
             };
-
             dispatch(pubSelected(pub));
-
         }
     }
 
@@ -76,15 +74,20 @@ function Header({pub, disableSearchBar}){
         icon: <AccountCircleIcon/>,
         sx: { color: '#333333'},
         size: "large",
-        handleClick: ()=>{navigate("/login")},
+        // handleClick: ()=>{navigate("/login")},
     };
 
     const propsLogout = {
         icon: <AccountCircleIcon/>,
         sx: { color: '#333333'},
         size: "large",
-        handleClick: ()=>{handleLogout(navigate)},
+        // handleClick: ()=>{handleLogout(navigate)},
     };
+
+    // TODO Matteo: metterci query per recuperare la foto profilo e metterla al posto di null
+    const propAccountButton = {
+        img: null
+    }
 
     const propsHome = {
         text: "Home",
@@ -114,28 +117,21 @@ function Header({pub, disableSearchBar}){
     return (
         <div>
             <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-
                 <div style={{width: '70px'}}/>
-
                 <div style={{flex: '1', textAlign: 'center', fontSize: '40px', fontFamily: 'Arial, sans-serif'}}>
                     <b>BeerToBeer</b>
                 </div>
-
                 <div style={{width: '70px'}}>
                     <div style={{display: "flex", alignItems: "center", flexDirection: "column"}}>
+                        <CustomAccountButton {...propAccountButton}/>
+                        {/*
                         {currentUser ?
                             <CustomIconButton {...propsLogout}/> :
                             <CustomIconButton {...propsLogin}/>}
-
-
-                        {/*<div>
-                            {currentUser ? <CustomButton text={"Logout"} size={"small"} sx={{color: '#333333'}}/>:
-                                <CustomButton text={"Login"} size={"small"} sx={{color: '#333333'}}/>}
-                        </div>*/}
+                        */}
                     </div>
                 </div>
             </div>
-
             <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center'}}>
                 <div>
                     <CustomButton {...propsHome}/>
