@@ -11,7 +11,7 @@ import {useNavigate} from "react-router-dom";
 import {useContext} from "react";
 import {AuthContext} from "../contexts/Auth";
 
-function CustomAccountButton({img}) {
+function CustomAccountButton({src}) {
 
       const [anchorEl, setAnchorEl] = React.useState(null);
       const open = Boolean(anchorEl);
@@ -79,7 +79,7 @@ function CustomAccountButton({img}) {
           <>
               <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
                   <IconButton {...propsIconButton}>
-                      <Avatar img={img} sx={{ width: 40, height: 40 }}></Avatar>
+                      <Avatar src={src} sx={{ width: 40, height: 40 }}></Avatar>
                   </IconButton>
               </Box>
               <Menu

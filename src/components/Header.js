@@ -4,8 +4,13 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SearchBar from "./SearchBar";
 import {useNavigate} from "react-router-dom";
 import {AuthContext} from "../contexts/Auth";
-import {useContext, useState} from "react";
-import {get_docs_by_attribute, query_by_preamble, requestBeersByName} from "../services/persistence_manager";
+import {useContext, useEffect, useState} from "react";
+import {
+    get_docs_by_attribute,
+    pull_img_url,
+    query_by_preamble,
+    requestBeersByName
+} from "../services/persistence_manager";
 import {useDispatch} from "react-redux";
 import {pubSelected, resetPubSelected, setSearchTerm} from "../store/App";
 
@@ -15,6 +20,21 @@ function Header({pub, disableSearchBar, advancedSearch}) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [options, setOptions] = useState([]);
+    const {currentUser} = useContext(AuthContext);
+
+    const [profileImg, setProfileImg] = useState(null)
+
+    useEffect(() => {
+        (async  ()=> {
+            const user = await get_docs_by_attribute(currentUser.uid, "User", "uid")
+            const defaultImage = await get_docs_by_attribute("default_user_img",
+                "Default_Images", "type")
+            const link_img = user[0].link_img
+            const img = !!link_img ? await pull_img_url(link_img) : await pull_img_url(defaultImage[0].link_img)
+            setProfileImg(img)
+
+        })()
+    }, []);
 
     const handleClickPub = async (value) => {
         if (value != null) {
@@ -82,9 +102,9 @@ function Header({pub, disableSearchBar, advancedSearch}) {
         // handleClick: ()=>{handleLogout(navigate)},
     };
 
-    // TODO Matteo: metterci query per recuperare la foto profilo e metterla al posto di null
+
     const propAccountButton = {
-        img: null
+        src: profileImg
     }
 
     const propsHome = {
