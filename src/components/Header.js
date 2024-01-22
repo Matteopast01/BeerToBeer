@@ -31,8 +31,7 @@ function Header({pub, disableSearchBar, advancedSearch}) {
     }
 
     const handleClickBeer = async (value) => {
-        console.log("value: " + value)
-        console.log(typeof (value))
+            value = value && value.charAt(0) === '#' ? value.slice(1) : value;
             const beer = await requestBeersByName(value);   // it returns an array of one element
             const id = beer[0].id;
             console.log("beer " + beer)
