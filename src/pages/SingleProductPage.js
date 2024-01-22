@@ -4,7 +4,7 @@ import useAsync from "../hooks/useAsync";
 import {
     get_docs_by_attribute, pull_img_url,
     requestBeersById,
-    store_doc
+    store_doc, update_by_function
 } from "../services/persistence_manager";
 import Header from "../components/Header";
 import Chip from '@mui/material/Chip';
@@ -12,7 +12,7 @@ import ProductCardDescription from "../components/ProductCardDescription";
 import Footer from "../components/Footer";
 import ProductReviewContainer from "../components/ProductReviewContainer";
 import InputRew from "../components/InputRew";
-import {useContext} from "react";
+import {useContext, useEffect} from "react";
 import {AuthContext} from "../contexts/Auth";
 import {useDispatch, useSelector} from "react-redux";
 import {updateReviews, setRewToReply} from "../store/App";
@@ -44,6 +44,13 @@ function SingleProductPage(){
         }
     )
     const {currentUser} = useContext(AuthContext);
+    useEffect(() => {
+        update_by_function("Beer_Id","id",Number(beerId), (obj)=>{
+            obj.number_calls += 1
+            return obj
+        })
+        return ()=>{dispatch(setRewToReply(null))}
+    }, []);
 
     const dispatch = useDispatch()
     const rewToReply = useSelector((state) => state.review.rewToReply)
