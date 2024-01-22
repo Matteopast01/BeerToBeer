@@ -15,7 +15,7 @@ const Search = function (){
                 <div style={{ marginRight: '20px' }}>
                     <AdvancedSearch/>
                     <div className="box has-text-centered mb-3">
-                        <h5 className="title is-4">Sorting by</h5>
+                        <h5 className="title is-4">Sorting by:</h5>
                         <Sorting/>
                     </div>
                 </div>
