@@ -93,7 +93,7 @@ export const ResultContainer = function(){
         (item)=>{navigate(`/product/${item.id}`)}
     )
 
-    return (<div style={{textAlign: "center", overflow: "auto", height:"90vh"}}>
+    return (<div style={{ overflow: "auto", height:"90vh"}}>
 
         <CardList maxColumn={3} cardFeature={cardFeature} items={cardItems}/>
         </div>
