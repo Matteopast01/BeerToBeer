@@ -85,7 +85,7 @@ function AdvancedSearch( ) {
     return (
         <div>
             <div className="box has-text-centered mb-3">
-                <h3 className="title is-4">Advanced Search</h3>
+                <h3 className="title is-4">Filter by:</h3>
                 {renderedData}
             </div>
         </div>

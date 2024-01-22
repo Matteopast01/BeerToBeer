@@ -5,17 +5,20 @@ import {useEffect} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {requestBeersById, requestBeersByName} from "../services/persistence_manager";
-import {setSearchedBeers} from "../store/App";
+import {setSearchedBeers, setSearchTerm} from "../store/App";
 
 export const ResultContainer = function(){
 
     const navigate = useNavigate()
-    const {searchTerm} = useParams()
+    //const {searchTerm} = useParams()
     const dispatch = useDispatch()
 
     const values = useSelector((state)=>state.filters.values)
     const selection1 = useSelector((state) => state.sorting.selection1)
     const selection2 = useSelector((state) => state.sorting.selection2)
+
+    const searchedTerm = useSelector((state)=>state.searchTerm.value )
+    console.log(searchedTerm)
 
 
     let minAbv = values[0].min
@@ -30,7 +33,7 @@ export const ResultContainer = function(){
 
     const loadBeers = async function () {
 
-        if (searchTerm === undefined){
+        if (searchedTerm == ""){
             let beerList = [];
             for (let i = 1; i < 10; i++) {
                 const requestResult = await requestBeersById(i)
@@ -40,15 +43,18 @@ export const ResultContainer = function(){
         return beerList
 
     }
-        return await requestBeersByName(searchTerm)
+        return await requestBeersByName(searchedTerm)
 }
-
+    useEffect(()=>{return ()=>{dispatch(setSearchTerm(""))}}, [])
     useEffect(() => {
         (async  ()=> {
             const beers = await loadBeers()
             dispatch(setSearchedBeers(beers))
+            if (!window.location.href.includes(searchedTerm)) {
+                window.history.pushState({}, '', `/search/${searchedTerm}`);
+            }
         })()
-    }, []);
+    }, [searchedTerm]);
 
 
     const beers = useSelector((state)=>state.searchedBeers.searchedBeers)

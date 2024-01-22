@@ -62,6 +62,7 @@ function Header({pub, disableSearchBar, advancedSearch}) {
             else if (pub || advancedSearch) {
                 event.preventDefault()
             }
+
         },
         label: !!pub ? "Search pub..." : "Search beer...",
         handleClick: !!pub ? handleClickPub : handleClickBeer
