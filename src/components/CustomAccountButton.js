@@ -32,7 +32,6 @@ function CustomAccountButton({img}) {
           !!currentUser ? navigate("/profile") : navigate("/login")
       };
 
-      // TODO Matteo: verificare lo slog da dentro al profilo, porta al login ora
       const handleClickLog = () => {
           setAnchorEl(null);
           !!currentUser ? handleLogout() : navigate("/login")
@@ -42,7 +41,7 @@ function CustomAccountButton({img}) {
           onClick: handleClick,
           size: 'small',
           sx: { ml: 'auto' },
-    }
+      }
 
       const propsMenu = {
 
@@ -75,9 +74,9 @@ function CustomAccountButton({img}) {
           transformOrigin: { horizontal: 'right', vertical: 'top' },
           anchorOrigin: { horizontal: 'right', vertical: 'bottom' }
       }
-
+      console.log(JSON.stringify(currentUser))
       return (
-          <React.Fragment>
+          <>
               <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
                   <IconButton {...propsIconButton}>
                       <Avatar img={img} sx={{ width: 40, height: 40 }}></Avatar>
@@ -91,10 +90,13 @@ function CustomAccountButton({img}) {
                   onClick={handleClose}
                   {...propsMenu}
               >
-                  <MenuItem onClick={handleClickProfile}>
-                      <Avatar /> Profile
-                  </MenuItem>
-                  <Divider />
+                  {!!currentUser &&
+                  <>
+                      <MenuItem onClick={handleClickProfile}>
+                          <Avatar /> Profile
+                      </MenuItem>
+                      <Divider />
+                  </>}
                   <MenuItem onClick={handleClickLog}>
                       <ListItemIcon>
                           <Logout fontSize="small" />
@@ -102,7 +104,7 @@ function CustomAccountButton({img}) {
                       {!!currentUser ? "Logout" : "Login"}
                   </MenuItem>
               </Menu>
-          </React.Fragment>
+          </>
       );
 }
 

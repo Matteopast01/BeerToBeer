@@ -1,10 +1,10 @@
 import {useDispatch, useSelector} from "react-redux";
 import CustomIconButton from "./CustomIconButton";
 import CloseIcon from '@mui/icons-material/Close';
-import {resetPubSelected} from "../store/App";
+import {resetPubSelected, setSearchTerm} from "../store/App";
 import CustomCard from "./CustomCard";
 
-function SinglePub(){
+function SinglePub() {
 
     const pubSelected = useSelector(state => state.pub.value);
 
@@ -19,13 +19,13 @@ function SinglePub(){
 
     let images = pubSelected?.img || [];
     let description = pubSelected?.description || "";
-
     let name = pubSelected?.name;
 
      const dispatch = useDispatch();
 
      function handleClick(){
-        dispatch(resetPubSelected(null))
+         dispatch(resetPubSelected(null))
+         dispatch(setSearchTerm(""))
     }
 
     return (

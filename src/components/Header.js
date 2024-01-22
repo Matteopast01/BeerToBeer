@@ -12,9 +12,6 @@ import {pubSelected, resetPubSelected, setSearchTerm} from "../store/App";
 // disableSearchBar passed as prop disables the searchBar component
 function Header({pub, disableSearchBar}) {
 
-    const {currentUser} = useContext(AuthContext);
-    const {handleLogout} = useContext(AuthContext);
-
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [options, setOptions] = useState([]);
@@ -57,12 +54,11 @@ function Header({pub, disableSearchBar}) {
         },
         options: options,
         handleSubmit: (value, event) => {
-
             dispatch(setSearchTerm(value));
             if (!pub) {
                 navigate(`/search/${value}`)
             }
-            if (pub){
+            else {
                 event.preventDefault()
             }
         },
