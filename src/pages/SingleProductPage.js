@@ -12,7 +12,7 @@ import ProductCardDescription from "../components/ProductCardDescription";
 import Footer from "../components/Footer";
 import ProductReviewContainer from "../components/ProductReviewContainer";
 import InputRew from "../components/InputRew";
-import {useContext, useEffect} from "react";
+import {useContext, useEffect, useRef} from "react";
 import {AuthContext} from "../contexts/Auth";
 import {useDispatch, useSelector} from "react-redux";
 import {updateReviews, setRewToReply} from "../store/App";

@@ -10,7 +10,7 @@ import {useState} from "react";
 // text = the button text
 
 function CustomButton({justClicked, startIcon, startIconClicked, disabledBoolean,
-                          variant, color, sx, size, endIcon, endIconClicked, text, textClicked, handleClick}) {
+                          variant, color, sx, size, endIcon, endIconClicked, text, textClicked, handleClick, ref}) {
 
     const [clicked, setClicked] = useState(!!justClicked)
 
@@ -39,7 +39,9 @@ function CustomButton({justClicked, startIcon, startIconClicked, disabledBoolean
               sx={sx}
               size={size}
               endIcon={endIcon}
-              onClick={realHandleClick}>
+              onClick={realHandleClick}
+              ref={ref}
+      >
           {text}
       </Button>
   );

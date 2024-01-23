@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useRef, useState} from "react";
 import CustomIconButton from "./CustomIconButton";
 import ArrowUpwardRoundedIcon from '@mui/icons-material/ArrowUpwardRounded';
 import CustomButton from "./CustomButton";
@@ -11,16 +11,19 @@ const InputRew = function({placeholder, replyPlaceholder, onChange, onSubmit, re
 
     // Hook
     const [text, setText] = useState("")
+    const contentRef = useRef(null);
 
 
     // Handle functions
 
     const handleChange = (event)=>{
+        contentRef.current?.scrollIntoView();
         const inputText = event.target.value
         setText(inputText)
         if (!!onChange){
             onChange(inputText)
         }
+
     }
 
     const handleSubmit = ()=>{
@@ -72,8 +75,14 @@ const InputRew = function({placeholder, replyPlaceholder, onChange, onSubmit, re
                         <Chip sx={chipStyle}  variant="outlined" onDelete={onUnreply} label={"reply to "+rewToReply.user.username}/>:
                         ""
                 }
-                <TextareaAutosize style={textAreaStyle} placeholder={!! rewToReply ? replyPlaceholder : placeholder} onChange={handleChange} value={text} minRows={2}></TextareaAutosize>
-                <CustomButton sx={submitButtonStyle} variant="contained" text={"Submit"} handleClick={handleSubmit}></CustomButton>
+                <TextareaAutosize
+                    style={textAreaStyle}
+                    placeholder={!! rewToReply ? replyPlaceholder : placeholder}
+                    onChange={handleChange} value={text} minRows={2}
+                />
+                <div ref={contentRef}>
+                    <CustomButton sx={submitButtonStyle} variant="contained" text={"Submit"} handleClick={handleSubmit}></CustomButton>
+                </div>
             </div>
         </div>
     )
