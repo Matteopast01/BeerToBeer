@@ -36,7 +36,7 @@ function Header({pub, disableSearchBar, advancedSearch}) {
                 setProfileImg(img)
             }
         })()
-    }, []);
+    }, [currentUser]);
 
     const handleClickPub = async (value) => {
         if (value != null) {
