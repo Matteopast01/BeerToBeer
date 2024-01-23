@@ -95,6 +95,12 @@ function CustomAccountButton({src}) {
                       <MenuItem onClick={handleClickProfile}>
                           <Avatar src={src}/> Profile
                       </MenuItem>
+                      {currentUser.role ?
+                          <div>
+                              <MenuItem onClick={handleClickProfile}>
+                                  <Avatar src={src}/> Admin Page
+                              </MenuItem>
+                          </div> : <div></div>}
                       <Divider />
                   </>}
                   <MenuItem onClick={handleClickLog}>
