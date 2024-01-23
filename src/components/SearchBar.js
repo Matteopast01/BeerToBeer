@@ -37,7 +37,7 @@ const SearchBar = ({onSearch, handleSubmit, handleClick, options, label}) => {
                         label={label}
                         variant="outlined"
                         style={{
-                            width: isHovered ?'400px': '380px',
+                            width: '400px',
                             backgroundColor: isHovered ? '#eaeffa' : '#fafafc',
                             borderRadius: '5px',
                             transition: 'background-color 0.3s ease-in-out',

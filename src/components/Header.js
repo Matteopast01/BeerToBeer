@@ -13,6 +13,7 @@ import {
 } from "../services/persistence_manager";
 import {useDispatch} from "react-redux";
 import {pubSelected, resetPubSelected, setSearchTerm} from "../store/App";
+import {primary, secondary} from "../style/palette";
 
 // disableSearchBar passed as prop disables the searchBar component
 function Header({pub, disableSearchBar, advancedSearch}) {
@@ -102,21 +103,20 @@ function Header({pub, disableSearchBar, advancedSearch}) {
         // handleClick: ()=>{handleLogout(navigate)},
     };
 
-
     const propAccountButton = {
-        src: profileImg
+        src: !!currentUser ? profileImg : null
     }
 
     const propsHome = {
         text: "Home",
-        sx: { color: '#333333'},
+        sx: { color: secondary},
         size: "large",
         handleClick: ()=>{navigate("/")}
     };
 
     const propsPubs = {
         text: "Our Pubs",
-        sx: { color: '#333333'},
+        sx: { color: secondary},
         size: "large",
         handleClick: ()=>{
             navigate("/ourpubs");
@@ -126,14 +126,14 @@ function Header({pub, disableSearchBar, advancedSearch}) {
 
     const propsAdvancedSearch = {
         text:"Advanced Search",
-        sx: { color: '#333333'},
+        sx: { color: secondary},
         size: "large",
         handleClick: ()=>{navigate("/search")},
         uploadButtonBoolean: true
     };
 
     return (
-        <div>
+        <>
             <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
                 <div style={{width: '70px'}}/>
                 <div style={{flex: '1', textAlign: 'center', fontSize: '40px', fontFamily: 'Arial, sans-serif'}}>
@@ -142,11 +142,6 @@ function Header({pub, disableSearchBar, advancedSearch}) {
                 <div style={{width: '70px'}}>
                     <div style={{display: "flex", alignItems: "center", flexDirection: "column"}}>
                         <CustomAccountButton {...propAccountButton}/>
-                        {/*
-                        {currentUser ?
-                            <CustomIconButton {...propsLogout}/> :
-                            <CustomIconButton {...propsLogin}/>}
-                        */}
                     </div>
                 </div>
             </div>
@@ -158,7 +153,7 @@ function Header({pub, disableSearchBar, advancedSearch}) {
                 </div>
                 {!!disableSearchBar ? <div></div> : <SearchBar {...propsSearch}/>}
             </div>
-        </div>
+        </>
     );
 }
 

@@ -9,6 +9,7 @@ import {useState} from "react";
 // size = "small", "medium" or "large"
 // text = the button text
 
+// TODO: pensare a togliere la prop color che è quella di default
 function CustomButton({justClicked, startIcon, startIconClicked, disabledBoolean,
                           variant, color, sx, size, endIcon, endIconClicked, text, textClicked, handleClick, ref}) {
 
@@ -20,13 +21,13 @@ function CustomButton({justClicked, startIcon, startIconClicked, disabledBoolean
         text = !!textClicked ? textClicked : text
     }
     const realHandleClick = function (){
-        if(clicked){
+        if (clicked){
             setClicked(false)
         }
         else {
             setClicked(true)
         }
-        if(!!handleClick){
+        if (!!handleClick){
             handleClick()
         }
     }
