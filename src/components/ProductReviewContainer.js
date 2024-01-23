@@ -1,11 +1,12 @@
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
+import {useContext, useEffect} from "react";
 import Review from "./Review";
 import {setRewToReply, updateReviews} from "../store/App";
 import {get_docs_by_attribute, pull_img_url} from "../services/persistence_manager";
 import Typography from "@mui/material/Typography";
 import {Divider} from "@mui/material";
 import {loads_rews, sort_reviews} from "../services/utility/review_utility";
+import {AuthContext} from "../contexts/Auth";
 
 
 
@@ -20,6 +21,7 @@ const ProductReviewContainer = function({beerId}){
             dispatch(updateReviews(rews_redux))
         })()
     }, []);
+    const {currentUser} = useContext(AuthContext);
 
 
     // Utility
@@ -39,7 +41,11 @@ const ProductReviewContainer = function({beerId}){
         return rews.map((rew, index)=>{
             return (
                 <div key={rew.doc_id}>
-                    <Review rew={rew} answers={!!(rew.doc_id in rew_answers) ? rew_answers[rew.doc_id].reverse(): []} onReply={handleReply}/>
+                    <Review rew={rew}
+                            answers={!!(rew.doc_id in rew_answers) ? rew_answers[rew.doc_id].reverse(): []}
+                            onReply={handleReply}
+                            showOptions={currentUser.uid === rew.user.uid}
+                    />
                     <Divider/>
                 </div>
             )

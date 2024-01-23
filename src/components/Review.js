@@ -4,11 +4,13 @@ import {Avatar, ListItem, ListItemAvatar} from "@mui/material";
 import CustomButton from "./CustomButton";
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import {useState} from "react";
+import CustomIconButton from "./CustomIconButton";
 
 
 
-function Review({rew, answers=[], onReply}){
+function Review({rew, answers=[], onReply, showOptions, showOptionsAnswers}){
 
     // Hook
     const [answerOpened, setAnswerOpened] = useState(false)
@@ -21,7 +23,7 @@ function Review({rew, answers=[], onReply}){
 
     // Render Function
 
-    const render_rew = (rew, answer_opened=true, reply_button=true, marginLeft=0)=>{
+    const render_rew = (rew, option=false, answer_opened=true, reply_button=true, marginLeft=0)=>{
         return (
             <ListItem alignItems="flex-start" sx={{marginLeft: marginLeft.toString()+"px"}}>
                 <ListItemAvatar>
@@ -39,6 +41,7 @@ function Review({rew, answers=[], onReply}){
                         {!!reply_button ? <CustomButton sx={{fontSize: "11px", color: '#333333'}} text={"reply"} handleClick={()=>{onReply(rew)}}/> : ""}
                         {(!!reply_button && !!answer_opened && answers.length > 0) ? <CustomButton sx={{fontSize: "11px", color: '#333333'}} text={"hide answers"} endIcon={<KeyboardArrowUpIcon/>} handleClick={()=>{ clickHandler(false)}}/> : ""}
                         {(!!reply_button && !answer_opened && answers.length > 0) ? <CustomButton sx={{fontSize: "11px", color: '#333333'}} text={"view answers"} endIcon={<KeyboardArrowDownIcon/>} handleClick={()=>{ clickHandler(true)}}/> : "" }
+                        {!!option ? <CustomIconButton icon={<MoreHorizOutlinedIcon sx={{fontSize : 18}}/>}/> : ""}
                     </div>
                 </div>
             </ListItem>
@@ -48,11 +51,12 @@ function Review({rew, answers=[], onReply}){
 
     return (
     <div>
-        {!! rew ? render_rew(rew, answerOpened): ""}
+        {!! rew ? render_rew(rew, showOptions, answerOpened): ""}
         {(!!answers && !!answerOpened) ? answers.map((answer) => {
+            const option_answer = ( showOptions && rew.user.uid === answer.user.uid) || (showOptionsAnswers)
             return (
                 <div key={answer.doc_id}>
-                    {render_rew(answer, false, false, 50)}
+                    {render_rew(answer, option_answer, false, false, 50)}
                 </div>
             );
         }) : ""}
