@@ -29,10 +29,7 @@ function CustomAccountButton({src}) {
 
       const handleClickProfile = (profile) => {
           setAnchorEl(null);
-          if (profile === true){
-              !!currentUser ? navigate("/profile") : navigate("/login")}
-          else{
-              !!currentUser ? navigate("/adminPage") : navigate("/login")}
+          profile ? navigate("/profile") : navigate ("/adminPage")
       };
 
       const handleClickLog = () => {
