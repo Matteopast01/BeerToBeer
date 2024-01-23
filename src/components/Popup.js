@@ -9,10 +9,13 @@ import {useContext, useState} from "react";
 import {AuthContext} from "../contexts/Auth";
 import {delete_img, get_docs_by_attribute, push_img, update_by_function} from "../services/persistence_manager";
 import DeleteIcon from "@mui/icons-material/Delete";
+import {useDispatch} from "react-redux";
 
 
 export default function Popup( {username,changeUpdatedUsername, changeUploadedImage }) {
     const [open, setOpen] = useState(false);
+
+    const dispatch = useDispatch();
 
     const [formText, setFormText] = useState()
 
@@ -41,7 +44,6 @@ export default function Popup( {username,changeUpdatedUsername, changeUploadedIm
         const id_user = currentUser.uid
         const user = await get_docs_by_attribute(id_user, "User", "uid")
         if (user.link_img != ""){
-            console.log("ti elimino")
             await delete_img(user.link_img)
         }
 
@@ -61,7 +63,6 @@ export default function Popup( {username,changeUpdatedUsername, changeUploadedIm
         const id_user = currentUser.uid
         const user = await get_docs_by_attribute(id_user, "User", "uid")
         if (user.link_img != "") {
-            console.log("ti elimino")
             await delete_img(user.link_img)
         }
         await update_by_function("User", "uid",

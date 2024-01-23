@@ -98,7 +98,7 @@ function CustomAccountButton({src}) {
                       {currentUser.role ?
                           <div>
                               <MenuItem onClick={() => handleClickProfile(false)}>
-                                  <Avatar src={src}/> Admin Page
+                                  Dashboard
                               </MenuItem>
                           </div> : <div></div>}
                       <Divider />

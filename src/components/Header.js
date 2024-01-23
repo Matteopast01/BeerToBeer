@@ -11,19 +11,19 @@ import {
     query_by_preamble,
     requestBeersByName
 } from "../services/persistence_manager";
-import {useDispatch} from "react-redux";
-import {pubSelected, resetPubSelected, setSearchTerm} from "../store/App";
-import {primary, secondary} from "../style/palette";
+import {useDispatch, useSelector} from "react-redux";
+import {imgSelected, pubSelected, resetPubSelected, setSearchTerm} from "../store/App";
+import {secondary} from "../style/palette";
+
 
 // disableSearchBar passed as prop disables the searchBar component
 function Header({pub, disableSearchBar, advancedSearch}) {
 
     const navigate = useNavigate();
+    const profileImg = useSelector(state => state.userImg.value)
     const dispatch = useDispatch();
     const [options, setOptions] = useState([]);
     const {currentUser} = useContext(AuthContext);
-
-    const [profileImg, setProfileImg] = useState(null)
 
     useEffect(() => {
         (async  ()=> {
@@ -33,7 +33,7 @@ function Header({pub, disableSearchBar, advancedSearch}) {
                     "Default_Images", "type")
                 const link_img = user[0].link_img
                 const img = !!link_img ? await pull_img_url(link_img) : await pull_img_url(defaultImage[0].link_img)
-                setProfileImg(img)
+                dispatch(imgSelected(img))
             }
         })()
     }, [currentUser]);
