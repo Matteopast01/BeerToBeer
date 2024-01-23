@@ -93,7 +93,7 @@ function CustomAccountButton({src}) {
                   {!!currentUser &&
                   <>
                       <MenuItem onClick={handleClickProfile}>
-                          <Avatar /> Profile
+                          <Avatar src={src}/> Profile
                       </MenuItem>
                       <Divider />
                   </>}
