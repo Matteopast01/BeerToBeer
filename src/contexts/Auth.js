@@ -1,8 +1,7 @@
 import { useEffect, useState, createContext } from "react";
 import { getAuth } from "firebase/auth";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { useNavigate, Routes } from "react-router-dom";
-import {store_doc} from "../services/persistence_manager"
+import {get_docs_by_attribute, store_doc} from "../services/persistence_manager"
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -39,12 +38,6 @@ export const AuthProvider = ({ children }) => {
             .then((userCredential) => {
                 const user = userCredential.user;
                 navigate("/");
-                for (let property in user) {
-                    if (user.hasOwnProperty(property)) {
-                        console.log(property + ": " + user[property]);
-                    }
-                }
-
                 return true
             })
             .catch((error) => {
@@ -58,9 +51,8 @@ export const AuthProvider = ({ children }) => {
     const handleLogout = async function (navigate) {
         signOut(auth)
             .then(() => {
-                // Sign-out successful.
                 navigate("/");
-                console.log("Signed out successfully");
+                console.log("chiamata handleLogout")
             })
             .catch((error) => {
                 // An error happened.
@@ -68,17 +60,31 @@ export const AuthProvider = ({ children }) => {
     }
 
     const handleAuthChanged = function () {
-        const unsubscribe = auth.onAuthStateChanged((user) => {
-            setCurrentUser(user);
-            setPending(false);
+        const unsubscribe = auth.onAuthStateChanged(async (user) => {
+            
+            if (user !== null) {
+                console.log("ciao")
+                const result = await get_docs_by_attribute(user.uid, "User", "uid")
+                const Modifieduser = {
+                    ...user,
+                    role: result[0].role
+                };
+                setCurrentUser(Modifieduser);
+                setPending(false);
+               
+            }
+            else {
+                setCurrentUser(user);
+                setPending(false)
+            }
         });
 
-        // Return a function to unsubscribe when the component unmounts
-        return () => unsubscribe();
+
     }
 
     useEffect(() => {
         handleAuthChanged();
+        console.log("chiamata useEffect")
     }, []);
 
     if (pending) {
