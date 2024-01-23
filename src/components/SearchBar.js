@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 
-const SearchBar = ({onSearch, handleSubmit, handleClick, options, label }) => {
+const SearchBar = ({onSearch, handleSubmit, handleClick, options, label}) => {
 
     const [isHovered, setIsHovered] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");

@@ -79,7 +79,7 @@ function CustomAccountButton({src}) {
           <>
               <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
                   <IconButton {...propsIconButton}>
-                      <Avatar src={src} sx={{ width: 45, height: 45 }}></Avatar>
+                      <Avatar src={src} sx={{ width: 40, height: 40 }}></Avatar>
                   </IconButton>
               </Box>
               <Menu

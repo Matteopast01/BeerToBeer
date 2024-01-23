@@ -6,11 +6,10 @@ import {useParams} from "react-router-dom";
 
 function OurPubs (){
     return (
-        <div>
-            <div>
+        <>
+            <>
                 <Header pub/>
-            </div>
-
+            </>
             <div style={{display: "flex", minHeight: "73vh", marginTop: "5px"}}>
                 <div style={{width: "60%", marginRight: "5px"}}>
                     <PageSwitch/>
@@ -19,11 +18,10 @@ function OurPubs (){
                     <Maps/>
                 </div>
             </div>
-
-            <div>
+            <>
                 <Footer/>
-            </div>
-        </div>
+            </>
+        </>
     );
 }
 
