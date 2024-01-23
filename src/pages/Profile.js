@@ -11,16 +11,17 @@ import {AuthContext} from "../contexts/Auth";
 import {count_docs, get_docs_by_attribute, pull_img_url} from "../services/persistence_manager";
 import CustomButton from "../components/CustomButton";
 import DeleteIcon from "@mui/icons-material/Delete";
+import {imgSelected} from "../store/App";
+import {useDispatch, useSelector} from "react-redux";
 
 const Profile = function (){
 
     const {currentUser} = useContext(AuthContext);
 
-    const [currentUserImage, setCurrentUserImage] = useState("")
     const [username, setUsername] = useState("")
     const [numberRew, setNumberRew] = useState(0)
-
-
+    const dispatch = useDispatch()
+    const currentUserImage = useSelector(state => state.userImg.value)
     const provideUserInformation = async function () {
 
         const result = {}
@@ -41,15 +42,19 @@ const Profile = function (){
 
     const changeUploadedImage = async function (image) {
 
-        if (image === null) {
+        if (image == null) {
             const defaultImage = await get_docs_by_attribute("default_user_img",
                 "Default_Images", "type")
             const defaultImg =  await pull_img_url(defaultImage[0].link_img)
-            setCurrentUserImage(defaultImg)
+            dispatch(imgSelected(defaultImg))
 
         }
         else {
-            setCurrentUserImage(image)
+            const user = await get_docs_by_attribute(currentUser.uid, "User", "uid")
+            const userImg =  await pull_img_url(user[0].link_img)
+            console.log(userImg)
+            dispatch(imgSelected(userImg))
+
         }
     }
 
@@ -60,9 +65,9 @@ const Profile = function (){
 
             setUsername(result.username)
             setNumberRew(result.number_rew)
-            setCurrentUserImage(result.img)
+            dispatch(imgSelected(result.img))
         })()
-    }, []);
+    }, [currentUserImage]);
 
     const changeUpdatedUsername = function ( updatedUsername){
         setUsername(updatedUsername)
@@ -85,7 +90,7 @@ const Profile = function (){
                         maxWidth="300px"
                         contentWidth="100%"
                         numberContentRow="12"
-                        img={typeof currentUserImage === "string" ? currentUserImage : URL.createObjectURL(currentUserImage)}
+                        img={currentUserImage}
                         onClick={null}
                         children={
                             <>

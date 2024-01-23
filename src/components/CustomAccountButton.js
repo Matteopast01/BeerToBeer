@@ -29,7 +29,11 @@ function CustomAccountButton({src}) {
 
       const handleClickProfile = (profile) => {
           setAnchorEl(null);
-          profile ? navigate("/profile") : navigate ("/adminPage")
+          if (profile === true){
+          !!currentUser ? navigate("/profile") : navigate("/login")}
+          else{
+              !!currentUser ? navigate("/adminPage") : navigate("/login")
+          }
       };
 
       const handleClickLog = () => {
@@ -92,12 +96,12 @@ function CustomAccountButton({src}) {
               >
                   {!!currentUser &&
                   <>
-                      <MenuItem onClick={() => handleClickProfile(true)}>
+                      <MenuItem onClick={()=>handleClickProfile(true)}>
                           <Avatar src={src}/> Profile
                       </MenuItem>
                       {currentUser.role ?
                           <div>
-                              <MenuItem onClick={() => handleClickProfile(false)}>
+                              <MenuItem onClick={()=>handleClickProfile(false)}>
                                   Dashboard
                               </MenuItem>
                           </div> : <div></div>}

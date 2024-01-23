@@ -9,7 +9,8 @@ import {useContext, useState} from "react";
 import {AuthContext} from "../contexts/Auth";
 import {delete_img, get_docs_by_attribute, push_img, update_by_function} from "../services/persistence_manager";
 import DeleteIcon from "@mui/icons-material/Delete";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {imgSelected} from "../store/App";
 
 
 export default function Popup( {username,changeUpdatedUsername, changeUploadedImage }) {
@@ -75,6 +76,7 @@ export default function Popup( {username,changeUpdatedUsername, changeUploadedIm
 
     const RetrieveImage = async function (img) {
         setImg(img)
+
     }
 
     const propsEdit = {
