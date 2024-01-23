@@ -10,8 +10,7 @@ export const AdminPrivateRoute = () => {
 
     const role = useAsync(async ()=> {
         if(currentUser != null) {
-            const result = await get_docs_by_attribute(currentUser.uid, "User", "uid")
-            return result[0].role
+            return currentUser.role
         }
     })
 

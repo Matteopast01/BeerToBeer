@@ -34,7 +34,7 @@ function CustomAccountButton({src}) {
 
       const handleClickLog = () => {
           setAnchorEl(null);
-          !!currentUser ? handleLogout() : navigate("/login")
+          !!currentUser ? handleLogout(navigate) : navigate("/login")
       };
 
       const propsIconButton = {
