@@ -26,13 +26,14 @@ function Header({pub, disableSearchBar, advancedSearch}) {
 
     useEffect(() => {
         (async  ()=> {
-            const user = await get_docs_by_attribute(currentUser.uid, "User", "uid")
-            const defaultImage = await get_docs_by_attribute("default_user_img",
-                "Default_Images", "type")
-            const link_img = user[0].link_img
-            const img = !!link_img ? await pull_img_url(link_img) : await pull_img_url(defaultImage[0].link_img)
-            setProfileImg(img)
-
+            if (currentUser != null) {
+                const user = await get_docs_by_attribute(currentUser.uid, "User", "uid")
+                const defaultImage = await get_docs_by_attribute("default_user_img",
+                    "Default_Images", "type")
+                const link_img = user[0].link_img
+                const img = !!link_img ? await pull_img_url(link_img) : await pull_img_url(defaultImage[0].link_img)
+                setProfileImg(img)
+            }
         })()
     }, []);
 
@@ -54,7 +55,6 @@ function Header({pub, disableSearchBar, advancedSearch}) {
             value = value && value.charAt(0) === '#' ? value.slice(1) : value;
             const beer = await requestBeersByName(value);   // it returns an array of one element
             const id = beer[0].id;
-            console.log("beer " + beer)
             dispatch(setSearchTerm(value));
             navigate(`/product/${id}`)
             navigate(0)
