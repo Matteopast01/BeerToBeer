@@ -31,3 +31,24 @@ export const loads_rews = async (rews) => {
     }
     return items
 }
+
+
+export const sort_reviews = (reviews)=>{
+    const rews = []
+    const rew_answers = {}
+    reviews.map((item)=>{
+        if( item.id_replied_review === 0){
+            rews.push(item)
+        }
+        else if( item.id_replied_review in rew_answers){
+            rew_answers[ item.id_replied_review ].push(item)
+        }
+        else {
+            rew_answers[ item.id_replied_review ] = [item]
+        }
+    })
+    return {
+        reviews : rews,
+        answers : rew_answers
+    }
+}

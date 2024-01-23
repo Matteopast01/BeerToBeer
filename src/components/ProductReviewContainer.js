@@ -5,7 +5,7 @@ import {setRewToReply, updateReviews} from "../store/App";
 import {get_docs_by_attribute, pull_img_url} from "../services/persistence_manager";
 import Typography from "@mui/material/Typography";
 import {Divider} from "@mui/material";
-import {loads_rews} from "../services/utility/review_utility";
+import {loads_rews, sort_reviews} from "../services/utility/review_utility";
 
 
 
@@ -23,19 +23,9 @@ const ProductReviewContainer = function({beerId}){
 
 
     // Utility
-    const rews = []
-    const rew_answers = {}
-    reviews.map((item)=>{
-        if( item.id_replied_review === 0){
-            rews.push(item)
-        }
-        else if( item.id_replied_review in rew_answers){
-           rew_answers[ item.id_replied_review ].push(item)
-        }
-        else {
-            rew_answers[ item.id_replied_review ] = [item]
-        }
-    })
+    const sorted_rew = sort_reviews(reviews)
+    const rews = sorted_rew.reviews
+    const rew_answers = sorted_rew.answers
 
     // Handle function
 
