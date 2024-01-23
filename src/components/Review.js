@@ -37,8 +37,8 @@ function Review({rew, answers=[], onReply}){
                     <div>
                         <time style={{fontWeight: "lighter", fontSize: "12px"}}>{new Date(rew.date).toLocaleDateString("it",{ month: '2-digit', day: '2-digit', year: 'numeric' })}</time>
                         {!!reply_button ? <CustomButton sx={{fontSize: "11px", color: '#333333'}} text={"reply"} handleClick={()=>{onReply(rew)}}/> : ""}
-                        {(!!reply_button && !!answer_opened && answers.length > 0) ? <CustomButton sx={{fontSize: "11px", color: '#333333'}} text={"hide answers"} endIcon={<KeyboardArrowDownIcon/>} handleClick={()=>{ clickHandler(false)}}/> : ""}
-                        {(!!reply_button && !answer_opened && answers.length > 0) ? <CustomButton sx={{fontSize: "11px", color: '#333333'}} text={"view answers"} endIcon={<KeyboardArrowUpIcon/>} handleClick={()=>{ clickHandler(true)}}/> : "" }
+                        {(!!reply_button && !!answer_opened && answers.length > 0) ? <CustomButton sx={{fontSize: "11px", color: '#333333'}} text={"hide answers"} endIcon={<KeyboardArrowUpIcon/>} handleClick={()=>{ clickHandler(false)}}/> : ""}
+                        {(!!reply_button && !answer_opened && answers.length > 0) ? <CustomButton sx={{fontSize: "11px", color: '#333333'}} text={"view answers"} endIcon={<KeyboardArrowDownIcon/>} handleClick={()=>{ clickHandler(true)}}/> : "" }
                     </div>
                 </div>
             </ListItem>

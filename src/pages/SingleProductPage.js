@@ -97,6 +97,7 @@ function SingleProductPage(){
                 onSubmit={handleInputRewSubmit}
                 rewToReply={rewToReply}
                 onUnreply={handleInputRewUnreply}
+                replyPlaceholder={"write your reply..."}
             />
             <Footer/>
         </div>

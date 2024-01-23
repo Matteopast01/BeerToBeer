@@ -61,7 +61,7 @@ const ProductReviewContainer = function({beerId}){
         <div style={{overflowY: "auto", overflowX: "hidden", maxHeight: "500px"}}>
             {!(reviews.length === 0) ? render_rews(rews):
                 <div style={{marginTop: "50px", marginBottom: "50px"}}>
-                    <Typography sx={{textAlign: "center"}} fontSize={25}> {"Non ci Sono Recensioni"} </Typography>
+                    <Typography sx={{textAlign: "center"}} fontSize={25}> {"There are any reviews"} </Typography>
                 </div>}
         </div>
     )
