@@ -8,9 +8,6 @@ import {Divider} from "@mui/material";
 import {loads_rews, sort_reviews} from "../services/utility/review_utility";
 import {AuthContext} from "../contexts/Auth";
 
-
-
-
 const ProductReviewContainer = function({beerId}){
      //Hook
     const dispatch = useDispatch()
@@ -22,7 +19,6 @@ const ProductReviewContainer = function({beerId}){
         })()
     }, []);
     const {currentUser} = useContext(AuthContext);
-
 
     // Utility
     const sorted_rew = sort_reviews(reviews)
@@ -38,7 +34,6 @@ const ProductReviewContainer = function({beerId}){
     const handleOptionClicked = (rew)=>{
         dispatch(setRewToOption(rew))
     }
-
 
     // Render
     const render_rews = (rews)=>{
@@ -63,13 +58,10 @@ const ProductReviewContainer = function({beerId}){
         <div style={{overflowY: "auto", overflowX: "hidden", maxHeight: "500px"}}>
             {!(reviews.length === 0) ? render_rews(rews):
                 <div style={{marginTop: "50px", marginBottom: "50px"}}>
-                    <Typography sx={{textAlign: "center"}} fontSize={25}> {"There are any reviews"} </Typography>
+                    <Typography sx={{textAlign: "center"}} fontSize={25}> {"There are no reviews"} </Typography>
                 </div>}
         </div>
     )
-
-
-
 }
 
- export default ProductReviewContainer
+ export default ProductReviewContainer;
