@@ -10,9 +10,10 @@ const Search = function (){
         <div>
             <div>
                 <Header advancedSearch/>
+                <br/>
             </div>
             <div style={{ display: 'flex', flexDirection: 'row' }}>
-                <div style={{ marginRight: '20px' }}>
+                <div style={{ marginRight: '20px', marginTop: '10px'}}>
                     <AdvancedSearch/>
                     <div className="box has-text-centered mb-3">
                         <h5 className="title is-4">Sorting by:</h5>
