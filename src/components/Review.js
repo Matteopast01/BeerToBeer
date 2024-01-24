@@ -10,7 +10,7 @@ import CustomIconButton from "./CustomIconButton";
 
 
 
-function Review({rew, answers=[], onReply, showOptions, showOptionsAnswers}){
+function Review({rew, answers=[], onReply, onOptionClick, showOptions, showOptionsAnswers, showReplyButton}){
 
     // Hook
     const [answerOpened, setAnswerOpened] = useState(false)
@@ -23,7 +23,7 @@ function Review({rew, answers=[], onReply, showOptions, showOptionsAnswers}){
 
     // Render Function
 
-    const render_rew = (rew, option=false, answer_opened=true, reply_button=true, marginLeft=0)=>{
+    const render_rew = (rew, option=false, show_answer= true, answer_opened=true, reply_button=true, marginLeft=0)=>{
         return (
             <ListItem alignItems="flex-start" sx={{marginLeft: marginLeft.toString()+"px"}}>
                 <ListItemAvatar>
@@ -39,9 +39,9 @@ function Review({rew, answers=[], onReply, showOptions, showOptionsAnswers}){
                     <div>
                         <time style={{fontWeight: "lighter", fontSize: "12px"}}>{new Date(rew.date).toLocaleDateString("it",{ month: '2-digit', day: '2-digit', year: 'numeric' })}</time>
                         {!!reply_button ? <CustomButton sx={{fontSize: "11px", color: '#333333'}} text={"reply"} handleClick={()=>{onReply(rew)}}/> : ""}
-                        {(!!reply_button && !!answer_opened && answers.length > 0) ? <CustomButton sx={{fontSize: "11px", color: '#333333'}} text={"hide answers"} endIcon={<KeyboardArrowUpIcon/>} handleClick={()=>{ clickHandler(false)}}/> : ""}
-                        {(!!reply_button && !answer_opened && answers.length > 0) ? <CustomButton sx={{fontSize: "11px", color: '#333333'}} text={"view answers"} endIcon={<KeyboardArrowDownIcon/>} handleClick={()=>{ clickHandler(true)}}/> : "" }
-                        {!!option ? <CustomIconButton icon={<MoreHorizOutlinedIcon sx={{fontSize : 18}}/>}/> : ""}
+                        {(!! show_answer && !!answer_opened && answers.length > 0) ? <CustomButton sx={{fontSize: "11px", color: '#333333'}} text={"hide answers"} endIcon={<KeyboardArrowUpIcon/>} handleClick={()=>{ clickHandler(false)}}/> : ""}
+                        {(!! show_answer && !answer_opened && answers.length > 0) ? <CustomButton sx={{fontSize: "11px", color: '#333333'}} text={"view answers"} endIcon={<KeyboardArrowDownIcon/>} handleClick={()=>{ clickHandler(true)}}/> : "" }
+                        {!!option ? <CustomIconButton handleClick={()=>{onOptionClick(rew)}} icon={<MoreHorizOutlinedIcon sx={{fontSize : 18}}/>}/> : ""}
                     </div>
                 </div>
             </ListItem>
@@ -51,12 +51,12 @@ function Review({rew, answers=[], onReply, showOptions, showOptionsAnswers}){
 
     return (
     <div>
-        {!! rew ? render_rew(rew, showOptions, answerOpened): ""}
+        {!! rew ? render_rew(rew, showOptions, true, answerOpened, !!showReplyButton): ""}
         {(!!answers && !!answerOpened) ? answers.map((answer) => {
             const option_answer = ( showOptions && rew.user.uid === answer.user.uid) || (showOptionsAnswers)
             return (
                 <div key={answer.doc_id}>
-                    {render_rew(answer, option_answer, false, false, 50)}
+                    {render_rew(answer, option_answer, false, false, false, 50)}
                 </div>
             );
         }) : ""}

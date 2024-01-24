@@ -6,7 +6,8 @@ export const reviewSlices = createSlice(
         name: "review",
         initialState: {
             reviews : [],
-            rewToReply: null
+            rewToReply: null,
+            rewToOption: null,
         },
         reducers: {
             updateReviews: (state, action) =>{
@@ -14,6 +15,9 @@ export const reviewSlices = createSlice(
             },
             setRewToReply: (state, action)=>{
                 state.rewToReply = action.payload
+            },
+            setRewToOption: (state, action) =>{
+                state.rewToOption = action.payload
             }
         }
     }
@@ -27,7 +31,8 @@ export const pubReviewSlices = createSlice(
         name: "pub_review",
         initialState: {
             reviews : [],
-            rewToReply: null
+            rewToReply: null,
+            rewToOption: null,
         },
         reducers: {
             updatePubReviews: (state, action) =>{

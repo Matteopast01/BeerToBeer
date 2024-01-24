@@ -1,7 +1,7 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useContext, useEffect} from "react";
 import Review from "./Review";
-import {setRewToReply, updateReviews} from "../store/App";
+import {setRewToOption, setRewToReply, updateReviews} from "../store/App";
 import {get_docs_by_attribute, pull_img_url} from "../services/persistence_manager";
 import Typography from "@mui/material/Typography";
 import {Divider} from "@mui/material";
@@ -35,6 +35,10 @@ const ProductReviewContainer = function({beerId}){
         dispatch(setRewToReply(rew))
     }
 
+    const handleOptionClicked = (rew)=>{
+        dispatch(setRewToOption(rew))
+    }
+
 
     // Render
     const render_rews = (rews)=>{
@@ -44,7 +48,9 @@ const ProductReviewContainer = function({beerId}){
                     <Review rew={rew}
                             answers={!!(rew.doc_id in rew_answers) ? rew_answers[rew.doc_id].reverse(): []}
                             onReply={handleReply}
-                            showOptions={currentUser.uid === rew.user.uid}
+                            onOptionClick={handleOptionClicked}
+                            showOptions={!!currentUser && currentUser.uid === rew.user.uid}
+                            showReplyButton={!!currentUser}
                     />
                     <Divider/>
                 </div>

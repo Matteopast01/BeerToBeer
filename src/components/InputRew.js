@@ -7,7 +7,7 @@ import {TextareaAutosize} from "@mui/material";
 import Chip from "@mui/material/Chip";
 
 
-const InputRew = function({placeholder, replyPlaceholder, onChange, onSubmit, rewToReply, style, onUnreply}){
+const InputRew = function({placeholder, replyPlaceholder, onChange, onSubmit, rewToReply, style, onUnreply, ref}){
 
     // Hook
     const [text, setText] = useState("")
@@ -79,6 +79,7 @@ const InputRew = function({placeholder, replyPlaceholder, onChange, onSubmit, re
                     style={textAreaStyle}
                     placeholder={!! rewToReply ? replyPlaceholder : placeholder}
                     onChange={handleChange} value={text} minRows={2}
+                    ref={ref}
                 />
                 <div ref={contentRef}>
                     <CustomButton sx={submitButtonStyle} variant="contained" text={"Submit"} handleClick={handleSubmit}></CustomButton>
