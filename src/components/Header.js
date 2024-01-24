@@ -15,7 +15,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {imgSelected, pubSelected, resetPubSelected, setSearchTerm} from "../store/App";
 
 // disableSearchBar passed as prop disables the searchBar component
-function Header({pub, disableSearchBar, advancedSearch}) {
+function Header({pub, disableSearchBar, advancedSearch, singleProductPage}) {
 
     const navigate = useNavigate();
     const profileImg = useSelector(state => state.userImg.value)
