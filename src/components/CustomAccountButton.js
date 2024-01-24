@@ -10,6 +10,7 @@ import Logout from '@mui/icons-material/Logout';
 import {useNavigate} from "react-router-dom";
 import {useContext} from "react";
 import {AuthContext} from "../contexts/Auth";
+import theme from "../style/palette";
 
 function CustomAccountButton({src}) {
 
@@ -96,8 +97,9 @@ function CustomAccountButton({src}) {
               >
                   {!!currentUser &&
                   <>
-                      <MenuItem onClick={()=>handleClickProfile(true)}>
-                          <Avatar src={src}/> Profile
+                      <MenuItem onClick={() => handleClickProfile(true)}>
+                          {/*TODO palette da provare: <Avatar src={src}/> <span style={{color: theme.palette.primary.dark}}>Profile</span>*/}
+                          <Avatar src={src}/>Profile
                       </MenuItem>
                       {currentUser.role ?
                           <div>
