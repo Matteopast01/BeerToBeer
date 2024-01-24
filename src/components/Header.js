@@ -42,11 +42,12 @@ function Header({pub, disableSearchBar, advancedSearch}) {
         if (value != null) {
             const pubFromDB = await get_docs_by_attribute(value, "Pub", "name");
             const {position, ...newObj} = pubFromDB[0];
-
+            const img = await pull_img_url(pubFromDB[0].link_img)
             const pub = {
                 ...newObj,
                 lat: position.latitude,
-                lng: position.longitude
+                lng: position.longitude,
+                img: img
             };
             dispatch(pubSelected(pub));
         }

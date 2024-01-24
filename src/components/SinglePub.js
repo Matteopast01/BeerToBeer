@@ -44,7 +44,7 @@ function SinglePub() {
 
     // Utility
 
-    let images = pubSelected?.img || [];
+    let images = pubSelected.img;
     let description = pubSelected?.description || "";
     let name = pubSelected?.name;
 
