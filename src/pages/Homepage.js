@@ -6,7 +6,7 @@ import {pull_img_url} from "../services/persistence_manager";
 import useAsync from "../hooks/useAsync";
 import {get_docs_by_attribute} from "../services/persistence_manager";
 
-function Homepage(){
+function Homepage() {
 
     let images = useAsync(async  ()=> {
         const items = [];
@@ -22,7 +22,7 @@ function Homepage(){
         <div>
              <Header/>
             <br/>
-            <div>
+            <div style={{marginTop: "10px"}}>
                 <SimpleSlider imags={!!images ? images: []}/>
                 <br/>
                 <BeerContainer/>
