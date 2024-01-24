@@ -45,6 +45,7 @@ const ProductReviewContainer = function({beerId}){
                             onReply={handleReply}
                             onOptionClick={handleOptionClicked}
                             showOptions={!!currentUser && (currentUser.uid === rew.user.uid || currentUser.role)}
+                            showOptionsAnswers={!!currentUser && currentUser.role}
                             showReplyButton={!!currentUser}
                     />
                     <Divider/>
