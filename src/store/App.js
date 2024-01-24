@@ -1,6 +1,6 @@
 import { configureStore} from '@reduxjs/toolkit';
 import {reviewSlices, pubReviewSlices} from "../slices/ReviewSlices";
-import {filterSlice, searchedBeersSlice, searchTermSlice, sortingSlice} from "../slices/SearchSlices"
+import {filterSlice, searchedBeersSlice, searchTermSlice, selectedBeerSlice, sortingSlice} from "../slices/SearchSlices"
 import {loadedPubsSlice, pubSlice} from "../slices/PubSlices";
 import {userImgSlice} from '../slices/UserSlices'
 
@@ -15,7 +15,8 @@ const rootReducer = {
     loadedPubs: loadedPubsSlice.reducer,
     searchedBeers: searchedBeersSlice.reducer,
     searchTerm: searchTermSlice.reducer,
-    userImg: userImgSlice.reducer
+    userImg: userImgSlice.reducer,
+    selectedBeer : selectedBeerSlice.reducer
 };
 
 // Store configuration
@@ -32,6 +33,8 @@ export const {updatePubReviews, setPubRewToReply, setPubRewToOption} = pubReview
 export const {setSearchedBeers} = searchedBeersSlice.actions;
 export const {setSearchTerm} = searchTermSlice.actions;
 export const {imgSelected} = userImgSlice.actions;
+
+export const {setSelectedBeer} = selectedBeerSlice.actions;
 export const selectFilters = (state) => state.filters;
 
 export default store;

@@ -14,35 +14,34 @@ import ProductCardDescription from "../components/ProductCardDescription";
 import Footer from "../components/Footer";
 import ProductReviewContainer from "../components/ProductReviewContainer";
 import InputRew from "../components/InputRew";
-import {useContext, useEffect, useRef} from "react";
+import {useContext, useEffect, useRef, useState} from "react";
 import {AuthContext} from "../contexts/Auth";
 import {useDispatch, useSelector} from "react-redux";
-import {updateReviews, setRewToReply, setRewToOption} from "../store/App";
+import {updateReviews, setRewToReply, setRewToOption, setSelectedBeer} from "../store/App";
 import {loads_rews} from "../services/utility/review_utility";
 import Option from "../components/Option"
 import CustomButton from "../components/CustomButton";
 
 function SingleProductPage() {
 
-    const {beerId} = useParams()
-    const beer = useAsync(
-        async ()=>{
+    const {beer_Id} = useParams()
+    const idSearchedBeer = useSelector((state)=> state.selectedBeer.value)
+    let beerId = !!idSearchedBeer ? idSearchedBeer : beer_Id
+
+    console.log(beerId)
+    const [beer, setBeer] = useState(null)
+
+    useEffect(() => {
+        (async  ()=> {
+            beerId = !!idSearchedBeer ? idSearchedBeer : beer_Id
             const beer_api = await requestBeersById(beerId)
             const beer_firebase = await get_docs_by_attribute(Number(beerId),"Beer_Id", "id")
-            console.log(beer_firebase)
-            console.log(
-                {
-                    number_likes : beer_firebase[0].number_likes,
-                    ...beer_api[0],
-
-                }
-            )
-            return {
+            setBeer( {
                 ...beer_api[0],
                 ...beer_firebase[0]
-            }
-        }
-    )
+            })
+        })()
+    }, [beerId]);
     const {currentUser} = useContext(AuthContext);
     useEffect(() => {
         update_by_function("Beer_Id","id",Number(beerId), (obj)=>{
@@ -51,7 +50,7 @@ function SingleProductPage() {
         })
         return ()=>{
             dispatch(setRewToReply(null))
-            dispatch(setRewToOption(null))
+            dispatch(setSelectedBeer(null))
         }
     }, []);
     const dispatch = useDispatch()
@@ -97,7 +96,7 @@ function SingleProductPage() {
 
     return (
         <div>
-            <Header/>
+            <Header singleProductPage/>
             <br/>
             {!!beer ?
             <CustomCard img={beer.image_url} horizontal contentStyle={{width:"75%", background: "#f5f5f5"}} maxWidth={"100%"}>
