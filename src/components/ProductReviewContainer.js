@@ -7,18 +7,27 @@ import Typography from "@mui/material/Typography";
 import {Divider} from "@mui/material";
 import {loads_rews, sort_reviews} from "../services/utility/review_utility";
 import {AuthContext} from "../contexts/Auth";
+import {useParams} from "react-router-dom";
 
-const ProductReviewContainer = function({beerId}){
-     //Hook
+const ProductReviewContainer = function(){
+
+
+    //Hook
+
+    const  beer = useSelector((state)=> state.selectedBeer.value)
+
     const dispatch = useDispatch()
     const reviews = useSelector((state) => state.review.reviews)
+    const {currentUser} = useContext(AuthContext);
+
     useEffect(() => {
         (async () => {
-            const rews_redux = await loads_rews(await get_docs_by_attribute(beerId, "Review", "beer_id", null, "date", "desc"))
+            const rews_redux = !!beer ? await loads_rews(await get_docs_by_attribute(String(beer.id), "Review", "beer_id", null, "date", "desc")) : []
+            console.log("reviews: " + rews_redux)
             dispatch(updateReviews(rews_redux))
         })()
-    }, []);
-    const {currentUser} = useContext(AuthContext);
+    }, [beer]);
+
 
     // Utility
     const sorted_rew = sort_reviews(reviews)
@@ -32,7 +41,6 @@ const ProductReviewContainer = function({beerId}){
     }
 
     const handleOptionClicked = (rew)=>{
-        console.log(rew)
         dispatch(setRewToOption(rew))
     }
 
@@ -54,7 +62,7 @@ const ProductReviewContainer = function({beerId}){
             )
         })
     }
-    console.log(reviews)
+
 
     return (
         <div style={{overflowY: "auto", overflowX: "hidden", maxHeight: "500px"}}>

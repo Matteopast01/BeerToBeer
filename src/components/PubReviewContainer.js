@@ -15,17 +15,21 @@ import {Divider} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import {AuthContext} from "../contexts/Auth";
 
-function PubReviewContainer({pubId}) {
+function PubReviewContainer() {
+    const pubSelected = useSelector(state => state.pub.value);
+
     //Hook
     const dispatch = useDispatch()
     const reviews = useSelector((state) => state.pub_review.reviews)
+    const {currentUser} = useContext(AuthContext);
+
     useEffect(() => {
         (async () => {
-            const rews_redux = await loads_rews(await get_docs_by_attribute(pubId, "Pub_Review", "pub_id", null, "date", "desc"))
+            const rews_redux = await loads_rews(await get_docs_by_attribute(pubSelected.id, "Pub_Review", "pub_id", null, "date", "desc"))
             dispatch(updatePubReviews(rews_redux))
         })()
-    }, []);
-    const {currentUser} = useContext(AuthContext);
+    }, [pubSelected]);
+
 
 
     //Utility

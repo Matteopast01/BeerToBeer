@@ -25,34 +25,46 @@ import CustomButton from "../components/CustomButton";
 function SingleProductPage() {
 
     const {beer_Id} = useParams()
-    const idSearchedBeer = useSelector((state)=> state.selectedBeer.value)
-    let beerId = !!idSearchedBeer ? idSearchedBeer : beer_Id
+    const beer = useSelector((state)=> state.selectedBeer.value)
     const {currentUser} = useContext(AuthContext);
+    const dispatch = useDispatch()
 
-    const [beer, setBeer] = useState(null)
+
+
+
+    useEffect(() => {
+
+        (async  ()=> {
+            const beer_api = await requestBeersById(beer_Id)
+            const beer_firebase = await get_docs_by_attribute(Number(beer_Id),"Beer_Id", "id")
+            dispatch(setSelectedBeer({
+                ...beer_api[0],
+                ...beer_firebase[0]
+            }))
+        })()
+
+        return ()=>{
+            dispatch(setSelectedBeer(null))
+            dispatch(setRewToOption(null))
+        }
+    }, []);
 
     useEffect(() => {
         (async  ()=> {
-            beerId = !!idSearchedBeer ? idSearchedBeer : beer_Id
-            const beer_api = await requestBeersById(beerId)
-            const beer_firebase = await get_docs_by_attribute(Number(beerId),"Beer_Id", "id")
-            setBeer( {
-                ...beer_api[0],
-                ...beer_firebase[0]
+            const beerId = !!beer ? beer.id : beer_Id
+            update_by_function("Beer_Id","id",Number(beerId), (obj)=>{
+                obj.number_calls += 1
+                return obj
             })
         })()
-    }, [beerId]);
-    useEffect(() => {
-        update_by_function("Beer_Id","id",Number(beerId), (obj)=>{
-            obj.number_calls += 1
-            return obj
-        })
         return ()=>{
             dispatch(setRewToReply(null))
-            dispatch(setSelectedBeer(null))
+            dispatch(setRewToOption(null))
+
         }
-    }, []);
-    const dispatch = useDispatch()
+    }, [beer]);
+
+
     const rewToReply = useSelector((state) => state.review.rewToReply)
     const rewToOption = useSelector((state) => state.review.rewToOption)
 
@@ -66,13 +78,13 @@ function SingleProductPage() {
     // Handle Function
     const handleInputRewSubmit = async (text) => {
         await store_doc({
-            beer_id: beerId,
+            beer_id: beer.id,
             date: Date.now(),
             id_replied_review: !!rewToReply ? rewToReply.doc_id : 0 ,
             review: text,
             uid_author: currentUser.uid
         }, "Review")
-        const rews_redux = await loads_rews( await get_docs_by_attribute(beerId, "Review", "beer_id", null, "date", "desc"))
+        const rews_redux = await loads_rews( await get_docs_by_attribute(beer.id, "Review", "beer_id", null, "date", "desc"))
         dispatch(updateReviews(rews_redux))
         dispatch(setRewToReply(null))
     }
@@ -89,7 +101,7 @@ function SingleProductPage() {
         await delete_doc("Review", rewToOption.doc_id)
         delete_doc_by_attribute("Review", "id_replied_review", rewToOption.doc_id)
         dispatch(setRewToOption(null))
-        const rews_redux = await loads_rews( await get_docs_by_attribute(beerId, "Review", "beer_id", null, "date", "desc"))
+        const rews_redux = await loads_rews( await get_docs_by_attribute(beer.id, "Review", "beer_id", null, "date", "desc"))
         dispatch(updateReviews(rews_redux))
     }
 
@@ -101,7 +113,7 @@ function SingleProductPage() {
             <CustomCard img={beer.image_url} horizontal contentStyle={{width:"75%", background: "#f5f5f5"}} maxWidth={"100%"}>
                 <ProductCardDescription beer={beer}/>
             </CustomCard> : ""}
-            <ProductReviewContainer beerId={beerId}/>
+            <ProductReviewContainer />
             {
                 !! currentUser ?
                     (
