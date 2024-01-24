@@ -27,8 +27,8 @@ function SingleProductPage() {
     const {beer_Id} = useParams()
     const idSearchedBeer = useSelector((state)=> state.selectedBeer.value)
     let beerId = !!idSearchedBeer ? idSearchedBeer : beer_Id
+    const {currentUser} = useContext(AuthContext);
 
-    console.log(beerId)
     const [beer, setBeer] = useState(null)
 
     useEffect(() => {
@@ -42,7 +42,6 @@ function SingleProductPage() {
             })
         })()
     }, [beerId]);
-    const {currentUser} = useContext(AuthContext);
     useEffect(() => {
         update_by_function("Beer_Id","id",Number(beerId), (obj)=>{
             obj.number_calls += 1
