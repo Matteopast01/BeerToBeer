@@ -12,26 +12,30 @@ import store from "./store/App";
 import AdminPage from "./pages/AdminPage";
 import {AdminPrivateRoute} from "./components/AdminPrivateRoute";
 import SingleProductPage from "./pages/SingleProductPage";
+import theme from "./style/palette";
+import {ThemeProvider} from "@emotion/react";
 
 function App() {
     return (
         <Provider store={store}>
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={< Homepage />}/>
-                <Route element={<PrivateRoute />}>
-                    <Route path="/profile" element={< Profile />}/>
-                </Route>
-                <Route path="/login" element={<Login/>} />
-                <Route path="/signup" element={<Signup/>} />
-                <Route path="/search/:searchTerm?" element={<Search/>} />
-                <Route path="/ourpubs" element={<OurPubs/>} />
-                <Route path="/product/:beerId" element={<SingleProductPage/>} />
-                <Route element={<AdminPrivateRoute />}>
-                    <Route path="/adminPage" element={< AdminPage />}/>
-                </Route>
-            </Routes>
-        </BrowserRouter>
+            <ThemeProvider theme={theme}>
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="/" element={< Homepage />}/>
+                        <Route element={<PrivateRoute />}>
+                            <Route path="/profile" element={< Profile />}/>
+                        </Route>
+                        <Route path="/login" element={<Login/>} />
+                        <Route path="/signup" element={<Signup/>} />
+                        <Route path="/search/:searchTerm?" element={<Search/>} />
+                        <Route path="/ourpubs" element={<OurPubs/>} />
+                        <Route path="/product/:beerId" element={<SingleProductPage/>} />
+                        <Route element={<AdminPrivateRoute />}>
+                            <Route path="/adminPage" element={< AdminPage />}/>
+                        </Route>
+                    </Routes>
+                </BrowserRouter>
+            </ThemeProvider>
         </Provider>
     );
 }
