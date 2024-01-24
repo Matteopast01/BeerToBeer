@@ -8,6 +8,10 @@ const theme = createTheme({
             dark: '#0288d1',
             contrastText: '#fff',
         },
+
+        secondary: {
+            main: '#0288d1',
+        },
         error: {
             light: '#ff7961',
             main: '#f44336',
@@ -22,7 +26,7 @@ const theme = createTheme({
         },
         success: {
             light: '#4caf50',
-            main: '#2e7d32',
+           main: '#2e7d32',
             dark: '#1b5e20',
             contrastText: '#fff'
         },
@@ -37,8 +41,7 @@ const theme = createTheme({
 
 export default theme;
 
-/*
-export const primary = '#FFFFFF';
+/* export const primary = '#FFFFFF';
 
 export const secondary = '#2196F3';
 

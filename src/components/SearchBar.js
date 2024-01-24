@@ -21,8 +21,6 @@ const SearchBar = ({onSearch, handleSubmit, handleClick, options, label}) => {
         setSearchTerm("")
     }
 
-    console.log(JSON.stringify(theme));
-
     return (
         <form onSubmit={(event) => newHandleSubmit(searchTerm, event)} className="search-container">
             <Autocomplete
@@ -35,9 +33,7 @@ const SearchBar = ({onSearch, handleSubmit, handleClick, options, label}) => {
                 }}
                 renderInput={(params) => (
                     <TextField
-                        //warning
-                        //error
-                       //color='ciao'
+                        color="secondary"
                         {...params}
                         label={label}
                         variant="outlined"
@@ -49,7 +45,9 @@ const SearchBar = ({onSearch, handleSubmit, handleClick, options, label}) => {
                             fontSize: '14px',
                             fontStyle: 'italic',
                             fontFamily: 'Arial, sans-serif',
-                            //color: theme.palette.warning.main
+                            //"&:hover": {borderColor: "error", color: "error"}
+                            borderColor: '#2e7d32',
+                            color: theme.palette.warning.main
                         }}
                         InputProps={{
                             ...params.InputProps,
@@ -57,7 +55,7 @@ const SearchBar = ({onSearch, handleSubmit, handleClick, options, label}) => {
                             onMouseOut: () => setIsHovered(false),
                             onBlur: () => setSearchTerm(""),
                             //Per colorare la scritta
-                            //style: { color: theme.palette.warning.main },                        }}
+                           // style: { color: theme.palette.warning.main },
                         }}
                     />
                 )}
