@@ -32,6 +32,7 @@ const ProductReviewContainer = function({beerId}){
     }
 
     const handleOptionClicked = (rew)=>{
+        console.log(rew)
         dispatch(setRewToOption(rew))
     }
 

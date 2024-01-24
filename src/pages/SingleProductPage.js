@@ -2,6 +2,8 @@ import { useParams } from 'react-router-dom';
 import CustomCard from "../components/CustomCard";
 import useAsync from "../hooks/useAsync";
 import {
+    delete_doc,
+    delete_doc_by_attribute,
     get_docs_by_attribute, pull_img_url,
     requestBeersById,
     store_doc, update_by_function
@@ -15,14 +17,13 @@ import InputRew from "../components/InputRew";
 import {useContext, useEffect, useRef} from "react";
 import {AuthContext} from "../contexts/Auth";
 import {useDispatch, useSelector} from "react-redux";
-import {updateReviews, setRewToReply} from "../store/App";
+import {updateReviews, setRewToReply, setRewToOption} from "../store/App";
 import {loads_rews} from "../services/utility/review_utility";
-import {Dialog} from "@mui/material";
+import Option from "../components/Option"
 import CustomButton from "../components/CustomButton";
 
 function SingleProductPage() {
 
-    // Hook
     const {beerId} = useParams()
     const beer = useAsync(
         async ()=>{
@@ -33,6 +34,7 @@ function SingleProductPage() {
                 {
                     number_likes : beer_firebase[0].number_likes,
                     ...beer_api[0],
+
                 }
             )
             return {
@@ -41,18 +43,21 @@ function SingleProductPage() {
             }
         }
     )
-
     const {currentUser} = useContext(AuthContext);
     useEffect(() => {
         update_by_function("Beer_Id","id",Number(beerId), (obj)=>{
             obj.number_calls += 1
             return obj
         })
-        return ()=>{dispatch(setRewToReply(null))}
+        return ()=>{
+            dispatch(setRewToReply(null))
+            dispatch(setRewToOption(null))
+        }
     }, []);
-
     const dispatch = useDispatch()
     const rewToReply = useSelector((state) => state.review.rewToReply)
+    const rewToOption = useSelector((state) => state.review.rewToOption)
+
     /*
     <CustomButton text={
                     <Chip sx={ {background: "#ffd5d5"}}  icon={<FavoriteBorderIcon  sx={{color: "#f30303"}}/>} label={"15 Likes"}/>
@@ -78,6 +83,18 @@ function SingleProductPage() {
         dispatch(setRewToReply(null))
     }
 
+    const handleOptionRewCancel = ()=>{
+        dispatch(setRewToOption(null))
+    }
+
+    const handleOptionRewDelete = async () => {
+        await delete_doc("Review", rewToOption.doc_id)
+        delete_doc_by_attribute("Review", "id_replied_review", rewToOption.doc_id)
+        dispatch(setRewToOption(null))
+        const rews_redux = await loads_rews( await get_docs_by_attribute(beerId, "Review", "beer_id", null, "date", "desc"))
+        dispatch(updateReviews(rews_redux))
+    }
+
     return (
         <div>
             <Header/>
@@ -87,14 +104,29 @@ function SingleProductPage() {
                 <ProductCardDescription beer={beer}/>
             </CustomCard> : ""}
             <ProductReviewContainer beerId={beerId}/>
-            <InputRew
-                style={{marginTop: "1%", marginLeft: "10%", marginRight:"10%"}}
-                placeholder={"type your review..."}
-                onSubmit={handleInputRewSubmit}
-                rewToReply={rewToReply}
-                onUnreply={handleInputRewUnreply}
-                replyPlaceholder={"type your reply..."}
-            />
+            {
+                !! currentUser ?
+                    (
+                        <div>
+                            <InputRew
+                                style={{marginTop: "1%", marginLeft: "10%", marginRight:"10%"}}
+                                placeholder={"type your review..."}
+                                onSubmit={handleInputRewSubmit}
+                                rewToReply={rewToReply}
+                                onUnreply={handleInputRewUnreply}
+                                replyPlaceholder={"write your reply..."}
+                            />
+                            <Option
+                                open={!!rewToOption}
+                                deleteLabel={"Delete Review"}
+                                cancelLabel={"Cancel"}
+                                onCancel={handleOptionRewCancel}
+                                onDelete={handleOptionRewDelete}
+                            />
+                        </div>
+                    )
+                    : ""
+            }
             <Footer/>
         </div>
     )
