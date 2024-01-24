@@ -52,7 +52,7 @@ function PubReviewContainer({pubId}) {
                         answers={!!(rew.doc_id in sorted_rew.answers) ? sorted_rew.answers[rew.doc_id].reverse(): []}
                         onReply={handleReply}
                         onOptionClick={handleOptionClicked}
-                        showOptions={!!currentUser && currentUser.uid === rew.user.uid}
+                        showOptions={!!currentUser && (currentUser.uid === rew.user.uid || currentUser.role)}
                         showReplyButton={!!currentUser}
                     />
                     <Divider/>

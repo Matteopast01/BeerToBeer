@@ -49,7 +49,7 @@ const ProductReviewContainer = function({beerId}){
                             answers={!!(rew.doc_id in rew_answers) ? rew_answers[rew.doc_id].reverse(): []}
                             onReply={handleReply}
                             onOptionClick={handleOptionClicked}
-                            showOptions={!!currentUser && currentUser.uid === rew.user.uid}
+                            showOptions={!!currentUser && (currentUser.uid === rew.user.uid || currentUser.role)}
                             showReplyButton={!!currentUser}
                     />
                     <Divider/>
