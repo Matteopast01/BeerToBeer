@@ -9,6 +9,7 @@ function OurPubs (){
         <>
             <>
                 <Header pub/>
+                <br/>
             </>
             <div style={{display: "flex", minHeight: "73vh", marginTop: "5px"}}>
                 <div style={{width: "60%", marginRight: "5px"}}>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
+import {secondary} from "../style/palette";
 
 const SearchBar = ({onSearch, handleSubmit, handleClick, options, label}) => {
 
@@ -33,16 +34,17 @@ const SearchBar = ({onSearch, handleSubmit, handleClick, options, label}) => {
                 }}
                 renderInput={(params) => (
                     <TextField
+                        error
+                        color = 'error'
                         {...params}
                         label={label}
                         variant="outlined"
                         style={{
                             width: '400px',
                             backgroundColor: isHovered ? '#eaeffa' : '#fafafc',
-                            borderRadius: '5px',
-                            transition: 'background-color 0.3s ease-in-out',
+                            borderRadius: '3px',
+                            transition: 'background-color 0.1s ease-in-out',
                             fontSize: '14px',
-                            color: '#858484',
                             fontStyle: 'italic',
                             fontFamily: 'Arial, sans-serif',
                         }}
@@ -50,7 +52,7 @@ const SearchBar = ({onSearch, handleSubmit, handleClick, options, label}) => {
                             ...params.InputProps,
                             onMouseOver: () => setIsHovered(true),
                             onMouseOut: () => setIsHovered(false),
-                            onBlur: () => setSearchTerm("")
+                            onBlur: () => setSearchTerm(""),
                         }}
                     />
                 )}
