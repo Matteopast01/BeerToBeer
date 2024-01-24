@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
-import TextField from '@mui/material/TextField';
-import {secondary} from "../style/palette";
+import {TextField} from '@mui/material';
+import theme from "../style/palette";
 
 const SearchBar = ({onSearch, handleSubmit, handleClick, options, label}) => {
-
     const [isHovered, setIsHovered] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
 
@@ -22,6 +21,8 @@ const SearchBar = ({onSearch, handleSubmit, handleClick, options, label}) => {
         setSearchTerm("")
     }
 
+    console.log(JSON.stringify(theme));
+
     return (
         <form onSubmit={(event) => newHandleSubmit(searchTerm, event)} className="search-container">
             <Autocomplete
@@ -34,8 +35,9 @@ const SearchBar = ({onSearch, handleSubmit, handleClick, options, label}) => {
                 }}
                 renderInput={(params) => (
                     <TextField
-                        error
-                        color = 'error'
+                        //warning
+                        //error
+                       //color='ciao'
                         {...params}
                         label={label}
                         variant="outlined"
@@ -47,12 +49,15 @@ const SearchBar = ({onSearch, handleSubmit, handleClick, options, label}) => {
                             fontSize: '14px',
                             fontStyle: 'italic',
                             fontFamily: 'Arial, sans-serif',
+                            //color: theme.palette.warning.main
                         }}
                         InputProps={{
                             ...params.InputProps,
                             onMouseOver: () => setIsHovered(true),
                             onMouseOut: () => setIsHovered(false),
                             onBlur: () => setSearchTerm(""),
+                            //Per colorare la scritta
+                            //style: { color: theme.palette.warning.main },                        }}
                         }}
                     />
                 )}

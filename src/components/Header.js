@@ -13,8 +13,6 @@ import {
 } from "../services/persistence_manager";
 import {useDispatch, useSelector} from "react-redux";
 import {imgSelected, pubSelected, resetPubSelected, setSearchTerm} from "../store/App";
-import {secondary} from "../style/palette";
-
 
 // disableSearchBar passed as prop disables the searchBar component
 function Header({pub, disableSearchBar, advancedSearch}) {
@@ -88,7 +86,7 @@ function Header({pub, disableSearchBar, advancedSearch}) {
 
         },
         label: !!pub ? "Search pub..." : "Search beer...",
-        handleClick: !!pub ? handleClickPub : handleClickBeer
+        handleClick: !!pub ? handleClickPub : handleClickBeer,
     };
 
     const propsLogin = {
@@ -111,14 +109,15 @@ function Header({pub, disableSearchBar, advancedSearch}) {
 
     const propsHome = {
         text: "Home",
-        sx: { color: secondary},
+        //color: "error",
+        sx: { color: "primary.dark"},
         size: "large",
         handleClick: ()=>{navigate("/")}
     };
 
     const propsPubs = {
         text: "Our Pubs",
-        sx: { color: secondary},
+        sx: { color: "primary.dark"},
         size: "large",
         handleClick: ()=>{
             navigate("/ourpubs");
@@ -128,7 +127,7 @@ function Header({pub, disableSearchBar, advancedSearch}) {
 
     const propsAdvancedSearch = {
         text:"Advanced Search",
-        sx: { color: secondary},
+        sx: { color: "primary.dark"},
         size: "large",
         handleClick: ()=>{navigate("/search")},
         uploadButtonBoolean: true
