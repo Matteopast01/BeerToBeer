@@ -40,6 +40,9 @@ export const pubReviewSlices = createSlice(
             },
             setPubRewToReply: (state, action)=>{
                 state.rewToReply = action.payload
+            },
+            setPubRewToOption: (state, action) =>{
+                state.rewToOption = action.payload
             }
         }
     }

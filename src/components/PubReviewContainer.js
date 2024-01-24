@@ -1,11 +1,19 @@
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
+import {useContext, useEffect} from "react";
 import {loads_rews, sort_reviews} from "../services/utility/review_utility";
 import {get_docs_by_attribute} from "../services/persistence_manager";
-import {setPubRewToReply, setRewToReply, updatePubReviews, updateReviews} from "../store/App";
+import {
+    setPubRewToOption,
+    setPubRewToReply,
+    setRewToOption,
+    setRewToReply,
+    updatePubReviews,
+    updateReviews
+} from "../store/App";
 import Review from "./Review";
 import {Divider} from "@mui/material";
 import Typography from "@mui/material/Typography";
+import {AuthContext} from "../contexts/Auth";
 
 function PubReviewContainer({pubId}) {
     //Hook
@@ -17,6 +25,7 @@ function PubReviewContainer({pubId}) {
             dispatch(updatePubReviews(rews_redux))
         })()
     }, []);
+    const {currentUser} = useContext(AuthContext);
 
 
     //Utility
@@ -28,13 +37,24 @@ function PubReviewContainer({pubId}) {
         dispatch(setPubRewToReply(rew))
     }
 
+    const handleOptionClicked = (rew)=>{
+        dispatch(setPubRewToOption(rew))
+    }
+
 
     // Render
     const render_rews = (rews)=>{
         return rews.map((rew, index)=>{
             return (
                 <div key={rew.doc_id}>
-                    <Review rew={rew} answers={!!(rew.doc_id in sorted_rew.answers) ? sorted_rew.answers[rew.doc_id].reverse(): []} onReply={handleReply}/>
+                    <Review
+                        rew={rew}
+                        answers={!!(rew.doc_id in sorted_rew.answers) ? sorted_rew.answers[rew.doc_id].reverse(): []}
+                        onReply={handleReply}
+                        onOptionClick={handleOptionClicked}
+                        showOptions={!!currentUser && currentUser.uid === rew.user.uid}
+                        showReplyButton={!!currentUser}
+                    />
                     <Divider/>
                 </div>
             )

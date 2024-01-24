@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import CustomCard from "../components/CustomCard";
 import useAsync from "../hooks/useAsync";
 import {
-    delete_doc,
+    delete_doc, delete_doc_by_attribute,
     get_docs_by_attribute, pull_img_url,
     requestBeersById,
     store_doc, update_by_function
@@ -94,6 +94,7 @@ function SingleProductPage(){
 
     const handleOptionRewDelete = async () => {
         await delete_doc("Review", rewToOption.doc_id)
+        delete_doc_by_attribute("Review", "id_replied_review", rewToOption.doc_id)
         dispatch(setRewToOption(null))
         const rews_redux = await loads_rews( await get_docs_by_attribute(beerId, "Review", "beer_id", null, "date", "desc"))
         dispatch(updateReviews(rews_redux))

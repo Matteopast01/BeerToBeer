@@ -70,7 +70,7 @@ export const update_by_function =  async function (collection_name,attribute_nam
 }
 
 /**
- * delete an document (tuple)
+ * delete a document (tuple)
  * @param collection_name name of the object collection (table)
  * @param id id of the document
  * @param error error function
@@ -79,6 +79,19 @@ export const update_by_function =  async function (collection_name,attribute_nam
  */
 export const delete_doc = async function(collection_name, id, error = ()=>{}, postprocessing = ()=>{}){
     return database.delete_doc(collection_name, id, error, postprocessing)
+}
+
+/**
+ * delete a document with by attribute
+ * @param collection_name name of the object collection (table)
+ * @param attribute_name name of the attribute to check
+ * @param attribute value of the attribute to check
+ * @param error error function
+ * @param postprocessing postprocessing function
+ * @returns {Promise<void>}
+ */
+export const delete_doc_by_attribute = async function(collection_name, attribute_name, attribute, error = ()=>{}, postprocessing = ()=>{}){
+    return database.delete_doc_by_attribute(collection_name, attribute_name, attribute, error, postprocessing)
 }
 
 /**

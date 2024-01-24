@@ -2,8 +2,8 @@ import {useDispatch, useSelector} from "react-redux";
 import CustomIconButton from "./CustomIconButton";
 import CloseIcon from '@mui/icons-material/Close';
 import {
-    resetPubSelected,
-    setPubRewToReply,
+    resetPubSelected, setPubRewToOption,
+    setPubRewToReply, setRewToOption,
     setRewToReply,
     setSearchTerm,
     updatePubReviews,
@@ -11,20 +11,24 @@ import {
 } from "../store/App";
 import CustomCard from "./CustomCard";
 import {useContext, useEffect} from "react";
-import {get_docs_by_attribute, store_doc} from "../services/persistence_manager";
+import {delete_doc, delete_doc_by_attribute, get_docs_by_attribute, store_doc} from "../services/persistence_manager";
 import {loads_rews} from "../services/utility/review_utility";
 import {AuthContext} from "../contexts/Auth";
 import InputRew from "./InputRew";
 import PubReviewContainer from "./PubReviewContainer";
+import Option from "./Option";
 
 function SinglePub() {
 
     //Hook
     const pubSelected = useSelector(state => state.pub.value);
     useEffect(() => {
-        return ()=>{dispatch(setPubRewToReply(null))}
+        return ()=>{
+            dispatch(setPubRewToReply(null))
+            dispatch(setPubRewToOption(null))}
     }, []);
     const rewToReply = useSelector((state) => state.pub_review.rewToReply)
+    const rewToOption = useSelector((state)=> state.pub_review.rewToOption)
     const dispatch = useDispatch();
     const {currentUser} = useContext(AuthContext);
 
@@ -69,6 +73,19 @@ function SinglePub() {
         dispatch(setPubRewToReply(null))
     }
 
+
+    const handleOptionRewCancel = ()=> {
+        dispatch(setPubRewToOption(null))
+    }
+
+    const handleOptionRewDelete = async () => {
+        await delete_doc("Pub_Review", rewToOption.doc_id)
+        delete_doc_by_attribute("Pub_Review", "id_replied_review", rewToOption.doc_id)
+        dispatch(setPubRewToOption(null))
+        const rews_redux = await loads_rews( await get_docs_by_attribute(pubSelected.id, "Pub_Review", "pub_id", null, "date", "desc"))
+        dispatch(updatePubReviews(rews_redux))
+    }
+
     return (
 
         <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
@@ -89,14 +106,29 @@ function SinglePub() {
             </CustomCard>
             <div style={{width: "95%"}}>
                 <PubReviewContainer pubId={pubSelected.id}/>
-                <InputRew
-                    style={{marginTop: "1%", marginLeft: "10%", marginRight:"10%"}}
-                    placeholder={"type your review..."}
-                    onSubmit={handleInputRewSubmit}
-                    rewToReply={rewToReply}
-                    onUnreply={handleInputRewUnreply}
-                    replyPlaceholder={"type your reply..."}
-                />
+                {
+                    !! currentUser ?
+                        (
+                            <div>
+                                <InputRew
+                                    style={{marginTop: "1%", marginLeft: "10%", marginRight:"10%"}}
+                                    placeholder={"type your review..."}
+                                    onSubmit={handleInputRewSubmit}
+                                    rewToReply={rewToReply}
+                                    onUnreply={handleInputRewUnreply}
+                                    replyPlaceholder={"write your reply..."}
+                                />
+                                <Option
+                                    open={!!rewToOption}
+                                    deleteLabel={"Delete Review"}
+                                    cancelLabel={"Cancel"}
+                                    onCancel={handleOptionRewCancel}
+                                    onDelete={handleOptionRewDelete}
+                                />
+                            </div>
+                        )
+                        : ""
+                }
             </div>
 
         </div>

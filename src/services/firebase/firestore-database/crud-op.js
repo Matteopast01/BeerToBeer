@@ -154,6 +154,28 @@ export const delete_doc = async function(collection_name, id, error = ()=>{}, po
 }
 
 
+export const delete_doc_by_attribute = async function(collection_name, attribute_name, attribute, error = ()=>{}, postprocessing = ()=>{}){
+    try{
+
+        let q = query(collection(db, collection_name), where(attribute_name, "==", attribute));
+
+        let snapshot = await getDocs(q)
+
+        snapshot.forEach((snap_item) => {
+            deleteDoc(doc(db, collection_name, snap_item.id))
+        })
+
+        // postprocessing
+        postprocessing()
+        console.log("ok")
+    }
+    catch (e) {
+        console.log(e)
+        error()
+    }
+}
+
+
 export const count_docs = async function(attribute_val, collection_name, attribute_name){
     try{
         if (typeof (attribute_val) == "function") {
