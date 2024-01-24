@@ -25,17 +25,14 @@ function PubReviewContainer() {
 
     useEffect(() => {
         (async () => {
-            const rews_redux = await loads_rews(await get_docs_by_attribute(pubSelected.id, "Pub_Review", "pub_id", null, "date", "desc"))
+            const rews_redux = await loads_rews(await get_docs_by_attribute(pubSelected.id, "Pub_Review",
+                "pub_id", null, "date", "desc"))
             dispatch(updatePubReviews(rews_redux))
         })()
     }, [pubSelected]);
 
-
-
-    //Utility
+    // Utility
     const sorted_rew = sort_reviews(reviews)
-
-    //Handle Function
 
     const handleReply = (rew)=>{
         dispatch(setPubRewToReply(rew))
@@ -45,8 +42,6 @@ function PubReviewContainer() {
         dispatch(setPubRewToOption(rew))
     }
 
-
-    // Render
     const render_rews = (rews)=>{
         return rews.map((rew, index)=>{
             return (
@@ -70,7 +65,7 @@ function PubReviewContainer() {
         <div style={{overflowY: "auto", overflowX: "hidden", maxHeight: "500px"}}>
             {!(reviews.length === 0) ? render_rews(sorted_rew.reviews):
                 <div style={{marginTop: "50px", marginBottom: "50px"}}>
-                    <Typography sx={{textAlign: "center"}} fontSize={25}> {"There are any reviews"} </Typography>
+                    <Typography sx={{textAlign: "center"}} fontSize={25}> {"There are no reviews"} </Typography>
                 </div>}
         </div>
     )
