@@ -83,6 +83,7 @@ function Header({pub, disableSearchBar, advancedSearch}) {
             }
             else if (pub || advancedSearch) {
                 event.preventDefault()
+                dispatch(pubSelected(null))
             }
 
         },
