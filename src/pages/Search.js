@@ -7,7 +7,7 @@ import {ResultContainer} from "../components/ResultContainer";
 const Search = function (){
 
     return (
-        <div>
+        <>
             <div>
                 <Header advancedSearch/>
                 <br/>
@@ -27,7 +27,7 @@ const Search = function (){
             <div>
                 <Footer/>
             </div>
-        </div>
+        </>
     )
 }
 
