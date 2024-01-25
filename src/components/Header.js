@@ -8,14 +8,14 @@ import {useContext, useEffect, useState} from "react";
 import {
     get_docs_by_attribute,
     pull_img_url,
-    query_by_preamble,
+    query_by_preamble, requestBeersById,
     requestBeersByName
 } from "../services/persistence_manager";
 import {useDispatch, useSelector} from "react-redux";
-import {imgSelected, pubSelected, resetPubSelected, setSearchTerm} from "../store/App";
+import {imgSelected, pubSelected, resetPubSelected, setSearchTerm, setSelectedBeer} from "../store/App";
 
 // disableSearchBar passed as prop disables the searchBar component
-function Header({pub, disableSearchBar, advancedSearch}) {
+function Header({pub, disableSearchBar, advancedSearch, singleProductPage}) {
 
     const navigate = useNavigate();
     const profileImg = useSelector(state => state.userImg.value)
@@ -53,11 +53,19 @@ function Header({pub, disableSearchBar, advancedSearch}) {
 
     const handleClickBeer = async (value) => {
             value = value && value.charAt(0) === '#' ? value.slice(1) : value;
-            const beer = await requestBeersByName(value);   // it returns an array of one element
-            const id = beer[0].id;
-            dispatch(setSearchTerm(value));
-            navigate(`/product/${id}`)
-            navigate(0)
+            const beer_api = await requestBeersByName(value);   // it returns an array of one element
+            const id = beer_api[0].id;
+            if (singleProductPage) {
+                const beer_firebase = await get_docs_by_attribute(Number(id), "Beer_Id", "id")
+                dispatch(setSelectedBeer({
+                    ...beer_api[0],
+                    ...beer_firebase[0]
+                }));
+            }
+            else {
+                navigate(`/product/${id}`)
+            }
+
     };
 
     const propsSearch = {

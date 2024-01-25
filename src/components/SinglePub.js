@@ -26,7 +26,7 @@ function SinglePub() {
         return ()=>{
             dispatch(setPubRewToReply(null))
             dispatch(setPubRewToOption(null))}
-    }, []);
+    }, [pubSelected]);
     const rewToReply = useSelector((state) => state.pub_review.rewToReply)
     const rewToOption = useSelector((state)=> state.pub_review.rewToOption)
     const dispatch = useDispatch();
@@ -105,7 +105,7 @@ function SinglePub() {
                 </div>
             </CustomCard>
             <div style={{width: "95%"}}>
-                <PubReviewContainer pubId={pubSelected.id}/>
+                <PubReviewContainer />
                 {
                     !! currentUser ?
                         (

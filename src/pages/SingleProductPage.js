@@ -14,47 +14,57 @@ import ProductCardDescription from "../components/ProductCardDescription";
 import Footer from "../components/Footer";
 import ProductReviewContainer from "../components/ProductReviewContainer";
 import InputRew from "../components/InputRew";
-import {useContext, useEffect, useRef} from "react";
+import {useContext, useEffect, useRef, useState} from "react";
 import {AuthContext} from "../contexts/Auth";
 import {useDispatch, useSelector} from "react-redux";
-import {updateReviews, setRewToReply, setRewToOption} from "../store/App";
+import {updateReviews, setRewToReply, setRewToOption, setSelectedBeer} from "../store/App";
 import {loads_rews} from "../services/utility/review_utility";
 import Option from "../components/Option"
 import CustomButton from "../components/CustomButton";
 
 function SingleProductPage() {
 
-    const {beerId} = useParams()
-    const beer = useAsync(
-        async ()=>{
-            const beer_api = await requestBeersById(beerId)
-            const beer_firebase = await get_docs_by_attribute(Number(beerId),"Beer_Id", "id")
-            console.log(beer_firebase)
-            console.log(
-                {
-                    number_likes : beer_firebase[0].number_likes,
-                    ...beer_api[0],
+    const {beer_Id} = useParams()
+    const beer = useSelector((state)=> state.selectedBeer.value)
+    const {currentUser} = useContext(AuthContext);
+    const dispatch = useDispatch()
 
-                }
-            )
-            return {
+
+
+
+    useEffect(() => {
+
+        (async  ()=> {
+            const beer_api = await requestBeersById(beer_Id)
+            const beer_firebase = await get_docs_by_attribute(Number(beer_Id),"Beer_Id", "id")
+            dispatch(setSelectedBeer({
                 ...beer_api[0],
                 ...beer_firebase[0]
-            }
-        }
-    )
-    const {currentUser} = useContext(AuthContext);
-    useEffect(() => {
-        update_by_function("Beer_Id","id",Number(beerId), (obj)=>{
-            obj.number_calls += 1
-            return obj
-        })
+            }))
+        })()
+
         return ()=>{
-            dispatch(setRewToReply(null))
+            dispatch(setSelectedBeer(null))
             dispatch(setRewToOption(null))
         }
     }, []);
-    const dispatch = useDispatch()
+
+    useEffect(() => {
+        (async  ()=> {
+            const beerId = !!beer ? beer.id : beer_Id
+            update_by_function("Beer_Id","id",Number(beerId), (obj)=>{
+                obj.number_calls += 1
+                return obj
+            })
+        })()
+        return ()=>{
+            dispatch(setRewToReply(null))
+            dispatch(setRewToOption(null))
+
+        }
+    }, [beer]);
+
+
     const rewToReply = useSelector((state) => state.review.rewToReply)
     const rewToOption = useSelector((state) => state.review.rewToOption)
 
@@ -68,13 +78,13 @@ function SingleProductPage() {
     // Handle Function
     const handleInputRewSubmit = async (text) => {
         await store_doc({
-            beer_id: beerId,
+            beer_id: beer.id,
             date: Date.now(),
             id_replied_review: !!rewToReply ? rewToReply.doc_id : 0 ,
             review: text,
             uid_author: currentUser.uid
         }, "Review")
-        const rews_redux = await loads_rews( await get_docs_by_attribute(beerId, "Review", "beer_id", null, "date", "desc"))
+        const rews_redux = await loads_rews( await get_docs_by_attribute(beer.id, "Review", "beer_id", null, "date", "desc"))
         dispatch(updateReviews(rews_redux))
         dispatch(setRewToReply(null))
     }
@@ -91,19 +101,19 @@ function SingleProductPage() {
         await delete_doc("Review", rewToOption.doc_id)
         delete_doc_by_attribute("Review", "id_replied_review", rewToOption.doc_id)
         dispatch(setRewToOption(null))
-        const rews_redux = await loads_rews( await get_docs_by_attribute(beerId, "Review", "beer_id", null, "date", "desc"))
+        const rews_redux = await loads_rews( await get_docs_by_attribute(beer.id, "Review", "beer_id", null, "date", "desc"))
         dispatch(updateReviews(rews_redux))
     }
 
     return (
         <div>
-            <Header/>
+            <Header singleProductPage/>
             <br/>
             {!!beer ?
             <CustomCard img={beer.image_url} horizontal cardDescriptionStyle={{width:"75%", background: "#f5f5f5"}} maxWidth={"100%"}>
                 <ProductCardDescription beer={beer}/>
             </CustomCard> : ""}
-            <ProductReviewContainer beerId={beerId}/>
+            <ProductReviewContainer />
             {
                 !! currentUser ?
                     (

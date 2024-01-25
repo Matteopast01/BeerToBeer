@@ -15,23 +15,24 @@ import {Divider} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import {AuthContext} from "../contexts/Auth";
 
-function PubReviewContainer({pubId}) {
+function PubReviewContainer() {
+    const pubSelected = useSelector(state => state.pub.value);
+
     //Hook
     const dispatch = useDispatch()
     const reviews = useSelector((state) => state.pub_review.reviews)
-    useEffect(() => {
-        (async () => {
-            const rews_redux = await loads_rews(await get_docs_by_attribute(pubId, "Pub_Review", "pub_id", null, "date", "desc"))
-            dispatch(updatePubReviews(rews_redux))
-        })()
-    }, []);
     const {currentUser} = useContext(AuthContext);
 
+    useEffect(() => {
+        (async () => {
+            const rews_redux = await loads_rews(await get_docs_by_attribute(pubSelected.id, "Pub_Review",
+                "pub_id", null, "date", "desc"))
+            dispatch(updatePubReviews(rews_redux))
+        })()
+    }, [pubSelected]);
 
-    //Utility
+    // Utility
     const sorted_rew = sort_reviews(reviews)
-
-    //Handle Function
 
     const handleReply = (rew)=>{
         dispatch(setPubRewToReply(rew))
@@ -41,8 +42,6 @@ function PubReviewContainer({pubId}) {
         dispatch(setPubRewToOption(rew))
     }
 
-
-    // Render
     const render_rews = (rews)=>{
         return rews.map((rew, index)=>{
             return (
@@ -66,7 +65,7 @@ function PubReviewContainer({pubId}) {
         <div style={{overflowY: "auto", overflowX: "hidden", maxHeight: "500px"}}>
             {!(reviews.length === 0) ? render_rews(sorted_rew.reviews):
                 <div style={{marginTop: "50px", marginBottom: "50px"}}>
-                    <Typography sx={{textAlign: "center"}} fontSize={25}> {"There are any reviews"} </Typography>
+                    <Typography sx={{textAlign: "center"}} fontSize={25}> {"There are no reviews"} </Typography>
                 </div>}
         </div>
     )

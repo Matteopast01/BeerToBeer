@@ -60,3 +60,15 @@ export const searchTermSlice = createSlice({
         },
     },
 });
+
+export const selectedBeerSlice = createSlice({
+    name: 'selectedBeer',
+    initialState: {
+        value: null
+    },
+    reducers: {
+        setSelectedBeer: (state, action) => {
+            state.value = action.payload;
+        },
+    },
+});

@@ -5,7 +5,7 @@ import CustomButton from "./CustomButton";
 import  {grey}  from '@mui/material/colors';
 import {TextareaAutosize} from "@mui/material";
 import Chip from "@mui/material/Chip";
-
+import theme from "../style/palette";
 
 const InputRew = function({placeholder, replyPlaceholder, onChange, onSubmit, rewToReply, style, onUnreply, ref}){
 
@@ -13,9 +13,7 @@ const InputRew = function({placeholder, replyPlaceholder, onChange, onSubmit, re
     const [text, setText] = useState("")
     const contentRef = useRef(null);
 
-
     // Handle functions
-
     const handleChange = (event)=>{
         contentRef.current?.scrollIntoView();
         const inputText = event.target.value
@@ -23,21 +21,22 @@ const InputRew = function({placeholder, replyPlaceholder, onChange, onSubmit, re
         if (!!onChange){
             onChange(inputText)
         }
-
     }
 
     const handleSubmit = ()=>{
         onSubmit(text)
         setText("")
     }
-    // Props
 
+    // Props
     const submitButtonStyle = {
         marginLeft: "35%",
         width: "30%",
         marginRight:"35%",
+        // TODO palette da provare: backgroundColor: theme.palette.primary.dark,
         backgroundColor: "#100f0f",
         '&:hover': {
+            // TODO palette da provare: backgroundColor: theme.palette.primary.main
             backgroundColor: grey[900]
         },
         color: "#ffffff"
@@ -55,17 +54,11 @@ const InputRew = function({placeholder, replyPlaceholder, onChange, onSubmit, re
         }
     }
 
-
-
     const textAreaStyle = {
         width: "100%",
         padding: "10px",
         resize: "none"
     }
-
-    // Render
-
-
 
     return (
         <div style={style}>
