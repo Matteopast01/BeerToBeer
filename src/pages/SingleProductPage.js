@@ -61,6 +61,11 @@ function SingleProductPage() {
             }
         })()
         return ()=>{
+            /*
+            window.addEventListener("popstate", ()=>{
+                dispatch(setSelectedBeer(beer))
+            })
+             */
             dispatch(setRewToReply(null))
             dispatch(setRewToOption(null))
 
