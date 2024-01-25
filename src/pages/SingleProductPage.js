@@ -56,6 +56,9 @@ function SingleProductPage() {
                 obj.number_calls += 1
                 return obj
             })
+            if (!window.location.href.includes(beerId)) {
+                window.history.pushState({}, '', `/product/${beerId}`);
+            }
         })()
         return ()=>{
             dispatch(setRewToReply(null))
