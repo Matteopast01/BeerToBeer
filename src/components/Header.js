@@ -52,6 +52,7 @@ function Header({pub, disableSearchBar, advancedSearch, singleProductPage}) {
     }
 
     const handleClickBeer = async (value) => {
+        if(!!value){
             value = value && value.charAt(0) === '#' ? value.slice(1) : value;
             const beer_api = await requestBeersByName(value);   // it returns an array of one element
             const id = beer_api[0].id;
@@ -65,7 +66,7 @@ function Header({pub, disableSearchBar, advancedSearch, singleProductPage}) {
             else {
                 navigate(`/product/${id}`)
             }
-
+        }
     };
 
     const propsSearch = {
