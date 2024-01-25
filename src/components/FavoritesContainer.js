@@ -37,7 +37,7 @@ export function FavoritesContainer(){
         (item)=>{return(
             <BeerCardDescription beer={item}/>
         ) },
-        "default:350--8",
+        "default:350--181-8",
         (item)=>{navigate(`/product/${item.id}`)}
     )
 

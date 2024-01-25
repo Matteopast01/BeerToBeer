@@ -68,7 +68,7 @@ function PubContainer(){
             return (<div><h1 style = {{fontWeight: "bold"}} className="has-text-centered"> {item.name}</h1> {item.description} </div>
         )
         },
-        "default:273--6",
+        "default:273--167-6",
         (item)=>{handleOnclick(item)}
     )
 

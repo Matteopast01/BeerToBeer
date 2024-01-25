@@ -1,15 +1,17 @@
 
 const useCardList = ( items, idFunc, imgFunc, descriptionFunc, styleName, onClick = (item)=>{}) => {
     let maxWidth = "100%"
-    let contentDimension = "100%"
+    let contentWidth = "auto"
+    let contentHeight = "auto"
     let numberContentRow = "100%"
     if(styleName.includes(":")){
         const splitted = styleName.split(":")
         if(styleName.includes("-") ){
             const widthSplitted = splitted[1].split("-")
             maxWidth = !!widthSplitted[0] ? parseInt(widthSplitted[0]): "100%"
-            contentDimension = !!widthSplitted[1] ? parseInt(widthSplitted[1]): "100%"
-            numberContentRow = !!widthSplitted[2] ?parseInt(widthSplitted[2]): "100%"
+            contentWidth = !!widthSplitted[1] ? parseInt(widthSplitted[1]): "auto"
+            contentHeight = !!widthSplitted[2] ? parseInt(widthSplitted[2]): "auto"
+            numberContentRow = !!widthSplitted[2] ?parseInt(widthSplitted[3]): "auto"
         }
         maxWidth = parseInt(splitted[1])
         styleName = splitted[0]
@@ -19,7 +21,7 @@ const useCardList = ( items, idFunc, imgFunc, descriptionFunc, styleName, onClic
         case "horizontal":
             cardFeature = {
                 maxWidth : maxWidth,
-                contentStyle : !!contentDimension ? {width: contentDimension}: contentDimension,
+                contentStyle : {width: contentWidth, height: contentHeight},
                 numberContentRow: numberContentRow,
                 horizontal: true,
                 onClick: (item)=>{onClick(item)}
@@ -28,7 +30,7 @@ const useCardList = ( items, idFunc, imgFunc, descriptionFunc, styleName, onClic
         default:
             cardFeature = {
                 maxWidth : maxWidth,
-                contentWidth : !!contentDimension ? {width: contentDimension}: contentDimension,
+                contentStyle : {width: contentWidth, height: contentHeight},
                 numberContentRow : numberContentRow,
                 horizontal: false,
                 onClick: (item)=>{onClick(item)}

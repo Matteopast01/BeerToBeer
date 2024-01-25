@@ -100,7 +100,7 @@ function SingleProductPage() {
             <Header/>
             <br/>
             {!!beer ?
-            <CustomCard img={beer.image_url} horizontal contentStyle={{width:"75%", background: "#f5f5f5"}} maxWidth={"100%"}>
+            <CustomCard img={beer.image_url} horizontal cardDescriptionStyle={{width:"75%", background: "#f5f5f5"}} maxWidth={"100%"}>
                 <ProductCardDescription beer={beer}/>
             </CustomCard> : ""}
             <ProductReviewContainer beerId={beerId}/>
