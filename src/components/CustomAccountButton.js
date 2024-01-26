@@ -96,24 +96,28 @@ function CustomAccountButton({src}) {
                   {...propsMenu}
               >
                   {!!currentUser &&
-                  <>
+                  <div>
                       <MenuItem onClick={() => handleClickProfile(true)}>
-                          {/*TODO palette da provare: <Avatar src={src}/> <span style={{color: theme.palette.primary.dark}}>Profile</span>*/}
-                          <Avatar src={src}/>Profile
+                          {/*palette da provare: <Avatar src={src}/> <span style={{color: theme.palette.primary.dark}}>Profile</span>*/}
+                          <Avatar src={src}/> <span style={{color: theme.palette.primary.dark}}>Profile</span>
+                          {/*<Avatar src={src}/>Profile*/}
                       </MenuItem>
                       {currentUser.role ?
                           <div>
                               <MenuItem onClick={()=>handleClickProfile(false)}>
-                                  Dashboard
+                                  <span style={{color: theme.palette.primary.dark}}>Dashboard</span>
+                                  {/*Dashboard*/}
                               </MenuItem>
                           </div> : <div></div>}
                       <Divider />
-                  </>}
+                  </div>}
                   <MenuItem onClick={handleClickLog}>
                       <ListItemIcon>
                           <Logout fontSize="small" />
                       </ListItemIcon>
-                      {!!currentUser ? "Logout" : "Login"}
+                      {!!currentUser ?
+                          <span style={{color: theme.palette.primary.dark}}>Logout</span> :
+                          <span style={{color: theme.palette.primary.dark}}>Login</span>}
                   </MenuItem>
               </Menu>
           </>
