@@ -11,7 +11,7 @@ function valuetext(value) {
     return `${value}`;
 }
 
-function AdvancedSearch( ) {
+function AdvancedSearch() {
 
     const SearchedBeers = useSelector((state)=>state.searchedBeers.searchedBeers)
 
@@ -81,14 +81,13 @@ function AdvancedSearch( ) {
         </div>
     ));
 
-
     return (
-        <div>
+        <>
             <div className="box has-text-centered mb-3">
                 <h3 className="title is-4">Filter by:</h3>
                 {renderedData}
             </div>
-        </div>
+        </>
     );
 }
 export default AdvancedSearch;
