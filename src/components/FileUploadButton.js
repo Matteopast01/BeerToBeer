@@ -1,6 +1,7 @@
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import theme from "../style/palette";
 
 const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
@@ -25,7 +26,9 @@ const FileUploadButton = ({ onFileChange }) => {
         <Button
             component="label"
             variant="outlined"
-            style={{ border: '1px solid primary', color: 'black' }}
+            style={{ border: '1px solid primary' }}
+            color= 'secondary'
+             sx= {{ color: theme.palette.info.dark }}
             startIcon={<CloudUploadIcon />}>
             Upload file
             <VisuallyHiddenInput type="file" onChange={handleFileChange} />

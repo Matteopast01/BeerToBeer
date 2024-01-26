@@ -10,8 +10,7 @@ import {AuthContext} from "../contexts/Auth";
 import {delete_img, get_docs_by_attribute, push_img, update_by_function} from "../services/persistence_manager";
 import DeleteIcon from "@mui/icons-material/Delete";
 import {useDispatch, useSelector} from "react-redux";
-import {imgSelected} from "../store/App";
-
+import theme from "../style/palette";
 
 export default function Popup( {username,changeUpdatedUsername, changeUploadedImage }) {
     const [open, setOpen] = useState(false);
@@ -81,7 +80,8 @@ export default function Popup( {username,changeUpdatedUsername, changeUploadedIm
 
     const propsEdit = {
         variant: "outlined",
-        sx: { color: '#333333'},
+        color: "secondary",
+        sx: { color: theme.palette.info.dark },
         size: "large",
         endIcon: <EditIcon />,
         text: "Edit",
@@ -90,7 +90,8 @@ export default function Popup( {username,changeUpdatedUsername, changeUploadedIm
 
     const propsRemoveCurrentImage = {
         variant: "outlined",
-        sx: { color: '#333333'},
+        color: "secondary",
+        sx: { color: theme.palette.info.dark },
         size: "large",
         endIcon: <DeleteIcon />,
         text: "Delete Image",
@@ -99,7 +100,8 @@ export default function Popup( {username,changeUpdatedUsername, changeUploadedIm
 
     const propsSave = {
         variant: "outlined",
-        sx: { color: '#333333'},
+        color: "secondary",
+        sx: { color: theme.palette.info.dark },
         size: "large",
         endIcon: <SaveAsIcon />,
         text: "Save ",
@@ -109,7 +111,7 @@ export default function Popup( {username,changeUpdatedUsername, changeUploadedIm
     const propsClose = {
         variant: "text",
         color: "error",
-        sx: {color: '#f30303'},
+        sx: {color: theme.palette.error.main },
         size: "medium",
         icon: <CloseIcon />,
         handleClick: handleFormClose
@@ -148,8 +150,8 @@ export default function Popup( {username,changeUpdatedUsername, changeUploadedIm
                     type="text"
                     fullWidth
                     variant="standard"
-                    sx={{marginBottom: '30px' }}/>
-                    <DialogContentText  sx={{ textAlign: 'left', width: '100%', marginBottom: '30px'}}>
+                    sx={{marginBottom: '30px'}}/>
+                    <DialogContentText sx={{ textAlign: 'left', width: '100%', marginBottom: '30px'}}>
                         Enter your new photo here:
                     </DialogContentText>
                     <ImagesUploader props = {{type : "default", uploadFunction: RetrieveImage}}
