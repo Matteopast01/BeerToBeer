@@ -74,7 +74,7 @@ export default function BeerCardDescription({beer}){
             {
                 !! currentUser ?
                     <div>
-                        <CustomIconButton size={"small"} sx={{ color: '#f30303'}}
+                        <CustomIconButton size={"small"} sx={{ color: 'error.main'}}
                                           icon={!liked ? <FavoriteBorderIcon/>: <FavoriteIcon/>}
                                           handleClick={async () => {
                                               setLiked(!liked)
@@ -82,7 +82,7 @@ export default function BeerCardDescription({beer}){
                                               setLiked(await isIconClicked(beer.id, currentUser.uid, "Like"))
                                           }}
                         />
-                        <CustomIconButton size={"small"} sx={{ color: '#ffd700'}}
+                        <CustomIconButton size={"small"} sx={{ color: 'warning.light'}}
                                           icon={!favorited ? <StarBorderIcon sx={{fontSize : 27}}/> : <StarIcon sx={{fontSize : 27}}/>}
                                           handleClick={async () => {
                                               setFavorited(!favorited)
