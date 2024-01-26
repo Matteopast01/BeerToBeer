@@ -5,16 +5,12 @@ import Footer from "../components/Footer";
 import FavoritesContainer from "../components/FavoritesContainer"
 import CustomCard from "../components/CustomCard";
 import Popup from "../components/Popup";
-
 import {AuthContext} from "../contexts/Auth";
-
 import {count_docs, get_docs_by_attribute, pull_img_url} from "../services/persistence_manager";
-import CustomButton from "../components/CustomButton";
-import DeleteIcon from "@mui/icons-material/Delete";
 import {imgSelected} from "../store/App";
 import {useDispatch, useSelector} from "react-redux";
 
-const Profile = function (){
+const Profile = function () {
 
     const {currentUser} = useContext(AuthContext);
 
@@ -54,7 +50,6 @@ const Profile = function (){
             const userImg =  await pull_img_url(user[0].link_img)
             console.log(userImg)
             dispatch(imgSelected(userImg))
-
         }
     }
 
@@ -74,7 +69,7 @@ const Profile = function (){
     }
 
     return (
-        <div>
+        <>
             <div style={{ display: 'block', marginBottom: '10px'}}>
                 <Header />
             </div>
@@ -112,7 +107,7 @@ const Profile = function (){
                 <FavoritesContainer />
             </div>
             <Footer />
-        </div>
+        </>
     )
 }
 
