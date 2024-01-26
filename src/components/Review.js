@@ -5,8 +5,9 @@ import CustomButton from "./CustomButton";
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
-import {useState} from "react";
+import {useContext, useState} from "react";
 import CustomIconButton from "./CustomIconButton";
+import {AuthContext} from "../contexts/Auth";
 
 
 
@@ -14,6 +15,7 @@ function Review({rew, answers=[], onReply, onOptionClick, showOptions, showOptio
 
     // Hook
     const [answerOpened, setAnswerOpened] = useState(false)
+    const {currentUser} = useContext(AuthContext);
 
     // Handle Function
 
@@ -24,6 +26,7 @@ function Review({rew, answers=[], onReply, onOptionClick, showOptions, showOptio
     // Render Function
 
     const render_rew = (rew, option=false, show_answer= true, answer_opened=true, reply_button=true, marginLeft=0)=>{
+        console.log(option)
         return (
             <ListItem alignItems="flex-start" sx={{marginLeft: marginLeft.toString()+"px"}}>
                 <ListItemAvatar>
@@ -53,7 +56,7 @@ function Review({rew, answers=[], onReply, onOptionClick, showOptions, showOptio
     <div>
         {!! rew ? render_rew(rew, showOptions, true, answerOpened, !!showReplyButton): ""}
         {(!!answers && !!answerOpened) ? answers.map((answer) => {
-            const option_answer = ( showOptions && rew.user.uid === answer.user.uid) || (showOptionsAnswers)
+            const option_answer = !!currentUser && (currentUser.uid === answer.user.uid || currentUser.role)
             return (
                 <div key={answer.doc_id}>
                     {render_rew(answer, option_answer, false, false, false, 50)}
