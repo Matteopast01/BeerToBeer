@@ -67,7 +67,7 @@ function ProductCardDescription({beer}){
 
     return (
         <>
-            <h1 style={{fontWeight: "bold", fontSize: "150%"}}>{beer.name}</h1>
+            <h1 style={{fontWeight: "bold", fontSize: "30px"}}>{beer.name}</h1>
             <div style={{display: "inline", margin: "auto"}}>
                 <Chip className="p-2" style={{background: "#89b7ea", margin: "2px"}}  label={`ABV ${beer.abv}% vol`}/>
             </div>

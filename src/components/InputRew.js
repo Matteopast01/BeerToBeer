@@ -31,25 +31,25 @@ const InputRew = function({placeholder, replyPlaceholder, onChange, onSubmit, re
     // Props
     const submitButtonStyle = {
         marginLeft: "35%",
-        width: "30%",
+        width: "auto",
         marginRight:"35%",
         // TODO palette da provare: backgroundColor: theme.palette.primary.dark,
-        backgroundColor: "#100f0f",
+        backgroundColor: theme.palette.primary.dark,
         '&:hover': {
             // TODO palette da provare: backgroundColor: theme.palette.primary.main
-            backgroundColor: grey[900]
+            backgroundColor: theme.palette.primary.main
         },
         color: "#ffffff"
     }
 
     const chipStyle = {
         marginBottom: "2px",
-        backgroundColor: "#000000",
+        backgroundColor: theme.palette.primary.dark,
         color: "#ffffff",
         '& .MuiChip-deleteIcon': {
             color: "#fcf3f3",
             '&:hover': {
-                color: "#d2bcbc"
+                color: theme.palette.info.main
             }
         }
     }
@@ -57,7 +57,9 @@ const InputRew = function({placeholder, replyPlaceholder, onChange, onSubmit, re
     const textAreaStyle = {
         width: "100%",
         padding: "10px",
-        resize: "none"
+        resize: "none",
+        //box-shadow: 0 0 0 3px ${theme.palette.mode === 'dark' ? blue[600] : blue[200]};
+        // borderColor: theme.palette.primary.main,
     }
 
     return (
@@ -65,7 +67,7 @@ const InputRew = function({placeholder, replyPlaceholder, onChange, onSubmit, re
             <div>
                 {
                     !! rewToReply ?
-                        <Chip sx={chipStyle}  variant="outlined" onDelete={onUnreply} label={"reply to "+rewToReply.user.username}/>:
+                        <Chip sx={chipStyle}  variant="outlined" onDelete={onUnreply} label={"replying to "+rewToReply.user.username}/>:
                         ""
                 }
                 <TextareaAutosize
@@ -74,7 +76,7 @@ const InputRew = function({placeholder, replyPlaceholder, onChange, onSubmit, re
                     onChange={handleChange} value={text} minRows={2}
                     ref={ref}
                 />
-                <div ref={contentRef}>
+                <div ref={contentRef} style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
                     <CustomButton sx={submitButtonStyle} variant="contained" text={"Submit"} handleClick={handleSubmit}></CustomButton>
                 </div>
             </div>

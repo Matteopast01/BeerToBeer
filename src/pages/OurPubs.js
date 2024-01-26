@@ -15,7 +15,7 @@ function OurPubs (){
                 <div style={{width: "60%", marginRight: "5px"}}>
                     <PageSwitch/>
                 </div>
-                <div style={{width: "40%", marginTop: "10px"}}>
+                <div style={{width: "40%", marginTop: "7px"}}>
                     <Maps/>
                 </div>
             </div>

@@ -64,7 +64,7 @@ function AdvancedSearch( ) {
                 </Tooltip>
                 </div>
             <Slider
-                sx={{ color: '#333333',
+                sx={{ color: theme => theme.palette.primary.dark,
                     '& .MuiSlider-thumb': {
                         boxShadow: 'none',
                         '&:hover, &:focus, &.Mui-focusVisible': {
