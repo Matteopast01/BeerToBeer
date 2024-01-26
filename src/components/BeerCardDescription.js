@@ -73,7 +73,7 @@ export default function BeerCardDescription({beer}){
         <div>
             {
                 !! currentUser ?
-                    <div>
+                    <div> {/* TODO: punto modificato palette  */}
                         <CustomIconButton size={"small"} sx={{ color: 'error.main'}}
                                           icon={!liked ? <FavoriteBorderIcon/>: <FavoriteIcon/>}
                                           handleClick={async () => {
