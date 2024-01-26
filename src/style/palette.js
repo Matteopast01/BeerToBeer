@@ -8,9 +8,11 @@ const theme = createTheme({
             dark: '#0288d1',
             contrastText: '#fff',
         },
-
         secondary: {
+            light: '#29b6f6',
             main: '#0288d1',
+            dark: '#046194',
+            contrastText: '#fff'
         },
         error: {
             light: '#ff7961',
