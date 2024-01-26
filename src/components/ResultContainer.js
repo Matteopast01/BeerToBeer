@@ -2,7 +2,7 @@ import {CardList} from "./CardList";
 import useCardList from "../hooks/useCardList";
 import BeerCardDescription from "./BeerCardDescription";
 import {useEffect} from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {requestBeersById, requestBeersByName} from "../services/persistence_manager";
 import {setSearchedBeers, setSearchTerm} from "../store/App";
@@ -18,7 +18,6 @@ export const ResultContainer = function(){
     const selection2 = useSelector((state) => state.sorting.selection2)
 
     const searchedTerm = useSelector((state)=>state.searchTerm.value )
-    console.log(searchedTerm)
 
 
     let minAbv = values[0].min

@@ -11,8 +11,6 @@ function Maps(){
     const pubSelectedPosition = [currentPubSelected?.lat || null, currentPubSelected?.lng || null];
     const pubsLoaded = useSelector(state => state.loadedPubs.pubs);
 
-    // console.log(centerPosition)
-    // console.log(pubSelectedPosition)
 
     const customMarkerIcon = new L.Icon({
         iconUrl: "https://cdn2.iconfinder.com/data/icons/shipping-delivery-color/100/objects-52-1024.png",

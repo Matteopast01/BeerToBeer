@@ -1,10 +1,5 @@
 import * as React from 'react';
 import IconButton from '@mui/material/IconButton';
-
-// icon examples:
-import DeleteIcon from '@mui/icons-material/Delete';
-import AlarmIcon from '@mui/icons-material/Alarm';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import {useState} from "react";
 
 // label = label that explains the button type

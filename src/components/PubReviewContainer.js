@@ -5,10 +5,7 @@ import {get_docs_by_attribute} from "../services/persistence_manager";
 import {
     setPubRewToOption,
     setPubRewToReply,
-    setRewToOption,
-    setRewToReply,
-    updatePubReviews,
-    updateReviews
+    updatePubReviews
 } from "../store/App";
 import Review from "./Review";
 import {Divider} from "@mui/material";

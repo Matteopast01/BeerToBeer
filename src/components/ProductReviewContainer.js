@@ -7,7 +7,6 @@ import Typography from "@mui/material/Typography";
 import {Divider} from "@mui/material";
 import {loads_rews, sort_reviews} from "../services/utility/review_utility";
 import {AuthContext} from "../contexts/Auth";
-import {useParams} from "react-router-dom";
 
 const ProductReviewContainer = function(){
 
@@ -25,7 +24,6 @@ const ProductReviewContainer = function(){
 
 
             const rews_redux = !!beer ? await loads_rews(await get_docs_by_attribute(String(beer.id), "Review", "beer_id", null, "date", "desc")) : []
-            console.log(rews_redux)
             dispatch(updateReviews(rews_redux))
         })()
     }, [beer]);

@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { GoChevronDown } from "react-icons/go";
 import theme from "../style/palette";
-import {Divider} from "@mui/material";
 import * as React from "react";
 
 function DropDown({ options, value, onChange }) {

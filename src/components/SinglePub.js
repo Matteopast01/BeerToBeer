@@ -3,11 +3,9 @@ import CustomIconButton from "./CustomIconButton";
 import CloseIcon from '@mui/icons-material/Close';
 import {
     resetPubSelected, setPubRewToOption,
-    setPubRewToReply, setRewToOption,
-    setRewToReply,
+    setPubRewToReply,
     setSearchTerm,
-    updatePubReviews,
-    updateReviews
+    updatePubReviews
 } from "../store/App";
 import CustomCard from "./CustomCard";
 import {useContext, useEffect} from "react";

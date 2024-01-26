@@ -2,7 +2,6 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import PageSwitch from "../components/PageSwitch";
 import Maps from "../components/Maps";
-import {useParams} from "react-router-dom";
 
 function OurPubs (){
     return (

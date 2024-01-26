@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import { AuthContext } from "../contexts/Auth";
-import {get_docs_by_attribute} from "../services/persistence_manager";
 import useAsync from "../hooks/useAsync";
 
 

@@ -1,5 +1,3 @@
-import useAsync from "../hooks/useAsync";
-import {get_docs_by_attribute, pull_img_url} from "../services/persistence_manager"
 import {Avatar, ListItem, ListItemAvatar} from "@mui/material";
 import CustomButton from "./CustomButton";
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
@@ -26,7 +24,6 @@ function Review({rew, answers=[], onReply, onOptionClick, showOptions, showOptio
     // Render Function
 
     const render_rew = (rew, option=false, show_answer= true, answer_opened=true, reply_button=true, marginLeft=0)=>{
-        console.log(option)
         return (
             <ListItem alignItems="flex-start" sx={{marginLeft: marginLeft.toString()+"px"}}>
                 <ListItemAvatar>

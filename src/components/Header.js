@@ -1,6 +1,5 @@
 import CustomButton from "./CustomButton";
 import CustomAccountButton from "./CustomAccountButton";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SearchBar from "./SearchBar";
 import {useNavigate} from "react-router-dom";
 import {AuthContext} from "../contexts/Auth";
@@ -8,7 +7,7 @@ import {useContext, useEffect, useState} from "react";
 import {
     get_docs_by_attribute,
     pull_img_url,
-    query_by_preamble, requestBeersById,
+    query_by_preamble,
     requestBeersByName
 } from "../services/persistence_manager";
 import {useDispatch, useSelector} from "react-redux";
