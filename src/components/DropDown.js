@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { GoChevronDown } from "react-icons/go";
 import theme from "../style/palette";
 import {Divider} from "@mui/material";
+import * as React from "react";
 
 function DropDown({ options, value, onChange }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -34,10 +35,10 @@ function DropDown({ options, value, onChange }) {
                 className="hover:bg-link rounded cursor-pointer p-1"
                 onClick={() => handleOptionClick(option)}
                 key={option.value}
-                style={{ cursor: "pointer" }}
+                style={{cursor: "pointer"}}
             >
                 {option.label}
-                {/*// TODO: metterci stato con hover per evidenziare la scelta*/}
+                {/*// TODO: metterci stato con hover per evidenziare la scelta color: theme.palette.primary.dark*/}
             </div>
         );
     });
