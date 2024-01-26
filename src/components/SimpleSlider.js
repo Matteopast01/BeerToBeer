@@ -26,7 +26,8 @@ export default function SimpleSlider({imags}) {
                                     width: "1920px",
                                     height: "550px",
                                     objectFit: "cover", }} src={img.img} alt="Img1" />
-                                <h1 style={{position: "sticky", bottom: "50%", textAlign: "center", fontSize: 30, color: "white"}}>
+                                <h1 style={{position: "sticky", bottom: "20%", textAlign: "center", fontSize: 50, color: "white",
+                                textShadow: "3px 3px 5px rgba(0, 0, 0, 0.5)"}}>
                                     {img.text}
                                 </h1>
                             </div>
