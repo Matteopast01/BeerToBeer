@@ -17,6 +17,7 @@ import {AuthContext} from "../contexts/Auth";
 import InputRew from "./InputRew";
 import PubReviewContainer from "./PubReviewContainer";
 import Option from "./Option";
+import theme from "../style/palette";
 
 function SinglePub() {
 
@@ -32,7 +33,6 @@ function SinglePub() {
     const dispatch = useDispatch();
     const {currentUser} = useContext(AuthContext);
 
-
     // if we are rendering singlePub it means that a pubSelected exists and so its properties images and description
     // however js needs a fallback value in case of null state
 
@@ -43,12 +43,9 @@ function SinglePub() {
     //pubSelected.lng
 
     // Utility
-
     let images = pubSelected.img;
     let description = pubSelected?.description || "";
     let name = pubSelected?.name;
-
-
 
      // Handle Function
      function handleClick(){
@@ -64,7 +61,8 @@ function SinglePub() {
             review: text,
             uid_author: currentUser.uid
         }, "Pub_Review")
-        const rews_redux = await loads_rews( await get_docs_by_attribute(pubSelected.id, "Pub_Review", "pub_id", null, "date", "desc"))
+        const rews_redux = await loads_rews( await get_docs_by_attribute(pubSelected.id, "Pub_Review",
+            "pub_id", null, "date", "desc"))
         dispatch(updatePubReviews(rews_redux))
         dispatch(setPubRewToReply(null))
     }
@@ -72,7 +70,6 @@ function SinglePub() {
     const handleInputRewUnreply = async () =>{
         dispatch(setPubRewToReply(null))
     }
-
 
     const handleOptionRewCancel = ()=> {
         dispatch(setPubRewToOption(null))
@@ -82,56 +79,60 @@ function SinglePub() {
         await delete_doc("Pub_Review", rewToOption.doc_id)
         delete_doc_by_attribute("Pub_Review", "id_replied_review", rewToOption.doc_id)
         dispatch(setPubRewToOption(null))
-        const rews_redux = await loads_rews( await get_docs_by_attribute(pubSelected.id, "Pub_Review", "pub_id", null, "date", "desc"))
+        const rews_redux = await loads_rews( await get_docs_by_attribute(pubSelected.id, "Pub_Review",
+            "pub_id", null, "date", "desc"))
         dispatch(updatePubReviews(rews_redux))
     }
 
     return (
 
-        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative', paddingTop: '7px'}}>
             <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%'}}>
                 <div style={{width: '70px'}}/>
-                <div style={{flex: '1', textAlign: 'center', fontSize: '40px', fontFamily: 'Arial, sans-serif'}}>
-                    <b>{name}</b>
-                </div>
-                <div style={{ width: '70px' }} />
-                <div style={{ width: '50px' }}>
-                    <CustomIconButton icon={<CloseIcon sx={{ color: '#f30303' }} />} handleClick={handleClick} size={"medium"} />
+                <div style={{position: 'absolute', top: 0, right: 0, zIndex: 1, width: '70px', textAlign: 'center'}}>
+                    <CustomIconButton icon={<CloseIcon sx={{color: theme.palette.error.main}}/>}
+                                      handleClick={handleClick} size={"small"}/>
                 </div>
             </div>
-            <CustomCard img={images}  contentStyle={{width:"100%", background: "#f5f5f5"}} maxWidth={"95%"}>
-                <div style={{textAlign: 'left', fontSize: '16px', fontFamily: 'Arial, sans-serif'}}>
+            <CustomCard img={images} contentStyle={{width: "100%", background: theme.palette.info.light}}
+                        maxWidth={"95%"}>
+                <div style={{flex: '1', textAlign: 'center', fontSize: '30px', fontFamily: 'Arial, sans-serif'}}>
+                    <b>{name}</b>
+                </div>
+                <div style={{
+                    textAlign: 'left',
+                    fontSize: '16px',
+                    fontFamily: 'Arial, sans-serif',
+                    marginLeft: "5px",
+                    marginRight: "5px"
+                }}>
                     {description}
                 </div>
             </CustomCard>
             <div style={{width: "95%"}}>
-                <PubReviewContainer />
-                {
-                    !! currentUser ?
-                        (
-                            <div>
-                                <InputRew
-                                    style={{marginTop: "1%", marginLeft: "10%", marginRight:"10%"}}
-                                    placeholder={"type your review..."}
-                                    onSubmit={handleInputRewSubmit}
-                                    rewToReply={rewToReply}
-                                    onUnreply={handleInputRewUnreply}
-                                    replyPlaceholder={"write your reply..."}
-                                />
-                                <Option
-                                    open={!!rewToOption}
-                                    deleteLabel={"Delete Review"}
-                                    cancelLabel={"Cancel"}
-                                    onCancel={handleOptionRewCancel}
-                                    onDelete={handleOptionRewDelete}
-                                />
-                            </div>
-                        )
-                        : ""
-                }
+                <PubReviewContainer/>
+                {!!currentUser ? (
+                    <div>
+                        <InputRew
+                            style={{marginTop: "1%", marginLeft: "10%", marginRight: "10%"}}
+                            placeholder={"write your review..."}
+                            onSubmit={handleInputRewSubmit}
+                            rewToReply={rewToReply}
+                            onUnreply={handleInputRewUnreply}
+                            replyPlaceholder={"write your reply..."}
+                        />
+                        <Option
+                            open={!!rewToOption}
+                            deleteLabel={"Delete Review"}
+                            cancelLabel={"Cancel"}
+                            onCancel={handleOptionRewCancel}
+                            onDelete={handleOptionRewDelete}
+                        />
+                    </div>
+                ) : ""}
             </div>
-
         </div>
+
     );
 }
 
