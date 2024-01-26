@@ -5,14 +5,15 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import 'bulma/css/bulma.min.css';
 import {CardActionArea} from '@mui/material';
+import theme from "../style/palette";
 
 function CustomCard({ horizontal, maxWidth, contentStyle, cardDescriptionStyle, numberContentRow, children, img , onClick }) {
     let style
-    if(horizontal){
+    if(horizontal){ // TODO: punto eventualmente da modificare con palette
         style = {width: maxWidth, display: 'flex'}
     }
-    else{
-        style = {width: maxWidth, display: 'flex', flexDirection: 'column'}
+    else{ // TODO: punto modificato palette
+        style = {width: maxWidth, display: 'flex', flexDirection: 'column', boxShadow: `0px 0px 1px ${theme.palette.primary.main}`}
     }
 
 
