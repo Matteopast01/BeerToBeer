@@ -8,7 +8,6 @@ import {delete_doc, load_docs_by_attributes, store_doc, update_by_function} from
 import {AuthContext} from "../contexts/Auth";
 import StarIcon from "@mui/icons-material/Star";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import {Divider} from "@mui/material";
 
 function ProductCardDescription({beer}){
     const {currentUser} = useContext(AuthContext);
@@ -59,7 +58,6 @@ function ProductCardDescription({beer}){
         }
     }
 
-
     useEffect( () => {
         (async ()=>{
             setLiked(!!currentUser ? await isIconClicked(beer.id, currentUser.uid, "Like") : false)
@@ -68,16 +66,16 @@ function ProductCardDescription({beer}){
     }, []);
 
     return (
-        <div>
+        <>
             <h1 style={{fontWeight: "bold", fontSize: "150%"}}>{beer.name}</h1>
             <div style={{display: "inline", margin: "auto"}}>
-                <Chip className="p-2" style={{background: "#e7c9b6", margin: "2px"}}  label={`ABV ${beer.abv} % vol`}/>
+                <Chip className="p-2" style={{background: "#89b7ea", margin: "2px"}}  label={`ABV ${beer.abv}% vol`}/>
             </div>
             <div style={{display: "inline", margin: "auto"}}>
-                <Chip className="p-2" style={{background: "#a0bbbb", margin: "2px"}}  label={`IBU ${beer.ibu}`}/>
+                <Chip className="p-2" style={{background: "#f5a844d3", margin: "2px"}}  label={`IBU ${beer.ibu}`}/>
             </div>
             <div style={{display: "inline", margin: "auto", width: "80%"}}>
-                <Chip className="p-2" style={{background: "#75c270", marginRight: "2px"}}  label={`SRM ${beer.srm}`}/>
+                <Chip className="p-2" style={{background: "#75c270", margin: "2px"}}  label={`SRM ${beer.srm}`}/>
             </div>
 
             <br/><br/>
@@ -85,7 +83,7 @@ function ProductCardDescription({beer}){
                 <thead style={{margin:"auto" }}>
                 <tr>
                     <td className="p-2">
-                        <h1 style={{fontWeight: "bold" ,display: "inline"}}> Decription: </h1>
+                        <h1 style={{fontWeight: "bold", display: "inline"}}>Description:</h1>
                     </td>
                     <td className="p-2">
                         <p style={{display: "inline-table"}}>
@@ -95,31 +93,20 @@ function ProductCardDescription({beer}){
                 </tr>
                 <tr>
                     <td className="p-2">
-                        <h1 style={{fontWeight: "bold" ,display: "inline"}}> Food Pairing: </h1>
+                        <h1 style={{fontWeight: "bold", display: "inline"}}>Food pairing:</h1>
                     </td>
                     <td className="p-2">
                         <p style={{display: "inline-table"}}>
-                            {beer.food_pairing}
+                            {beer.food_pairing}{"."}
                         </p>
                     </td>
                 </tr>
                 </thead>
             </table>
             { !!currentUser ?
-                <div style={{marginLeft: "80%", background: "#79b2a8", display: "flex"}}>
-                    <CustomButton sx={{ color: '#ffd700' }}
-                                  startIcon={
-                                        !favorited ? <StarBorderIcon sx={{fontSize : 27}}/> : <StarIcon sx={{fontSize : 27}}/>
-                                  }
-                                  text={"Favorite"}
-                                  handleClick={async () => {
-                                      setFavorited(!favorited)
-                                      await iconClickHandler(beer.id, currentUser.uid, "Favorites")
-                                      setFavorited(await isIconClicked(beer.id, currentUser.uid, "Favorites"))
-                                  }}/>
-                    <Divider orientation="vertical"  flexItem />
-                    <CustomButton sx={{ color: "#f30303" }}
-                                  text={numberLikes+" like"}
+                <div style={{marginLeft: "80%", display: "flex"}}>
+                    <CustomButton sx={{ color: "error.main" }}
+                                  text={<b>{numberLikes} <span>like</span></b>}
                                   startIcon={
                                       !liked ? <FavoriteBorderIcon/>: <FavoriteIcon/>
                                  }
@@ -128,12 +115,21 @@ function ProductCardDescription({beer}){
                                       await iconClickHandler(beer.id, currentUser.uid, "Like")
                                       setLiked(await isIconClicked(beer.id, currentUser.uid, "Like"))
                                   }}/>
+
+                    <CustomButton sx={{ color: 'warning.light' }}
+                                  startIcon={
+                                        !favorited ? <StarBorderIcon sx={{fontSize : 27}}/> : <StarIcon sx={{fontSize : 27}}/>
+                                  }
+                                  text={<b>{"Favorite"}</b>}
+                                  handleClick={async () => {
+                                      setFavorited(!favorited)
+                                      await iconClickHandler(beer.id, currentUser.uid, "Favorites")
+                                      setFavorited(await isIconClicked(beer.id, currentUser.uid, "Favorites"))
+                                  }}/>
                 </div> : null
             }
-
-        </div>
+        </>
     )
-
 }
 
 export default ProductCardDescription
