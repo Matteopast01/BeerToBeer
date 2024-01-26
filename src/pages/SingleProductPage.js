@@ -103,7 +103,7 @@ function SingleProductPage() {
         await delete_doc("Review", rewToOption.doc_id)
         delete_doc_by_attribute("Review", "id_replied_review", rewToOption.doc_id)
         dispatch(setRewToOption(null))
-        const rews_redux = await loads_rews( await get_docs_by_attribute(beer.id, "Review",
+        const rews_redux = await loads_rews( await get_docs_by_attribute(String(beer.id), "Review",
             "beer_id", null, "date", "desc"))
         dispatch(updateReviews(rews_redux))
     }

@@ -51,13 +51,14 @@ const ProductReviewContainer = function(){
         return rews.map((rew, index)=>{
             return (
                 <div key={rew.doc_id}>
-                    <Review rew={rew}
-                            answers={!!(rew.doc_id in rew_answers) ? rew_answers[rew.doc_id].reverse(): []}
-                            onReply={handleReply}
-                            onOptionClick={handleOptionClicked}
-                            showOptions={!!currentUser && (currentUser.uid === rew.user.uid || currentUser.role)}
-                            showOptionsAnswers={!!currentUser && currentUser.role}
-                            showReplyButton={!!currentUser}
+                    <Review
+                        rew={rew}
+                        answers={!!(rew.doc_id in rew_answers) ? rew_answers[rew.doc_id].reverse(): []}
+                        onReply={handleReply}
+                        onOptionClick={handleOptionClicked}
+                        showOptions={!!currentUser && (currentUser.uid === rew.user.uid || currentUser.role)}
+                        showOptionsAnswers={!!currentUser && currentUser.role}
+                        showReplyButton={!!currentUser}
                     />
                     <Divider/>
                 </div>
