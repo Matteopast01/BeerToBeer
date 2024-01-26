@@ -1,27 +1,26 @@
-import ReactDOM from "react-dom";
 import CustomButton from "./CustomButton";
-import {Dialog, DialogContent} from "@mui/material";
+import {Dialog, DialogActions, DialogContent, DialogTitle} from "@mui/material";
+import theme from "../style/palette";
 
 function Option({ open=true, onClose= ()=>{}, onDelete= ()=>{}, onCancel= ()=>{},deleteLabel, cancelLabel, actionBar }) {
 
     //Props
-
-    const deteteStyle = {
-        color: "#ff0000",
-        borderColor: "#8c8080" ,
+    const deleteStyle = {
+        color: theme.palette.error.main,
+        borderColor: theme.palette.info.main,
         height: "40px",
         '&:hover': {
-            borderColor: '#ff0000',
+            borderColor: theme.palette.error.main,
         }
     }
 
     const cancelStyle = {
-        color: "#8c8080",
-        borderColor: "#8c8080",
+        color: theme.palette.info.dark,
+        borderColor: theme.palette.info.main,
         height: "40px",
         fontAlign: "center",
         '&:hover': {
-            borderColor: '#000000',
+            borderColor: theme.palette.info.dark,
         }
     }
 
@@ -31,9 +30,11 @@ function Option({ open=true, onClose= ()=>{}, onDelete= ()=>{}, onCancel= ()=>{}
             onClose={onClose}
             maxWidth="xs"
             fullWidth
-        >
-                { deleteLabel ? <CustomButton sx={deteteStyle} variant={"outlined"} text={deleteLabel} handleClick={onDelete}/> : ""}
-                { cancelLabel ? <CustomButton sx={cancelStyle} variant={"outlined"} text={cancelLabel} handleClick={onCancel}/> : ""}
+        >       <DialogTitle style={{color: theme.palette.info.dark, textAlign: "center"}}>Are you sure you want to delete it?</DialogTitle>
+                <DialogActions style={{alignItems: "center", justifyContent: "center"}}>
+                    { deleteLabel ? <CustomButton sx={deleteStyle} variant={"outlined"} text={deleteLabel} handleClick={onDelete}/> : ""}
+                    { cancelLabel ? <CustomButton sx={cancelStyle} variant={"outlined"} text={cancelLabel} handleClick={onCancel}/> : ""}
+                </DialogActions>
         </Dialog>
     );
 }
