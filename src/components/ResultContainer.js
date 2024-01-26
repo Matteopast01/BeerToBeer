@@ -46,13 +46,52 @@ export const ResultContainer = function(){
 }
     useEffect(()=>{return ()=>{dispatch(setSearchTerm(""))}}, [])
     useEffect(() => {
+        let handlePopstate;
         (async  ()=> {
             const beers = await loadBeers()
             dispatch(setSearchedBeers(beers))
             if (!window.location.href.includes(searchedTerm)) {
                 window.history.pushState({}, '', `/search/${searchedTerm}`);
+
             }
+
+            handlePopstate = async (event) => {
+                // Access the current URL from window.location.href
+                //console.log(event.state.term)
+
+
+                const url = window.location.href;
+                const urlSegments = new URL(url).pathname.split('/');
+
+                const lastParam = urlSegments[urlSegments.length - 1];
+                console.log(lastParam)
+                if (lastParam == ""){
+                    let beerList = [];
+                    for (let i = 1; i < 10; i++) {
+                        const requestResult = await requestBeersById(i)
+                        const beer = requestResult[0]
+                        beerList.push(beer)
+                    }
+                    dispatch(setSearchedBeers(beerList))
+
+                }
+                else {
+
+                    const beers = await requestBeersByName(lastParam)
+                    dispatch(setSearchedBeers(beers))
+
+                }
+
+                // Update your component state or perform any necessary actions
+            };
+
+            window.addEventListener('popstate', handlePopstate);
+
         })()
+        return ()=>{
+
+            window.removeEventListener('popstate', handlePopstate);
+        }
     }, [searchedTerm]);
 
 

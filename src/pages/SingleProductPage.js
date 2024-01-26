@@ -4,7 +4,7 @@ import {
     delete_doc,
     delete_doc_by_attribute,
     get_docs_by_attribute, pull_img_url,
-    requestBeersById,
+    requestBeersById, requestBeersByName,
     store_doc, update_by_function
 } from "../services/persistence_manager";
 import Header from "../components/Header";
@@ -15,7 +15,7 @@ import InputRew from "../components/InputRew";
 import {useContext, useEffect, useRef, useState} from "react";
 import {AuthContext} from "../contexts/Auth";
 import {useDispatch, useSelector} from "react-redux";
-import {updateReviews, setRewToReply, setRewToOption, setSelectedBeer} from "../store/App";
+import {updateReviews, setRewToReply, setRewToOption, setSelectedBeer, setSearchedBeers} from "../store/App";
 import {loads_rews} from "../services/utility/review_utility";
 import Option from "../components/Option"
 import theme from "../style/palette";
@@ -45,7 +45,9 @@ function SingleProductPage() {
     }, []);
 
     useEffect(() => {
+        let handlePopstate;
         (async  ()=> {
+
             const beerId = !!beer ? beer.id : beer_Id
             update_by_function("Beer_Id","id",Number(beerId), (obj)=>{
                 obj.number_calls += 1
@@ -53,14 +55,32 @@ function SingleProductPage() {
             })
             if (!window.location.href.includes(beerId)) {
                 window.history.pushState({}, '', `/product/${beerId}`);
+
             }
+
+            handlePopstate = async (event) => {
+                // Access the current URL from window.location.href
+                //console.log(event.state.term)
+
+                const url = window.location.href;
+                const urlSegments = new URL(url).pathname.split('/');
+
+                const lastParam = urlSegments[urlSegments.length - 1];
+                console.log(lastParam)
+                const beer_api = await requestBeersById(lastParam)
+                const beer_firebase = await get_docs_by_attribute(Number(lastParam),"Beer_Id", "id")
+
+                dispatch(setSelectedBeer({
+                    ...beer_api[0],
+                    ...beer_firebase[0]
+                }))
+
+            };
+
+            window.addEventListener('popstate', handlePopstate);
         })()
         return ()=>{
-            /*
-            window.addEventListener("popstate", ()=>{
-                dispatch(setSelectedBeer(beer))
-            })
-             */
+            window.removeEventListener('popstate', handlePopstate);
             dispatch(setRewToReply(null))
             dispatch(setRewToOption(null))
 

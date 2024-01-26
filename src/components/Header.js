@@ -139,7 +139,7 @@ function Header({pub, disableSearchBar, advancedSearch, singleProductPage}) {
         text:"Advanced Search",
         sx: { color: "primary.dark"},
         size: "large",
-        handleClick: ()=>{navigate("/search")},
+        handleClick: ()=>{navigate("/search/")},
         uploadButtonBoolean: true
     };
 

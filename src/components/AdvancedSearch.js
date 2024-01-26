@@ -16,7 +16,7 @@ function AdvancedSearch() {
     const SearchedBeers = useSelector((state)=>state.searchedBeers.searchedBeers)
 
     const computeFilterValues  = function(beers ){
-
+        if (beers != null) {
         let abv = []
         let ibv = []
         let srm = []
@@ -27,13 +27,16 @@ function AdvancedSearch() {
             srm.push(beer.srm)
         })
 
+
         let minAbv = Math.min(...abv);
         let maxAbv = Math.max(...abv);
         let minIbv = Math.min(...ibv);
         let maxIbv = Math.max(...ibv);
         let minSrm = Math.min(...srm);
         let maxSrm = Math.max(...srm);
+
        return [{minAbv: minAbv, maxAbv: maxAbv }, {minIbv: minIbv, maxIbv: maxIbv }, {minSrm:minSrm, maxSrm: maxSrm}]
+        }
 
     }
     const filtersValues = computeFilterValues(SearchedBeers)
