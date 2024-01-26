@@ -99,6 +99,7 @@ function CustomAccountButton({src}) {
                   <div>
                       <MenuItem onClick={() => handleClickProfile(true)}>
                           {/*palette da provare: <Avatar src={src}/> <span style={{color: theme.palette.primary.dark}}>Profile</span>*/}
+                          {/*// TODO: punto modificato palette */}
                           <Avatar src={src}/> <span style={{color: theme.palette.primary.dark}}>Profile</span>
                           {/*<Avatar src={src}/>Profile*/}
                       </MenuItem>
