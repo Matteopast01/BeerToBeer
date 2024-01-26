@@ -30,9 +30,6 @@ const AdminPage = () => {
         })()
     }, []);
 
-
-
-
     const updateSliderImages = async function (img) {
         const queryResult = await get_docs_by_attribute(position, "Default_Images", "id")
         const link = queryResult[0].link_img
@@ -43,8 +40,6 @@ const AdminPage = () => {
             entry.link_img = new_link
             return entry
         })
-
-
     }
 
     const removePopupImage = async function (param ){
@@ -59,13 +54,8 @@ const AdminPage = () => {
        const newArray = sliderImages.filter((slider)=>
             slider.img !==  param
         )
-
         setSliderImages(newArray)
-
-
     }
-
-
 
     const updateDefaultUserImage = async function (img) {
         const queryResult = await get_docs_by_attribute("default_user_img", "Default_Images",  "type")
@@ -77,9 +67,13 @@ const AdminPage = () => {
     return (
         <div>
             <Header disableSearchBar/>
-            <ImagesUploader props = {{type : "slider_img", uploadFunction: updateSliderImages, removePopupImage: removePopupImage}} maxImages={3}  minImages = {2} />
+            <ImagesUploader props = {{type : "slider_img", uploadFunction: updateSliderImages, removePopupImage: removePopupImage}} maxImages={3}  minImages={2}>
+                Change slider images:
+            </ImagesUploader>
             <br />
-            <ImagesUploader props = {{type :"default_user_img", uploadFunction : updateDefaultUserImage }} maxImages={1} minImages={0}/>
+            <ImagesUploader props = {{type :"default_user_img", uploadFunction : updateDefaultUserImage }} maxImages={1} minImages={0}>
+                Change default user image:
+            </ImagesUploader>
             <Footer />
         </div>
     );
