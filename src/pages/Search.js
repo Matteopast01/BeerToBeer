@@ -4,7 +4,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import {ResultContainer} from "../components/ResultContainer";
 
-const Search = function (){
+const Search = function () {
 
     return (
         <>
@@ -12,7 +12,7 @@ const Search = function (){
                 <Header advancedSearch/>
                 <br/>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'row' }}>
+            <div style={{ display: 'flex', flexDirection: 'row', marginTop: '5px' }}>
                 <div style={{ marginRight: '20px', marginTop: '10px'}}>
                     <AdvancedSearch/>
                     <div className="box has-text-centered mb-3">
