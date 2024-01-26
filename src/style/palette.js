@@ -28,12 +28,12 @@ const theme = createTheme({
         },
         success: {
             light: '#4caf50',
-           main: '#2e7d32',
+            main: '#2e7d32',
             dark: '#1b5e20',
             contrastText: '#fff'
         },
-        black:{
-            light: '#eeeeee',
+        info: {
+            light: '#f8f8f8',
             main: '#9e9e9e',
             dark: '#333333',
             contrastText: '#212121'
