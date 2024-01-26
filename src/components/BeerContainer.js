@@ -1,10 +1,4 @@
-import {load_ordered_docs, pull_img_url, query_by_preamble} from "../services/persistence_manager";
-import {useDispatch, useSelector} from "react-redux";
-import {addPub, pubSelected} from "../store/App";
 import * as React from "react";
-import {useEffect} from "react";
-import useCardList from "../hooks/useCardList";
-import {CardList} from "./CardList";
 import {useNavigate} from "react-router-dom";
 import {CardList} from "./CardList";
 import useCardList from "../hooks/useCardList";
