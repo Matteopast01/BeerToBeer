@@ -1,6 +1,5 @@
 import { useParams } from 'react-router-dom';
 import CustomCard from "../components/CustomCard";
-import useAsync from "../hooks/useAsync";
 import {
     delete_doc,
     delete_doc_by_attribute,
@@ -9,7 +8,6 @@ import {
     store_doc, update_by_function
 } from "../services/persistence_manager";
 import Header from "../components/Header";
-import Chip from '@mui/material/Chip';
 import ProductCardDescription from "../components/ProductCardDescription";
 import Footer from "../components/Footer";
 import ProductReviewContainer from "../components/ProductReviewContainer";
@@ -20,7 +18,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {updateReviews, setRewToReply, setRewToOption, setSelectedBeer} from "../store/App";
 import {loads_rews} from "../services/utility/review_utility";
 import Option from "../components/Option"
-import CustomButton from "../components/CustomButton";
+import theme from "../style/palette";
 
 function SingleProductPage() {
 
@@ -28,9 +26,6 @@ function SingleProductPage() {
     const beer = useSelector((state)=> state.selectedBeer.value)
     const {currentUser} = useContext(AuthContext);
     const dispatch = useDispatch()
-
-
-
 
     useEffect(() => {
 
@@ -72,7 +67,6 @@ function SingleProductPage() {
         }
     }, [beer]);
 
-
     const rewToReply = useSelector((state) => state.review.rewToReply)
     const rewToOption = useSelector((state) => state.review.rewToOption)
 
@@ -109,16 +103,18 @@ function SingleProductPage() {
         await delete_doc("Review", rewToOption.doc_id)
         delete_doc_by_attribute("Review", "id_replied_review", rewToOption.doc_id)
         dispatch(setRewToOption(null))
-        const rews_redux = await loads_rews( await get_docs_by_attribute(beer.id, "Review", "beer_id", null, "date", "desc"))
+        const rews_redux = await loads_rews( await get_docs_by_attribute(beer.id, "Review",
+            "beer_id", null, "date", "desc"))
         dispatch(updateReviews(rews_redux))
     }
 
     return (
-        <div>
+        <>
             <Header singleProductPage/>
             <br/>
             {!!beer ?
-            <CustomCard img={beer.image_url} horizontal cardDescriptionStyle={{width:"75%", background: "#f5f5f5"}} maxWidth={"100%"}>
+            <CustomCard img={beer.image_url} horizontal cardDescriptionStyle={{width:"75%",
+                background: theme.palette.info.light}} maxWidth={"100%"}>
                 <ProductCardDescription beer={beer}/>
             </CustomCard> : ""}
             <ProductReviewContainer />
@@ -128,7 +124,7 @@ function SingleProductPage() {
                         <div>
                             <InputRew
                                 style={{marginTop: "1%", marginLeft: "10%", marginRight:"10%"}}
-                                placeholder={"type your review..."}
+                                placeholder={"write your review..."}
                                 onSubmit={handleInputRewSubmit}
                                 rewToReply={rewToReply}
                                 onUnreply={handleInputRewUnreply}
@@ -146,7 +142,7 @@ function SingleProductPage() {
                     : ""
             }
             <Footer/>
-        </div>
+        </>
     )
 }
 
