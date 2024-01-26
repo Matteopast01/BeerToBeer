@@ -1,8 +1,5 @@
 import {useRef, useState} from "react";
-import CustomIconButton from "./CustomIconButton";
-import ArrowUpwardRoundedIcon from '@mui/icons-material/ArrowUpwardRounded';
 import CustomButton from "./CustomButton";
-import  {grey}  from '@mui/material/colors';
 import {TextareaAutosize} from "@mui/material";
 import Chip from "@mui/material/Chip";
 import theme from "../style/palette";
@@ -24,7 +21,7 @@ const InputRew = function({placeholder, replyPlaceholder, onChange, onSubmit, re
     }
 
     const handleSubmit = ()=>{
-        onSubmit(text)
+        if (text != "") onSubmit(text)
         setText("")
     }
 
@@ -33,10 +30,8 @@ const InputRew = function({placeholder, replyPlaceholder, onChange, onSubmit, re
         marginLeft: "35%",
         width: "auto",
         marginRight:"35%",
-        // TODO palette da provare: backgroundColor: theme.palette.primary.dark,
         backgroundColor: theme.palette.primary.dark,
         '&:hover': {
-            // TODO palette da provare: backgroundColor: theme.palette.primary.main
             backgroundColor: theme.palette.primary.main
         },
         color: "#ffffff"
@@ -82,7 +77,6 @@ const InputRew = function({placeholder, replyPlaceholder, onChange, onSubmit, re
             </div>
         </div>
     )
-
 }
 
 export default InputRew
