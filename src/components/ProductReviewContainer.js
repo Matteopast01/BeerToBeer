@@ -22,8 +22,10 @@ const ProductReviewContainer = function(){
 
     useEffect(() => {
         (async () => {
+
+
             const rews_redux = !!beer ? await loads_rews(await get_docs_by_attribute(String(beer.id), "Review", "beer_id", null, "date", "desc")) : []
-            console.log("reviews: " + rews_redux)
+            console.log(rews_redux)
             dispatch(updateReviews(rews_redux))
         })()
     }, [beer]);

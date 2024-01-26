@@ -80,13 +80,13 @@ function SingleProductPage() {
     // Handle Function
     const handleInputRewSubmit = async (text) => {
         await store_doc({
-            beer_id: beer.id,
+            beer_id: String(beer.id),
             date: Date.now(),
             id_replied_review: !!rewToReply ? rewToReply.doc_id : 0 ,
             review: text,
             uid_author: currentUser.uid
         }, "Review")
-        const rews_redux = await loads_rews( await get_docs_by_attribute(beer.id, "Review", "beer_id", null, "date", "desc"))
+        const rews_redux = await loads_rews( await get_docs_by_attribute(String(beer.id), "Review", "beer_id", null, "date", "desc"))
         dispatch(updateReviews(rews_redux))
         dispatch(setRewToReply(null))
     }
