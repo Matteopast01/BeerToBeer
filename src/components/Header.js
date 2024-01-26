@@ -97,7 +97,7 @@ function Header({pub, disableSearchBar, advancedSearch, singleProductPage}) {
         label: !!pub ? "Search pub..." : "Search beer...",
         handleClick: !!pub ? handleClickPub : handleClickBeer,
     };
-
+    /*
     const propsLogin = {
         icon: <AccountCircleIcon/>,
         sx: { color: '#333333'},
@@ -111,7 +111,9 @@ function Header({pub, disableSearchBar, advancedSearch, singleProductPage}) {
         size: "large",
         // handleClick: ()=>{handleLogout(navigate)},
     };
+    /*
 
+     */
     const propAccountButton = {
         src: !!currentUser ? profileImg : null
     }
