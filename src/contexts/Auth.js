@@ -21,7 +21,6 @@ export const AuthProvider = ({ children }) => {
                 const user = userCredential.user;
                 registeredUser["uid"] = user.uid
                 store_doc(registeredUser,"User")
-                console.log(user);
                 navigate("/");
 
             })
@@ -43,7 +42,6 @@ export const AuthProvider = ({ children }) => {
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                console.log(errorCode, errorMessage);
                 return false
             });
     }
@@ -52,7 +50,6 @@ export const AuthProvider = ({ children }) => {
         signOut(auth)
             .then(() => {
                 navigate("/");
-                console.log("chiamata handleLogout")
             })
             .catch((error) => {
                 // An error happened.
@@ -63,7 +60,6 @@ export const AuthProvider = ({ children }) => {
         const unsubscribe = auth.onAuthStateChanged(async (user) => {
             
             if (user !== null) {
-                console.log("ciao")
                 const result = await get_docs_by_attribute(user.uid, "User", "uid")
                 const Modifieduser = {
                     ...user,
@@ -84,7 +80,6 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         handleAuthChanged();
-        console.log("chiamata useEffect")
     }, []);
 
     if (pending) {
@@ -96,7 +91,7 @@ export const AuthProvider = ({ children }) => {
         handleSignUp,
         handleLogout,
         handleLogin,
-         // include useNavigate in the context value
+
     }
 
     return (
