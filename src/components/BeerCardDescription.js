@@ -8,10 +8,6 @@ import Typography from "@mui/material/Typography";
 import * as React from "react";
 import {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../contexts/Auth";
-import useAsync from "../hooks/useAsync";
-
-
-
 
 export default function BeerCardDescription({beer}){
     const {currentUser} = useContext(AuthContext);
@@ -60,7 +56,6 @@ export default function BeerCardDescription({beer}){
         }
     }
 
-
     useEffect( () => {
         (async ()=>{
             setLiked(!!currentUser ? await isIconClicked(beer.id, currentUser.uid, "Like") : false)
@@ -69,7 +64,7 @@ export default function BeerCardDescription({beer}){
 
     }, []);
 
-    return(
+    return (
         <div>
             {
                 !! currentUser ?
@@ -92,10 +87,10 @@ export default function BeerCardDescription({beer}){
                         />
                     </div> : null
             }
-            <h1 className="has-text-centered"> {beer.name}</h1>
+            <h1 className="has-text-centered"> <b>{beer.name}</b></h1>
             <Typography variant="body2" color="text.secondary">
                 {beer.description}
             </Typography>
         </div>
     )
-}
+};
