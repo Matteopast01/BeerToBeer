@@ -9,8 +9,8 @@ import theme from "../style/palette";
 
 function CustomCard({ horizontal, maxWidth, contentStyle, cardDescriptionStyle, numberContentRow, children, img , onClick }) {
     let style
-    if(horizontal){ // TODO: punto eventualmente da modificare con palette
-        style = {width: maxWidth, display: 'flex'}
+    if(horizontal){ // TODO: punto modificato palette
+        style = {width: maxWidth, display: 'flex', boxShadow: `0px 0px 1px ${theme.palette.primary.main}`}
     }
     else{ // TODO: punto modificato palette
         style = {width: maxWidth, display: 'flex', flexDirection: 'column', boxShadow: `0px 0px 1px ${theme.palette.primary.main}`}
