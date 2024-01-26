@@ -46,16 +46,16 @@ const SearchBar = ({onSearch, handleSubmit, handleClick, options, label}) => {
                             fontStyle: 'italic',
                             fontFamily: 'Arial, sans-serif',
                             //"&:hover": {borderColor: "error", color: "error"}
-                            borderColor: '#2e7d32',
-                            color: theme.palette.warning.main
+                            // borderColor: '#2e7d32',
+                            // color: theme.palette.warning.main
                         }}
                         InputProps={{
                             ...params.InputProps,
                             onMouseOver: () => setIsHovered(true),
                             onMouseOut: () => setIsHovered(false),
                             onBlur: () => setSearchTerm(""),
-                            //Per colorare la scritta
-                           // style: { color: theme.palette.warning.main },
+                            // Per colorare la scritta
+                           // style: {color: theme.palette.warning.main},
                         }}
                     />
                 )}
