@@ -14,7 +14,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {imgSelected, pubSelected, resetPubSelected, setSearchTerm, setSelectedBeer} from "../store/App";
 
 // disableSearchBar passed as prop disables the searchBar component
-function Header({pub, disableSearchBar, advancedSearch, singleProductPage}) {
+function Header({pub, disableSearchBar, advancedSearch, singleProductPage, page}) {
 
     const navigate = useNavigate();
     const profileImg = useSelector(state => state.userImg.value)
@@ -96,29 +96,13 @@ function Header({pub, disableSearchBar, advancedSearch, singleProductPage}) {
         label: !!pub ? "Search pub..." : "Search beer...",
         handleClick: !!pub ? handleClickPub : handleClickBeer,
     };
-    /*
-    const propsLogin = {
-        icon: <AccountCircleIcon/>,
-        sx: { color: '#333333'},
-        size: "large",
-        // handleClick: ()=>{navigate("/login")},
-    };
 
-    const propsLogout = {
-        icon: <AccountCircleIcon/>,
-        sx: { color: '#333333'},
-        size: "large",
-        // handleClick: ()=>{handleLogout(navigate)},
-    };
-    /*
-
-     */
     const propAccountButton = {
         src: !!currentUser ? profileImg : null
     }
 
     const propsHome = {
-        text: "Home",
+        text: page === "Homepage" ? (<b>Home</b>) : "Home",
         //color: "error",
         sx: { color: "primary.dark"},
         size: "large",
@@ -126,7 +110,7 @@ function Header({pub, disableSearchBar, advancedSearch, singleProductPage}) {
     };
 
     const propsPubs = {
-        text: "Our Pubs",
+        text: page === "Our Pubs" ? (<b>Our Pubs</b>) : "Our Pubs",
         sx: { color: "primary.dark"},
         size: "large",
         handleClick: ()=>{
@@ -136,7 +120,7 @@ function Header({pub, disableSearchBar, advancedSearch, singleProductPage}) {
     };
 
     const propsAdvancedSearch = {
-        text:"Advanced Search",
+        text: page === "Advanced Search" ? (<b>Advanced Search</b>) : "Advanced Search",
         sx: { color: "primary.dark"},
         size: "large",
         handleClick: ()=>{navigate("/search/")},

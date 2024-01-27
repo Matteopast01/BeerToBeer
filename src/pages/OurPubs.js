@@ -7,7 +7,7 @@ function OurPubs (){
     return (
         <>
             <>
-                <Header pub/>
+                <Header pub page={"Our Pubs"}/>
                 <br/>
             </>
             <div style={{display: "flex", minHeight: "73vh", marginTop: "5px"}}>

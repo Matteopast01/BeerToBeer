@@ -9,7 +9,7 @@ const Search = function () {
     return (
         <>
             <div>
-                <Header advancedSearch/>
+                <Header advancedSearch page={"Advanced Search"}/>
                 <br/>
             </div>
             <div style={{ display: 'flex', flexDirection: 'row', marginTop: '5px' }}>

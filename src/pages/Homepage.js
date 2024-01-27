@@ -20,7 +20,7 @@ function Homepage() {
 
     return (
         <div>
-             <Header/>
+             <Header page={"Homepage"}/>
             <br/>
             <div style={{marginTop: "10px"}}>
                 <SimpleSlider imags={!!images ? images: []}/>
