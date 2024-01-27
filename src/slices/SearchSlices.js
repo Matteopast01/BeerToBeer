@@ -24,8 +24,8 @@ export const filterSlice = createSlice({
 export const sortingSlice = createSlice({
     name: 'sorting',
     initialState: {
-        selection1: { label: 'Seleziona...', value: null },
-        selection2: { label: 'Seleziona...', value: null },
+        selection1: { label: 'Select...', value: null },
+        selection2: { label: 'Select...', value: null },
     },
     reducers: {
         setSelection1: (state, action) => {
