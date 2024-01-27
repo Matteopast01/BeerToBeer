@@ -1,64 +1,72 @@
+/* Existing CSS */
+
 .App {
     text-align: center;
     display: flex;
-    min-height: 100vh;
+    min-height: 30px;
     align-items: center;
     justify-content: center;
     color: black;
     background-color: white;
+    margin-top: 0px;
 }
 
 .auth-form-container, .login-form, .register-form {
     display: flex;
     flex-direction: column;
+    margin-top: 0px;
 }
 
 @media screen and (min-width: 600px) {
     .auth-form-container {
-        padding: 5rem;
+        padding: 2rem; /* Adjusted padding */
         border: 1px solid black;
         border-radius: 10px;
-        margin: 0.5rem;
+        margin: 1rem; /* Adjusted margin */
     }
 }
+
 h2 {
-    font-size: 30px;
+    font-size: 24px; /* Adjusted font size */
     color: black;
 }
 
 label {
     text-align: left;
     padding: 0.5rem 0;
-    font-size: 20px;
+    font-size: 18px; /* Adjusted font size */
 }
 
 input {
     margin: 0.5rem 0;
-    padding: 20px;
+    padding: 15px; /* Adjusted padding */
     border: 1px solid black;
     color: black;
-    border-radius: 10px;
-    font-size: 15px;
+    border-radius: 8px; /* Adjusted border-radius */
+    font-size: 14px; /* Adjusted font size */
 }
 
 button {
     border: none;
     padding: 1rem 2rem;
-    border-radius: 10px;
+    border-radius: 8px; /* Adjusted border-radius */
     cursor: pointer;
-    color:black;
-    font-size: 1.2em;
+    color: black;
+    font-size: 1em; /* Adjusted font size */
 }
+
+/* Additional CSS for link button and error message */
 
 .link-btn {
     background: none;
     color: black;
     text-decoration: underline;
 }
+
 .error-message {
     color: black;
     margin-top: 5px;
-    font-size: 14px;
+    font-size: 12px; /* Adjusted font size */
 }
 
 .input-error {

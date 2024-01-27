@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/Auth";
 import CustomButton from "../components/CustomButton";
 import theme from "../style/palette";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 export const Signup = function () {
     const [email, setEmail] = useState("");
@@ -24,7 +26,6 @@ export const Signup = function () {
     };
 
     const onSubmit = async (e) => {
-        e.preventDefault();
         setFormSubmitted(true);
 
         if (isEmailValid() && isPasswordValid()) {
@@ -33,64 +34,65 @@ export const Signup = function () {
     };
 
     return (
-        <div className={"App"}>
-            <div className="auth-form-container">
-                <div style={{flex: '1', textAlign: 'center', fontSize: '40px', fontFamily: 'Arial, sans-serif'}}>
-                    <b>BeerToBeer</b>
+        <>
+            <Header disableSearchBar/>
+            <div className={"App"}>
+                <div className="auth-form-container">
+                    <h2>Sign in:</h2>
+                    <form className="register-form">
+                        <label htmlFor="name">Username:</label>
+                        <input
+                            value={name}
+                            name="name"
+                            onChange={(e) => setName(e.target.value)}
+                            id="name"
+                            placeholder="full Name"
+                        />
+                        <label htmlFor="email">Email:</label>
+                        <input
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            type="email"
+                            placeholder="youremail@gmail.com"
+                            id="email"
+                            name="email"
+                            required
+                            pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
+                            title="Please enter a valid email address."
+                        />
+                        {formSubmitted && !isEmailValid() && <p className="error-message">Please enter a valid email address.</p>}
+                        <label htmlFor="password">Password:</label>
+                        <input
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            type="password"
+                            placeholder="********"
+                            id="password"
+                            name="password"
+                            required
+                        />
+                        {formSubmitted && !isPasswordValid() &&
+                        <p className="error-message">Password must be at least 6 characters long.</p>}
+                        <CustomButton type="submit" variant="contained" text={"Submit"} handleClick={onSubmit}
+                                      sx={{marginLeft: "35%",
+                                          width: "auto",
+                                          marginRight:"35%",
+                                          backgroundColor: theme.palette.primary.dark,
+                                          '&:hover': {
+                                              backgroundColor: theme.palette.primary.main},
+                                          color: "#ffffff"}}/>
+                    </form>
+                    <button
+                        className="link-btn"
+                        onClick={() => {
+                            navigate("/login");
+                        }}
+                    >
+                        Already have an account? Login here.
+                    </button>
                 </div>
-                <h2>Register:</h2>
-                <form className="register-form">
-                    <label htmlFor="name">Username:</label>
-                    <input
-                        value={name}
-                        name="name"
-                        onChange={(e) => setName(e.target.value)}
-                        id="name"
-                        placeholder="full Name"
-                    />
-                    <label htmlFor="email">Email:</label>
-                    <input
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        type="email"
-                        placeholder="youremail@gmail.com"
-                        id="email"
-                        name="email"
-                        required
-                        pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
-                        title="Please enter a valid email address."
-                    />
-                    {formSubmitted && !isEmailValid() && <p className="error-message">Please enter a valid email address.</p>}
-                    <label htmlFor="password">Password:</label>
-                    <input
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        type="password"
-                        placeholder="********"
-                        id="password"
-                        name="password"
-                        required
-                    />
-                    {formSubmitted && !isPasswordValid() &&
-                    <p className="error-message">Password must be at least 6 characters long.</p>}
-                    <CustomButton type="submit" variant="contained" text={"Submit"} onClick={onSubmit}
-                                  sx={{marginLeft: "35%",
-                                      width: "auto",
-                                      marginRight:"35%",
-                                      backgroundColor: theme.palette.primary.dark,
-                                      '&:hover': {
-                                          backgroundColor: theme.palette.primary.main},
-                                      color: "#ffffff"}}/>
-                </form>
-                <button
-                    className="link-btn"
-                    onClick={() => {
-                        navigate("/login");
-                    }}
-                >
-                    Already have an account? Login here.
-                </button>
             </div>
-        </div>
+            <Footer/>
+            </>
     );
 };
