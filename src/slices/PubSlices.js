@@ -11,7 +11,7 @@ export const pubSlice = createSlice({
             state.value = action.payload;
         },
         resetPubSelected: (state, action) => {
-            state.value = action.payload;
+            state.value = action.payload; //TODO cambiare in state.value = null
         }
     }
 });
