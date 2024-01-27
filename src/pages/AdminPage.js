@@ -67,9 +67,12 @@ const AdminPage = () => {
     return (
         <div>
             <Header disableSearchBar/>
-            <ImagesUploader props = {{type : "slider_img", uploadFunction: updateSliderImages, removePopupImage: removePopupImage}} maxImages={3}  minImages={2}/>
+            <ImagesUploader props = {{type : "slider_img", uploadFunction: updateSliderImages,
+                removePopupImage: removePopupImage}} text={"Change slider images on the home page:"}
+                            maxImages={3}  minImages={2}/>
             <br />
-            <ImagesUploader props = {{type :"default_user_img", uploadFunction : updateDefaultUserImage }} maxImages={1} minImages={0}/>
+            <ImagesUploader props = {{type :"default_user_img", uploadFunction : updateDefaultUserImage }}
+                            text={"Change user default images:"} maxImages={1} minImages={0}/>
             <Footer />
         </div>
     );
