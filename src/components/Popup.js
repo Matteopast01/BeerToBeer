@@ -11,9 +11,11 @@ import {delete_img, get_docs_by_attribute, push_img, update_by_function} from ".
 import DeleteIcon from "@mui/icons-material/Delete";
 import {useDispatch, useSelector} from "react-redux";
 import theme from "../style/palette";
+import Option from "./Option";
 
 export default function Popup( {username,changeUpdatedUsername, changeUploadedImage }) {
     const [open, setOpen] = useState(false);
+    const [showOption, setShowOption] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -97,7 +99,8 @@ export default function Popup( {username,changeUpdatedUsername, changeUploadedIm
         size: "large",
         endIcon: <DeleteIcon />,
         text: "Delete Image",
-        handleClick: removeCurrentImage
+        handleClick: () => {
+            setShowOption(true);}
     }
 
     const propsSave = {
@@ -127,6 +130,14 @@ export default function Popup( {username,changeUpdatedUsername, changeUploadedIm
             <div>
                 <CustomButton {...propsRemoveCurrentImage} style={{ display: 'block', marginBottom: '10px' }}/>
             </div>
+            <Option
+                open={showOption}
+                onDelete={async () => {
+                    await removeCurrentImage();
+                    setShowOption(false);}}
+                onCancel={() => setShowOption(false)}
+                deleteLabel="Confirm Delete"
+                cancelLabel="Cancel"/>
             <Dialog
                 open={open}
                 onClose={handleFormClose}
