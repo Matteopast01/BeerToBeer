@@ -89,7 +89,7 @@ function SinglePub() {
                 <div style={{width: '70px'}}/>
                 <div style={{position: 'absolute', top: 0, right: 0, zIndex: 1, width: '70px', textAlign: 'center'}}>
                     <CustomIconButton icon={<CloseIcon sx={{color: theme.palette.error.main}}/>}
-                                      handleClick={handleClick} size={"small"}/>
+                                      handleClick={handleClick} size={"small"} variant="text" color="error"/>
                 </div>
             </div>
             <CustomCard img={images} contentStyle={{width: "100%", background: theme.palette.info.light}}
