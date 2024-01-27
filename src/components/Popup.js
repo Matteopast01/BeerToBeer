@@ -46,16 +46,19 @@ export default function Popup( {username,changeUpdatedUsername, changeUploadedIm
         if (user.link_img != ""){
             await delete_img(user.link_img)
         }
+        if (img.size !== 0) {
+            const image_url = username + "_profile_img"
+            await update_by_function("User", "uid",
+                currentUser.uid, (user) => {
+                    user.link_img = image_url
+                    return user
+                })
 
-        const image_url = username + "_profile_img"
-        await update_by_function("User", "uid",
-            currentUser.uid, (user) => {
-            user.link_img = image_url
-            return user
-        })
-        changeUploadedImage(img)
+            changeUploadedImage(img)
+            await push_img(image_url, img)
+        }
 
-        await push_img(image_url, img)
+
         handleFormClose()
     }
 
@@ -75,7 +78,6 @@ export default function Popup( {username,changeUpdatedUsername, changeUploadedIm
 
     const RetrieveImage = async function (img) {
         setImg(img)
-
     }
 
     const propsEdit = {
