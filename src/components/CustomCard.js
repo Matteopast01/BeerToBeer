@@ -16,7 +16,6 @@ function CustomCard({ horizontal, maxWidth, contentStyle, cardDescriptionStyle, 
         style = {width: maxWidth, display: 'flex', flexDirection: 'column', boxShadow: `0px 0px 1px ${theme.palette.primary.main}`}
     }
 
-
     return (
         <Card sx={style}>
             {!!onClick ? (<CardActionArea onClick={onClick}>
@@ -42,7 +41,5 @@ function CustomCard({ horizontal, maxWidth, contentStyle, cardDescriptionStyle, 
         </Card>
     );
 }
-
-
 
 export default CustomCard;
