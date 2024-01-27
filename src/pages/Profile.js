@@ -73,13 +73,14 @@ const Profile = function () {
             <div style={{ display: 'block', marginBottom: '10px'}}>
                 <Header />
             </div>
-            <div style={{  textAlign: 'center' }}>
-                <div style={{ fontSize: '28px', fontFamily: 'Arial, sans-serif', marginBottom: '10px' }}>
+            <div style={{  textAlign: 'center', marginTop: '20px' }}>
+                <div style={{ fontSize: '28px', fontFamily: 'Arial, sans-serif', marginBottom: '10px'}}>
                     <b>Favorites</b>
                 </div>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <div style={{ flex: 1, marginRight: '15px' }}>
+                {/* TODO: cotrollare se va bene per tutto, settato marginTop: '8px' quà sotto*/}
+                <div style={{ flex: 1, marginRight: '15px', marginTop: '8px' }}>
                     <CustomCard
                         horizontal={false}
                         maxWidth="300px"
@@ -98,12 +99,11 @@ const Profile = function () {
                                 <div style={{ textAlign: 'center' }}>
                                     <Popup  username={username}
                                             changeUploadedImage={ changeUploadedImage}
-                                            changeUpdatedUsername = {changeUpdatedUsername}/>
+                                            changeUpdatedUsername={changeUpdatedUsername}/>
                                 </div>
                             </>
                         }/>
                 </div>
-                <div style={{ borderRight: '1px solid #ccc', height: '100%' }}/>
                 <FavoritesContainer />
             </div>
             <Footer />
