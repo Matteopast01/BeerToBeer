@@ -4,8 +4,8 @@
     min-height: 100vh;
     align-items: center;
     justify-content: center;
-    color: white;
-    background-color: #add8e6; /* Light blue color */
+    color: black;
+    background-color: white;
 }
 
 .auth-form-container, .login-form, .register-form {
@@ -16,43 +16,43 @@
 @media screen and (min-width: 600px) {
     .auth-form-container {
         padding: 5rem;
-        border: 1px solid white;
+        border: 1px solid black;
         border-radius: 10px;
         margin: 0.5rem;
     }
 }
 h2 {
-    font-size: 4em; /* Adjust the font size as needed */
-    color: white; /* Lighter blue color */
+    font-size: 30px;
+    color: black;
 }
 
 label {
     text-align: left;
     padding: 0.5rem 0;
-    font-size: 1.5em; /* Adjust the font size as needed */
+    font-size: 20px;
 }
 
 input {
     margin: 0.5rem 0;
-    padding: 1.5rem;
-    border: none;
+    padding: 20px;
+    border: 1px solid black;
+    color: black;
     border-radius: 10px;
-    font-size: 1.2em; /* Adjust the font size as needed */
+    font-size: 15px;
 }
 
 button {
     border: none;
-    background-color: white;
-    padding: 1rem 2rem; /* Adjust the padding for the desired button size */
+    padding: 1rem 2rem;
     border-radius: 10px;
     cursor: pointer;
     color:black;
-    font-size: 1.2em; /* Adjust the font size as needed */
+    font-size: 1.2em;
 }
 
 .link-btn {
     background: none;
-    color: white;
+    color: black;
     text-decoration: underline;
 }
 .error-message {

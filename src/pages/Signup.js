@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import "../App.css";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/Auth";
+import CustomButton from "../components/CustomButton";
+import theme from "../style/palette";
 
 export const Signup = function () {
     const [email, setEmail] = useState("");
@@ -33,6 +35,9 @@ export const Signup = function () {
     return (
         <div className={"App"}>
             <div className="auth-form-container">
+                <div style={{flex: '1', textAlign: 'center', fontSize: '40px', fontFamily: 'Arial, sans-serif'}}>
+                    <b>BeerToBeer</b>
+                </div>
                 <h2>Register:</h2>
                 <form className="register-form">
                     <label htmlFor="name">Username:</label>
@@ -66,10 +71,16 @@ export const Signup = function () {
                         name="password"
                         required
                     />
-                    {formSubmitted && !isPasswordValid() && <p className="error-message">Password must be at least 6 characters long.</p>}
-                    <button type="submit" onClick={onSubmit}>
-                        Sign up
-                    </button>
+                    {formSubmitted && !isPasswordValid() &&
+                    <p className="error-message">Password must be at least 6 characters long.</p>}
+                    <CustomButton type="submit" variant="contained" text={"Submit"} onClick={onSubmit}
+                                  sx={{marginLeft: "35%",
+                                      width: "auto",
+                                      marginRight:"35%",
+                                      backgroundColor: theme.palette.primary.dark,
+                                      '&:hover': {
+                                          backgroundColor: theme.palette.primary.main},
+                                      color: "#ffffff"}}/>
                 </form>
                 <button
                     className="link-btn"
