@@ -132,9 +132,11 @@ function Header({pub, disableSearchBar, advancedSearch, singleProductPage, page}
             <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
                 <div style={{width: '70px'}}>
                     <div style={{display: "flex", alignItems: "center", flexDirection: "column"}}>
+                        <a href= 'https://www.brewdog.com/uk'>
                         <img src="/Logos/Brewdog%20Logo%20Blue.png" alt="logo"
-                             style={{width: '40px', height: '50px'}}/>
-                    </div>
+                             style={{width: '35px', height: '40px'}}/>
+                        </a>
+                        </div>
                 </div>
                 <div style={{flex: '1', textAlign: 'center', fontSize: '40px', fontFamily: 'Arial, sans-serif'}}>
                     <img src="/Logos/BeerToBeer%20Logo.png" alt="logo" style={{width: '360px', height: '55px', marginTop: '10px'}}/>

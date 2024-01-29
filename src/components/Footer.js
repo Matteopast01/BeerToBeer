@@ -13,8 +13,9 @@ function Footer(){
     return (
         <div style={footerStyle}>
             <b>Powered by DAPP © 2024</b>
+            <br/>
             <img src="/Logos/DAPP%20Logo.png" alt="logo"
-                 style={{width: '10px', height: '13px', marginLeft: '5px'}}/>
+                 style={{width: '35px', height: '35px', marginTop: '10px'}}/>
         </div>
     );
 }
