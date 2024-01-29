@@ -104,14 +104,14 @@ function Header({pub, disableSearchBar, advancedSearch, singleProductPage, page}
     const propsHome = {
         text: page === "Homepage" ? (<b>Home</b>) : "Home",
         //color: "error",
-        sx: { color: "primary.dark"},
+        sx:  page === "Homepage" ? { color: "secondary.main" } : { color: "info.dark" },
         size: "large",
         handleClick: ()=>{navigate("/")}
     };
 
     const propsPubs = {
         text: page === "Our Pubs" ? (<b>Our Pubs</b>) : "Our Pubs",
-        sx: { color: "primary.dark"},
+        sx:  page === "Our Pubs" ? { color: "secondary.main" } : { color: "info.dark" },
         size: "large",
         handleClick: ()=>{
             navigate("/ourpubs");
@@ -121,7 +121,7 @@ function Header({pub, disableSearchBar, advancedSearch, singleProductPage, page}
 
     const propsAdvancedSearch = {
         text: page === "Advanced Search" ? (<b>Advanced Search</b>) : "Advanced Search",
-        sx: { color: "primary.dark"},
+        sx:  page === "Advanced Search" ? { color: "secondary.main" } : { color: "info.dark" },
         size: "large",
         handleClick: ()=>{navigate("/search/")},
         uploadButtonBoolean: true
@@ -132,7 +132,7 @@ function Header({pub, disableSearchBar, advancedSearch, singleProductPage, page}
             <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
                 <div style={{width: '70px'}}/>
                 <div style={{flex: '1', textAlign: 'center', fontSize: '40px', fontFamily: 'Arial, sans-serif'}}>
-                    <b>BeerToBeer</b>
+                    <img src="/Logos/BeerToBeer%20Logo.png" alt="logo" style={{width: '360px', height: '55px', marginTop: '10px'}}/>
                 </div>
                 <div style={{width: '70px'}}>
                     <div style={{display: "flex", alignItems: "center", flexDirection: "column"}}>
