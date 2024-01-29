@@ -92,7 +92,6 @@ export const Signup = function () {
                     </button>
                 </div>
             </div>
-            <Footer/>
             </>
     );
 };

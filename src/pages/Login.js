@@ -49,7 +49,6 @@ export const Login = function  () {
                     Don't have an account? Register here.</button>
             </div>
             </div>
-                <Footer/>
         </>
     )
 }
