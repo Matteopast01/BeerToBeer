@@ -88,7 +88,7 @@ export default function Popup( {username,changeUpdatedUsername, changeUploadedIm
         sx: { color: theme.palette.info.dark },
         size: "large",
         endIcon: <EditIcon />,
-        text: "Edit",
+        text: "Edit profile",
         handleClick: handleFormOpen
     }
 
@@ -144,7 +144,7 @@ export default function Popup( {username,changeUpdatedUsername, changeUploadedIm
                 maxWidth="sm"
                 fullWidth>
                 <DialogTitle sx={{ color: 'black' }}>
-                    Edit <EditIcon/>
+                    Edit Profile <EditIcon/>
                 </DialogTitle>
                 <div style={{ position: 'absolute', top: 0, right: 0, padding: '8px' }}>
                     <CustomIconButton {...propsClose} />
