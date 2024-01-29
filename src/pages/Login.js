@@ -30,7 +30,7 @@ export const Login = function  () {
                 <form className="login-form" >
                     <label htmlFor="email">Email:</label>
                     <input value={email} onChange={(e) => setEmail(e.target.value)}
-                           type="email" placeholder="youremail@gmail.com" id="email" name="email" />
+                           type="email" placeholder="example@domain.com" id="email" name="email" />
                     <label htmlFor="password">Password:</label>
                     <input value={password} onChange={(e) => setPassword(e.target.value)}
                            type="password" placeholder="********" id="password" name="password" />
