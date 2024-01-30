@@ -2,7 +2,6 @@ import React, {useContext, useState} from "react";
 import "../App.css"
 import {useNavigate} from "react-router-dom";
 import {AuthContext} from "../contexts/Auth";
-import Footer from "../components/Footer";
 import CustomButton from "../components/CustomButton";
 import theme from "../style/palette";
 import Header from "../components/Header";

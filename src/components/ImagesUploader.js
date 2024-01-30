@@ -6,7 +6,8 @@ import {get_docs_by_attribute, pull_img_url} from "../services/persistence_manag
 import {AuthContext} from "../contexts/Auth";
 import theme from "../style/palette";
 
-const ImagesUploader = ({props, text,  maxImages, minImages}) => {
+const ImagesUploader = ({props, text, maxImages, minImages}) => {
+
     const [imageList, setImageList] = useState([]);
     const [errorMessage, setErrorMessage] = useState("");
 
