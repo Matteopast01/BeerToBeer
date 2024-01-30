@@ -7,17 +7,19 @@ import {
     requestBeersById } from "../services/persistence_manager.js";
 import BeerCardDescription from "./BeerCardDescription";
 import {AuthContext} from "../contexts/Auth";
+import {useSelector} from "react-redux";
 
 export function FavoritesContainer(){
     const [items, setItems] = useState([])
     const navigate = useNavigate();
     const {currentUser} = useContext(AuthContext);
+    const render_favorite = useSelector((state) => state.favorite.rerender)
 
     useEffect(() => {
         (async  ()=> {
             await loadFavoritesBeers()
         })()
-    }, []);
+    }, [render_favorite]);
 
     const loadFavoritesBeers = async function () {
 

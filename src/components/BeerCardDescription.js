@@ -8,11 +8,21 @@ import Typography from "@mui/material/Typography";
 import * as React from "react";
 import {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../contexts/Auth";
+import {useDispatch} from "react-redux";
+import {
+    setRenderFavorites,
+    setRenderLike,
+    setRerenderFavorite,
+    setRerenderFavorites,
+    setRerenderLike
+} from "../store/App";
 
 export default function BeerCardDescription({beer}){
     const {currentUser} = useContext(AuthContext);
     const [liked, setLiked] = useState(false)
     const [favorited, setFavorited] = useState(false)
+    const dispatch = useDispatch()
+
     const isIconClicked = async (beer_id, user_id, icon) => {
         let results = await load_docs_by_attributes(icon, {
             beer_id: beer_id,
@@ -40,7 +50,11 @@ export default function BeerCardDescription({beer}){
                 uid: user_id
             },icon)
             if (icon === "Like"){
-                updateNumberLikes(1, beer_id)
+                dispatch( setRerenderLike(true))
+                await updateNumberLikes(1, beer_id)
+            }
+            else {
+                dispatch( setRerenderFavorite(true))
             }
         } else {
             let results = await load_docs_by_attributes(icon, {
@@ -50,7 +64,7 @@ export default function BeerCardDescription({beer}){
             for( let result of results ){
                 await delete_doc(icon, result.doc_id)
                 if (icon === "Like"){
-                    updateNumberLikes(-1, beer_id)
+                    await updateNumberLikes(-1, beer_id)
                 }
             }
         }

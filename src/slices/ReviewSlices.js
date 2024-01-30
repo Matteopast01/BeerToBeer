@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {get_docs_by_attribute, pull_img_url} from '../services/persistence_manager'
 
 export const reviewSlices = createSlice(
     {

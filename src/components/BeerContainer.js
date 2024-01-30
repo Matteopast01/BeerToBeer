@@ -6,6 +6,7 @@ import DropDown from "./DropDown";
 import {useEffect, useState} from "react";
 import {load_ordered_docs, requestBeersById} from "../services/persistence_manager.js";
 import BeerCardDescription from "./BeerCardDescription";
+import {useSelector} from "react-redux";
 
 export function BeerContainer(){
     //Hooks
@@ -13,6 +14,7 @@ export function BeerContainer(){
 
     const [selection, setSelection] = useState({label: "Most Popular", value: "number_calls"});
     const [items, setItems] = useState([])
+    const render_like = useSelector((state) => state.like.rerender)
 
 
         // Hook Navigate
@@ -41,6 +43,14 @@ export function BeerContainer(){
             setItems(await getBeers("number_calls"))
         })()
     }, []);
+
+    useEffect(() => {
+        (async  ()=> {
+            if(selection.value === "number_likes"){
+                setItems(await getBeers(selection.value))
+            }
+        })()
+    }, [render_like]);
 
 
 
