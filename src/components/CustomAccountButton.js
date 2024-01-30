@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
@@ -8,13 +7,13 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Logout from '@mui/icons-material/Logout';
 import {useNavigate} from "react-router-dom";
-import {useContext} from "react";
+import {useContext, useState} from "react";
 import {AuthContext} from "../contexts/Auth";
 import theme from "../style/palette";
 
 function CustomAccountButton({src}) {
 
-      const [anchorEl, setAnchorEl] = React.useState(null);
+      const [anchorEl, setAnchorEl] = useState(null);
       const open = Boolean(anchorEl);
       const navigate = useNavigate();
       const {currentUser} = useContext(AuthContext);
@@ -98,14 +97,12 @@ function CustomAccountButton({src}) {
                   {!!currentUser &&
                   <div>
                       <MenuItem onClick={() => handleClickProfile(true)}>
-                          {/*// TODO: punto modificato palette */}
                           <Avatar src={src}/> <span style={{color: theme.palette.primary.dark}}>Profile</span>
                       </MenuItem>
                       {currentUser.role ?
                           <div>
                               <MenuItem onClick={()=>handleClickProfile(false)}>
                                   <span style={{color: theme.palette.primary.dark}}>Dashboard</span>
-                                  {/*Dashboard*/}
                               </MenuItem>
                           </div> : <div></div>}
                       <Divider />

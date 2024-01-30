@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Button from '@mui/material/Button';
 import {useState} from "react";
 
@@ -9,7 +8,6 @@ import {useState} from "react";
 // size = "small", "medium" or "large"
 // text = the button text
 
-// TODO: pensare a togliere la prop color che è quella di default
 function CustomButton({justClicked, startIcon, startIconClicked, disabledBoolean,
                           variant, color, sx, size, endIcon, endIconClicked, text, textClicked, handleClick, ref}) {
 
