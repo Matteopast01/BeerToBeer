@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import {useState} from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
 import {TextField} from '@mui/material';
-import theme from "../style/palette";
 
 const SearchBar = ({onSearch, handleSubmit, handleClick, options, label}) => {
+
     const [isHovered, setIsHovered] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
 
@@ -54,7 +54,7 @@ const SearchBar = ({onSearch, handleSubmit, handleClick, options, label}) => {
                             onMouseOver: () => setIsHovered(true),
                             onMouseOut: () => setIsHovered(false),
                             onBlur: () => setSearchTerm(""),
-                            // Per colorare la scritta
+                            // for letters coloring
                            // style: {color: theme.palette.warning.main},
                         }}
                     />
