@@ -53,8 +53,7 @@ const InputRew = function({placeholder, replyPlaceholder, onChange, onSubmit, re
         width: "100%",
         padding: "10px",
         resize: "none",
-        //box-shadow: 0 0 0 3px ${theme.palette.mode === 'dark' ? blue[600] : blue[200]};
-        // borderColor: theme.palette.primary.main,
+        borderColor: theme.palette.info.main,
     }
 
     return (

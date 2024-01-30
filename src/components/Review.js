@@ -2,12 +2,10 @@ import {Avatar, ListItem, ListItemAvatar} from "@mui/material";
 import CustomButton from "./CustomButton";
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import {useContext, useState} from "react";
 import CustomIconButton from "./CustomIconButton";
 import {AuthContext} from "../contexts/Auth";
-
-
+import {DeleteOutline} from "@mui/icons-material";
 
 function Review({rew, answers=[], onReply, onOptionClick, showOptions, showOptionsAnswers, showReplyButton}){
 
@@ -16,13 +14,11 @@ function Review({rew, answers=[], onReply, onOptionClick, showOptions, showOptio
     const {currentUser} = useContext(AuthContext);
 
     // Handle Function
-
     const clickHandler = (newAnswerOpened)=>{
         setAnswerOpened(newAnswerOpened)
     }
 
     // Render Function
-
     const render_rew = (rew, option=false, show_answer= true, answer_opened=true, reply_button=true, marginLeft=0)=>{
         return (
             <ListItem alignItems="flex-start" sx={{marginLeft: marginLeft.toString()+"px"}}>
@@ -41,13 +37,12 @@ function Review({rew, answers=[], onReply, onOptionClick, showOptions, showOptio
                         {!!reply_button ? <CustomButton sx={{fontSize: "11px", color: '#333333'}} text={"reply"} handleClick={()=>{onReply(rew)}}/> : ""}
                         {(!! show_answer && !!answer_opened && answers.length > 0) ? <CustomButton sx={{fontSize: "11px", color: '#333333'}} text={"hide answers"} endIcon={<KeyboardArrowUpIcon/>} handleClick={()=>{ clickHandler(false)}}/> : ""}
                         {(!! show_answer && !answer_opened && answers.length > 0) ? <CustomButton sx={{fontSize: "11px", color: '#333333'}} text={"view answers"} endIcon={<KeyboardArrowDownIcon/>} handleClick={()=>{ clickHandler(true)}}/> : "" }
-                        {!!option ? <CustomIconButton handleClick={()=>{onOptionClick(rew)}} icon={<MoreHorizOutlinedIcon sx={{fontSize : 18}}/>}/> : ""}
+                        {!!option ? <CustomIconButton handleClick={()=>{onOptionClick(rew)}} icon={<DeleteOutline sx={{fontSize : 18}}/>}/> : ""}
                     </div>
                 </div>
             </ListItem>
         )
     }
-
 
     return (
     <div>
@@ -63,6 +58,5 @@ function Review({rew, answers=[], onReply, onOptionClick, showOptions, showOptio
     </div>
                 )
 }
-
 
 export default Review;

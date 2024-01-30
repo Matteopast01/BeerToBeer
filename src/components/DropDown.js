@@ -28,16 +28,21 @@ function DropDown({ options, value, onChange }) {
         onChange(option);
     };
 
+    const [isHovered, setIsHovered] = useState(null);
+
     const renderedOptions = options.map((option) => {
         return (
             <div
                 className="hover:bg-link rounded cursor-pointer p-1"
                 onClick={() => handleOptionClick(option)}
                 key={option.value}
-                style={{cursor: "pointer"}}
+                style={!!isHovered && isHovered === option.value ?
+                    {color: theme.palette.info.dark, backgroundColor: theme.palette.primary.opacity, cursor: "pointer"} :
+                    {cursor: "pointer"}}
+                onMouseEnter={() => setIsHovered(option.value)}
+                onMouseLeave={() => setIsHovered(null)}
             >
                 {option.label}
-                {/*// TODO: metterci stato con hover per evidenziare la scelta color: theme.palette.primary.dark*/}
             </div>
         );
     });

@@ -7,6 +7,7 @@ const theme = createTheme({
             main: '#29b6f6',
             dark: '#0288d1',
             contrastText: '#fff',
+            opacity: 'rgba(79,195,247,0.16)'
         },
         secondary: {
             light: '#29b6f6',
@@ -42,15 +43,3 @@ const theme = createTheme({
 });
 
 export default theme;
-
-/* export const primary = '#FFFFFF';
-
-export const secondary = '#2196F3';
-
-export const tertiary = '#333333';
-
-export const quaternary = '#c9c9c9';
-
-export const error = '#EC0013';
-
-export const alert = '#FFCD34';*/

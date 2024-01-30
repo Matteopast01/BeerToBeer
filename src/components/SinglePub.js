@@ -92,7 +92,7 @@ function SinglePub() {
                                       handleClick={handleClick} size={"small"} variant="text" color="error"/>
                 </div>
             </div>
-            <CustomCard img={images} contentStyle={{width: "100%", background: theme.palette.info.light}}
+            <CustomCard img={images} cardDescriptionStyle={{width: "100%", background: theme.palette.info.light}}
                         maxWidth={"95%"}>
                 <div style={{flex: '1', textAlign: 'center', fontSize: '30px', fontFamily: 'Arial, sans-serif'}}>
                     <b>{name}</b>
