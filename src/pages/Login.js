@@ -6,7 +6,8 @@ import CustomButton from "../components/CustomButton";
 import theme from "../style/palette";
 import Header from "../components/Header";
 
-export const Login = function  () {
+const Login = function () {
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate()
@@ -51,3 +52,4 @@ export const Login = function  () {
         </>
     )
 }
+export default Login;
