@@ -3,7 +3,8 @@ import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import theme from "../style/palette";
 
-const VisuallyHiddenInput = styled('input')({
+const VisuallyHiddenInput = styled('input') (
+    {
     clip: 'rect(0 0 0 0)',
     clipPath: 'inset(50%)',
     height: 1,
@@ -13,7 +14,8 @@ const VisuallyHiddenInput = styled('input')({
     left: 0,
     whiteSpace: 'nowrap',
     width: 1,
-});
+    }
+);
 
 const FileUploadButton = ({ onFileChange }) => {
     const handleFileChange = (event) => {
