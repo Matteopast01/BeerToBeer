@@ -13,7 +13,6 @@ import {useDispatch, useSelector} from "react-redux";
 const Profile = function () {
 
     const {currentUser} = useContext(AuthContext);
-
     const [username, setUsername] = useState("")
     const [numberRew, setNumberRew] = useState(0)
     const dispatch = useDispatch()
@@ -31,7 +30,6 @@ const Profile = function () {
         result["username"] = user[0].username
         const link_img = user[0].link_img
 
-
         result["img"] = !!link_img ? await pull_img_url(link_img) : await pull_img_url(defaultImage[0].link_img)
         return result
     }
@@ -43,7 +41,6 @@ const Profile = function () {
                 "Default_Images", "type")
             const defaultImg =  await pull_img_url(defaultImage[0].link_img)
             dispatch(imgSelected(defaultImg))
-
         }
         else {
             const user = await get_docs_by_attribute(currentUser.uid, "User", "uid")
@@ -79,7 +76,7 @@ const Profile = function () {
                 </div>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                {/* TODO: cotrollare se va bene per tutto, settato marginTop: '8px' quà sotto*/}
+                {/* TODO: controllare se va bene per tutto, settato marginTop: '8px' quà sotto*/}
                 <div style={{ flex: 1, marginRight: '15px', marginTop: '8px' }}>
                     <CustomCard
                         horizontal={false}
