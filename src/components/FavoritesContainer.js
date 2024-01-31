@@ -18,6 +18,7 @@ export function FavoritesContainer(){
     useEffect(() => {
         (async  ()=> {
             await loadFavoritesBeers()
+            console.log("prova Use Effect")
         })()
     }, [render_favorite]);
 

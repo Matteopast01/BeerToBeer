@@ -50,11 +50,7 @@ export default function BeerCardDescription({beer}){
                 uid: user_id
             },icon)
             if (icon === "Like"){
-                dispatch( setRerenderLike(true))
                 await updateNumberLikes(1, beer_id)
-            }
-            else {
-                dispatch( setRerenderFavorite(true))
             }
         } else {
             let results = await load_docs_by_attributes(icon, {
@@ -67,6 +63,12 @@ export default function BeerCardDescription({beer}){
                     await updateNumberLikes(-1, beer_id)
                 }
             }
+        }
+        if (icon === "Like"){
+            dispatch( setRerenderLike(true))
+        }
+        else {
+            dispatch(setRerenderFavorite(true))
         }
     }
 

@@ -4,11 +4,11 @@ export const likeSlice = createSlice(
     {
         name: "like",
         initialState: {
-           rerender: null
+           rerender: true
         },
         reducers: {
             setRerenderLike: (state, action) =>{
-                state.rerender =  action.payload
+                state.rerender =  !state.rerender
             },
         }
     }
@@ -19,11 +19,11 @@ export const favoritesSlice = createSlice(
     {
         name: "favorites",
         initialState: {
-            rerender: null
+            rerender: true
         },
         reducers: {
             setRerenderFavorite: (state, action) =>{
-                state.rerender =  action.payload
+                state.rerender =  !state.rerender
             },
         }
     }

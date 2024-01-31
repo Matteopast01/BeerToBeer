@@ -4,7 +4,7 @@ import {PrivateRoute} from "./components/PrivateRoute";
 import Homepage from "./pages/Homepage.js";
 import Search from "./pages/Search";
 import OurPubs from "./pages/OurPubs";
-import {Login} from "./pages/Login"
+import Login from "./pages/Login"
 import {Signup} from "./pages/Signup"
 import Profile from "./pages/Profile";
 import { Provider } from 'react-redux';
