@@ -1,17 +1,14 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import FileUploadButton from "../components/FileUploadButton";
 import CustomIconButton from "../components/CustomIconButton";
 import CancelIcon from '@mui/icons-material/Cancel';
 import {get_docs_by_attribute, pull_img_url} from "../services/persistence_manager";
-import {AuthContext} from "../contexts/Auth";
 import theme from "../style/palette";
 
 const ImagesUploader = ({props, text, maxImages, minImages}) => {
 
     const [imageList, setImageList] = useState([]);
     const [errorMessage, setErrorMessage] = useState("");
-
-    const {currentUser} = useContext(AuthContext);
 
     useEffect(() => {
         (async  ()=> {
