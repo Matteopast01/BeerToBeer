@@ -14,6 +14,7 @@ import {AdminPrivateRoute} from "./components/AdminPrivateRoute";
 import SingleProductPage from "./pages/SingleProductPage";
 import theme from "./style/palette";
 import {ThemeProvider} from "@emotion/react";
+import NotFound from "./pages/NotFound";
 
 function App() {
     return (
@@ -33,6 +34,7 @@ function App() {
                         <Route element={<AdminPrivateRoute />}>
                             <Route path="/adminPage" element={< AdminPage />}/>
                         </Route>
+                        <Route path="*" element={<NotFound code = "404 Not Found" message="The requested page could not be found."/>} />
                     </Routes>
                 </BrowserRouter>
             </ThemeProvider>
