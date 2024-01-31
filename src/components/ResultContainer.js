@@ -4,22 +4,62 @@ import BeerCardDescription from "./BeerCardDescription";
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {requestBeersById, requestBeersByName} from "../services/persistence_manager";
-import {setSearchedBeers, setSearchTerm} from "../store/App";
+import {get_docs_by_attribute, requestBeersById, requestBeersByName} from "../services/persistence_manager";
+import {setSearchedBeers, setSearchTerm, setSelectedBeer} from "../store/App";
+import useHistory from "../hooks/useHistory";
 
 export const ResultContainer = function(){
 
-    const navigate = useNavigate()
-    //const {searchTerm} = useParams()
-    const dispatch = useDispatch()
+    // Hook
 
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
     const values = useSelector((state)=>state.filters.values)
     const selection1 = useSelector((state) => state.sorting.selection1)
     const selection2 = useSelector((state) => state.sorting.selection2)
-
     const searchedTerm = useSelector((state)=>state.searchTerm.value )
+    const beers = useSelector((state)=>state.searchedBeers.searchedBeers)
+
+    const [historyChange, historyRollback] = useHistory(
+        async (lastParam) => {
+            if (lastParam == ""){
+                let beerList = [];
+                for (let i = 1; i < 10; i++) {
+                    const requestResult = await requestBeersById(i)
+                    const beer = requestResult[0]
+                    beerList.push(beer)
+                }
+                dispatch(setSearchedBeers(beerList))
+
+            }
+            else {
+
+                const beers = await requestBeersByName(lastParam)
+                dispatch(setSearchedBeers(beers))
+
+            }
+        },
+        "search"
+    )
+    useEffect(()=>{
+        return ()=>{
+            dispatch(setSearchTerm(""))
+        }
+    }, [])
 
 
+    useEffect(() => {
+        (async  ()=> {
+            const beers = await loadBeers()
+            dispatch(setSearchedBeers(beers))
+            historyChange(searchedTerm)
+        })()
+        return ()=>{
+            historyRollback()
+        }
+    }, [searchedTerm]);
+
+    // Utility
     let minAbv = values[0].min
     let maxAbv = values[0].max
     let minIbv = values[1].min
@@ -39,63 +79,10 @@ export const ResultContainer = function(){
                 const beer = requestResult[0]
                 beerList.push(beer)
             }
-        return beerList
-
-    }
-        return await requestBeersByName(searchedTerm)
-}
-    useEffect(()=>{return ()=>{dispatch(setSearchTerm(""))}}, [])
-    useEffect(() => {
-        let handlePopstate;
-        (async  ()=> {
-            const beers = await loadBeers()
-            dispatch(setSearchedBeers(beers))
-            if (!window.location.href.includes(searchedTerm)) {
-                window.history.pushState({}, '', `/search/${searchedTerm}`);
-
-            }
-
-            handlePopstate = async (event) => {
-                // Access the current URL from window.location.href
-                //console.log(event.state.term)
-
-
-                const url = window.location.href;
-                const urlSegments = new URL(url).pathname.split('/');
-
-                const lastParam = urlSegments[urlSegments.length - 1];
-                console.log(lastParam)
-                if (lastParam == ""){
-                    let beerList = [];
-                    for (let i = 1; i < 10; i++) {
-                        const requestResult = await requestBeersById(i)
-                        const beer = requestResult[0]
-                        beerList.push(beer)
-                    }
-                    dispatch(setSearchedBeers(beerList))
-
-                }
-                else {
-
-                    const beers = await requestBeersByName(lastParam)
-                    dispatch(setSearchedBeers(beers))
-
-                }
-
-                // Update your component state or perform any necessary actions
-            };
-
-            window.addEventListener('popstate', handlePopstate);
-
-        })()
-        return ()=>{
-
-            window.removeEventListener('popstate', handlePopstate);
+            return beerList
         }
-    }, [searchedTerm]);
-
-
-    const beers = useSelector((state)=>state.searchedBeers.searchedBeers)
+        return await requestBeersByName(searchedTerm)
+    }
     const filterBeers = function (){
 
       return beers.filter((beer)=>{
@@ -127,6 +114,7 @@ export const ResultContainer = function(){
 
     let Beers = (sortingProperty === null || sortingProperty === "-") ? filteredBeers : sortingBeers(filteredBeers, sortingProperty, sortingWay);
 
+    // Render
     const [cardItems, cardFeature] = useCardList(Beers,
         (item)=>{return item.id},
         (item)=>{return item.image_url},

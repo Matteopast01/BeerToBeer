@@ -19,6 +19,7 @@ import {updateReviews, setRewToReply, setRewToOption, setSelectedBeer} from "../
 import {loads_rews} from "../services/utility/review_utility";
 import Option from "../components/Option"
 import theme from "../style/palette";
+import useHistory from "../hooks/useHistory";
 
 function SingleProductPage() {
 
@@ -26,6 +27,21 @@ function SingleProductPage() {
     const beer = useSelector((state)=> state.selectedBeer.value)
     const {currentUser} = useContext(AuthContext);
     const dispatch = useDispatch()
+
+    const [historyChange, historyRollback] = useHistory(
+        async (lastParam) => {
+            const beer_api = await requestBeersById(lastParam)
+            const beer_firebase = await get_docs_by_attribute(Number(lastParam),
+                "Beer_Id", "id")
+
+            dispatch(setSelectedBeer({
+                ...beer_api[0],
+                ...beer_firebase[0]
+            }))
+        },
+        "product"
+    )
+
 
     useEffect(() => {
 
@@ -53,31 +69,11 @@ function SingleProductPage() {
                 obj.number_calls += 1
                 return obj
             })
-            if (!window.location.href.includes(beerId)) {
-                window.history.pushState({}, '', `/product/${beerId}`);
-            }
-
-            handlePopstate = async (event) => {
-
-                // Access the current URL from window.location.href
-                const url = window.location.href;
-                const urlSegments = new URL(url).pathname.split('/');
-                const lastParam = urlSegments[urlSegments.length - 1];
-                const beer_api = await requestBeersById(lastParam)
-                const beer_firebase = await get_docs_by_attribute(Number(lastParam),
-                    "Beer_Id", "id")
-
-                dispatch(setSelectedBeer({
-                    ...beer_api[0],
-                    ...beer_firebase[0]
-                }))
-            };
-
-            window.addEventListener('popstate', handlePopstate);
+            historyChange(beerId)
         })()
 
         return ()=>{
-            window.removeEventListener('popstate', handlePopstate);
+            historyRollback()
             dispatch(setRewToReply(null))
             dispatch(setRewToOption(null))
         }
