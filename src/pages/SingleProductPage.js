@@ -3,19 +3,19 @@ import CustomCard from "../components/CustomCard";
 import {
     delete_doc,
     delete_doc_by_attribute,
-    get_docs_by_attribute, pull_img_url,
-    requestBeersById, requestBeersByName,
+    get_docs_by_attribute,
+    requestBeersById,
     store_doc, update_by_function
-} from "../services/persistence_manager";
+    } from "../services/persistence_manager";
 import Header from "../components/Header";
 import ProductCardDescription from "../components/ProductCardDescription";
 import Footer from "../components/Footer";
 import ProductReviewContainer from "../components/ProductReviewContainer";
 import InputRew from "../components/InputRew";
-import {useContext, useEffect, useRef, useState} from "react";
+import {useContext, useEffect} from "react";
 import {AuthContext} from "../contexts/Auth";
 import {useDispatch, useSelector} from "react-redux";
-import {updateReviews, setRewToReply, setRewToOption, setSelectedBeer, setSearchedBeers} from "../store/App";
+import {updateReviews, setRewToReply, setRewToOption, setSelectedBeer} from "../store/App";
 import {loads_rews} from "../services/utility/review_utility";
 import Option from "../components/Option"
 import theme from "../style/palette";
@@ -55,50 +55,40 @@ function SingleProductPage() {
             })
             if (!window.location.href.includes(beerId)) {
                 window.history.pushState({}, '', `/product/${beerId}`);
-
             }
 
             handlePopstate = async (event) => {
-                // Access the current URL from window.location.href
-                //console.log(event.state.term)
 
+                // Access the current URL from window.location.href
                 const url = window.location.href;
                 const urlSegments = new URL(url).pathname.split('/');
-
                 const lastParam = urlSegments[urlSegments.length - 1];
-                console.log(lastParam)
                 const beer_api = await requestBeersById(lastParam)
-                const beer_firebase = await get_docs_by_attribute(Number(lastParam),"Beer_Id", "id")
+                const beer_firebase = await get_docs_by_attribute(Number(lastParam),
+                    "Beer_Id", "id")
 
                 dispatch(setSelectedBeer({
                     ...beer_api[0],
                     ...beer_firebase[0]
                 }))
-
             };
 
             window.addEventListener('popstate', handlePopstate);
         })()
+
         return ()=>{
             window.removeEventListener('popstate', handlePopstate);
             dispatch(setRewToReply(null))
             dispatch(setRewToOption(null))
-
         }
     }, [beer]);
 
     const rewToReply = useSelector((state) => state.review.rewToReply)
     const rewToOption = useSelector((state) => state.review.rewToOption)
 
-    /*
-    <CustomButton text={
-                    <Chip sx={ {background: "#ffd5d5"}}  icon={<FavoriteBorderIcon  sx={{color: "#f30303"}}/>} label={"15 Likes"}/>
-                }></CustomButton>
-                <Chip style={{background: "#c7fdb7"}} icon={<ModeCommentOutlinedIcon/>} label={"3 REVIEWS"}/>
-     */
-
     // Handle Function
     const handleInputRewSubmit = async (text) => {
+
         await store_doc({
             beer_id: String(beer.id),
             date: Date.now(),
@@ -106,7 +96,8 @@ function SingleProductPage() {
             review: text,
             uid_author: currentUser.uid
         }, "Review")
-        const rews_redux = await loads_rews( await get_docs_by_attribute(String(beer.id), "Review", "beer_id", null, "date", "desc"))
+        const rews_redux = await loads_rews( await get_docs_by_attribute(String(beer.id),
+            "Review", "beer_id", null, "date", "desc"))
         dispatch(updateReviews(rews_redux))
         dispatch(setRewToReply(null))
     }
